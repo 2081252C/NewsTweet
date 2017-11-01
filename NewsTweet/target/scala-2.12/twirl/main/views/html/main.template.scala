@@ -46,10 +46,46 @@ Seq[Any](format.raw/*7.32*/("""
         <link rel="shortcut icon" type="image/png" href=""""),_display_(/*15.59*/routes/*15.65*/.Assets.versioned("images/favicon.png")),format.raw/*15.104*/("""">
     </head>
     <body>
-        """),format.raw/*19.32*/("""
-        """),_display_(/*20.10*/content),format.raw/*20.17*/("""
+        <div class="header">
+            <h1> NewsTweet </h1> 
+            <a href="/twitter/auth"><img src=""""),_display_(/*20.48*/routes/*20.54*/.Assets.versioned("images/twitterlogin.png")),format.raw/*20.98*/("""" border="2px"> </a>
+            <br>
+            <br>
+        </div>
+        <div class="sidebar">
+            <h3> Interests </h3><br>
+            <p> Interests appear here.</p>
+            <!-- Placeholder  -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
 
-        """),format.raw/*22.9*/("""<script src=""""),_display_(/*22.23*/routes/*22.29*/.Assets.versioned("javascripts/main.js")),format.raw/*22.69*/("""" type="text/javascript"></script>
+        """),format.raw/*55.32*/("""
+        """),_display_(/*56.10*/content),format.raw/*56.17*/("""
+
+        """),format.raw/*58.9*/("""<script src=""""),_display_(/*58.23*/routes/*58.29*/.Assets.versioned("javascripts/main.js")),format.raw/*58.69*/("""" type="text/javascript"></script>
     </body>
 </html>
 """))
@@ -68,11 +104,11 @@ Seq[Any](format.raw/*7.32*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Oct 31 23:13:33 GMT 2017
-                  SOURCE: /home/carly/Documents/Project/NewsTweet/HelloWorld/app/views/main.scala.html
-                  HASH: 863271db3bc90c425db2fb95e8fb0ff62c83f9b4
-                  MATRIX: 1206->260|1331->290|1359->292|1439->397|1475->406|1510->414|1536->419|1625->481|1640->487|1703->528|1791->589|1806->595|1867->634|1929->758|1966->768|1994->775|2031->785|2072->799|2087->805|2148->845
-                  LINES: 33->7|38->7|40->9|43->12|44->13|44->13|44->13|45->14|45->14|45->14|46->15|46->15|46->15|49->19|50->20|50->20|52->22|52->22|52->22|52->22
+                  DATE: Wed Nov 01 15:04:49 GMT 2017
+                  SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
+                  HASH: 20455df3dce9a9ba3d3b5b8e0052422f0a7baa0f
+                  MATRIX: 1206->260|1331->290|1359->292|1439->397|1475->406|1510->414|1536->419|1625->481|1640->487|1703->528|1791->589|1806->595|1867->634|2030->770|2045->776|2110->820|2784->1556|2821->1566|2849->1573|2886->1583|2927->1597|2942->1603|3003->1643
+                  LINES: 33->7|38->7|40->9|43->12|44->13|44->13|44->13|45->14|45->14|45->14|46->15|46->15|46->15|51->20|51->20|51->20|85->55|86->56|86->56|88->58|88->58|88->58|88->58
                   -- GENERATED --
               */
           

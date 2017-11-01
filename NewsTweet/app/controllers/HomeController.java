@@ -22,4 +22,9 @@ public class HomeController extends Controller {
         return ok(views.html.about.render());
     }
 
+     String user= "carly";
+
+    public String getName() {
+        return user;
+    }
 }

@@ -32,10 +32,15 @@ object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Html
 
 Seq[Any](format.raw/*1.4*/("""
 
-"""),_display_(/*3.2*/main("Hello World!")/*3.22*/ {_display_(Seq[Any](format.raw/*3.24*/("""
-  """),format.raw/*4.3*/("""<h1>Hello World</h1>
-  <h2><a href="/about"> About Page </a></h2>
-""")))}),format.raw/*6.2*/("""
+"""),_display_(/*3.2*/main("NewsTweet")/*3.19*/ {_display_(Seq[Any](format.raw/*3.21*/("""
+  """),format.raw/*4.3*/("""<div id="categories">
+  	<h3>Categories:</h3>
+  	<p>
+  	</p>
+  </div>
+  
+""")))}),format.raw/*10.2*/("""
+
 """))
       }
     }
@@ -52,11 +57,11 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Oct 31 23:13:33 GMT 2017
-                  SOURCE: /home/carly/Documents/Project/NewsTweet/HelloWorld/app/views/index.scala.html
-                  HASH: cfd2e3a37c211afa07c23a8f3e1be1f68b7282b0
-                  MATRIX: 941->1|1037->3|1065->6|1093->26|1132->28|1161->31|1257->98
-                  LINES: 28->1|33->1|35->3|35->3|35->3|36->4|38->6
+                  DATE: Wed Nov 01 18:19:18 GMT 2017
+                  SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
+                  HASH: 5e3dfa99cd935f5f337cecb8c4ce1845d719d239
+                  MATRIX: 941->1|1037->3|1065->6|1090->23|1129->25|1158->28|1262->102
+                  LINES: 28->1|33->1|35->3|35->3|35->3|36->4|42->10
                   -- GENERATED --
               */
           

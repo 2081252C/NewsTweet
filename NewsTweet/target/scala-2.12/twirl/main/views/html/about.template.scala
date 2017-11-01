@@ -35,9 +35,8 @@ Seq[Any](format.raw/*1.4*/("""
 """),_display_(/*3.2*/main("About Page")/*3.20*/ {_display_(Seq[Any](format.raw/*3.22*/("""
   """),format.raw/*4.3*/("""<h1>About</h1>
   <p> This is an example of a <b> Play Java Application</b>.</p>
-  <p> <a href="/twitter/auth">Login with Twitter</a> </p>
   <p> <a href="/">Home</a> </p>
-""")))}),format.raw/*8.2*/("""
+""")))}),format.raw/*7.2*/("""
 """))
       }
     }
@@ -54,11 +53,11 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Oct 31 23:13:33 GMT 2017
-                  SOURCE: /home/carly/Documents/Project/NewsTweet/HelloWorld/app/views/about.scala.html
-                  HASH: 4c74fe688d9bf11964d93a69c6f8697aeeb97f67
-                  MATRIX: 941->1|1037->3|1065->6|1091->24|1130->26|1159->29|1359->200
-                  LINES: 28->1|33->1|35->3|35->3|35->3|36->4|40->8
+                  DATE: Wed Nov 01 15:03:51 GMT 2017
+                  SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/about.scala.html
+                  HASH: b6028b45ccd58851469918b0ae9bb967c65d4f80
+                  MATRIX: 941->1|1037->3|1065->6|1091->24|1130->26|1159->29|1301->142
+                  LINES: 28->1|33->1|35->3|35->3|35->3|36->4|39->7
                   -- GENERATED --
               */
           

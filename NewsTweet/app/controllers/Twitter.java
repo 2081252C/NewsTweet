@@ -29,6 +29,7 @@ public class Twitter extends Controller {
 
     private final WSClient ws;
 
+
     @Inject
     public Twitter(WSClient ws) {
         this.ws = ws;
@@ -37,7 +38,7 @@ public class Twitter extends Controller {
     public CompletionStage<Result> homeTimeline() {
         Optional<RequestToken> sessionTokenPair = getSessionTokenPair();
         if (sessionTokenPair.isPresent()) {
-            return ws.url("https://api.twitter.com/1.1/statuses/home_timeline.json")
+            return ws.url("localhost:9000")
                     .sign(new OAuthCalculator(Twitter.KEY, sessionTokenPair.get()))
                     .get()
                     .thenApply(result -> ok(result.asJson()));
@@ -56,7 +57,8 @@ public class Twitter extends Controller {
             RequestToken requestToken = getSessionTokenPair().get();
             RequestToken accessToken = TWITTER.retrieveAccessToken(requestToken, verifier);
             saveSessionTokenPair(accessToken);
-            return redirect(routes.Twitter.homeTimeline());
+            //User user = new User(username, "");
+            return redirect(routes.HomeController.index());
         }
     }
 
