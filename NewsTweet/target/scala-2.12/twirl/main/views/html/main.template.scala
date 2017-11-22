@@ -48,7 +48,7 @@ Seq[Any](format.raw/*7.32*/("""
     <body>
         <div class="header">
             <h1> NewsTweet </h1> 
-            <a href="/twitter/auth"><img src=""""),_display_(/*20.48*/routes/*20.54*/.Assets.versioned("images/twitterlogin.png")),format.raw/*20.98*/("""" border="2px"> </a>
+            <a href="/twitter/signin"><img src=""""),_display_(/*20.50*/routes/*20.56*/.Assets.versioned("images/twitterlogin.png")),format.raw/*20.100*/("""" border="2px"> </a>
             <br>
             <br>
         </div>
@@ -104,10 +104,10 @@ Seq[Any](format.raw/*7.32*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Nov 01 15:04:49 GMT 2017
+                  DATE: Tue Nov 21 23:23:18 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
-                  HASH: 20455df3dce9a9ba3d3b5b8e0052422f0a7baa0f
-                  MATRIX: 1206->260|1331->290|1359->292|1439->397|1475->406|1510->414|1536->419|1625->481|1640->487|1703->528|1791->589|1806->595|1867->634|2030->770|2045->776|2110->820|2784->1556|2821->1566|2849->1573|2886->1583|2927->1597|2942->1603|3003->1643
+                  HASH: ec79cc52a0cc3e5d25402db8c8f8f7a74aa379ca
+                  MATRIX: 1206->260|1331->290|1359->292|1439->397|1475->406|1510->414|1536->419|1625->481|1640->487|1703->528|1791->589|1806->595|1867->634|2032->772|2047->778|2113->822|2787->1558|2824->1568|2852->1575|2889->1585|2930->1599|2945->1605|3006->1645
                   LINES: 33->7|38->7|40->9|43->12|44->13|44->13|44->13|45->14|45->14|45->14|46->15|46->15|46->15|51->20|51->20|51->20|85->55|86->56|86->56|88->58|88->58|88->58|88->58
                   -- GENERATED --
               */

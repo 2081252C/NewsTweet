@@ -1,2 +1,3 @@
-[0m[[0m[31merror[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/app/models/User.java:9:1:  int cannot be converted to java.lang.String[0m
-[0m[[0m[31merror[0m] [0m[0m        this.imgUrl = imgUrl;[0m
+[0m[[0m[31merror[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/app/controllers/TwitterSignInServlet.java:78:1:  long cannot be converted to java.lang.String[0m
+[0m[[0m[31merror[0m] [0m[0m            long userId =  Long.parseUnsignedLong(user.getId());// user Id[0m
+[0m[[0m[0minfo[0m] [0m[0mSome messages have been simplified; recompile with -Xdiags:verbose to get full output[0m

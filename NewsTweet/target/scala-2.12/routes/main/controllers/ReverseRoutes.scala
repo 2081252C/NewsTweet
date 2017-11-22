@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Nov 01 11:34:55 GMT 2017
+// @DATE:Tue Nov 21 23:24:32 GMT 2017
 
 import play.api.mvc.Call
 
@@ -13,19 +13,34 @@ import _root_.play.libs.F
 package controllers {
 
   // @LINE:13
-  class ReverseTwitter(_prefix: => String) {
+  class ReverseTwitterSignInServlet(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
     // @LINE:13
-    def homeTimeline(): Call = {
+    def signIn(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "twitter/homeTimeline")
+      Call("GET", _prefix + { _defaultPrefix } + "twitter/signin")
     }
   
     // @LINE:14
+    def callBack(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "callback")
+    }
+  
+  }
+
+  // @LINE:11
+  class ReverseTwitterAuth(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:11
     def auth(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "twitter/auth")
@@ -40,12 +55,6 @@ package controllers {
     }
 
   
-    // @LINE:8
-    def about(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "about")
-    }
-  
     // @LINE:6
     def index(): Call = {
       
@@ -54,14 +63,14 @@ package controllers {
   
   }
 
-  // @LINE:11
+  // @LINE:9
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:11
+    // @LINE:9
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

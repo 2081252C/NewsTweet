@@ -1,6 +1,7 @@
 package controllers;
 
 import play.mvc.*;
+import models.TwitterUser;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -15,16 +16,6 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        return ok(views.html.index.render());
-    }
-
-    public Result about() {
-        return ok(views.html.about.render());
-    }
-
-     String user= "carly";
-
-    public String getName() {
-        return user;
+            return ok(views.html.index.render());
     }
 }

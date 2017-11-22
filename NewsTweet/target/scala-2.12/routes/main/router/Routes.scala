@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Nov 01 11:34:55 GMT 2017
+// @DATE:Tue Nov 21 23:24:32 GMT 2017
 
 package router
 
@@ -16,27 +16,31 @@ import _root_.play.libs.F
 class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
-  HomeController_0: controllers.HomeController,
+  HomeController_2: controllers.HomeController,
+  // @LINE:9
+  Assets_3: controllers.Assets,
   // @LINE:11
-  Assets_2: controllers.Assets,
+  TwitterAuth_1: controllers.TwitterAuth,
   // @LINE:13
-  Twitter_1: controllers.Twitter,
+  TwitterSignInServlet_0: controllers.TwitterSignInServlet,
   val prefix: String
 ) extends GeneratedRouter {
 
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
-    HomeController_0: controllers.HomeController,
+    HomeController_2: controllers.HomeController,
+    // @LINE:9
+    Assets_3: controllers.Assets,
     // @LINE:11
-    Assets_2: controllers.Assets,
+    TwitterAuth_1: controllers.TwitterAuth,
     // @LINE:13
-    Twitter_1: controllers.Twitter
-  ) = this(errorHandler, HomeController_0, Assets_2, Twitter_1, "/")
+    TwitterSignInServlet_0: controllers.TwitterSignInServlet
+  ) = this(errorHandler, HomeController_2, Assets_3, TwitterAuth_1, TwitterSignInServlet_0, "/")
 
   def withPrefix(prefix: String): Routes = {
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_0, Assets_2, Twitter_1, prefix)
+    new Routes(errorHandler, HomeController_2, Assets_3, TwitterAuth_1, TwitterSignInServlet_0, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -45,10 +49,10 @@ class Routes(
 
   def documentation = List(
     ("""GET""", this.prefix, """controllers.HomeController.index"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """about""", """controllers.HomeController.about"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """twitter/homeTimeline""", """controllers.Twitter.homeTimeline()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """twitter/auth""", """controllers.Twitter.auth()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """twitter/auth""", """controllers.TwitterAuth.auth()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """twitter/signin""", """controllers.TwitterSignInServlet.signIn()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """callback""", """controllers.TwitterSignInServlet.callBack()"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -61,7 +65,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix)))
   )
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
-    HomeController_0.index,
+    HomeController_2.index,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -74,30 +78,12 @@ class Routes(
     )
   )
 
-  // @LINE:8
-  private[this] lazy val controllers_HomeController_about1_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("about")))
-  )
-  private[this] lazy val controllers_HomeController_about1_invoker = createInvoker(
-    HomeController_0.about,
-    play.api.routing.HandlerDef(this.getClass.getClassLoader,
-      "router",
-      "controllers.HomeController",
-      "about",
-      Nil,
-      "GET",
-      this.prefix + """about""",
-      """""",
-      Seq()
-    )
-  )
-
-  // @LINE:11
-  private[this] lazy val controllers_Assets_versioned2_route = Route("GET",
+  // @LINE:9
+  private[this] lazy val controllers_Assets_versioned1_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned2_invoker = createInvoker(
-    Assets_2.versioned(fakeValue[String], fakeValue[Asset]),
+  private[this] lazy val controllers_Assets_versioned1_invoker = createInvoker(
+    Assets_3.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -110,37 +96,55 @@ class Routes(
     )
   )
 
-  // @LINE:13
-  private[this] lazy val controllers_Twitter_homeTimeline3_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/homeTimeline")))
+  // @LINE:11
+  private[this] lazy val controllers_TwitterAuth_auth2_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/auth")))
   )
-  private[this] lazy val controllers_Twitter_homeTimeline3_invoker = createInvoker(
-    Twitter_1.homeTimeline(),
+  private[this] lazy val controllers_TwitterAuth_auth2_invoker = createInvoker(
+    TwitterAuth_1.auth(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.Twitter",
-      "homeTimeline",
+      "controllers.TwitterAuth",
+      "auth",
       Nil,
       "GET",
-      this.prefix + """twitter/homeTimeline""",
+      this.prefix + """twitter/auth""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:13
+  private[this] lazy val controllers_TwitterSignInServlet_signIn3_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/signin")))
+  )
+  private[this] lazy val controllers_TwitterSignInServlet_signIn3_invoker = createInvoker(
+    TwitterSignInServlet_0.signIn(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.TwitterSignInServlet",
+      "signIn",
+      Nil,
+      "GET",
+      this.prefix + """twitter/signin""",
       """""",
       Seq()
     )
   )
 
   // @LINE:14
-  private[this] lazy val controllers_Twitter_auth4_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/auth")))
+  private[this] lazy val controllers_TwitterSignInServlet_callBack4_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("callback")))
   )
-  private[this] lazy val controllers_Twitter_auth4_invoker = createInvoker(
-    Twitter_1.auth(),
+  private[this] lazy val controllers_TwitterSignInServlet_callBack4_invoker = createInvoker(
+    TwitterSignInServlet_0.callBack(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.Twitter",
-      "auth",
+      "controllers.TwitterSignInServlet",
+      "callBack",
       Nil,
       "GET",
-      this.prefix + """twitter/auth""",
+      this.prefix + """callback""",
       """""",
       Seq()
     )
@@ -152,31 +156,31 @@ class Routes(
     // @LINE:6
     case controllers_HomeController_index0_route(params@_) =>
       call { 
-        controllers_HomeController_index0_invoker.call(HomeController_0.index)
+        controllers_HomeController_index0_invoker.call(HomeController_2.index)
       }
   
-    // @LINE:8
-    case controllers_HomeController_about1_route(params@_) =>
-      call { 
-        controllers_HomeController_about1_invoker.call(HomeController_0.about)
+    // @LINE:9
+    case controllers_Assets_versioned1_route(params@_) =>
+      call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
+        controllers_Assets_versioned1_invoker.call(Assets_3.versioned(path, file))
       }
   
     // @LINE:11
-    case controllers_Assets_versioned2_route(params@_) =>
-      call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned2_invoker.call(Assets_2.versioned(path, file))
+    case controllers_TwitterAuth_auth2_route(params@_) =>
+      call { 
+        controllers_TwitterAuth_auth2_invoker.call(TwitterAuth_1.auth())
       }
   
     // @LINE:13
-    case controllers_Twitter_homeTimeline3_route(params@_) =>
+    case controllers_TwitterSignInServlet_signIn3_route(params@_) =>
       call { 
-        controllers_Twitter_homeTimeline3_invoker.call(Twitter_1.homeTimeline())
+        controllers_TwitterSignInServlet_signIn3_invoker.call(TwitterSignInServlet_0.signIn())
       }
   
     // @LINE:14
-    case controllers_Twitter_auth4_route(params@_) =>
+    case controllers_TwitterSignInServlet_callBack4_route(params@_) =>
       call { 
-        controllers_Twitter_auth4_invoker.call(Twitter_1.auth())
+        controllers_TwitterSignInServlet_callBack4_invoker.call(TwitterSignInServlet_0.callBack())
       }
   }
 }

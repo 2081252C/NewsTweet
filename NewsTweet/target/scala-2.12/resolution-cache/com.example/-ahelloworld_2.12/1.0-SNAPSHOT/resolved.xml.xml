@@ -4,7 +4,7 @@
 		module="-ahelloworld_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20171101113440"
+		publication="20171117220923"
 	>
 		<description>
 		[AHelloWorld
@@ -51,5 +51,7 @@
 		<dependency org="com.typesafe.play" name="play-akka-http-server_2.12" rev="2.6.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-guice_2.12" rev="2.6.6" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-ahc-ws_2.12" rev="2.6.6" conf="compile->default(compile)"/>
+		<dependency org="org.twitter4j" name="twitter4j-core" rev="4.0.2" conf="compile->default(compile)"/>
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="provided->default(compile)"/>
 	</dependencies>
 </ivy-module>
