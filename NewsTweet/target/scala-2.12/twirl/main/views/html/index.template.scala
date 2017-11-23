@@ -22,17 +22,17 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[Form[Search],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.4*/("""
+Seq[Any](format.raw/*1.28*/("""
 
-"""),_display_(/*3.2*/main("NewsTweet")/*3.19*/ {_display_(Seq[Any](format.raw/*3.21*/("""
+"""),_display_(/*3.2*/main("NewsTweet")/*3.19*/(searchForm)/*3.31*/ {_display_(Seq[Any](format.raw/*3.33*/("""
   """),format.raw/*4.3*/("""<div id="categories">
   	<h3>Categories:</h3>
   	<p>
@@ -46,9 +46,9 @@ Seq[Any](format.raw/*1.4*/("""
     }
   }
 
-  def render(): play.twirl.api.HtmlFormat.Appendable = apply()
+  def render(searchForm:Form[Search]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm)
 
-  def f:(() => play.twirl.api.HtmlFormat.Appendable) = () => apply()
+  def f:((Form[Search]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm) => apply(searchForm)
 
   def ref: this.type = this
 
@@ -57,11 +57,11 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Nov 01 18:19:18 GMT 2017
+                  DATE: Thu Nov 23 00:00:48 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
-                  HASH: 5e3dfa99cd935f5f337cecb8c4ce1845d719d239
-                  MATRIX: 941->1|1037->3|1065->6|1090->23|1129->25|1158->28|1262->102
-                  LINES: 28->1|33->1|35->3|35->3|35->3|36->4|42->10
+                  HASH: 137d1a94d895e585516dc40d2f22528257da2891
+                  MATRIX: 954->1|1075->27|1103->30|1128->47|1148->59|1187->61|1216->64|1320->138
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|42->10
                   -- GENERATED --
               */
           

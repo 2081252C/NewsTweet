@@ -2,20 +2,23 @@ package controllers;
 
 import play.mvc.*;
 import models.TwitterUser;
+import models.Search;
+import play.data.Form;
+import play.data.FormFactory;
+import javax.inject.Inject;
 
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
-public class HomeController extends Controller {
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
+public class HomeController extends Controller {
+	@Inject FormFactory formFactory;
+
     public Result index() {
-            return ok(views.html.index.render());
+    		Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+	        String term = searchForm.field("searchTerm").value();
+	        System.out.println(term);
+            return ok(views.html.index.render(searchForm));
     }
 }

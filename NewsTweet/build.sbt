@@ -29,4 +29,6 @@ libraryDependencies ++= Seq(
 )
 
 // https://mvnrepository.com/artifact/javax.persistence/persistence-api
+libraryDependencies += "javax.inject" % "javax.inject" % "1"
+
 libraryDependencies += "javax.persistence" % "persistence-api" % "1.0"

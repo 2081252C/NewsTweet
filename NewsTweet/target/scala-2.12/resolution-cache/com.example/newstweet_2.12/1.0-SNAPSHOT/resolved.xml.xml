@@ -4,7 +4,7 @@
 		module="newstweet_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20171121205333"
+		publication="20171122183918"
 	>
 		<description>
 		NewsTweet
@@ -60,6 +60,7 @@
 		<dependency org="com.h2database" name="h2" rev="1.4.192" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-java-jpa_2.12" rev="2.6.6" conf="compile->default(compile)"/>
 		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="5.1.0.Final" conf="compile->default(compile)"/>
+		<dependency org="javax.inject" name="javax.inject" rev="1" conf="compile->default(compile)"/>
 		<dependency org="javax.persistence" name="persistence-api" rev="1.0" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

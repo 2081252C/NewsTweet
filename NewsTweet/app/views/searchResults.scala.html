@@ -1,6 +1,6 @@
-@()
+@(searchForm: Form[Search])
 
-@main("Search Results") {
+@main("Search Results")(searchForm) {
   <div id="searchResults">
   	<h3>Search Results:</h3>
   	<p>

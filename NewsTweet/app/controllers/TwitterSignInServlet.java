@@ -45,7 +45,8 @@ public class TwitterSignInServlet extends Controller {
     private static final long serialVersionUID = -6205814293093350242L;
     private Twitter twitter = new TwitterFactory().getInstance();
     boolean set = false;
-    private RequestToken requestToken = null;
+    public RequestToken requestToken = null;
+    public AccessToken accessToken = null;
     StringBuffer callbackURL = new StringBuffer("https://localhost:9000/");
 
     public void setOAuth(){
@@ -70,7 +71,7 @@ public class TwitterSignInServlet extends Controller {
     public Result callBack() throws  IOException {
         try {
             String verifier = request().getQueryString("oauth_verifier");
-            AccessToken accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
+            accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
             User user = twitter.showUser(twitter.getScreenName());
             long userId = user.getId();// user Id
             TwitterUser t = TwitterUser.find.byId(userId);

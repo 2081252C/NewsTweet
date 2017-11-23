@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Tue Nov 21 23:24:32 GMT 2017
+// @DATE:Wed Nov 22 23:11:07 GMT 2017
 
 import play.api.mvc.Call
 
@@ -11,6 +11,21 @@ import _root_.play.libs.F
 
 // @LINE:6
 package controllers {
+
+  // @LINE:9
+  class ReverseAssets(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:9
+    def versioned(file:Asset): Call = {
+      implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
+      Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
+    }
+  
+  }
 
   // @LINE:13
   class ReverseTwitterSignInServlet(_prefix: => String) {
@@ -63,17 +78,17 @@ package controllers {
   
   }
 
-  // @LINE:9
-  class ReverseAssets(_prefix: => String) {
+  // @LINE:16
+  class ReverseSearchController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:9
-    def versioned(file:Asset): Call = {
-      implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
-      Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
+    // @LINE:16
+    def searchResults(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "search")
     }
   
   }

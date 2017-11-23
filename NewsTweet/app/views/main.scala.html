@@ -4,7 +4,9 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)
+
+@import helper._
+@(title: String)(searchForm: Form[Search])(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +19,13 @@
     <body>
         <div class="header">
             <h1> NewsTweet </h1> 
+            @helper.form(action=routes.SearchController.searchResults()){
+
+                @helper.inputText(searchForm("searchTerm"),
+                    'placeholder -> "Search ...",
+                    '_label -> null)
+
+             }
             <a href="/twitter/signin"><img src="@routes.Assets.versioned("images/twitterlogin.png")" border="2px"> </a>
             <br>
             <br>
@@ -57,4 +66,5 @@
 
         <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
     </body>
+
 </html>
