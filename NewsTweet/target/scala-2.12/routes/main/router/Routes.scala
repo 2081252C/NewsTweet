@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Nov 22 23:11:07 GMT 2017
+// @DATE:Fri Nov 24 23:51:00 GMT 2017
 
 package router
 
@@ -18,13 +18,15 @@ class Routes(
   // @LINE:6
   HomeController_2: controllers.HomeController,
   // @LINE:9
-  Assets_4: controllers.Assets,
+  Assets_5: controllers.Assets,
   // @LINE:11
   TwitterAuth_1: controllers.TwitterAuth,
   // @LINE:13
-  TwitterSignInServlet_3: controllers.TwitterSignInServlet,
+  TwitterSignInServlet_4: controllers.TwitterSignInServlet,
   // @LINE:16
   SearchController_0: controllers.SearchController,
+  // @LINE:18
+  TwitterLogOutServlet_3: controllers.TwitterLogOutServlet,
   val prefix: String
 ) extends GeneratedRouter {
 
@@ -33,18 +35,20 @@ class Routes(
     // @LINE:6
     HomeController_2: controllers.HomeController,
     // @LINE:9
-    Assets_4: controllers.Assets,
+    Assets_5: controllers.Assets,
     // @LINE:11
     TwitterAuth_1: controllers.TwitterAuth,
     // @LINE:13
-    TwitterSignInServlet_3: controllers.TwitterSignInServlet,
+    TwitterSignInServlet_4: controllers.TwitterSignInServlet,
     // @LINE:16
-    SearchController_0: controllers.SearchController
-  ) = this(errorHandler, HomeController_2, Assets_4, TwitterAuth_1, TwitterSignInServlet_3, SearchController_0, "/")
+    SearchController_0: controllers.SearchController,
+    // @LINE:18
+    TwitterLogOutServlet_3: controllers.TwitterLogOutServlet
+  ) = this(errorHandler, HomeController_2, Assets_5, TwitterAuth_1, TwitterSignInServlet_4, SearchController_0, TwitterLogOutServlet_3, "/")
 
   def withPrefix(prefix: String): Routes = {
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_2, Assets_4, TwitterAuth_1, TwitterSignInServlet_3, SearchController_0, prefix)
+    new Routes(errorHandler, HomeController_2, Assets_5, TwitterAuth_1, TwitterSignInServlet_4, SearchController_0, TwitterLogOutServlet_3, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -58,6 +62,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """twitter/signin""", """controllers.TwitterSignInServlet.signIn()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """callback""", """controllers.TwitterSignInServlet.callBack()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search""", """controllers.SearchController.searchResults()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """logout""", """controllers.TwitterLogOutServlet.logOut()"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -88,7 +93,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
   private[this] lazy val controllers_Assets_versioned1_invoker = createInvoker(
-    Assets_4.versioned(fakeValue[String], fakeValue[Asset]),
+    Assets_5.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -124,7 +129,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/signin")))
   )
   private[this] lazy val controllers_TwitterSignInServlet_signIn3_invoker = createInvoker(
-    TwitterSignInServlet_3.signIn(),
+    TwitterSignInServlet_4.signIn(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterSignInServlet",
@@ -142,7 +147,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("callback")))
   )
   private[this] lazy val controllers_TwitterSignInServlet_callBack4_invoker = createInvoker(
-    TwitterSignInServlet_3.callBack(),
+    TwitterSignInServlet_4.callBack(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterSignInServlet",
@@ -173,6 +178,24 @@ class Routes(
     )
   )
 
+  // @LINE:18
+  private[this] lazy val controllers_TwitterLogOutServlet_logOut6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("logout")))
+  )
+  private[this] lazy val controllers_TwitterLogOutServlet_logOut6_invoker = createInvoker(
+    TwitterLogOutServlet_3.logOut(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.TwitterLogOutServlet",
+      "logOut",
+      Nil,
+      "GET",
+      this.prefix + """logout""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -185,7 +208,7 @@ class Routes(
     // @LINE:9
     case controllers_Assets_versioned1_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned1_invoker.call(Assets_4.versioned(path, file))
+        controllers_Assets_versioned1_invoker.call(Assets_5.versioned(path, file))
       }
   
     // @LINE:11
@@ -197,19 +220,25 @@ class Routes(
     // @LINE:13
     case controllers_TwitterSignInServlet_signIn3_route(params@_) =>
       call { 
-        controllers_TwitterSignInServlet_signIn3_invoker.call(TwitterSignInServlet_3.signIn())
+        controllers_TwitterSignInServlet_signIn3_invoker.call(TwitterSignInServlet_4.signIn())
       }
   
     // @LINE:14
     case controllers_TwitterSignInServlet_callBack4_route(params@_) =>
       call { 
-        controllers_TwitterSignInServlet_callBack4_invoker.call(TwitterSignInServlet_3.callBack())
+        controllers_TwitterSignInServlet_callBack4_invoker.call(TwitterSignInServlet_4.callBack())
       }
   
     // @LINE:16
     case controllers_SearchController_searchResults5_route(params@_) =>
       call { 
         controllers_SearchController_searchResults5_invoker.call(SearchController_0.searchResults())
+      }
+  
+    // @LINE:18
+    case controllers_TwitterLogOutServlet_logOut6_route(params@_) =>
+      call { 
+        controllers_TwitterLogOutServlet_logOut6_invoker.call(TwitterLogOutServlet_3.logOut())
       }
   }
 }

@@ -1,3 +1,5 @@
+package controllers;
+
 /*
 Copyright (c) 2007-2009, Yusuke Yamamoto
 All rights reserved.
@@ -28,12 +30,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import play.mvc.*;
 
-public class TwitterLogOutServlet extends HttpServlet {
+public class TwitterLogOutServlet extends Controller {
     private static final long serialVersionUID = -4433102460849019660L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath()+ "/");
+    public Result logOut(){
+        session().clear();
+        return redirect("/");
     }
 }

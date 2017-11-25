@@ -44,19 +44,19 @@ import java.util.List;
 public class TwitterSignInServlet extends Controller {
     private static final long serialVersionUID = -6205814293093350242L;
     private Twitter twitter = new TwitterFactory().getInstance();
-    boolean set = false;
+    public boolean set = false;
     public RequestToken requestToken = null;
     public AccessToken accessToken = null;
-    StringBuffer callbackURL = new StringBuffer("https://localhost:9000/");
+    StringBuffer callbackURL = new StringBuffer("https://localhost:9443/");
 
-    public void setOAuth(){
-        twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
-        set = true;
+    public void setOAuth(boolean b){
+        this.set = b;
     }
 
     public Result signIn() throws IOException {
         if(!set){
-            setOAuth();
+            twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
+            setOAuth(true);
         }
         try {
             int index = callbackURL.lastIndexOf("/");
@@ -75,6 +75,8 @@ public class TwitterSignInServlet extends Controller {
             User user = twitter.showUser(twitter.getScreenName());
             long userId = user.getId();// user Id
             TwitterUser t = TwitterUser.find.byId(userId);
+            session("id", Long.toString(userId));
+            session("access", accessToken.toString());
             if (t==null) {
                 String userName = user.getScreenName(); // user name
                 String acessTokenString = accessToken.toString();
@@ -84,6 +86,6 @@ public class TwitterSignInServlet extends Controller {
         } catch (TwitterException e) {
             return ok("bad callback");
         }
-        return redirect("http://localhost:9000");
+        return redirect("https://localhost:9443");
     }
 }

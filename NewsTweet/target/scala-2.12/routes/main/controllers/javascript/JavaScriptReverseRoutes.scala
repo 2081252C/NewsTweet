@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Nov 22 23:11:07 GMT 2017
+// @DATE:Fri Nov 24 23:51:00 GMT 2017
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -26,6 +26,26 @@ package controllers.javascript {
       """
         function(file1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + """)("file", file1)})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:18
+  class ReverseTwitterLogOutServlet(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:18
+    def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.TwitterLogOutServlet.logOut",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
         }
       """
     )

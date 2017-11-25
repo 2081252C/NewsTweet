@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Nov 22 23:11:07 GMT 2017
+// @DATE:Fri Nov 24 23:51:00 GMT 2017
 
 import play.api.mvc.Call
 
@@ -23,6 +23,21 @@ package controllers {
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
+    }
+  
+  }
+
+  // @LINE:18
+  class ReverseTwitterLogOutServlet(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:18
+    def logOut(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "logout")
     }
   
   }

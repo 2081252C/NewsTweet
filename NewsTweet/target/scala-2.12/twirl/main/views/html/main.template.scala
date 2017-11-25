@@ -23,15 +23,15 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 /*8.2*/import helper._
 
-object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[String,Form[Search],Html,play.twirl.api.HtmlFormat.Appendable] {
+object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template5[String,Form[Search],String,Integer,Html,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*9.2*/(title: String)(searchForm: Form[Search])(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*9.2*/(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*9.58*/("""
+Seq[Any](format.raw/*9.87*/("""
 
 """),format.raw/*11.1*/("""<!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,14 @@ Seq[Any](format.raw/*9.58*/("""
                     '_label -> null)),format.raw/*26.37*/("""
 
              """)))}),format.raw/*28.15*/("""
-            """),format.raw/*29.13*/("""<a href="/twitter/signin"><img src=""""),_display_(/*29.50*/routes/*29.56*/.Assets.versioned("images/twitterlogin.png")),format.raw/*29.100*/("""" border="2px"> </a>
+             """),format.raw/*29.14*/("""<div class="user">
+            """),_display_(/*30.14*/if(bool==1)/*30.25*/{_display_(Seq[Any](format.raw/*30.26*/("""
+                """),format.raw/*31.17*/("""hello """),_display_(/*31.24*/(user)),format.raw/*31.30*/("""
+                """),format.raw/*32.17*/("""<br> <a href="/logout">Logout</a>
+            """)))}/*33.14*/else/*33.18*/{_display_(Seq[Any](format.raw/*33.19*/(""" 
+            """),format.raw/*34.13*/("""<a href="/twitter/signin"><img src=""""),_display_(/*34.50*/routes/*34.56*/.Assets.versioned("images/twitterlogin.png")),format.raw/*34.100*/("""" border="2px"> </a>
+            """)))}),format.raw/*35.14*/("""
+            """),format.raw/*36.13*/("""</div>
             <br>
             <br>
         </div>
@@ -85,10 +92,10 @@ Seq[Any](format.raw/*9.58*/("""
             <br>
         </div>
 
-        """),format.raw/*64.32*/("""
-        """),_display_(/*65.10*/content),format.raw/*65.17*/("""
+        """),format.raw/*71.32*/("""
+        """),_display_(/*72.10*/content),format.raw/*72.17*/("""
 
-        """),format.raw/*67.9*/("""<script src=""""),_display_(/*67.23*/routes/*67.29*/.Assets.versioned("javascripts/main.js")),format.raw/*67.69*/("""" type="text/javascript"></script>
+        """),format.raw/*74.9*/("""<script src=""""),_display_(/*74.23*/routes/*74.29*/.Assets.versioned("javascripts/main.js")),format.raw/*74.69*/("""" type="text/javascript"></script>
     </body>
 
 </html>
@@ -97,9 +104,9 @@ Seq[Any](format.raw/*9.58*/("""
     }
   }
 
-  def render(title:String,searchForm:Form[Search],content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(content)
+  def render(title:String,searchForm:Form[Search],user:String,bool:Integer,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(user)(bool)(content)
 
-  def f:((String) => (Form[Search]) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (content) => apply(title)(searchForm)(content)
+  def f:((String) => (Form[Search]) => (String) => (Integer) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (user) => (bool) => (content) => apply(title)(searchForm)(user)(bool)(content)
 
   def ref: this.type = this
 
@@ -108,11 +115,11 @@ Seq[Any](format.raw/*9.58*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Thu Nov 23 00:04:20 GMT 2017
+                  DATE: Fri Nov 24 23:51:00 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
-                  HASH: b5cdd9823c34bc7f9cd43d8508ef324aa3ddc232
-                  MATRIX: 651->261|988->278|1139->334|1168->336|1248->441|1284->450|1319->458|1345->463|1434->525|1449->531|1512->572|1600->633|1615->639|1676->678|1805->780|1820->786|1882->839|1921->840|1967->859|1982->865|2126->988|2173->1004|2214->1017|2278->1054|2293->1060|2359->1104|3033->1840|3070->1850|3098->1857|3135->1867|3176->1881|3191->1887|3252->1927
-                  LINES: 24->8|29->9|34->9|36->11|39->14|40->15|40->15|40->15|41->16|41->16|41->16|42->17|42->17|42->17|47->22|47->22|47->22|47->22|49->24|49->24|51->26|53->28|54->29|54->29|54->29|54->29|88->64|89->65|89->65|91->67|91->67|91->67|91->67
+                  HASH: 7782a62efeb389109b8ae671480c18d607ada7e8
+                  MATRIX: 651->261|1003->278|1183->363|1212->365|1292->470|1328->479|1363->487|1389->492|1478->554|1493->560|1556->601|1644->662|1659->668|1720->707|1849->809|1864->815|1926->868|1965->869|2011->888|2026->894|2170->1017|2217->1033|2259->1047|2318->1079|2338->1090|2377->1091|2422->1108|2456->1115|2483->1121|2528->1138|2594->1185|2607->1189|2646->1190|2688->1204|2752->1241|2767->1247|2833->1291|2898->1325|2939->1338|3599->2060|3636->2070|3664->2077|3701->2087|3742->2101|3757->2107|3818->2147
+                  LINES: 24->8|29->9|34->9|36->11|39->14|40->15|40->15|40->15|41->16|41->16|41->16|42->17|42->17|42->17|47->22|47->22|47->22|47->22|49->24|49->24|51->26|53->28|54->29|55->30|55->30|55->30|56->31|56->31|56->31|57->32|58->33|58->33|58->33|59->34|59->34|59->34|59->34|60->35|61->36|95->71|96->72|96->72|98->74|98->74|98->74|98->74
                   -- GENERATED --
               */
           

@@ -10,6 +10,7 @@ import views.html.main;
 import play.data.Form.*;
 
 import twitter4j.Twitter;
+import twitter4j.User;
 import twitter4j.Status;
 import twitter4j.TwitterFactory;
 import twitter4j.QueryResult;
@@ -50,6 +51,16 @@ public class SearchController extends Controller {
 				return ok("error");
 			}
 	        //System.out.println(term);
-	        return ok(views.html.searchResults.render(searchForm));
+	        Twitter twi = new TwitterFactory().getInstance();
+	        twi.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
+	        String s = "";
+	        try{
+	        	User u = twi.showUser(twi.getScreenName());
+	        	s = u.getScreenName();
+	        }
+	        catch (TwitterException e){
+	        	s = "undefined";
+	        }
+	        return ok(views.html.searchResults.render(searchForm, s, 1));
 	}
 }

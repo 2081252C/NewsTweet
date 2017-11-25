@@ -6,7 +6,7 @@
  *@
 
 @import helper._
-@(title: String)(searchForm: Form[Search])(content: Html)
+@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,14 @@
                     '_label -> null)
 
              }
+             <div class="user">
+            @if(bool==1){
+                hello @(user)
+                <br> <a href="/logout">Logout</a>
+            }else{ 
             <a href="/twitter/signin"><img src="@routes.Assets.versioned("images/twitterlogin.png")" border="2px"> </a>
+            }
+            </div>
             <br>
             <br>
         </div>

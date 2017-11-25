@@ -14,3 +14,5 @@ GET     /twitter/signin         controllers.TwitterSignInServlet.signIn()
 GET     /callback 			  controllers.TwitterSignInServlet.callBack()
 
 GET     /search					controllers.SearchController.searchResults()
+
+GET     /logout					controllers.TwitterLogOutServlet.logOut()

@@ -1,6 +1,6 @@
-@(searchForm: Form[Search])
+@(searchForm: Form[Search], user: String, bool: Integer)
 
-@main("Data Analytics")(searchForm){
+@main("Data Analytics")(searchForm)(user)(bool){
   <div id="Search Analytics">
   	<h3>Data Analytics:</h3>
   	<p>
