@@ -1,10 +1,13 @@
-2017-11-25 00:08:57,055 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-12 - Creating Pool for datasource 'default'
-2017-11-25 00:08:57,393 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-12 - Database [default] connected at jdbc:h2:file:~/data/db
-2017-11-25 00:08:58,355 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in play-dev-mode-akka.actor.default-dispatcher-12 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
-2017-11-25 00:08:58,692 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-12 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2017-11-27 11:37:39,761 [INFO] from application in pool-5-thread-2 - Creating Pool for datasource 'default'
+2017-11-27 11:37:39,984 [INFO] from play.api.db.DefaultDBApi in pool-5-thread-2 - Database [default] connected at jdbc:h2:file:~/data/db
+2017-11-27 11:37:40,793 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in pool-5-thread-2 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2017-11-27 11:37:41,226 [INFO] from play.api.http.EnabledFilters in pool-5-thread-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2017-11-25 00:08:58,695 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-12 - Application started (Dev)
+2017-11-27 11:37:41,229 [INFO] from play.api.Play in pool-5-thread-2 - Application started (Dev)
+2017-11-27 11:37:41,232 [WARN] from play.core.server.ssl.DefaultSSLEngineProvider in pool-5-thread-2 - Using generated key with self signed certificate for HTTPS. This should not be used in production.
+2017-11-27 11:37:41,259 [INFO] from play.core.server.AkkaHttpServer in pool-5-thread-2 - Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+2017-11-27 11:37:41,260 [INFO] from play.core.server.AkkaHttpServer in pool-5-thread-2 - Listening for HTTPS on /0:0:0:0:0:0:0:0:9443

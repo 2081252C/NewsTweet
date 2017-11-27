@@ -17,6 +17,8 @@ import twitter4j.QueryResult;
 import twitter4j.Query;
 import twitter4j.TwitterException;
 import twitter4j.conf.ConfigurationBuilder;
+import java.util.List;
+import java.util.ArrayList;
 
 
 import play.*;
@@ -41,26 +43,27 @@ public class SearchController extends Controller {
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    Query query = new Query(term);
+		    List<Status> tweets = new ArrayList<Status>();
+		    List<String> tID = new ArrayList<String>();
 		    try{
 		    	QueryResult result = twitter.search(query);
 			    for (Status status : result.getTweets()) {
-			        System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
+			        tID.add(Long.toString(status.getId()));
 			    }
 			}
 			catch (TwitterException e){
 				return ok("error");
 			}
 	        //System.out.println(term);
-	        Twitter twi = new TwitterFactory().getInstance();
-	        twi.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
-	        String s = "";
-	        try{
-	        	User u = twi.showUser(twi.getScreenName());
-	        	s = u.getScreenName();
-	        }
-	        catch (TwitterException e){
-	        	s = "undefined";
-	        }
-	        return ok(views.html.searchResults.render(searchForm, s, 1));
-	}
+	         String str = session("id");
+	        if(str!=null){
+		        Long id = Long.parseLong(str);
+		        TwitterUser t = TwitterUser.find.byId(1561842786L);
+				String s = t.username;
+			    return ok(views.html.searchResults.render(searchForm, s, 1, tID));
+			}
+		    else{
+		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID));
+		        }
+    }
 }

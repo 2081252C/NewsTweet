@@ -35,18 +35,9 @@ public class HomeController extends Controller {
     		Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        String term = searchForm.field("searchTerm").value();
 	        String str = session("id");
-	        System.out.println("id is "+ str);
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
-		        // ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-	        	//  	configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
-	         //         .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
-	         //         .setOAuthAccessToken(null)
-	         //         .setOAuthAccessTokenSecret(null);
-	         //    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
-	            //Authorization auth = twitter.getAuthorization();
-		        System.out.println("working");
-		        TwitterUser t = TwitterUser.find.byId(1561842786L);
+		        TwitterUser t = TwitterUser.find.byId(id);
 				String s = t.username;
 			    return ok(views.html.index.render(searchForm, s, 1));
 			}

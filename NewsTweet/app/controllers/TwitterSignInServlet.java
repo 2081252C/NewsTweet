@@ -59,9 +59,11 @@ public class TwitterSignInServlet extends Controller {
             setOAuth(true);
         }
         try {
-            int index = callbackURL.lastIndexOf("/");
-            callbackURL.replace(index, callbackURL.length(), "").append("/callback");
-            requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+            if(requestToken == null){
+                int index = callbackURL.lastIndexOf("/");
+                callbackURL.replace(index, callbackURL.length(), "").append("/callback");
+                requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+            }
             return redirect(requestToken.getAuthenticationURL());
         } catch (TwitterException e) {
             return ok("bad auth");            

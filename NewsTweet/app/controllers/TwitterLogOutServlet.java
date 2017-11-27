@@ -37,6 +37,6 @@ public class TwitterLogOutServlet extends Controller {
 
     public Result logOut(){
         session().clear();
-        return redirect("/");
+        return redirect("http://localhost:9000");
     }
 }
