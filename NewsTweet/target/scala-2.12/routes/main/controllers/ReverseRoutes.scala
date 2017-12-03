@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Fri Nov 24 23:51:00 GMT 2017
+// @DATE:Sun Dec 03 08:26:12 GMT 2017
 
 import play.api.mvc.Call
 
@@ -27,21 +27,6 @@ package controllers {
   
   }
 
-  // @LINE:18
-  class ReverseTwitterLogOutServlet(_prefix: => String) {
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:18
-    def logOut(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "logout")
-    }
-  
-  }
-
   // @LINE:13
   class ReverseTwitterSignInServlet(_prefix: => String) {
     def _defaultPrefix: String = {
@@ -59,6 +44,12 @@ package controllers {
     def callBack(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "callback")
+    }
+  
+    // @LINE:20
+    def logOut(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "logout")
     }
   
   }
@@ -85,6 +76,36 @@ package controllers {
     }
 
   
+    // @LINE:22
+    def newsCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "category/news")
+    }
+  
+    // @LINE:25
+    def techCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "category/tech")
+    }
+  
+    // @LINE:23
+    def entertainmentCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "category/entertainment")
+    }
+  
+    // @LINE:24
+    def musicCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "category/music")
+    }
+  
+    // @LINE:26
+    def gamingCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "category/gaming")
+    }
+  
     // @LINE:6
     def index(): Call = {
       
@@ -104,6 +125,21 @@ package controllers {
     def searchResults(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "search")
+    }
+  
+  }
+
+  // @LINE:18
+  class ReversePersonaController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:18
+    def addPersona(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "addpersona")
     }
   
   }

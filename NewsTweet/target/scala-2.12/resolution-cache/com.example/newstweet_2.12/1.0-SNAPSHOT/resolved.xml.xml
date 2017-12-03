@@ -4,7 +4,7 @@
 		module="newstweet_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20171122183918"
+		publication="20171203005419"
 	>
 		<description>
 		NewsTweet
@@ -62,5 +62,8 @@
 		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="5.1.0.Final" conf="compile->default(compile)"/>
 		<dependency org="javax.inject" name="javax.inject" rev="1" conf="compile->default(compile)"/>
 		<dependency org="javax.persistence" name="persistence-api" rev="1.0" conf="compile->default(compile)"/>
+		<dependency org="junit" name="junit" rev="4.12" conf="test->default(compile)"/>
+		<dependency org="org.twitter4j" name="twitter4j-stream" rev="4.0.6" conf="compile->default(compile)"/>
+		<dependency org="de.julielab" name="aliasi-lingpipe" rev="4.1.0" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Fri Nov 24 23:51:00 GMT 2017
+// @DATE:Sun Dec 03 08:26:12 GMT 2017
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -26,26 +26,6 @@ package controllers.javascript {
       """
         function(file1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + """)("file", file1)})
-        }
-      """
-    )
-  
-  }
-
-  // @LINE:18
-  class ReverseTwitterLogOutServlet(_prefix: => String) {
-
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:18
-    def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.TwitterLogOutServlet.logOut",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
         }
       """
     )
@@ -80,6 +60,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:20
+    def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.TwitterSignInServlet.logOut",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
+        }
+      """
+    )
+  
   }
 
   // @LINE:11
@@ -110,6 +100,56 @@ package controllers.javascript {
     }
 
   
+    // @LINE:22
+    def newsCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.newsCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/news"})
+        }
+      """
+    )
+  
+    // @LINE:25
+    def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.techCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/tech"})
+        }
+      """
+    )
+  
+    // @LINE:23
+    def entertainmentCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.entertainmentCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/entertainment"})
+        }
+      """
+    )
+  
+    // @LINE:24
+    def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.musicCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/music"})
+        }
+      """
+    )
+  
+    // @LINE:26
+    def gamingCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.gamingCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/gaming"})
+        }
+      """
+    )
+  
     // @LINE:6
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.index",
@@ -136,6 +176,26 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "search"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:18
+  class ReversePersonaController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:18
+    def addPersona: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.PersonaController.addPersona",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "addpersona"})
         }
       """
     )

@@ -32,6 +32,14 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import play.mvc.*;
 
+import twitter4j.Twitter;
+import twitter4j.User;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.RequestToken;
+import twitter4j.auth.AccessToken;
+import models.TwitterUser;
+
 public class TwitterLogOutServlet extends Controller {
     private static final long serialVersionUID = -4433102460849019660L;
 

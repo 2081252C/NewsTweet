@@ -14,3 +14,16 @@ function create(){
 		        theme        : 'light'    // or dark	
 		});
 	 }
+
+// function carousel() {
+// 	alert(called);
+//     var i;
+//     var x = document.getElementsByClassName(arguments[0]);
+//     for (i = 0; i < x.length; i++) {
+//       x[i].style.display = "none";
+//     }
+//     slideIndex++;
+//     if (slideIndex > x.length) {slideIndex = 1}
+//     x[slideIndex-1].style.display = "block";
+//     setTimeout(carousel(), 1000); // Change image every 2 seconds
+// }

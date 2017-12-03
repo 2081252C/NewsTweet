@@ -22,17 +22,17 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object dataAnalytics extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[Form[Search],String,Integer,play.twirl.api.HtmlFormat.Appendable] {
+object dataAnalytics extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template5[Form[Search],String,Integer,Form[Persona],String,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.57*/("""
+Seq[Any](format.raw/*1.98*/("""
 
-"""),_display_(/*3.2*/main("Data Analytics")/*3.24*/(searchForm)/*3.36*/(user)/*3.42*/(bool)/*3.48*/{_display_(Seq[Any](format.raw/*3.49*/("""
+"""),_display_(/*3.2*/main("Data Analytics")/*3.24*/(searchForm)/*3.36*/(user)/*3.42*/(bool)/*3.48*/(personaForm)/*3.61*/(img: String)/*3.74*/{_display_(Seq[Any](format.raw/*3.75*/("""
   """),format.raw/*4.3*/("""<div id="Search Analytics">
   	<h3>Data Analytics:</h3>
   	<p>
@@ -46,9 +46,9 @@ Seq[Any](format.raw/*1.57*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool)
+  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img)
 
-  def f:((Form[Search],String,Integer) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool) => apply(searchForm,user,bool)
+  def f:((Form[Search],String,Integer,Form[Persona],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img) => apply(searchForm,user,bool,personaForm,img)
 
   def ref: this.type = this
 
@@ -57,11 +57,11 @@ Seq[Any](format.raw/*1.57*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 24 15:49:09 GMT 2017
+                  DATE: Thu Nov 30 00:10:16 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/dataAnalytics.scala.html
-                  HASH: 4911fbdf7885fdab5dd4ed3c4531c5251402af2f
-                  MATRIX: 977->1|1127->56|1155->59|1185->81|1205->93|1219->99|1233->105|1271->106|1300->109|1414->193
-                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|35->3|35->3|36->4|42->10
+                  HASH: 71f36be940ed05b79cc154a282c45b744e99cfdd
+                  MATRIX: 998->1|1189->97|1217->100|1247->122|1267->134|1281->140|1295->146|1316->159|1337->172|1375->173|1404->176|1518->260
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|35->3|35->3|35->3|35->3|36->4|42->10
                   -- GENERATED --
               */
           

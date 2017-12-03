@@ -2,6 +2,7 @@ package controllers;
 
 import play.mvc.*;
 import models.TwitterUser;
+import models.Persona;
 import play.data.Form;
 import play.data.FormFactory;
 import models.Search;
@@ -40,6 +41,10 @@ public class SearchController extends Controller {
 			Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        String term = searchForm.field("searchTerm").value();
 
+	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+	        String name = personaForm.field("personaName").value();
+	        //List interests = personaForm.field("interests").value();
+
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    Query query = new Query(term);
@@ -60,10 +65,10 @@ public class SearchController extends Controller {
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(1561842786L);
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, s, 1, tID));
+			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, term));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID));
+		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, personaForm, "", term));
 		        }
     }
 }

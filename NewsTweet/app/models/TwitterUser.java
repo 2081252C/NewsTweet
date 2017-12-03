@@ -4,20 +4,27 @@ import javax.persistence.*;
 import io.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class TwitterUser extends Model {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
 	public Long id;
 
     public String username;
+    public String imgUrl;
     public String accessToken;
 
-    public TwitterUser(Long id, String username, String accessToken){
+    @OneToMany(mappedBy = "twitter_user")
+    public List<Persona> personas = new ArrayList<>();
+
+
+    public TwitterUser(Long id, String username, String imgUrl, String accessToken){
     	this.id = id;
     	this.username = username;
+        this.imgUrl = imgUrl;
     	this.accessToken = accessToken;
 
     }

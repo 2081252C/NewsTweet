@@ -7,10 +7,55 @@
 		revision="1.0-SNAPSHOT"
 		conf="compile"
 		confs="compile, runtime, test, provided, optional, universal, universal-docs, universal-src, windows, docker, linux, rpm, debian, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, docs"
-		date="20171122183918"/>
+		date="20171203005419"/>
 	<dependencies>
+		<module organisation="de.julielab" name="aliasi-lingpipe">
+			<revision name="4.1.0" status="release" pubdate="20160509171128" resolver="public" artresolver="public" homepage="https://github.com/JULIELab/jcore-dependencies/tree/master/aliasi-lingpipe" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="109">
+				<license name="GNU Affero General Public License, Version 3.0" url="http://www.gnu.org/licenses/agpl-3.0.en.html"/>
+				<metadata-artifact status="successful" details="" size="1416" time="132" location="/home/carly/.ivy2/cache/de.julielab/aliasi-lingpipe/ivy-4.1.0.xml" searched="true" original-local-location="/home/carly/.ivy2/cache/de.julielab/aliasi-lingpipe/ivy-4.1.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/de/julielab/aliasi-lingpipe/4.1.0/aliasi-lingpipe-4.1.0.pom"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="4.1.0" rev-constraint-default="4.1.0" rev-constraint-dynamic="4.1.0" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="aliasi-lingpipe" type="jar" ext="jar" status="successful" details="" size="1543422" time="888" location="/home/carly/.ivy2/cache/de.julielab/aliasi-lingpipe/jars/aliasi-lingpipe-4.1.0.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/de/julielab/aliasi-lingpipe/4.1.0/aliasi-lingpipe-4.1.0.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.twitter4j" name="twitter4j-stream">
+			<revision name="4.0.6" status="release" pubdate="20161225125824" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://twitter4j.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="107">
+				<license name="Apache License 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+				<metadata-artifact status="no" details="" size="3568" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-stream/ivy-4.0.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-stream/4.0.6/twitter4j-stream-4.0.6.pom"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="4.0.6" rev-constraint-default="4.0.6" rev-constraint-dynamic="4.0.6" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="twitter4j-stream" type="jar" ext="jar" status="no" details="" size="62850" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-stream/jars/twitter4j-stream-4.0.6.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-stream/4.0.6/twitter4j-stream-4.0.6.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.twitter4j" name="twitter4j-core">
+			<revision name="4.0.6" status="release" pubdate="20161225125758" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://twitter4j.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime(*), master(compile), runtime, compile(*), master, default(compile)" position="108">
+				<license name="Apache License 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+				<metadata-artifact status="no" details="" size="3769" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-core/ivy-4.0.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-core/4.0.6/twitter4j-core-4.0.6.pom"/>
+				<caller organisation="org.twitter4j" name="twitter4j-stream" conf="default, compile, runtime, master" rev="4.0.6" rev-constraint-default="4.0.6" rev-constraint-dynamic="4.0.6" callerrev="4.0.6"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="4.0.2" rev-constraint-default="4.0.2" rev-constraint-dynamic="4.0.2" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="twitter4j-core" type="jar" ext="jar" status="no" details="" size="305357" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-core/jars/twitter4j-core-4.0.6.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-core/4.0.6/twitter4j-core-4.0.6.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="4.0.2" status="release" pubdate="20140624154122" resolver="sbt-chain" artresolver="sbt-chain" evicted="latest-revision" evicted-reason="" homepage="http://twitter4j.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="-1">
+				<license name="Apache License 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+				<metadata-artifact status="no" details="" size="3767" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-core/ivy-4.0.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.pom"/>
+				<evicted-by rev="4.0.6"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="4.0.2" rev-constraint-default="4.0.2" rev-constraint-dynamic="4.0.2" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="javax.persistence" name="persistence-api">
-			<revision name="1.0" status="release" pubdate="20060822204912" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.jcp.org/en/jsr/detail?id=220" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="107">
+			<revision name="1.0" status="release" pubdate="20060822204912" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.jcp.org/en/jsr/detail?id=220" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="106">
 				<license name="Common Development and Distribution License (CDDL) v1.0" url="http://www.sun.com/cddl/cddl.html"/>
 				<metadata-artifact status="no" details="" size="2872" time="0" location="/home/carly/.ivy2/cache/javax.persistence/persistence-api/ivy-1.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/javax/persistence/persistence-api/1.0/persistence-api-1.0.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="1.0" rev-constraint-default="1.0" rev-constraint-dynamic="1.0" callerrev="1.0-SNAPSHOT"/>
@@ -22,7 +67,7 @@
 			</revision>
 		</module>
 		<module organisation="org.hibernate" name="hibernate-entitymanager">
-			<revision name="5.1.0.Final" status="release" pubdate="20160210172934" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="99">
+			<revision name="5.1.0.Final" status="release" pubdate="20160210172934" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="98">
 				<license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/lgpl-2.1.html"/>
 				<metadata-artifact status="no" details="" size="3677" time="0" location="/home/carly/.ivy2/cache/org.hibernate/hibernate-entitymanager/ivy-5.1.0.Final.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/hibernate/hibernate-entitymanager/5.1.0.Final/hibernate-entitymanager-5.1.0.Final.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="5.1.0.Final" rev-constraint-default="5.1.0.Final" rev-constraint-dynamic="5.1.0.Final" callerrev="1.0-SNAPSHOT"/>
@@ -34,7 +79,7 @@
 			</revision>
 		</module>
 		<module organisation="org.hibernate" name="hibernate-core">
-			<revision name="5.1.0.Final" status="release" pubdate="20160210172907" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="100">
+			<revision name="5.1.0.Final" status="release" pubdate="20160210172907" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="99">
 				<license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/lgpl-2.1.html"/>
 				<metadata-artifact status="no" details="" size="3915" time="0" location="/home/carly/.ivy2/cache/org.hibernate/hibernate-core/ivy-5.1.0.Final.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/hibernate/hibernate-core/5.1.0.Final/hibernate-core-5.1.0.Final.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-entitymanager" conf="default, compile, runtime, master" rev="5.1.0.Final" rev-constraint-default="5.1.0.Final" rev-constraint-dynamic="5.1.0.Final" callerrev="5.1.0.Final"/>
@@ -46,7 +91,7 @@
 			</revision>
 		</module>
 		<module organisation="org.hibernate.common" name="hibernate-commons-annotations">
-			<revision name="5.0.1.Final" status="release" pubdate="20151124150317" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="106">
+			<revision name="5.0.1.Final" status="release" pubdate="20151124150317" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="105">
 				<license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/lgpl-2.1.html"/>
 				<metadata-artifact status="no" details="" size="2763" time="0" location="/home/carly/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/ivy-5.0.1.Final.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-entitymanager" conf="default, compile, runtime, master" rev="5.0.1.Final" rev-constraint-default="5.0.1.Final" rev-constraint-dynamic="5.0.1.Final" callerrev="5.1.0.Final"/>
@@ -59,7 +104,7 @@
 			</revision>
 		</module>
 		<module organisation="org.jboss" name="jandex">
-			<revision name="2.0.0.Final" status="release" pubdate="20151003012403" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="103">
+			<revision name="2.0.0.Final" status="release" pubdate="20151003012403" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="102">
 				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="8522" time="0" location="/home/carly/.ivy2/cache/org.jboss/jandex/ivy-2.0.0.Final.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jboss/jandex/2.0.0.Final/jandex-2.0.0.Final.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-core" conf="compile, runtime" rev="2.0.0.Final" rev-constraint-default="2.0.0.Final" rev-constraint-dynamic="2.0.0.Final" callerrev="5.1.0.Final"/>
@@ -71,7 +116,7 @@
 			</revision>
 		</module>
 		<module organisation="org.apache.geronimo.specs" name="geronimo-jta_1.1_spec">
-			<revision name="1.1.1" status="release" pubdate="20080207012654" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="102">
+			<revision name="1.1.1" status="release" pubdate="20080207012654" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="101">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="7102" time="0" location="/home/carly/.ivy2/cache/org.apache.geronimo.specs/geronimo-jta_1.1_spec/ivy-1.1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-entitymanager" conf="default, compile, runtime, master" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="5.1.0.Final"/>
@@ -84,7 +129,7 @@
 			</revision>
 		</module>
 		<module organisation="antlr" name="antlr">
-			<revision name="2.7.7" status="release" pubdate="20070113062839" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.antlr.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="101">
+			<revision name="2.7.7" status="release" pubdate="20070113062839" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.antlr.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="100">
 				<license name="BSD License" url="http://www.antlr.org/license.html"/>
 				<metadata-artifact status="no" details="" size="2565" time="0" location="/home/carly/.ivy2/cache/antlr/antlr/ivy-2.7.7.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/antlr/antlr/2.7.7/antlr-2.7.7.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-core" conf="compile, runtime" rev="2.7.7" rev-constraint-default="2.7.7" rev-constraint-dynamic="2.7.7" callerrev="5.1.0.Final"/>
@@ -96,25 +141,13 @@
 			</revision>
 		</module>
 		<module organisation="com.typesafe.play" name="play-java-jpa_2.12">
-			<revision name="2.6.6" status="release" pubdate="20171005222615" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://playframework.com" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="97">
+			<revision name="2.6.6" status="release" pubdate="20171005222615" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://playframework.com" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="96">
 				<license name="Apache-2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
 				<metadata-artifact status="no" details="" size="3400" time="0" location="/home/carly/.ivy2/cache/com.typesafe.play/play-java-jpa_2.12/ivy-2.6.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/play/play-java-jpa_2.12/2.6.6/play-java-jpa_2.12-2.6.6.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="2.6.6" rev-constraint-default="2.6.6" rev-constraint-dynamic="2.6.6" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
 					<artifact name="play-java-jpa_2.12" type="jar" ext="jar" status="no" details="" size="13463" time="0" location="/home/carly/.ivy2/cache/com.typesafe.play/play-java-jpa_2.12/jars/play-java-jpa_2.12-2.6.6.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/play/play-java-jpa_2.12/2.6.6/play-java-jpa_2.12-2.6.6.jar"/>
-					</artifact>
-				</artifacts>
-			</revision>
-		</module>
-		<module organisation="org.twitter4j" name="twitter4j-core">
-			<revision name="4.0.2" status="release" pubdate="20140624154122" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://twitter4j.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="96">
-				<license name="Apache License 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
-				<metadata-artifact status="no" details="" size="3767" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-core/ivy-4.0.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.pom"/>
-				<caller organisation="com.example" name="newstweet_2.12" conf="compile" rev="4.0.2" rev-constraint-default="4.0.2" rev-constraint-dynamic="4.0.2" callerrev="1.0-SNAPSHOT"/>
-				<artifacts>
-					<artifact name="twitter4j-core" type="jar" ext="jar" status="no" details="" size="280412" time="0" location="/home/carly/.ivy2/cache/org.twitter4j/twitter4j-core/jars/twitter4j-core-4.0.2.jar">
-						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
@@ -228,7 +261,7 @@
 			</revision>
 		</module>
 		<module organisation="org.hibernate.javax.persistence" name="hibernate-jpa-2.1-api">
-			<revision name="1.0.0.Final" status="release" pubdate="20130726180144" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="98">
+			<revision name="1.0.0.Final" status="release" pubdate="20130726180144" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://hibernate.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="97">
 				<license name="Eclipse Public License (EPL), Version 1.0" url="http://www.eclipse.org/legal/epl-v10.html"/>
 				<license name="Eclipse Distribution License (EDL), Version 1.0" url="http://www.eclipse.org/org/documents/edl-v10.php"/>
 				<metadata-artifact status="no" details="" size="2760" time="0" location="/home/carly/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/ivy-1.0.0.Final.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.pom"/>
@@ -1081,7 +1114,7 @@
 			</revision>
 		</module>
 		<module organisation="dom4j" name="dom4j">
-			<revision name="1.6.1" status="release" pubdate="20060210123318" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://dom4j.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="104">
+			<revision name="1.6.1" status="release" pubdate="20060210123318" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://dom4j.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="103">
 				<metadata-artifact status="no" details="" size="3851" time="0" location="/home/carly/.ivy2/cache/dom4j/dom4j/ivy-1.6.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.pom"/>
 				<caller organisation="org.hibernate" name="hibernate-entitymanager" conf="default, compile, runtime, master" rev="1.6.1" rev-constraint-default="1.6.1" rev-constraint-dynamic="1.6.1" callerrev="5.1.0.Final"/>
 				<caller organisation="org.hibernate" name="hibernate-core" conf="compile, runtime" rev="1.6.1" rev-constraint-default="1.6.1" rev-constraint-dynamic="1.6.1" callerrev="5.1.0.Final"/>
@@ -1093,7 +1126,7 @@
 			</revision>
 		</module>
 		<module organisation="xml-apis" name="xml-apis">
-			<revision name="1.0.b2" status="release" pubdate="20070209003046" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://xml.apache.org/commons/#external" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="105">
+			<revision name="1.0.b2" status="release" pubdate="20070209003046" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://xml.apache.org/commons/#external" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="104">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="3049" time="0" location="/home/carly/.ivy2/cache/xml-apis/xml-apis/ivy-1.0.b2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.pom"/>
 				<caller organisation="dom4j" name="dom4j" conf="compile, runtime" rev="1.0.b2" rev-constraint-default="1.0.b2" rev-constraint-dynamic="1.0.b2" callerrev="1.6.1"/>
@@ -1113,6 +1146,30 @@
 				<artifacts>
 					<artifact name="logback-core" type="jar" ext="jar" status="no" details="" size="471901" time="0" location="/home/carly/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.2.3.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="junit" name="junit">
+			<revision name="4.10" status="release" pubdate="20110929201223" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://junit.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="110">
+				<license name="Common Public License Version 1.0" url="http://www.opensource.org/licenses/cpl1.0.txt"/>
+				<metadata-artifact status="no" details="" size="2897" time="0" location="/home/carly/.ivy2/cache/junit/junit/ivy-4.10.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.pom"/>
+				<caller organisation="de.julielab" name="aliasi-lingpipe" conf="default, compile, runtime, master" rev="4.10" rev-constraint-default="4.10" rev-constraint-dynamic="4.10" callerrev="4.1.0"/>
+				<artifacts>
+					<artifact name="junit" type="jar" ext="jar" status="no" details="" size="253160" time="0" location="/home/carly/.ivy2/cache/junit/junit/jars/junit-4.10.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.hamcrest" name="hamcrest-core">
+			<revision name="1.1" status="release" pubdate="20070718201143" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="111">
+				<license name="BSD style" url="http://www.opensource.org/licenses/bsd-license.php"/>
+				<metadata-artifact status="no" details="" size="4340" time="0" location="/home/carly/.ivy2/cache/org.hamcrest/hamcrest-core/ivy-1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.pom"/>
+				<caller organisation="junit" name="junit" conf="compile, runtime" rev="1.1" rev-constraint-default="1.1" rev-constraint-dynamic="1.1" callerrev="4.10"/>
+				<artifacts>
+					<artifact name="hamcrest-core" type="jar" ext="jar" status="no" details="" size="76643" time="0" location="/home/carly/.ivy2/cache/org.hamcrest/hamcrest-core/jars/hamcrest-core-1.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
@@ -1380,6 +1437,7 @@
 				<caller organisation="org.slf4j" name="jcl-over-slf4j" conf="compile, runtime" rev="1.7.25" rev-constraint-default="1.7.25" rev-constraint-dynamic="1.7.25" callerrev="1.7.25"/>
 				<caller organisation="org.avaje" name="avaje-classpath-scanner" conf="compile, runtime" rev="[1.7,1.8)" rev-constraint-default="[1.7,1.8)" rev-constraint-dynamic="[1.7,1.8)" callerrev="2.2.2"/>
 				<caller organisation="com.googlecode.usc" name="jdbcdslog" conf="compile, runtime" rev="1.5.10" rev-constraint-default="1.5.10" rev-constraint-dynamic="1.5.10" callerrev="1.0.6.2"/>
+				<caller organisation="de.julielab" name="aliasi-lingpipe" conf="default, compile, runtime, master" rev="1.7.12" rev-constraint-default="1.7.12" rev-constraint-dynamic="1.7.12" callerrev="4.1.0"/>
 				<caller organisation="org.slf4j" name="jul-to-slf4j" conf="compile, runtime" rev="1.7.25" rev-constraint-default="1.7.25" rev-constraint-dynamic="1.7.25" callerrev="1.7.25"/>
 				<caller organisation="com.typesafe.play" name="play-netty-utils" conf="compile, runtime" rev="1.7.25" rev-constraint-default="1.7.25" rev-constraint-dynamic="1.7.25" callerrev="2.6.6"/>
 				<caller organisation="com.jolbox" name="bonecp" conf="compile, runtime" rev="1.7.2" rev-constraint-default="1.7.2" rev-constraint-dynamic="1.7.2" callerrev="0.8.0.RELEASE"/>
@@ -1425,6 +1483,7 @@
 			<revision name="1.7.12" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
 				<evicted-by rev="1.7.25"/>
 				<caller organisation="org.avaje" name="avaje-classpath-scanner" conf="compile, runtime" rev="[1.7,1.8)" rev-constraint-default="[1.7,1.8)" rev-constraint-dynamic="[1.7,1.8)" callerrev="2.2.2"/>
+				<caller organisation="de.julielab" name="aliasi-lingpipe" conf="default, compile, runtime, master" rev="1.7.12" rev-constraint-default="1.7.12" rev-constraint-dynamic="1.7.12" callerrev="4.1.0"/>
 				<caller organisation="org.avaje" name="avaje-datasource-api" conf="compile, runtime" rev="1.7.12" rev-constraint-default="1.7.12" rev-constraint-dynamic="1.7.12" callerrev="1.1"/>
 				<caller organisation="io.ebean" name="ebean" conf="compile, runtime" rev="[1.7.1,1.7.99)" rev-constraint-default="[1.7.1,1.7.99)" rev-constraint-dynamic="[1.7.1,1.7.99)" callerrev="10.4.4"/>
 				<artifacts>

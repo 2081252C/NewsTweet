@@ -32,3 +32,12 @@ libraryDependencies ++= Seq(
 libraryDependencies += "javax.inject" % "javax.inject" % "1"
 
 libraryDependencies += "javax.persistence" % "persistence-api" % "1.0"
+
+// https://mvnrepository.com/artifact/junit/junit
+libraryDependencies += "junit" % "junit" % "4.12" % Test
+
+
+// https://mvnrepository.com/artifact/org.twitter4j/twitter4j-stream
+libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.6"
+
+libraryDependencies += "de.julielab" % "aliasi-lingpipe" % "4.1.0",
