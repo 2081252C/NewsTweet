@@ -22,7 +22,7 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object gaming extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template6[Form[Search],String,Integer,Form[Persona],String,List[String],play.twirl.api.HtmlFormat.Appendable] {
+object sport extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template6[Form[Search],String,Integer,Form[Persona],String,List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
   def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, tweets: List[String]):play.twirl.api.HtmlFormat.Appendable = {
@@ -40,7 +40,7 @@ Seq[Any](format.raw/*1.120*/("""
 
 """),_display_(/*9.2*/main("NewsTweet")/*9.19*/(searchForm)/*9.31*/(user)/*9.37*/(bool)/*9.43*/(personaForm)/*9.56*/(img)/*9.61*/{_display_(Seq[Any](format.raw/*9.62*/("""
   """),format.raw/*10.3*/("""<div id="categories">
-  	<h3>Gaming:</h3>
+  	<h3>Sport:</h3>
   	<p>
   		<p id="list">
         """),_display_(/*14.10*/for(tweet <- tweets) yield /*14.30*/{_display_(Seq[Any](format.raw/*14.31*/("""
@@ -69,10 +69,10 @@ Seq[Any](format.raw/*1.120*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Sun Dec 03 08:40:54 GMT 2017
-                  SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/gaming.scala.html
-                  HASH: 744cf3c0f6e0c77e84f6e1a18a6649c1e420c212
-                  MATRIX: 1004->1|1195->122|1241->119|1269->138|1296->139|1492->309|1506->315|1568->357|1631->395|1656->412|1676->424|1690->430|1704->436|1725->449|1738->454|1776->455|1806->458|1909->534|1945->554|1984->555|2023->566|2058->574|2084->579|2163->631|2189->636|2251->667|2283->672
+                  DATE: Sun Dec 03 20:30:32 GMT 2017
+                  SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/sport.scala.html
+                  HASH: 7bff85b3d853e5da6652a60ee689060ae8c04b49
+                  MATRIX: 1003->1|1194->122|1240->119|1268->138|1295->139|1491->309|1505->315|1567->357|1630->395|1655->412|1675->424|1689->430|1703->436|1724->449|1737->454|1775->455|1805->458|1907->533|1943->553|1982->554|2021->565|2056->573|2082->578|2161->630|2187->635|2249->666|2281->671
                   LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|46->14|46->14|46->14|47->15|47->15|47->15|49->17|49->17|51->19|52->20
                   -- GENERATED --
               */

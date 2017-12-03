@@ -42,7 +42,7 @@ Seq[Any](format.raw/*1.98*/("""
       <tr>
         <td>
           <div id="category_info">
-            Check out the latest tweets!
+            <h1>Check out the latest tweets!</h1>
           </div>
         </td>
         <td>
@@ -78,7 +78,6 @@ Seq[Any](format.raw/*1.98*/("""
         <td>
           <div id="music_category">
         		<a href=""""),_display_(/*48.21*/routes/*48.27*/.HomeController.musicCategory),format.raw/*48.56*/("""">
-              <a href=""""),_display_(/*49.25*/routes/*49.31*/.HomeController.newsCategory),format.raw/*49.59*/("""">
               <div  class="w3-display-container mySlides" >
                 <img class="music w3-animate-right" src="https://media.theweekendedition.com.au/wp-content/uploads/2015/03/TWE-Brisbane-Live-Music-Week-1100x550-c-center.jpg">
                 <img class="music w3-animate-right" src="http://www.harbourside-kitchen.com/wp-content/uploads/2014/07/live-music_guide.jpg">
@@ -87,18 +86,18 @@ Seq[Any](format.raw/*1.98*/("""
                   var slideIndex = 0;
                   carousel1();
 
-                  function carousel1() """),format.raw/*58.40*/("""{"""),format.raw/*58.41*/("""
-                      """),format.raw/*59.23*/("""var i;
+                  function carousel1() """),format.raw/*57.40*/("""{"""),format.raw/*57.41*/("""
+                      """),format.raw/*58.23*/("""var i;
                       var x = document.getElementsByClassName("music");
-                      for (i = 0; i < x.length; i++) """),format.raw/*61.54*/("""{"""),format.raw/*61.55*/("""
-                        """),format.raw/*62.25*/("""x[i].style.display = "none";
-                      """),format.raw/*63.23*/("""}"""),format.raw/*63.24*/("""
-                      """),format.raw/*64.23*/("""slideIndex++;
-                      if (slideIndex > x.length) """),format.raw/*65.50*/("""{"""),format.raw/*65.51*/("""slideIndex = 1"""),format.raw/*65.65*/("""}"""),format.raw/*65.66*/("""
-                      """),format.raw/*66.23*/("""x[slideIndex-1].style.display = "block";
+                      for (i = 0; i < x.length; i++) """),format.raw/*60.54*/("""{"""),format.raw/*60.55*/("""
+                        """),format.raw/*61.25*/("""x[i].style.display = "none";
+                      """),format.raw/*62.23*/("""}"""),format.raw/*62.24*/("""
+                      """),format.raw/*63.23*/("""slideIndex++;
+                      if (slideIndex > x.length) """),format.raw/*64.50*/("""{"""),format.raw/*64.51*/("""slideIndex = 1"""),format.raw/*64.65*/("""}"""),format.raw/*64.66*/("""
+                      """),format.raw/*65.23*/("""x[slideIndex-1].style.display = "block";
                       setTimeout(carousel1, 2000); // Change image every 2 seconds
-                  """),format.raw/*68.19*/("""}"""),format.raw/*68.20*/("""
-                """),format.raw/*69.17*/("""</script>
+                  """),format.raw/*67.19*/("""}"""),format.raw/*67.20*/("""
+                """),format.raw/*68.17*/("""</script>
                 <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
                   Music
                 </div>
@@ -111,8 +110,7 @@ Seq[Any](format.raw/*1.98*/("""
       <tr>
         <td>
           <div id="entertainment_category">
-        		<a href=""""),_display_(/*82.21*/routes/*82.27*/.HomeController.entertainmentCategory),format.raw/*82.64*/("""">
-              <a href=""""),_display_(/*83.25*/routes/*83.31*/.HomeController.newsCategory),format.raw/*83.59*/("""">
+        		<a href=""""),_display_(/*81.21*/routes/*81.27*/.HomeController.entertainmentCategory),format.raw/*81.64*/("""">
               <div  class="w3-display-container mySlides" >
                 <img class="entertainment w3-animate-right" src="https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg">
                 <img class="entertainment w3-animate-right" src="http://i.dailymail.co.uk/i/pix/2016/02/29/18/31AEE75100000578-3453525-Winners_Leo_enjoyed_a_chat_with_previous_Oscar_winner_Elton_John-a-20_1456771263145.jpg">
@@ -121,18 +119,18 @@ Seq[Any](format.raw/*1.98*/("""
                   var slideIndex = 0;
                   carousel2();
 
-                  function carousel2() """),format.raw/*92.40*/("""{"""),format.raw/*92.41*/("""
-                      """),format.raw/*93.23*/("""var i;
+                  function carousel2() """),format.raw/*90.40*/("""{"""),format.raw/*90.41*/("""
+                      """),format.raw/*91.23*/("""var i;
                       var x = document.getElementsByClassName("entertainment");
-                      for (i = 0; i < x.length; i++) """),format.raw/*95.54*/("""{"""),format.raw/*95.55*/("""
-                        """),format.raw/*96.25*/("""x[i].style.display = "none";
-                      """),format.raw/*97.23*/("""}"""),format.raw/*97.24*/("""
-                      """),format.raw/*98.23*/("""slideIndex++;
-                      if (slideIndex > x.length) """),format.raw/*99.50*/("""{"""),format.raw/*99.51*/("""slideIndex = 1"""),format.raw/*99.65*/("""}"""),format.raw/*99.66*/("""
-                      """),format.raw/*100.23*/("""x[slideIndex-1].style.display = "block";
+                      for (i = 0; i < x.length; i++) """),format.raw/*93.54*/("""{"""),format.raw/*93.55*/("""
+                        """),format.raw/*94.25*/("""x[i].style.display = "none";
+                      """),format.raw/*95.23*/("""}"""),format.raw/*95.24*/("""
+                      """),format.raw/*96.23*/("""slideIndex++;
+                      if (slideIndex > x.length) """),format.raw/*97.50*/("""{"""),format.raw/*97.51*/("""slideIndex = 1"""),format.raw/*97.65*/("""}"""),format.raw/*97.66*/("""
+                      """),format.raw/*98.23*/("""x[slideIndex-1].style.display = "block";
                       setTimeout(carousel2, 2000); // Change image every 2 seconds
-                  """),format.raw/*102.19*/("""}"""),format.raw/*102.20*/("""
-                """),format.raw/*103.17*/("""</script>
+                  """),format.raw/*100.19*/("""}"""),format.raw/*100.20*/("""
+                """),format.raw/*101.17*/("""</script>
                 <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
                   Entertainment
                 </div>
@@ -142,8 +140,7 @@ Seq[Any](format.raw/*1.98*/("""
         </td>
         <td>
         	<div id="tech_category">
-        		<a href=""""),_display_(/*113.21*/routes/*113.27*/.HomeController.techCategory),format.raw/*113.55*/("""">
-              <a href=""""),_display_(/*114.25*/routes/*114.31*/.HomeController.newsCategory),format.raw/*114.59*/("""">
+        		<a href=""""),_display_(/*111.21*/routes/*111.27*/.HomeController.techCategory),format.raw/*111.55*/("""">
               <div  class="w3-display-container mySlides" >
                 <img class="tech w3-animate-right" src="https://static.interestingengineering.com/images/NOVEMBER/sizes/sophia1_resize_md.jpg">
                 <img class="tech w3-animate-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Intel_E5200_-1_%284233673443%29.jpg/1024px-Intel_E5200_-1_%284233673443%29.jpg">
@@ -152,18 +149,18 @@ Seq[Any](format.raw/*1.98*/("""
                   var slideIndex = 0;
                   carousel3();
 
-                  function carousel3() """),format.raw/*123.40*/("""{"""),format.raw/*123.41*/("""
-                      """),format.raw/*124.23*/("""var i;
+                  function carousel3() """),format.raw/*120.40*/("""{"""),format.raw/*120.41*/("""
+                      """),format.raw/*121.23*/("""var i;
                       var x = document.getElementsByClassName("tech");
-                      for (i = 0; i < x.length; i++) """),format.raw/*126.54*/("""{"""),format.raw/*126.55*/("""
-                        """),format.raw/*127.25*/("""x[i].style.display = "none";
-                      """),format.raw/*128.23*/("""}"""),format.raw/*128.24*/("""
-                      """),format.raw/*129.23*/("""slideIndex++;
-                      if (slideIndex > x.length) """),format.raw/*130.50*/("""{"""),format.raw/*130.51*/("""slideIndex = 1"""),format.raw/*130.65*/("""}"""),format.raw/*130.66*/("""
-                      """),format.raw/*131.23*/("""x[slideIndex-1].style.display = "block";
+                      for (i = 0; i < x.length; i++) """),format.raw/*123.54*/("""{"""),format.raw/*123.55*/("""
+                        """),format.raw/*124.25*/("""x[i].style.display = "none";
+                      """),format.raw/*125.23*/("""}"""),format.raw/*125.24*/("""
+                      """),format.raw/*126.23*/("""slideIndex++;
+                      if (slideIndex > x.length) """),format.raw/*127.50*/("""{"""),format.raw/*127.51*/("""slideIndex = 1"""),format.raw/*127.65*/("""}"""),format.raw/*127.66*/("""
+                      """),format.raw/*128.23*/("""x[slideIndex-1].style.display = "block";
                       setTimeout(carousel3, 2000); // Change image every 2 seconds
-                  """),format.raw/*133.19*/("""}"""),format.raw/*133.20*/("""
-                """),format.raw/*134.17*/("""</script>
+                  """),format.raw/*130.19*/("""}"""),format.raw/*130.20*/("""
+                """),format.raw/*131.17*/("""</script>
                 <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
                   Tech
                 </div>
@@ -172,31 +169,30 @@ Seq[Any](format.raw/*1.98*/("""
         	</div>
         </td>
         <td>
-          <div id="gaming_category">
-        		<a href=""""),_display_(/*144.21*/routes/*144.27*/.HomeController.gamingCategory),format.raw/*144.57*/("""">
-              <a href=""""),_display_(/*145.25*/routes/*145.31*/.HomeController.newsCategory),format.raw/*145.59*/("""">
+          <div id="sport_category">
+        		<a href=""""),_display_(/*141.21*/routes/*141.27*/.HomeController.sportCategory),format.raw/*141.56*/("""">
               <div  class="w3-display-container mySlides" >
-                <img class="gaming w3-animate-right" src="https://www.artsprofessional.co.uk/sites/artsprofessional.co.uk/files/styles/551_by_350_feature/public/video_game.jpg?itok=PSM93NW8">
-                <img class="gaming w3-animate-right" src="http://www.audioholics.com/editorials/xbox-one-x-the-downside-of-the-innovation-bell-curve/image">
-                <img class="gaming w3-animate-right" src="https://i.ytimg.com/vi/lUSV44_KtXk/maxresdefault.jpg">
+                <img class="sport w3-animate-right" src="https://ichef.bbci.co.uk/onesport/cps/480/cpsprodpb/E338/production/_98386185_leicesterandmanchesterunited.jpg">
+                <img class="sport w3-animate-right" src="http://www.telegraph.co.uk/content/dam/rugby-union/2017/08/04/TELEMMGLPICT000136082031_trans_NvBQzQNjv4BqBDCnIxthzPLaVuHdTEmpqJRQxFEnemAQdOy_hncTgwo.jpeg?imwidth=480">
+                <img class="sport w3-animate-right" src="https://i2-prod.dailyrecord.co.uk/incoming/article1220810.ece/ALTERNATES/s615/Jessica%20Ennis">
                 <script>
                   var slideIndex = 0;
                   carousel4();
 
-                  function carousel4() """),format.raw/*154.40*/("""{"""),format.raw/*154.41*/("""
-                      """),format.raw/*155.23*/("""var i;
-                      var x = document.getElementsByClassName("gaming");
-                      for (i = 0; i < x.length; i++) """),format.raw/*157.54*/("""{"""),format.raw/*157.55*/("""
-                        """),format.raw/*158.25*/("""x[i].style.display = "none";
-                      """),format.raw/*159.23*/("""}"""),format.raw/*159.24*/("""
-                      """),format.raw/*160.23*/("""slideIndex++;
-                      if (slideIndex > x.length) """),format.raw/*161.50*/("""{"""),format.raw/*161.51*/("""slideIndex = 1"""),format.raw/*161.65*/("""}"""),format.raw/*161.66*/("""
-                      """),format.raw/*162.23*/("""x[slideIndex-1].style.display = "block";
+                  function carousel4() """),format.raw/*150.40*/("""{"""),format.raw/*150.41*/("""
+                      """),format.raw/*151.23*/("""var i;
+                      var x = document.getElementsByClassName("sport");
+                      for (i = 0; i < x.length; i++) """),format.raw/*153.54*/("""{"""),format.raw/*153.55*/("""
+                        """),format.raw/*154.25*/("""x[i].style.display = "none";
+                      """),format.raw/*155.23*/("""}"""),format.raw/*155.24*/("""
+                      """),format.raw/*156.23*/("""slideIndex++;
+                      if (slideIndex > x.length) """),format.raw/*157.50*/("""{"""),format.raw/*157.51*/("""slideIndex = 1"""),format.raw/*157.65*/("""}"""),format.raw/*157.66*/("""
+                      """),format.raw/*158.23*/("""x[slideIndex-1].style.display = "block";
                       setTimeout(carousel4, 2000); // Change image every 2 seconds
-                  """),format.raw/*164.19*/("""}"""),format.raw/*164.20*/("""
-                """),format.raw/*165.17*/("""</script>
+                  """),format.raw/*160.19*/("""}"""),format.raw/*160.20*/("""
+                """),format.raw/*161.17*/("""</script>
                 <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  Gaming
+                  Sport
                 </div>
               </div>
             </a>
@@ -226,7 +222,7 @@ Seq[Any](format.raw/*1.98*/("""
     		<br>
   </div>
   
-""")))}),format.raw/*197.2*/("""
+""")))}),format.raw/*193.2*/("""
 
 """))
       }
@@ -244,11 +240,11 @@ Seq[Any](format.raw/*1.98*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Sun Dec 03 10:32:48 GMT 2017
+                  DATE: Sun Dec 03 20:30:32 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
-                  HASH: 4305d7b86621560e2f3b7c543bddc26e53d679c6
-                  MATRIX: 990->1|1181->97|1209->99|1249->113|1263->119|1325->161|1432->242|1446->248|1507->289|1609->366|1634->383|1654->395|1668->401|1682->407|1703->420|1724->433|1763->435|1792->438|2068->687|2083->693|2132->721|2798->1359|2827->1360|2878->1383|3037->1514|3066->1515|3119->1540|3198->1591|3227->1592|3278->1615|3369->1678|3398->1679|3440->1693|3469->1694|3520->1717|3689->1858|3718->1859|3763->1876|4096->2182|4111->2188|4161->2217|4215->2244|4230->2250|4279->2278|4986->2957|5015->2958|5066->2981|5226->3113|5255->3114|5308->3139|5387->3190|5416->3191|5467->3214|5558->3277|5587->3278|5629->3292|5658->3293|5709->3316|5879->3458|5908->3459|5953->3476|6329->3825|6344->3831|6402->3868|6456->3895|6471->3901|6520->3929|7275->4656|7304->4657|7355->4680|7523->4820|7552->4821|7605->4846|7684->4897|7713->4898|7764->4921|7855->4984|7884->4985|7926->4999|7955->5000|8007->5023|8178->5165|8208->5166|8254->5183|8596->5497|8612->5503|8662->5531|8717->5558|8733->5564|8783->5592|9485->6265|9515->6266|9567->6289|9727->6420|9757->6421|9811->6446|9891->6497|9921->6498|9973->6521|10065->6584|10095->6585|10138->6599|10168->6600|10220->6623|10391->6765|10421->6766|10467->6783|10802->7090|10818->7096|10870->7126|10925->7153|10941->7159|10991->7187|11679->7846|11709->7847|11761->7870|11923->8003|11953->8004|12007->8029|12087->8080|12117->8081|12169->8104|12261->8167|12291->8168|12334->8182|12364->8183|12416->8206|12587->8348|12617->8349|12663->8366|13192->8864
-                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|50->18|50->18|50->18|59->27|59->27|60->28|62->30|62->30|63->31|64->32|64->32|65->33|66->34|66->34|66->34|66->34|67->35|69->37|69->37|70->38|80->48|80->48|80->48|81->49|81->49|81->49|90->58|90->58|91->59|93->61|93->61|94->62|95->63|95->63|96->64|97->65|97->65|97->65|97->65|98->66|100->68|100->68|101->69|114->82|114->82|114->82|115->83|115->83|115->83|124->92|124->92|125->93|127->95|127->95|128->96|129->97|129->97|130->98|131->99|131->99|131->99|131->99|132->100|134->102|134->102|135->103|145->113|145->113|145->113|146->114|146->114|146->114|155->123|155->123|156->124|158->126|158->126|159->127|160->128|160->128|161->129|162->130|162->130|162->130|162->130|163->131|165->133|165->133|166->134|176->144|176->144|176->144|177->145|177->145|177->145|186->154|186->154|187->155|189->157|189->157|190->158|191->159|191->159|192->160|193->161|193->161|193->161|193->161|194->162|196->164|196->164|197->165|229->197
+                  HASH: dc7bfb484a27f968a9f50a8f8520ad69b8a0fd74
+                  MATRIX: 990->1|1181->97|1209->99|1249->113|1263->119|1325->161|1432->242|1446->248|1507->289|1609->366|1634->383|1654->395|1668->401|1682->407|1703->420|1724->433|1763->435|1792->438|2077->696|2092->702|2141->730|2807->1368|2836->1369|2887->1392|3046->1523|3075->1524|3128->1549|3207->1600|3236->1601|3287->1624|3378->1687|3407->1688|3449->1702|3478->1703|3529->1726|3698->1867|3727->1868|3772->1885|4105->2191|4120->2197|4170->2226|4877->2905|4906->2906|4957->2929|5117->3061|5146->3062|5199->3087|5278->3138|5307->3139|5358->3162|5449->3225|5478->3226|5520->3240|5549->3241|5600->3264|5770->3406|5799->3407|5844->3424|6220->3773|6235->3779|6293->3816|7048->4543|7077->4544|7128->4567|7296->4707|7325->4708|7378->4733|7457->4784|7486->4785|7537->4808|7628->4871|7657->4872|7699->4886|7728->4887|7779->4910|7950->5052|7980->5053|8026->5070|8368->5384|8384->5390|8434->5418|9136->6091|9166->6092|9218->6115|9378->6246|9408->6247|9462->6272|9542->6323|9572->6324|9624->6347|9716->6410|9746->6411|9789->6425|9819->6426|9871->6449|10042->6591|10072->6592|10118->6609|10452->6915|10468->6921|10519->6950|11293->7695|11323->7696|11375->7719|11536->7851|11566->7852|11620->7877|11700->7928|11730->7929|11782->7952|11874->8015|11904->8016|11947->8030|11977->8031|12029->8054|12200->8196|12230->8197|12276->8214|12804->8711
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|50->18|50->18|50->18|59->27|59->27|60->28|62->30|62->30|63->31|64->32|64->32|65->33|66->34|66->34|66->34|66->34|67->35|69->37|69->37|70->38|80->48|80->48|80->48|89->57|89->57|90->58|92->60|92->60|93->61|94->62|94->62|95->63|96->64|96->64|96->64|96->64|97->65|99->67|99->67|100->68|113->81|113->81|113->81|122->90|122->90|123->91|125->93|125->93|126->94|127->95|127->95|128->96|129->97|129->97|129->97|129->97|130->98|132->100|132->100|133->101|143->111|143->111|143->111|152->120|152->120|153->121|155->123|155->123|156->124|157->125|157->125|158->126|159->127|159->127|159->127|159->127|160->128|162->130|162->130|163->131|173->141|173->141|173->141|182->150|182->150|183->151|185->153|185->153|186->154|187->155|187->155|188->156|189->157|189->157|189->157|189->157|190->158|192->160|192->160|193->161|225->193
                   -- GENERATED --
               */
           

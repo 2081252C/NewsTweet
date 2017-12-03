@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Sun Dec 03 08:26:12 GMT 2017
+// @DATE:Sun Dec 03 20:28:45 GMT 2017
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -141,11 +141,11 @@ package controllers.javascript {
     )
   
     // @LINE:26
-    def gamingCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.gamingCategory",
+    def sportCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.sportCategory",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/gaming"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/sport"})
         }
       """
     )

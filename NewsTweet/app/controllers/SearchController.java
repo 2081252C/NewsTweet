@@ -63,7 +63,7 @@ public class SearchController extends Controller {
 	         String str = session("id");
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
-		        TwitterUser t = TwitterUser.find.byId(1561842786L);
+		        TwitterUser t = TwitterUser.find.byId(id);
 				String s = t.username;
 			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, term));
 			}

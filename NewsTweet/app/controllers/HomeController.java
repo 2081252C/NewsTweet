@@ -59,13 +59,13 @@ public class HomeController extends Controller{
         =  new File("/classifyTweets/categories-test");
 
     private static String[] CATEGORIES
-        = { "entertainment", "gaming", "music", "news", "tech" };
+        = { "entertainment", "sport", "music", "news", "tech" };
 
     private static int NGRAM_SIZE = 6;
 
     List<String> news = new ArrayList<>();
     List<String> entertainment = new ArrayList<>();
-    List<String> gaming = new ArrayList<>();
+    List<String> sport = new ArrayList<>();
     List<String> music = new ArrayList<>();
     List<String> tech = new ArrayList<>();
 
@@ -94,12 +94,12 @@ public class HomeController extends Controller{
 	            public void onStatus(Status status) {
 	                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
 	          		System.out.println(status.getRetweetedStatus().getRetweetCount());
-	                //if(status.getRetweetedStatus().getRetweetCount()>1000){
+	                if(status.getRetweetedStatus().getRetweetCount()>1000){
 	                	top.add(Long.toString(status.getId()));
 	                	classify.add(status);
-	                //}
+	                }
 			        //System.out.println(statuses.size() + ":" + status.getText());
-			        if (top.size() == 50) {
+			        if (top.size() == 100) {
 			          synchronized (lock) {
 			            lock.notify();
 			          }
@@ -221,9 +221,9 @@ public class HomeController extends Controller{
                 		tech.add(tweetID);
                 	}
                 }
-                else if(bestCategory.compareTo("gaming")==0){
-                	if(!gaming.contains(tweetID)){
-                		gaming.add(tweetID);
+                else if(bestCategory.compareTo("sport")==0){
+                	if(!sport.contains(tweetID)){
+                		sport.add(tweetID);
                 	}
                 }
             }
@@ -238,7 +238,7 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
 		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl));
 		}
@@ -258,7 +258,7 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
 		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music));
 		}
@@ -278,7 +278,7 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
 		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment));
 		}
@@ -298,7 +298,7 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
 		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech));
 		}
@@ -307,7 +307,7 @@ public class HomeController extends Controller{
 	        }
     }
 
-    public Result gamingCategory(){
+    public Result sportCategory(){
     	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
         String term = searchForm.field("searchTerm").value();
 
@@ -318,12 +318,12 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.gaming.render(searchForm, s, 1, personaForm, t.imgUrl, gaming));
+		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport));
 		}
 	    else{
-	        	return ok(views.html.gaming.render(searchForm, "", 0, personaForm, "", gaming));
+	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport));
 	        }
     }
 
@@ -338,7 +338,7 @@ public class HomeController extends Controller{
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(1561842786L);
+	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
 		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news));
 		}

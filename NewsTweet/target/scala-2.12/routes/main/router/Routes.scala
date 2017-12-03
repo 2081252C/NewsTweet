@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Sun Dec 03 08:26:12 GMT 2017
+// @DATE:Sun Dec 03 20:28:45 GMT 2017
 
 package router
 
@@ -68,7 +68,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/entertainment""", """controllers.HomeController.entertainmentCategory()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/music""", """controllers.HomeController.musicCategory()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/tech""", """controllers.HomeController.techCategory()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/gaming""", """controllers.HomeController.gamingCategory()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/sport""", """controllers.HomeController.sportCategory()"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -293,18 +293,18 @@ class Routes(
   )
 
   // @LINE:26
-  private[this] lazy val controllers_HomeController_gamingCategory12_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/gaming")))
+  private[this] lazy val controllers_HomeController_sportCategory12_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/sport")))
   )
-  private[this] lazy val controllers_HomeController_gamingCategory12_invoker = createInvoker(
-    HomeController_2.gamingCategory(),
+  private[this] lazy val controllers_HomeController_sportCategory12_invoker = createInvoker(
+    HomeController_2.sportCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
-      "gamingCategory",
+      "sportCategory",
       Nil,
       "GET",
-      this.prefix + """category/gaming""",
+      this.prefix + """category/sport""",
       """""",
       Seq()
     )
@@ -386,9 +386,9 @@ class Routes(
       }
   
     // @LINE:26
-    case controllers_HomeController_gamingCategory12_route(params@_) =>
+    case controllers_HomeController_sportCategory12_route(params@_) =>
       call { 
-        controllers_HomeController_gamingCategory12_invoker.call(HomeController_2.gamingCategory())
+        controllers_HomeController_sportCategory12_invoker.call(HomeController_2.sportCategory())
       }
   }
 }

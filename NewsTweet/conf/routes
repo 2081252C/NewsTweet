@@ -23,6 +23,6 @@ GET     /category/news              controllers.HomeController.newsCategory()
 GET     /category/entertainment     controllers.HomeController.entertainmentCategory()
 GET     /category/music             controllers.HomeController.musicCategory()
 GET     /category/tech              controllers.HomeController.techCategory()
-GET     /category/gaming            controllers.HomeController.gamingCategory()
+GET     /category/sport            controllers.HomeController.sportCategory()
 
 
