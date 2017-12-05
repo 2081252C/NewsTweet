@@ -2,7 +2,7 @@ package controllers;
 
 import play.mvc.*;
 import models.TwitterUser;
-import models.Persona;
+import models.*;
 import play.data.Form;
 import play.data.FormFactory;
 import models.Search;
@@ -45,6 +45,9 @@ public class SearchController extends Controller {
 	        String name = personaForm.field("personaName").value();
 	        //List interests = personaForm.field("interests").value();
 
+	        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+	        String interestName = interestForm.field("interestName").value();
+
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    Query query = new Query(term);
@@ -64,11 +67,23 @@ public class SearchController extends Controller {
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
+		        List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, term));
+			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, interestForm, term, personaNames, personaID));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, personaForm, "", term));
+		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, personaForm, "", interestForm, term, null, null));
 		        }
     }
 }

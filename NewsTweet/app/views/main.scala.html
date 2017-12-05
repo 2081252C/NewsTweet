@@ -6,7 +6,7 @@
  *@
 
 @import helper._
-@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(content: Html)
+@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(personaID: List[Long])(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +49,26 @@
                 <td height=100% valign="top">
                     <div id="sidebar">
                         <h3> Interests </h3>
+                        @if(bool==1){
+                            <button onclick="document.getElementById('interest_form').style.display = 'block'; this.style.display = 'none'">Add Interest</button>
+                            <div id="interest_form">
+                                @helper.form(action=routes.InterestController.addInterest()){
+
+                                    @helper.inputText(interestForm("interestName"),
+                                        'placeholder -> "Interest Name",
+                                        '_label -> null,
+                                        'size -> 8)
+
+                                    @helper.select(
+                                       interestForm("personaName"),
+                                       helper.options(personas),
+                                       '_label -> null
+                                    )
+                                }
+                            </div>
+                        }else{ 
+                            Here are some sample interests. Sign in to create your own!
+                        }
                     </div>
                 </td>
                 <td valign="top">

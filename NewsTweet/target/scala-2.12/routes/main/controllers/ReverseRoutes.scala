@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Sun Dec 03 20:28:45 GMT 2017
+// @DATE:Mon Dec 04 21:55:14 GMT 2017
 
 import play.api.mvc.Call
 
@@ -46,7 +46,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "callback")
     }
   
-    // @LINE:20
+    // @LINE:22
     def logOut(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "logout")
@@ -76,31 +76,31 @@ package controllers {
     }
 
   
-    // @LINE:22
+    // @LINE:24
     def newsCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/news")
     }
   
-    // @LINE:25
+    // @LINE:27
     def techCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/tech")
     }
   
-    // @LINE:23
+    // @LINE:25
     def entertainmentCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/entertainment")
     }
   
-    // @LINE:24
+    // @LINE:26
     def musicCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/music")
     }
   
-    // @LINE:26
+    // @LINE:28
     def sportCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/sport")
@@ -140,6 +140,21 @@ package controllers {
     def addPersona(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "addpersona")
+    }
+  
+  }
+
+  // @LINE:19
+  class ReverseInterestController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:19
+    def addInterest(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "addinterest")
     }
   
   }

@@ -1,6 +1,6 @@
-@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String)
+@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], personaID: List[Long])
 
-@main("Data Analytics")(searchForm)(user)(bool)(personaForm)(img: String){
+@main("Data Analytics")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(personaID){
   <div id="Search Analytics">
   	<h3>Data Analytics:</h3>
   	<p>

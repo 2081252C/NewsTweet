@@ -22,23 +22,23 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object music extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template6[Form[Search],String,Integer,Form[Persona],String,List[String],play.twirl.api.HtmlFormat.Appendable] {
+object music extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[Long],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, tweets: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, tweets: List[String], interestForm: Form[Interest], personas: List[String], personaID: List[Long]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 /*3.2*/import helper._
 
 
-Seq[Any](format.raw/*1.120*/("""
+Seq[Any](format.raw/*1.197*/(""")
 
 """),format.raw/*4.1*/("""
 """),format.raw/*5.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src=""""),_display_(/*7.15*/routes/*7.21*/.Assets.versioned("javascripts/render.js")),format.raw/*7.63*/(""""; type="text/javascript"></script>
 
-"""),_display_(/*9.2*/main("NewsTweet")/*9.19*/(searchForm)/*9.31*/(user)/*9.37*/(bool)/*9.43*/(personaForm)/*9.56*/(img)/*9.61*/{_display_(Seq[Any](format.raw/*9.62*/("""
+"""),_display_(/*9.2*/main("NewsTweet")/*9.19*/(searchForm)/*9.31*/(user)/*9.37*/(bool)/*9.43*/(personaForm)/*9.56*/(img)/*9.61*/(interestForm)/*9.75*/(personas)/*9.85*/(personaID)/*9.96*/{_display_(Seq[Any](format.raw/*9.97*/("""
   """),format.raw/*10.3*/("""<div id="categories">
   	<h3>Music:</h3>
   	<p>
@@ -58,9 +58,9 @@ Seq[Any](format.raw/*1.120*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,tweets:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,tweets)
+  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,tweets:List[String],interestForm:Form[Interest],personas:List[String],personaID:List[Long]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID)
 
-  def f:((Form[Search],String,Integer,Form[Persona],String,List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,tweets) => apply(searchForm,user,bool,personaForm,img,tweets)
+  def f:((Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[Long]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID) => apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID)
 
   def ref: this.type = this
 
@@ -69,11 +69,11 @@ Seq[Any](format.raw/*1.120*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Sun Dec 03 08:40:54 GMT 2017
+                  DATE: Tue Dec 05 20:40:15 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/music.scala.html
-                  HASH: 410af3952aef13ea0534233f5740d4bb6b7aea0f
-                  MATRIX: 1003->1|1194->122|1240->119|1268->138|1295->139|1491->309|1505->315|1567->357|1630->395|1655->412|1675->424|1689->430|1703->436|1724->449|1737->454|1775->455|1805->458|1907->533|1943->553|1982->554|2021->565|2056->573|2082->578|2161->630|2187->635|2249->666|2281->671
-                  LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|46->14|46->14|46->14|47->15|47->15|47->15|49->17|49->17|51->19|52->20
+                  HASH: b73c907583c056d7f75950c40ccdd341f0557d94
+                  MATRIX: 1042->1|1310->200|1356->196|1385->216|1412->217|1608->387|1622->393|1684->435|1747->473|1772->490|1792->502|1806->508|1820->514|1841->527|1854->532|1876->546|1894->556|1913->567|1951->568|1981->571|2083->646|2119->666|2158->667|2197->678|2232->686|2258->691|2337->743|2363->748|2425->779|2457->784
+                  LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|46->14|46->14|46->14|47->15|47->15|47->15|49->17|49->17|51->19|52->20
                   -- GENERATED --
               */
           

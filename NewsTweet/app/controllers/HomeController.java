@@ -12,8 +12,7 @@ import twitter4j.TwitterException;
 import twitter4j.conf.ConfigurationBuilder;
 import java.util.List;
 import java.util.ArrayList;
-import models.Search;
-import models.Persona;
+import models.*;
 import play.data.Form;
 import play.data.FormFactory;
 import javax.inject.Inject;
@@ -86,6 +85,9 @@ public class HomeController extends Controller{
 	        String name = personaForm.field("personaName").value();
 	        //List interests = personaForm.field("interests").value();
 
+            Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+            String interestName = interestForm.field("interestName").value();
+
 		    //Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    TwitterStream twitterStream = new TwitterStreamFactory(configurationBuilder.build()).getInstance();
@@ -94,10 +96,10 @@ public class HomeController extends Controller{
 	            public void onStatus(Status status) {
 	                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
 	          		System.out.println(status.getRetweetedStatus().getRetweetCount());
-	                if(status.getRetweetedStatus().getRetweetCount()>1000){
+	                //if(status.getRetweetedStatus().getRetweetCount()>1000){
 	                	top.add(Long.toString(status.getId()));
 	                	classify.add(status);
-	                }
+	                //}
 			        //System.out.println(statuses.size() + ":" + status.getText());
 			        if (top.size() == 100) {
 			          synchronized (lock) {
@@ -239,11 +241,24 @@ public class HomeController extends Controller{
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+
 			String s = t.username;
-		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl));
+		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, ""));
+	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
 	        }
     }
 
@@ -254,16 +269,32 @@ public class HomeController extends Controller{
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
 
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+
         //System.out.println(term);
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music));
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music));
+	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, null, null));
 	        }	
     }
 
@@ -274,16 +305,33 @@ public class HomeController extends Controller{
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
 
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        
         //System.out.println(term);
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment));
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+
+		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment));
+	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, null, null));
 	        }
     }
 
@@ -294,16 +342,32 @@ public class HomeController extends Controller{
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
 
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+
         //System.out.println(term);
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech));
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech));
+	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, null, null));
 	        }
     }
 
@@ -314,16 +378,32 @@ public class HomeController extends Controller{
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
 
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+
         //System.out.println(term);
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport));
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport));
+	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, null, null));
 	        }
     }
 
@@ -334,16 +414,31 @@ public class HomeController extends Controller{
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
 
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
         //System.out.println(term);
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
 			String s = t.username;
-		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news));
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            List<String> personaNames = new ArrayList<>();
+            List<Long> personaID = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                personaID.add(p.id);
+            }
+		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, personaID));
 		}
 	    else{
-	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news));
+	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, null, null));
 	        }
     }
 }

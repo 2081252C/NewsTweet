@@ -1,10 +1,10 @@
-@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String)
+@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], personaID: List[Long])
 
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-@main("NewsTweet")(searchForm)(user)(bool)(personaForm)(img: String) {
+@main("NewsTweet")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(personaID) {
   <div id="categories">
     <table id="category">
       <tr>

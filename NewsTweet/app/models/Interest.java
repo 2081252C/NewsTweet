@@ -20,9 +20,10 @@ public class Interest extends Model{
 	@ManyToOne()
     public Persona persona;
 
-	public Interest(Long id, String interestName){
+	public Interest(String interestName, Persona persona){
     	this.id = id;
     	this.interestName = interestName;
+    	this.persona = persona;
 
     }
 

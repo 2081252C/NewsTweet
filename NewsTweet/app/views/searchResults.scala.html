@@ -1,4 +1,4 @@
-@(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], personaForm: Form[Persona], img: String, term: String)
+@(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], personaID: List[Long]))
 
 @import helper._
 
@@ -6,7 +6,7 @@
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
-@main("Search Results")(searchForm)(user)(bool)(personaForm)(img) {
+@main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(personaID) {
   <div id="searchResults">
   	<h3>Search Results for @term:</h3>
   	<p id="list">
