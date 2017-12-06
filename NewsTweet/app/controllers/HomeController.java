@@ -247,15 +247,27 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
+
+            List<String> interests = new ArrayList<>();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<Interest> interestsFromDB = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
 
+            System.out.println("\n\ninterets: " + interests.toString());
+
 			String s = t.username;
-		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, personaID));
+		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
@@ -286,12 +298,20 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
-		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, personaID));
+		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, null, null));
@@ -322,13 +342,21 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
 
-		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, personaID));
+		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, null, null));
@@ -359,12 +387,20 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
-		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, personaID));
+		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, null, null));
@@ -395,12 +431,20 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
-		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, personaID));
+		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, null, null));
@@ -410,10 +454,8 @@ public class HomeController extends Controller{
     public Result newsCategory(){
     	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
         String term = searchForm.field("searchTerm").value();
-
         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
         String name = personaForm.field("personaName").value();
-
         Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
         String interestName = interestForm.field("interestName").value();
 
@@ -430,12 +472,20 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
-		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, personaID));
+		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests));
 		}
 	    else{
 	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, null, null));

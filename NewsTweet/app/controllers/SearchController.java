@@ -74,13 +74,21 @@ public class SearchController extends Controller {
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
-                personaID.add(p.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + p.personaName);
+                }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, interestForm, term, personaNames, personaID));
+			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
 			}
 		    else{
 		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, personaForm, "", interestForm, term, null, null));

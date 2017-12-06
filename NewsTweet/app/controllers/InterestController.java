@@ -44,10 +44,18 @@ public class InterestController extends Controller {
                                         .findPagedList()
                                         .getList();
 	            List<String> personaNames = new ArrayList<>();
-	            List<Long> personaID = new ArrayList<>();
+	            List<String> interests = new ArrayList<>();
 	            for(Persona p: personas){
 	                personaNames.add(p.personaName);
-	                personaID.add(p.id);
+	                List<Interest> interestsFromDB = Interest.find.query().where()
+	                                        .ilike("persona", Long.toString(p.id))
+	                                        .setFirstRow(0)
+	                                        .setMaxRows(25)
+	                                        .findPagedList()
+	                                        .getList();
+	                for(Interest i: interestsFromDB){
+	                    interests.add(i.interestName + " " + p.personaName);
+	                }
 	            }
 
 	   			List<Persona> personaSaveInterest = Persona.find.query().where()
@@ -64,7 +72,7 @@ public class InterestController extends Controller {
 		        i.save();
 
 				String s = t.username;
-			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, personaID));
+			    return redirect("/");
 			}
 		    else{
 		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));

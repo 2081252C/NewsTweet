@@ -22,23 +22,23 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object tech extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[Long],play.twirl.api.HtmlFormat.Appendable] {
+object tech extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, tweets: List[String], interestForm: Form[Interest], personas: List[String], personaID: List[Long]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, tweets: List[String], interestForm: Form[Interest], personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 /*3.2*/import helper._
 
 
-Seq[Any](format.raw/*1.197*/("""
+Seq[Any](format.raw/*1.199*/("""
 
 """),format.raw/*4.1*/("""
 """),format.raw/*5.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src=""""),_display_(/*7.15*/routes/*7.21*/.Assets.versioned("javascripts/render.js")),format.raw/*7.63*/(""""; type="text/javascript"></script>
 
-"""),_display_(/*9.2*/main("NewsTweet")/*9.19*/(searchForm)/*9.31*/(user)/*9.37*/(bool)/*9.43*/(personaForm)/*9.56*/(img)/*9.61*/(interestForm)/*9.75*/(personas)/*9.85*/(personaID)/*9.96*/{_display_(Seq[Any](format.raw/*9.97*/("""
+"""),_display_(/*9.2*/main("NewsTweet")/*9.19*/(searchForm)/*9.31*/(user)/*9.37*/(bool)/*9.43*/(personaForm)/*9.56*/(img)/*9.61*/(interestForm)/*9.75*/(personas)/*9.85*/(interests)/*9.96*/{_display_(Seq[Any](format.raw/*9.97*/("""
   """),format.raw/*10.3*/("""<div id="categories">
   	<h3>Tech:</h3>
   	<p>
@@ -58,9 +58,9 @@ Seq[Any](format.raw/*1.197*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,tweets:List[String],interestForm:Form[Interest],personas:List[String],personaID:List[Long]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID)
+  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,tweets:List[String],interestForm:Form[Interest],personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,interests)
 
-  def f:((Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[Long]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID) => apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,personaID)
+  def f:((Form[Search],String,Integer,Form[Persona],String,List[String],Form[Interest],List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,tweets,interestForm,personas,interests) => apply(searchForm,user,bool,personaForm,img,tweets,interestForm,personas,interests)
 
   def ref: this.type = this
 
@@ -69,10 +69,10 @@ Seq[Any](format.raw/*1.197*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Dec 05 20:40:16 GMT 2017
+                  DATE: Wed Dec 06 16:13:08 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/tech.scala.html
-                  HASH: e154e2d199ebae04ae421cd8b9f2f9adbe0447b6
-                  MATRIX: 1041->1|1309->199|1355->196|1383->215|1410->216|1606->386|1620->392|1682->434|1745->472|1770->489|1790->501|1804->507|1818->513|1839->526|1852->531|1874->545|1892->555|1911->566|1949->567|1979->570|2080->644|2116->664|2155->665|2194->676|2229->684|2255->689|2334->741|2360->746|2422->777|2454->782
+                  HASH: f8e4a1868746b143904e5fe64961c8f8b1677a13
+                  MATRIX: 1043->1|1313->201|1359->198|1387->217|1414->218|1610->388|1624->394|1686->436|1749->474|1774->491|1794->503|1808->509|1822->515|1843->528|1856->533|1878->547|1896->557|1915->568|1953->569|1983->572|2084->646|2120->666|2159->667|2198->678|2233->686|2259->691|2338->743|2364->748|2426->779|2458->784
                   LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|46->14|46->14|46->14|47->15|47->15|47->15|49->17|49->17|51->19|52->20
                   -- GENERATED --
               */

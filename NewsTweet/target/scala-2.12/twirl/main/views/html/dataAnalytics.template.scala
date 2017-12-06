@@ -22,17 +22,17 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object dataAnalytics extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template8[Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[Long],play.twirl.api.HtmlFormat.Appendable] {
+object dataAnalytics extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template8[Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], personaID: List[Long]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.175*/("""
+Seq[Any](format.raw/*1.177*/("""
 
-"""),_display_(/*3.2*/main("Data Analytics")/*3.24*/(searchForm)/*3.36*/(user)/*3.42*/(bool)/*3.48*/(personaForm)/*3.61*/(img)/*3.66*/(interestForm)/*3.80*/(personas)/*3.90*/(personaID)/*3.101*/{_display_(Seq[Any](format.raw/*3.102*/("""
+"""),_display_(/*3.2*/main("Data Analytics")/*3.24*/(searchForm)/*3.36*/(user)/*3.42*/(bool)/*3.48*/(personaForm)/*3.61*/(img)/*3.66*/(interestForm)/*3.80*/(personas)/*3.90*/(interests)/*3.101*/{_display_(Seq[Any](format.raw/*3.102*/("""
   """),format.raw/*4.3*/("""<div id="Search Analytics">
   	<h3>Data Analytics:</h3>
   	<p>
@@ -46,9 +46,9 @@ Seq[Any](format.raw/*1.175*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],personaID:List[Long]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,interestForm,personas,personaID)
+  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests)
 
-  def f:((Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[Long]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,interestForm,personas,personaID) => apply(searchForm,user,bool,personaForm,img,interestForm,personas,personaID)
+  def f:((Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,interestForm,personas,interests) => apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests)
 
   def ref: this.type = this
 
@@ -57,10 +57,10 @@ Seq[Any](format.raw/*1.175*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Dec 05 20:40:16 GMT 2017
+                  DATE: Wed Dec 06 16:13:08 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/dataAnalytics.scala.html
-                  HASH: a0f6f1f897efc6df301f13ee5b86c94361d121ea
-                  MATRIX: 1037->1|1306->174|1334->177|1364->199|1384->211|1398->217|1412->223|1433->236|1446->241|1468->255|1486->265|1506->276|1545->277|1574->280|1688->364
+                  HASH: bf6f1f90134cff409169053cd28b15ca149496fb
+                  MATRIX: 1039->1|1310->176|1338->179|1368->201|1388->213|1402->219|1416->225|1437->238|1450->243|1472->257|1490->267|1510->278|1549->279|1578->282|1692->366
                   LINES: 28->1|33->1|35->3|35->3|35->3|35->3|35->3|35->3|35->3|35->3|35->3|35->3|35->3|36->4|42->10
                   -- GENERATED --
               */

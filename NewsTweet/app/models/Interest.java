@@ -27,5 +27,5 @@ public class Interest extends Model{
 
     }
 
-    public static final Finder<Long, Persona> find = new Finder<>(Persona.class);
+    public static final Finder<Long, Interest> find = new Finder<>(Interest.class);
 }

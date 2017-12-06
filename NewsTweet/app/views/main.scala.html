@@ -6,7 +6,7 @@
  *@
 
 @import helper._
-@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(personaID: List[Long])(content: Html)
+@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +14,12 @@
         @* Here's where we render the page title `String`. *@
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     </head>
     <body>
         <table>
-            <tr>
+            <tr id="head">
                 <th width="15%">
                     <div id="title">
                         <a href="/"> <h1> NewsTweet </h1></a>
@@ -45,11 +46,36 @@
                     </div>
                 </th>
             </tr>
+            @if(personas.isEmpty){
+            }else{
+            <tr id="head2">
+                <div id="tabs">
+                    @if(bool==1 ){
+                        @for(persona <- personas){
+                            <button class="persona" onclick="openCity(event, '@persona')">@persona</button>
+                        }
+                    }
+                    </div>
+            </tr>
+            }
             <tr>
-                <td height=100% valign="top">
-                    <div id="sidebar">
+                <td height=100% valign="top" width=269>
+                    <div id="sidebar"  style="margin-top:95px">
                         <h3> Interests </h3>
                         @if(bool==1){
+                            @if(interests.isEmpty){
+                                Looks like you don't have any interests yet!<br><br> Would you like to add one?<br><br>
+                            }else{
+                                @for(persona <- personas){
+                                    <div id="@persona" class="city">
+                                        @for(interest <- interests){
+                                            @if(interest contains persona){
+                                                @interest.replace(persona,"")<br>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
                             <button onclick="document.getElementById('interest_form').style.display = 'block'; this.style.display = 'none'">Add Interest</button>
                             <div id="interest_form">
                                 @helper.form(action=routes.InterestController.addInterest()){
@@ -69,12 +95,14 @@
                         }else{ 
                             Here are some sample interests. Sign in to create your own!
                         }
-                    </div>
+                </div>
                 </td>
                 <td valign="top">
+                    <div id="content"  style="margin-top:95px; z-index: -1">
                     @* And here's where we render the `Html` object containing
                      * the page content. *@
                     @content
+                </div>
                 </td>
                 <td td valign="top">
                     <div id="user_options">

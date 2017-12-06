@@ -36,6 +36,7 @@ body {
     width: 200px;
     background: url("../images/fakecolumn.jpeg") repeat-y;
     min-height: 100%;
+    position: fixed;
 }
 
 #sidebar h3 {
@@ -58,6 +59,7 @@ body {
 #persona_form{
 	display: none;
 	width: 150px;
+	z-index: 1000;
 }
 
 #user_pic{
@@ -75,7 +77,11 @@ body {
 	float: right;
 	background-color: white;
 	width: 200px;
+	margin-top: 61px;
+	right: 10px;
 	text-align: center;
+	z-index: 1000;
+	position: fixed;
 }
 
 #user_options:hover{
@@ -171,4 +177,43 @@ th{
 
 #interest_form{
 	display:none;
+}
+
+#head{
+	position: fixed;
+	width:100%;
+	z-index:10;
+}
+
+#tabs{
+	position: fixed;
+	width:100%;
+	top:63px;
+	z-index: 10;
+	background-color:lightsteelblue;
+	}
+
+.persona{
+	padding:8px 16px;
+	float:left;
+	width:auto;
+	border:0;
+	outline:none;
+	display:block;
+  background-color:lightsteelblue;
+}
+
+
+.persona.clicked{
+	padding:8px 16px;
+	float:left;
+	width:auto;
+	border:0;
+	outline:none;
+	display:block;
+  background-color:lightgrey;
+}
+
+#main{
+	top:15%;
 }

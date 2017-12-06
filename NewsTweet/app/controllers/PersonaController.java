@@ -47,12 +47,20 @@ public class PersonaController extends Controller {
                                         .findPagedList()
                                         .getList();
             List<String> personaNames = new ArrayList<>();
-            List<Long> personaID = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
             for(Persona persona: personas){
                 personaNames.add(persona.personaName);
-                personaID.add(persona.id);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(persona.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " " + persona.personaName);
+                }
             }
-			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, personaID));
+			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
 			}
 		    else{
 		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
