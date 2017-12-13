@@ -1,4 +1,4 @@
-@(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String]))
+@(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String])
 
 @import helper._
 
@@ -7,16 +7,39 @@
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
 @main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests) {
-  <div id="searchResults">
   	<h3>Search Results for @term:</h3>
-  	<p id="list">
-  			@for(tweet <- tweets){
-  				<p id="@tweet"><br></p>
-  				<script>
-					rendering("@tweet");
-				</script>
-  			}
-  	</p>
-  </div>
+    <table style="width:820px;">
+  	  <tr>
+        <div id="search_tabs">
+          <th style="width:410px;">
+            <button class="search_result" onclick="openTab(event, 'popular')" style="width:400;">Popular</button> 
+          </th>
+          <th style="width:410px;">
+            <button class="search_result" onclick="openTab(event, 'recent')" style="width:400;">Recent</button>
+          </th>
+        </div>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div id="popular" class="tweets" style="width:50%; left:300px">
+            @for(tweet <- popTweets){
+              <p id="@tweet"><br></p>
+              <script>
+              rendering("@tweet");
+            </script>
+            }
+          </div>
+      
+          <div id="recent" class="tweets" style="width:50%">
+            @for(tweet <- recentTweets){
+              <p id="@tweet"><br></p>
+              <script>
+              rendering("@tweet");
+            </script>
+            }
+          </div>
+        </td>
+      </tr>
+    </table>
 }
 

@@ -33,6 +33,8 @@ public class PersonaController extends Controller {
 	        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
 	        String interestName = interestForm.field("interestName").value();
 
+	        List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
 	        String str = session("id");
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
@@ -46,8 +48,6 @@ public class PersonaController extends Controller {
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
             for(Persona persona: personas){
                 personaNames.add(persona.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -63,7 +63,7 @@ public class PersonaController extends Controller {
 			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
 			}
 		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
+		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
 		        }
     }
 }

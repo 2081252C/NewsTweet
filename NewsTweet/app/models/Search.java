@@ -8,4 +8,5 @@ import play.data.validation.Constraints;
 public class Search{
 
 	private String searchTerm;
+	
 }

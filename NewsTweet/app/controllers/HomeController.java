@@ -101,7 +101,7 @@ public class HomeController extends Controller{
 	                	classify.add(status);
 	                //}
 			        //System.out.println(statuses.size() + ":" + status.getText());
-			        if (top.size() == 100) {
+			        if (top.size() == 1) {
 			          synchronized (lock) {
 			            lock.notify();
 			          }
@@ -237,6 +237,8 @@ public class HomeController extends Controller{
         System.out.println(evaluator);
 
         //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
@@ -248,8 +250,6 @@ public class HomeController extends Controller{
                                         .findPagedList()
                                         .getList();
 
-            List<String> interests = new ArrayList<>();
-            List<String> personaNames = new ArrayList<>();
             List<Interest> interestsFromDB = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
@@ -270,7 +270,7 @@ public class HomeController extends Controller{
 		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
+	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
 	        }
     }
 
@@ -287,6 +287,8 @@ public class HomeController extends Controller{
 
         //System.out.println(term);
          String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
@@ -297,8 +299,6 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -314,7 +314,7 @@ public class HomeController extends Controller{
 		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, null, null));
+	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, personaNames, interests));
 	        }	
     }
 
@@ -330,6 +330,8 @@ public class HomeController extends Controller{
 
         
         //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
@@ -341,8 +343,6 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -359,7 +359,7 @@ public class HomeController extends Controller{
 		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, null, null));
+	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, personaNames, interests));
 	        }
     }
 
@@ -376,6 +376,8 @@ public class HomeController extends Controller{
 
         //System.out.println(term);
          String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
@@ -386,8 +388,7 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
+            
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -403,7 +404,7 @@ public class HomeController extends Controller{
 		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, null, null));
+	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, personaNames, interests));
 	        }
     }
 
@@ -419,6 +420,8 @@ public class HomeController extends Controller{
 
 
         //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
          String str = session("id");
         if(str!=null){
 	        Long id = Long.parseLong(str);
@@ -430,8 +433,7 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
+            
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -447,8 +449,8 @@ public class HomeController extends Controller{
 		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, null, null));
-	        }
+	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, personaNames, interests));
+            }
     }
 
     public Result newsCategory(){
@@ -461,6 +463,8 @@ public class HomeController extends Controller{
 
         //System.out.println(term);
          String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
         if(str!=null){
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
@@ -471,8 +475,6 @@ public class HomeController extends Controller{
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -488,7 +490,7 @@ public class HomeController extends Controller{
 		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests));
 		}
 	    else{
-	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, null, null));
+	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, personaNames, interests));
 	        }
     }
 }

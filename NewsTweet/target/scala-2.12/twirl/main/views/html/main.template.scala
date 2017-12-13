@@ -58,97 +58,100 @@ Seq[Any](format.raw/*9.207*/("""
                                 'placeholder -> "Search ...",
                                 '_label -> null)),format.raw/*34.49*/("""
 
-                         """)))}),format.raw/*36.27*/("""
-                    """),format.raw/*37.21*/("""</div>
+                            """),_display_(/*36.30*/helper/*36.36*/.inputRadioGroup(searchForm("searchType"), 
+                                Seq("User" -> "User", "Hashtag" -> "Hashtag", "Content" -> "Content"), 
+                                '_label -> null)),format.raw/*38.49*/("""
+                         """)))}),format.raw/*39.27*/("""
+                    """),format.raw/*40.21*/("""</div>
                 </th>
                 <th>
                     <div id="user">
-                        """),_display_(/*41.26*/if(bool==1)/*41.37*/{_display_(Seq[Any](format.raw/*41.38*/("""
-                            """),format.raw/*42.29*/("""<img id="user_pic" src="""),_display_(/*42.53*/img),format.raw/*42.56*/(""" """),format.raw/*42.57*/("""onmouseover="document.getElementById('user_options').style.display = 'block';" onclick="document.getElementById('user_options').style.display = 'none';">
-                        """)))}/*43.26*/else/*43.30*/{_display_(Seq[Any](format.raw/*43.31*/(""" 
-                            """),format.raw/*44.29*/("""<a href="/twitter/signin"><img src=""""),_display_(/*44.66*/routes/*44.72*/.Assets.versioned("images/twitterlogin.png")),format.raw/*44.116*/("""" width="60%" border="0px" > </a>
-                        """)))}),format.raw/*45.26*/("""
-                    """),format.raw/*46.21*/("""</div>
+                        """),_display_(/*44.26*/if(bool==1)/*44.37*/{_display_(Seq[Any](format.raw/*44.38*/("""
+                            """),format.raw/*45.29*/("""<img id="user_pic" src="""),_display_(/*45.53*/img),format.raw/*45.56*/(""" """),format.raw/*45.57*/("""onmouseover="document.getElementById('user_options').style.display = 'block';" onclick="document.getElementById('user_options').style.display = 'none';">
+                        """)))}/*46.26*/else/*46.30*/{_display_(Seq[Any](format.raw/*46.31*/(""" 
+                            """),format.raw/*47.29*/("""<a href="/twitter/signin"><img src=""""),_display_(/*47.66*/routes/*47.72*/.Assets.versioned("images/twitterlogin.png")),format.raw/*47.116*/("""" width="60%" border="0px" > </a>
+                        """)))}),format.raw/*48.26*/("""
+                    """),format.raw/*49.21*/("""</div>
                 </th>
             </tr>
-            """),_display_(/*49.14*/if(personas.isEmpty)/*49.34*/{_display_(Seq[Any](format.raw/*49.35*/("""
-            """)))}/*50.14*/else/*50.18*/{_display_(Seq[Any](format.raw/*50.19*/("""
-            """),format.raw/*51.13*/("""<tr id="head2">
+            """),_display_(/*52.14*/if(personas.isEmpty)/*52.34*/{_display_(Seq[Any](format.raw/*52.35*/("""
+            """)))}/*53.14*/else/*53.18*/{_display_(Seq[Any](format.raw/*53.19*/("""
+            """),format.raw/*54.13*/("""<tr id="head2">
                 <div id="tabs">
-                    """),_display_(/*53.22*/if(bool==1 )/*53.34*/{_display_(Seq[Any](format.raw/*53.35*/("""
-                        """),_display_(/*54.26*/for(persona <- personas) yield /*54.50*/{_display_(Seq[Any](format.raw/*54.51*/("""
-                            """),format.raw/*55.29*/("""<button class="persona" onclick="openCity(event, '"""),_display_(/*55.80*/persona),format.raw/*55.87*/("""')">"""),_display_(/*55.92*/persona),format.raw/*55.99*/("""</button>
-                        """)))}),format.raw/*56.26*/("""
-                    """)))}),format.raw/*57.22*/("""
-                    """),format.raw/*58.21*/("""</div>
+                    """),_display_(/*56.22*/if(bool==1 )/*56.34*/{_display_(Seq[Any](format.raw/*56.35*/("""
+                        """),_display_(/*57.26*/for(persona <- personas) yield /*57.50*/{_display_(Seq[Any](format.raw/*57.51*/("""
+                            """),format.raw/*58.29*/("""<button class="persona" onclick="openCity(event, '"""),_display_(/*58.80*/persona),format.raw/*58.87*/("""')">"""),_display_(/*58.92*/persona),format.raw/*58.99*/("""</button>
+                        """)))}),format.raw/*59.26*/("""
+                    """)))}),format.raw/*60.22*/("""
+                    """),format.raw/*61.21*/("""</div>
             </tr>
-            """)))}),format.raw/*60.14*/("""
-            """),format.raw/*61.13*/("""<tr>
+            """)))}),format.raw/*63.14*/("""
+            """),format.raw/*64.13*/("""<tr>
                 <td height=100% valign="top" width=269>
                     <div id="sidebar"  style="margin-top:95px">
                         <h3> Interests </h3>
-                        """),_display_(/*65.26*/if(bool==1)/*65.37*/{_display_(Seq[Any](format.raw/*65.38*/("""
-                            """),_display_(/*66.30*/if(interests.isEmpty)/*66.51*/{_display_(Seq[Any](format.raw/*66.52*/("""
-                                """),format.raw/*67.33*/("""Looks like you don't have any interests yet!<br><br> Would you like to add one?<br><br>
-                            """)))}/*68.30*/else/*68.34*/{_display_(Seq[Any](format.raw/*68.35*/("""
-                                """),_display_(/*69.34*/for(persona <- personas) yield /*69.58*/{_display_(Seq[Any](format.raw/*69.59*/("""
-                                    """),format.raw/*70.37*/("""<div id=""""),_display_(/*70.47*/persona),format.raw/*70.54*/("""" class="city">
-                                        """),_display_(/*71.42*/for(interest <- interests) yield /*71.68*/{_display_(Seq[Any](format.raw/*71.69*/("""
-                                            """),_display_(/*72.46*/if(interest contains persona)/*72.75*/{_display_(Seq[Any](format.raw/*72.76*/("""
-                                                """),_display_(/*73.50*/interest/*73.58*/.replace(persona,"")),format.raw/*73.78*/("""<br>
-                                            """)))}),format.raw/*74.46*/("""
-                                        """)))}),format.raw/*75.42*/("""
-                                    """),format.raw/*76.37*/("""</div>
-                                """)))}),format.raw/*77.34*/("""
-                            """)))}),format.raw/*78.30*/("""
-                            """),format.raw/*79.29*/("""<button onclick="document.getElementById('interest_form').style.display = 'block'; this.style.display = 'none'">Add Interest</button>
+                        """),_display_(/*68.26*/if(bool==1)/*68.37*/{_display_(Seq[Any](format.raw/*68.38*/("""
+                            """),_display_(/*69.30*/if(interests.isEmpty)/*69.51*/{_display_(Seq[Any](format.raw/*69.52*/("""
+                                """),format.raw/*70.33*/("""Looks like you don't have any interests yet!<br><br> Would you like to add one?<br><br>
+                            """)))}/*71.30*/else/*71.34*/{_display_(Seq[Any](format.raw/*71.35*/("""
+                                """),_display_(/*72.34*/for(persona <- personas) yield /*72.58*/{_display_(Seq[Any](format.raw/*72.59*/("""
+                                    """),format.raw/*73.37*/("""<div id=""""),_display_(/*73.47*/persona),format.raw/*73.54*/("""" class="city">
+                                        """),_display_(/*74.42*/for(interest <- interests) yield /*74.68*/{_display_(Seq[Any](format.raw/*74.69*/("""
+                                            """),_display_(/*75.46*/if(interest contains persona)/*75.75*/{_display_(Seq[Any](format.raw/*75.76*/("""
+                                                """),_display_(/*76.50*/interest/*76.58*/.replace(persona,"")),format.raw/*76.78*/("""<br>
+                                            """)))}),format.raw/*77.46*/("""
+                                        """)))}),format.raw/*78.42*/("""
+                                    """),format.raw/*79.37*/("""</div>
+                                """)))}),format.raw/*80.34*/("""
+                            """)))}),format.raw/*81.30*/("""
+                            """),format.raw/*82.29*/("""<button onclick="document.getElementById('interest_form').style.display = 'block'; this.style.display = 'none'">Add Interest</button>
                             <div id="interest_form">
-                                """),_display_(/*81.34*/helper/*81.40*/.form(action=routes.InterestController.addInterest())/*81.93*/{_display_(Seq[Any](format.raw/*81.94*/("""
+                                """),_display_(/*84.34*/helper/*84.40*/.form(action=routes.InterestController.addInterest())/*84.93*/{_display_(Seq[Any](format.raw/*84.94*/("""
 
-                                    """),_display_(/*83.38*/helper/*83.44*/.inputText(interestForm("interestName"),
+                                    """),_display_(/*86.38*/helper/*86.44*/.inputText(interestForm("interestName"),
                                         'placeholder -> "Interest Name",
                                         '_label -> null,
-                                        'size -> 8)),format.raw/*86.52*/("""
+                                        'size -> 8)),format.raw/*89.52*/("""
 
-                                    """),_display_(/*88.38*/helper/*88.44*/.select(
+                                    """),_display_(/*91.38*/helper/*91.44*/.select(
                                        interestForm("personaName"),
                                        helper.options(personas),
                                        '_label -> null
-                                    )),format.raw/*92.38*/("""
-                                """)))}),format.raw/*93.34*/("""
-                            """),format.raw/*94.29*/("""</div>
-                        """)))}/*95.26*/else/*95.30*/{_display_(Seq[Any](format.raw/*95.31*/(""" 
-                            """),format.raw/*96.29*/("""Here are some sample interests. Sign in to create your own!
-                        """)))}),format.raw/*97.26*/("""
-                """),format.raw/*98.17*/("""</div>
+                                    )),format.raw/*95.38*/("""
+                                """)))}),format.raw/*96.34*/("""
+                            """),format.raw/*97.29*/("""</div>
+                        """)))}/*98.26*/else/*98.30*/{_display_(Seq[Any](format.raw/*98.31*/(""" 
+                            """),format.raw/*99.29*/("""Here are some sample interests. Sign in to create your own!
+                        """)))}),format.raw/*100.26*/("""
+                """),format.raw/*101.17*/("""</div>
                 </td>
                 <td valign="top">
-                    <div id="content"  style="margin-top:95px; z-index: -1">
-                    """),format.raw/*103.44*/("""
-                    """),_display_(/*104.22*/content),format.raw/*104.29*/("""
-                """),format.raw/*105.17*/("""</div>
+                    <div id="content"  style="margin-top:110px; z-index: -1">
+                    """),format.raw/*106.44*/("""
+                    """),_display_(/*107.22*/content),format.raw/*107.29*/("""
+                """),format.raw/*108.17*/("""</div>
                 </td>
                 <td td valign="top">
                     <div id="user_options">
-                        <i>"""),_display_(/*109.29*/(user)),format.raw/*109.35*/("""</i>
+                        <i>"""),_display_(/*112.29*/(user)),format.raw/*112.35*/("""</i>
                         <br> 
                         <button onclick="document.getElementById('persona_form').style.display = 'block'; this.style.display = 'none'">Add Persona</button>
                         <div id="persona_form">
-                            """),_display_(/*113.30*/helper/*113.36*/.form(action=routes.PersonaController.addPersona())/*113.87*/{_display_(Seq[Any](format.raw/*113.88*/("""
+                            """),_display_(/*116.30*/helper/*116.36*/.form(action=routes.PersonaController.addPersona())/*116.87*/{_display_(Seq[Any](format.raw/*116.88*/("""
 
-                                """),_display_(/*115.34*/helper/*115.40*/.inputText(personaForm("personaName"),
+                                """),_display_(/*118.34*/helper/*118.40*/.inputText(personaForm("personaName"),
                                     'placeholder -> "Persona Name",
                                     '_label -> null,
-                                    'size -> 8)),format.raw/*118.48*/("""
+                                    'size -> 8)),format.raw/*121.48*/("""
 
-                            """)))}),format.raw/*120.30*/("""
-                        """),format.raw/*121.25*/("""</div>
+                            """)))}),format.raw/*123.30*/("""
+                        """),format.raw/*124.25*/("""</div>
                         <a href="/logout"><button> Logout </button></a>
                     </div>
                 </td>
         </table>
 
-        <script src=""""),_display_(/*127.23*/routes/*127.29*/.Assets.versioned("javascripts/main.js")),format.raw/*127.69*/("""" type="text/javascript"></script>
+        <script src=""""),_display_(/*130.23*/routes/*130.29*/.Assets.versioned("javascripts/main.js")),format.raw/*130.69*/("""" type="text/javascript"></script>
     </body>
 
 </html>
@@ -168,11 +171,11 @@ Seq[Any](format.raw/*9.207*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Dec 06 18:07:18 GMT 2017
+                  DATE: Wed Dec 13 04:34:45 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
-                  HASH: 06338319d6cf00723d155cb442c8e2ab35644df7
-                  MATRIX: 651->261|1066->278|1367->483|1396->485|1476->590|1512->599|1547->607|1573->612|1662->674|1677->680|1740->721|1908->862|1923->868|1984->907|2345->1241|2360->1247|2422->1300|2461->1301|2519->1332|2534->1338|2702->1485|2761->1513|2810->1534|2948->1645|2968->1656|3007->1657|3064->1686|3115->1710|3139->1713|3168->1714|3366->1893|3379->1897|3418->1898|3476->1928|3540->1965|3555->1971|3621->2015|3711->2074|3760->2095|3847->2155|3876->2175|3915->2176|3948->2190|3961->2194|4000->2195|4041->2208|4137->2277|4158->2289|4197->2290|4250->2316|4290->2340|4329->2341|4386->2370|4464->2421|4492->2428|4524->2433|4552->2440|4618->2475|4671->2497|4720->2518|4789->2556|4830->2569|5052->2764|5072->2775|5111->2776|5168->2806|5198->2827|5237->2828|5298->2861|5434->2978|5447->2982|5486->2983|5547->3017|5587->3041|5626->3042|5691->3079|5728->3089|5756->3096|5840->3153|5882->3179|5921->3180|5994->3226|6032->3255|6071->3256|6148->3306|6165->3314|6206->3334|6287->3384|6360->3426|6425->3463|6496->3503|6557->3533|6614->3562|6861->3782|6876->3788|6938->3841|6977->3842|7043->3881|7058->3887|7301->4109|7367->4148|7382->4154|7637->4388|7702->4422|7759->4451|7810->4483|7823->4487|7862->4488|7920->4518|8036->4603|8081->4620|8270->4882|8320->4904|8349->4911|8395->4928|8561->5066|8589->5072|8885->5340|8901->5346|8962->5397|9002->5398|9065->5433|9081->5439|9310->5646|9373->5677|9427->5702|9623->5870|9639->5876|9701->5916
-                  LINES: 24->8|29->9|34->9|36->11|39->14|40->15|40->15|40->15|41->16|41->16|41->16|43->18|43->18|43->18|55->30|55->30|55->30|55->30|57->32|57->32|59->34|61->36|62->37|66->41|66->41|66->41|67->42|67->42|67->42|67->42|68->43|68->43|68->43|69->44|69->44|69->44|69->44|70->45|71->46|74->49|74->49|74->49|75->50|75->50|75->50|76->51|78->53|78->53|78->53|79->54|79->54|79->54|80->55|80->55|80->55|80->55|80->55|81->56|82->57|83->58|85->60|86->61|90->65|90->65|90->65|91->66|91->66|91->66|92->67|93->68|93->68|93->68|94->69|94->69|94->69|95->70|95->70|95->70|96->71|96->71|96->71|97->72|97->72|97->72|98->73|98->73|98->73|99->74|100->75|101->76|102->77|103->78|104->79|106->81|106->81|106->81|106->81|108->83|108->83|111->86|113->88|113->88|117->92|118->93|119->94|120->95|120->95|120->95|121->96|122->97|123->98|127->103|128->104|128->104|129->105|133->109|133->109|137->113|137->113|137->113|137->113|139->115|139->115|142->118|144->120|145->121|151->127|151->127|151->127
+                  HASH: b1db466eb9a897f22989687cbe94d2fa13ce244e
+                  MATRIX: 651->261|1066->278|1367->483|1396->485|1476->590|1512->599|1547->607|1573->612|1662->674|1677->680|1740->721|1908->862|1923->868|1984->907|2345->1241|2360->1247|2422->1300|2461->1301|2519->1332|2534->1338|2702->1485|2760->1516|2775->1522|2992->1718|3050->1745|3099->1766|3237->1877|3257->1888|3296->1889|3353->1918|3404->1942|3428->1945|3457->1946|3655->2125|3668->2129|3707->2130|3765->2160|3829->2197|3844->2203|3910->2247|4000->2306|4049->2327|4136->2387|4165->2407|4204->2408|4237->2422|4250->2426|4289->2427|4330->2440|4426->2509|4447->2521|4486->2522|4539->2548|4579->2572|4618->2573|4675->2602|4753->2653|4781->2660|4813->2665|4841->2672|4907->2707|4960->2729|5009->2750|5078->2788|5119->2801|5341->2996|5361->3007|5400->3008|5457->3038|5487->3059|5526->3060|5587->3093|5723->3210|5736->3214|5775->3215|5836->3249|5876->3273|5915->3274|5980->3311|6017->3321|6045->3328|6129->3385|6171->3411|6210->3412|6283->3458|6321->3487|6360->3488|6437->3538|6454->3546|6495->3566|6576->3616|6649->3658|6714->3695|6785->3735|6846->3765|6903->3794|7150->4014|7165->4020|7227->4073|7266->4074|7332->4113|7347->4119|7590->4341|7656->4380|7671->4386|7926->4620|7991->4654|8048->4683|8099->4715|8112->4719|8151->4720|8209->4750|8326->4835|8372->4852|8562->5115|8612->5137|8641->5144|8687->5161|8853->5299|8881->5305|9177->5573|9193->5579|9254->5630|9294->5631|9357->5666|9373->5672|9602->5879|9665->5910|9719->5935|9915->6103|9931->6109|9993->6149
+                  LINES: 24->8|29->9|34->9|36->11|39->14|40->15|40->15|40->15|41->16|41->16|41->16|43->18|43->18|43->18|55->30|55->30|55->30|55->30|57->32|57->32|59->34|61->36|61->36|63->38|64->39|65->40|69->44|69->44|69->44|70->45|70->45|70->45|70->45|71->46|71->46|71->46|72->47|72->47|72->47|72->47|73->48|74->49|77->52|77->52|77->52|78->53|78->53|78->53|79->54|81->56|81->56|81->56|82->57|82->57|82->57|83->58|83->58|83->58|83->58|83->58|84->59|85->60|86->61|88->63|89->64|93->68|93->68|93->68|94->69|94->69|94->69|95->70|96->71|96->71|96->71|97->72|97->72|97->72|98->73|98->73|98->73|99->74|99->74|99->74|100->75|100->75|100->75|101->76|101->76|101->76|102->77|103->78|104->79|105->80|106->81|107->82|109->84|109->84|109->84|109->84|111->86|111->86|114->89|116->91|116->91|120->95|121->96|122->97|123->98|123->98|123->98|124->99|125->100|126->101|130->106|131->107|131->107|132->108|136->112|136->112|140->116|140->116|140->116|140->116|142->118|142->118|145->121|147->123|148->124|154->130|154->130|154->130
                   -- GENERATED --
               */
           

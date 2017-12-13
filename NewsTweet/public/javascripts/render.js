@@ -23,7 +23,22 @@ function openCity(evt, cityName) {
     }
     tablinks = document.getElementsByClassName("persona");
     console.log(tablinks);
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" clicked", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " clicked";
+}
+
+function openTab(evt, cityName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("tweets");
     for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("search_result");
+    console.log(tablinks);
+    for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" clicked", "");
     }
     document.getElementById(cityName).style.display = "block";

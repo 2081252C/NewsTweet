@@ -40,6 +40,8 @@ public class SearchController extends Controller {
 
 			Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        String term = searchForm.field("searchTerm").value();
+	        String searchType = searchForm.field("searchType").value();
+
 
 	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
 	        String name = personaForm.field("personaName").value();
@@ -50,7 +52,18 @@ public class SearchController extends Controller {
 
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
+
 		    Query query = new Query(term);
+		    query.setSince("2017-06-01");
+
+		    if(searchType.compareTo("User")==0){
+		    	query = new Query("from:"+term);
+		    	System.out.println("username search");
+		    }
+		    else if(searchType.compareTo("Hashtag")==0){
+		    	query = new Query("#"+term);
+		    }
+
 		    List<Status> tweets = new ArrayList<Status>();
 		    List<String> tID = new ArrayList<String>();
 		    try{
@@ -62,8 +75,36 @@ public class SearchController extends Controller {
 			catch (TwitterException e){
 				return ok("error");
 			}
+
+			List<String> mostPopular = new ArrayList<>();
+			try{
+				query.setResultType(Query.POPULAR);
+		    	QueryResult result = twitter.search(query);
+			    for (Status status : result.getTweets()) {
+			        mostPopular.add(Long.toString(status.getId()));
+			    }
+			}
+			catch (TwitterException e){
+				return ok("error");
+			}
+
+			List<String> mostRecent = new ArrayList<>();
+			try{
+				query.setResultType(Query.RECENT);
+		    	QueryResult result = twitter.search(query);
+			    for (Status status : result.getTweets()) {
+			        mostRecent.add(Long.toString(status.getId()));
+			    }
+			}
+			catch (TwitterException e){
+				return ok("error");
+			}
+
+
 	        //System.out.println(term);
 	         String str = session("id");
+	                     List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
@@ -73,8 +114,6 @@ public class SearchController extends Controller {
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-            List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
             for(Persona p: personas){
                 personaNames.add(p.personaName);
                 List<Interest> interestsFromDB = Interest.find.query().where()
@@ -88,10 +127,10 @@ public class SearchController extends Controller {
                 }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
+			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, mostPopular, mostRecent, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, personaForm, "", interestForm, term, null, null));
+		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, mostPopular, mostRecent, personaForm, "", interestForm, term, personaNames, interests));
 		        }
     }
 }

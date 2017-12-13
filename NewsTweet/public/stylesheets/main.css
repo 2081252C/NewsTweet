@@ -37,6 +37,7 @@ body {
     background: url("../images/fakecolumn.jpeg") repeat-y;
     min-height: 100%;
     position: fixed;
+    top: 10px;
 }
 
 #sidebar h3 {
@@ -102,15 +103,20 @@ th{
 	padding: 0;
 	overflow: auto;
 	background-color: #5e97f2;
-	height: 40px;
+	height: 35px;
 }
 
 #title{
 	float: left;
 }
 
-#search {
-	float: left;
+#search form {
+  display: flex; /* 2. display flex to the rescue */
+  flex-direction: row;
+}
+
+#search input {
+  display: inline; /* 1. oh noes, my inputs are styled as block... */
 }
 
 #categories{
@@ -188,12 +194,12 @@ th{
 #tabs{
 	position: fixed;
 	width:100%;
-	top:63px;
+	top:75px;
 	z-index: 10;
 	background-color:lightsteelblue;
 	}
 
-.persona{
+.persona, .search_result {
 	padding:8px 16px;
 	float:left;
 	width:auto;
@@ -216,4 +222,12 @@ th{
 
 #main{
 	top:15%;
+}
+
+#recent{
+	display: none;
+}
+
+#searchTabs th{
+	width:400px;
 }

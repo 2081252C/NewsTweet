@@ -34,6 +34,8 @@ public class InterestController extends Controller {
 	        String term = searchForm.field("searchTerm").value();
 
 	        String str = session("id");
+	        List<String> personaNames = new ArrayList<>();
+	            List<String> interests = new ArrayList<>();
 	        if(str!=null){
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
@@ -43,8 +45,7 @@ public class InterestController extends Controller {
                                         .setMaxRows(25)
                                         .findPagedList()
                                         .getList();
-	            List<String> personaNames = new ArrayList<>();
-	            List<String> interests = new ArrayList<>();
+	            
 	            for(Persona p: personas){
 	                personaNames.add(p.personaName);
 	                List<Interest> interestsFromDB = Interest.find.query().where()
@@ -75,7 +76,7 @@ public class InterestController extends Controller {
 			    return redirect("/");
 			}
 		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, null, null));
+		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
 		        }
     }
 }
