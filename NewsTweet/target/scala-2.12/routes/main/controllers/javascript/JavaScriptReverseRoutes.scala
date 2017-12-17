@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Mon Dec 04 21:55:14 GMT 2017
+// @DATE:Thu Dec 14 13:25:44 GMT 2017
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -60,7 +60,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:24
     def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TwitterSignInServlet.logOut",
       """
@@ -100,7 +100,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:24
+    // @LINE:26
     def newsCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.newsCategory",
       """
@@ -110,7 +110,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:27
+    // @LINE:29
     def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.techCategory",
       """
@@ -120,7 +120,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:25
+    // @LINE:27
     def entertainmentCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.entertainmentCategory",
       """
@@ -130,7 +130,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:26
+    // @LINE:28
     def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.musicCategory",
       """
@@ -140,7 +140,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:28
+    // @LINE:30
     def sportCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.sportCategory",
       """
@@ -182,7 +182,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:18
+  // @LINE:19
   class ReversePersonaController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -190,7 +190,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:18
+    // @LINE:19
     def addPersona: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.PersonaController.addPersona",
       """
@@ -202,7 +202,27 @@ package controllers.javascript {
   
   }
 
-  // @LINE:19
+  // @LINE:17
+  class ReverseTrackController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:17
+    def trackSearch: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.TrackController.trackSearch",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "track"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:20
   class ReverseInterestController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -210,7 +230,17 @@ package controllers.javascript {
     }
 
   
-    // @LINE:19
+    // @LINE:21
+    def showInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.InterestController.showInterest",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "interest"})
+        }
+      """
+    )
+  
+    // @LINE:20
     def addInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.InterestController.addInterest",
       """

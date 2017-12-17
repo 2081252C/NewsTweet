@@ -14,9 +14,11 @@ GET     /twitter/signin             controllers.TwitterSignInServlet.signIn()
 GET     /callback 			        controllers.TwitterSignInServlet.callBack()
 
 GET     /search					    controllers.SearchController.searchResults()
+GET     /track					    controllers.TrackController.trackSearch()
 
 GET     /addpersona					controllers.PersonaController.addPersona()
 GET     /addinterest				controllers.InterestController.addInterest()
+GET     /interest				    controllers.InterestController.showInterest()
 
 
 GET     /logout					    controllers.TwitterSignInServlet.logOut()

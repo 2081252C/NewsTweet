@@ -25,7 +25,10 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 
 libraryDependencies ++= Seq(
   javaJpa,
-  "org.hibernate" % "hibernate-entitymanager" % "5.1.0.Final" // replace by your jpa implementation
+  "org.hibernate" % "hibernate-entitymanager" % "5.1.0.Final", // replace by your jpa implementation
+  filters,
+"org.webjars" % "bootstrap" % "3.3.7-1" exclude("org.webjars", "jquery"),
+"org.webjars" % "jquery" % "3.2.1"
 )
 
 // https://mvnrepository.com/artifact/javax.persistence/persistence-api
@@ -40,4 +43,6 @@ libraryDependencies += "junit" % "junit" % "4.12" % Test
 // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-stream
 libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.6"
 
-libraryDependencies += "de.julielab" % "aliasi-lingpipe" % "4.1.0",
+libraryDependencies += "de.julielab" % "aliasi-lingpipe" % "4.1.0"
+
+libraryDependencies += "com.adrianhurt" %% "play-bootstrap" % "1.2-P26-B4"

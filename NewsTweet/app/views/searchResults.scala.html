@@ -1,4 +1,4 @@
-@(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String])
+@(searchForm: Form[Search], trackForm: Form[Track], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String])
 
 @import helper._
 
@@ -28,6 +28,19 @@
               rendering("@tweet");
             </script>
             }
+           <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
+                            <div id="track">
+                                @helper.form(action=routes.TrackController.trackSearch()){
+
+                                    @inputText(trackForm("term").copy(value= Option[String]("@term")))
+
+                                    @helper.select(
+                                       trackForm("interest"),
+                                       helper.options(interests),
+                                       '_label -> null
+                                    )
+                                }
+                            </div>
           </div>
       
           <div id="recent" class="tweets" style="width:50%">
@@ -37,6 +50,19 @@
               rendering("@tweet");
             </script>
             }
+            <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
+                            <div id="track">
+                                @helper.form(action=routes.TrackController.trackSearch()){
+
+                                    @inputText(trackForm("term").copy(value= Option[String]("@term")))
+
+                                    @helper.select(
+                                       trackForm("interest"),
+                                       helper.options(interests),
+                                       '_label -> null
+                                    )
+                                }
+                            </div>
           </div>
         </td>
       </tr>

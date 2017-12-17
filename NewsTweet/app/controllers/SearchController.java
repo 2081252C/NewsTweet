@@ -50,6 +50,10 @@ public class SearchController extends Controller {
 	        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
 	        String interestName = interestForm.field("interestName").value();
 
+	        Form<Track> trackForm = formFactory.form(Track.class).bindFromRequest();
+	        String search = trackForm.field("term").value();
+	        String interestTrack = trackForm.field("interest").value();
+
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 
@@ -57,11 +61,12 @@ public class SearchController extends Controller {
 		    query.setSince("2017-06-01");
 
 		    if(searchType.compareTo("User")==0){
-		    	query = new Query("from:"+term);
-		    	System.out.println("username search");
+		    	term = "from:"+term;
+		    	query = new Query(term);
 		    }
 		    else if(searchType.compareTo("Hashtag")==0){
-		    	query = new Query("#"+term);
+		    	term = "#"+term;
+		    	query = new Query(term);
 		    }
 
 		    List<Status> tweets = new ArrayList<Status>();
@@ -127,10 +132,10 @@ public class SearchController extends Controller {
                 }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, s, 1, tID, mostPopular, mostRecent, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
+			    return ok(views.html.searchResults.render(searchForm, trackForm, s, 1, tID, mostPopular, mostRecent, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, "", 0, tID, mostPopular, mostRecent, personaForm, "", interestForm, term, personaNames, interests));
+		        	return ok(views.html.searchResults.render(searchForm, null, "", 0, tID, mostPopular, mostRecent, personaForm, "", interestForm, term, personaNames, interests));
 		        }
     }
 }

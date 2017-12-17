@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Mon Dec 04 21:55:14 GMT 2017
+// @DATE:Thu Dec 14 13:25:44 GMT 2017
 
 import play.api.mvc.Call
 
@@ -46,7 +46,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "callback")
     }
   
-    // @LINE:22
+    // @LINE:24
     def logOut(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "logout")
@@ -76,31 +76,31 @@ package controllers {
     }
 
   
-    // @LINE:24
+    // @LINE:26
     def newsCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/news")
     }
   
-    // @LINE:27
+    // @LINE:29
     def techCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/tech")
     }
   
-    // @LINE:25
+    // @LINE:27
     def entertainmentCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/entertainment")
     }
   
-    // @LINE:26
+    // @LINE:28
     def musicCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/music")
     }
   
-    // @LINE:28
+    // @LINE:30
     def sportCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/sport")
@@ -129,14 +129,14 @@ package controllers {
   
   }
 
-  // @LINE:18
+  // @LINE:19
   class ReversePersonaController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:18
+    // @LINE:19
     def addPersona(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "addpersona")
@@ -144,14 +144,35 @@ package controllers {
   
   }
 
-  // @LINE:19
+  // @LINE:17
+  class ReverseTrackController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:17
+    def trackSearch(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "track")
+    }
+  
+  }
+
+  // @LINE:20
   class ReverseInterestController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:19
+    // @LINE:21
+    def showInterest(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "interest")
+    }
+  
+    // @LINE:20
     def addInterest(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "addinterest")

@@ -79,4 +79,49 @@ public class InterestController extends Controller {
 		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
 		        }
     }
+
+    public Result showInterest() {
+			Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+	        String interestName = interestForm.field("interestName").value();
+	        String personaName = interestForm.field("personaName").value();
+
+	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        	String name = personaForm.field("personaName").value();
+
+	        Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+	        String term = searchForm.field("searchTerm").value();
+
+	        String str = session("id");
+	        List<String> personaNames = new ArrayList<>();
+	            List<String> interests = new ArrayList<>();
+	        if(str!=null){
+		        Long id = Long.parseLong(str);
+		        TwitterUser t = TwitterUser.find.byId(id);
+		        List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+	            
+	            for(Persona p: personas){
+	                personaNames.add(p.personaName);
+	                List<Interest> interestsFromDB = Interest.find.query().where()
+	                                        .ilike("persona", Long.toString(p.id))
+	                                        .setFirstRow(0)
+	                                        .setMaxRows(25)
+	                                        .findPagedList()
+	                                        .getList();
+	                for(Interest i: interestsFromDB){
+	                    interests.add(i.interestName + " " + p.personaName);
+	                }
+	            }
+
+				String s = t.username;
+			    return ok(views.html.interest.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
+			}
+		    else{
+		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
+		        }
+    }
 }

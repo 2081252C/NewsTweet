@@ -22,11 +22,21 @@ create table twitter_user (
   constraint pk_twitter_user primary key (id)
 );
 
+create table track (
+  id                            bigint auto_increment not null,
+  tracked_term                  varchar(255),
+  interest_id                   bigint not null,
+  constraint pk_track_interest primary key (id)
+);
+
 alter table interest add constraint fk_interest_persona_id foreign key (persona_id) references persona (id) on delete restrict on update restrict;
 create index ix_interest_persona_id on interest (persona_id);
 
 alter table persona add constraint fk_persona_twitter_user_id foreign key (twitter_user_id) references twitter_user (id) on delete restrict on update restrict;
 create index ix_persona_twitter_user_id on persona (twitter_user_id);
+
+alter table track add constraint fk_track_interest_id foreign key (interest_id) references interest (id) on delete restrict on update restrict;
+create index ix_track_interest_id on track (interest_id);
 
 
 # --- !Downs

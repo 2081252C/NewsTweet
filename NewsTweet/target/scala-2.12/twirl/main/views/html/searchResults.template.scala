@@ -22,16 +22,16 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object searchResults extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template12[Form[Search],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
+object searchResults extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template13[Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], trackForm: Form[Track], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 /*3.2*/import helper._
 
 
-Seq[Any](format.raw/*1.266*/("""
+Seq[Any](format.raw/*1.290*/("""
 
 """),format.raw/*4.1*/("""
 """),format.raw/*5.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
@@ -60,29 +60,55 @@ Seq[Any](format.raw/*1.266*/("""
               rendering(""""),_display_(/*28.27*/tweet),format.raw/*28.32*/("""");
             </script>
             """)))}),format.raw/*30.14*/("""
-          """),format.raw/*31.11*/("""</div>
+           """),format.raw/*31.12*/("""<button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
+                            <div id="track">
+                                """),_display_(/*33.34*/helper/*33.40*/.form(action=routes.TrackController.trackSearch())/*33.90*/{_display_(Seq[Any](format.raw/*33.91*/("""
+
+                                    """),_display_(/*35.38*/inputText(trackForm("term").copy(value= Option[String]("@term")))),format.raw/*35.103*/("""
+
+                                    """),_display_(/*37.38*/helper/*37.44*/.select(
+                                       trackForm("interest"),
+                                       helper.options(interests),
+                                       '_label -> null
+                                    )),format.raw/*41.38*/("""
+                                """)))}),format.raw/*42.34*/("""
+                            """),format.raw/*43.29*/("""</div>
+          </div>
       
           <div id="recent" class="tweets" style="width:50%">
-            """),_display_(/*34.14*/for(tweet <- recentTweets) yield /*34.40*/{_display_(Seq[Any](format.raw/*34.41*/("""
-              """),format.raw/*35.15*/("""<p id=""""),_display_(/*35.23*/tweet),format.raw/*35.28*/(""""><br></p>
+            """),_display_(/*47.14*/for(tweet <- recentTweets) yield /*47.40*/{_display_(Seq[Any](format.raw/*47.41*/("""
+              """),format.raw/*48.15*/("""<p id=""""),_display_(/*48.23*/tweet),format.raw/*48.28*/(""""><br></p>
               <script>
-              rendering(""""),_display_(/*37.27*/tweet),format.raw/*37.32*/("""");
+              rendering(""""),_display_(/*50.27*/tweet),format.raw/*50.32*/("""");
             </script>
-            """)))}),format.raw/*39.14*/("""
-          """),format.raw/*40.11*/("""</div>
+            """)))}),format.raw/*52.14*/("""
+            """),format.raw/*53.13*/("""<button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
+                            <div id="track">
+                                """),_display_(/*55.34*/helper/*55.40*/.form(action=routes.TrackController.trackSearch())/*55.90*/{_display_(Seq[Any](format.raw/*55.91*/("""
+
+                                    """),_display_(/*57.38*/inputText(trackForm("term").copy(value= Option[String]("@term")))),format.raw/*57.103*/("""
+
+                                    """),_display_(/*59.38*/helper/*59.44*/.select(
+                                       trackForm("interest"),
+                                       helper.options(interests),
+                                       '_label -> null
+                                    )),format.raw/*63.38*/("""
+                                """)))}),format.raw/*64.34*/("""
+                            """),format.raw/*65.29*/("""</div>
+          </div>
         </td>
       </tr>
     </table>
-""")))}),format.raw/*44.2*/("""
+""")))}),format.raw/*70.2*/("""
 
 """))
       }
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,tweets:List[String],popTweets:List[String],recentTweets:List[String],personaForm:Form[Persona],img:String,interestForm:Form[Interest],term:String,personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests)
+  def render(searchForm:Form[Search],trackForm:Form[Track],user:String,bool:Integer,tweets:List[String],popTweets:List[String],recentTweets:List[String],personaForm:Form[Persona],img:String,interestForm:Form[Interest],term:String,personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,trackForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests)
 
-  def f:((Form[Search],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests) => apply(searchForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests)
+  def f:((Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,trackForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests) => apply(searchForm,trackForm,user,bool,tweets,popTweets,recentTweets,personaForm,img,interestForm,term,personas,interests)
 
   def ref: this.type = this
 
@@ -91,11 +117,11 @@ Seq[Any](format.raw/*1.266*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Dec 13 04:41:04 GMT 2017
+                  DATE: Wed Dec 13 23:40:59 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/searchResults.scala.html
-                  HASH: 39969cc268c60548b08bcc38aa0095986b36a91f
-                  MATRIX: 1086->1|1423->268|1469->265|1497->284|1524->285|1720->455|1734->461|1796->503|1859->541|1889->563|1909->575|1923->581|1937->587|1958->600|1971->605|1993->619|2011->629|2031->640|2071->642|2102->646|2153->670|2178->674|2767->1236|2806->1259|2845->1260|2888->1275|2923->1283|2949->1288|3036->1348|3062->1353|3132->1392|3171->1403|3286->1491|3328->1517|3367->1518|3410->1533|3445->1541|3471->1546|3558->1606|3584->1611|3654->1650|3693->1661|3770->1708
-                  LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|42->10|42->10|57->25|57->25|57->25|58->26|58->26|58->26|60->28|60->28|62->30|63->31|66->34|66->34|66->34|67->35|67->35|67->35|69->37|69->37|71->39|72->40|76->44
+                  HASH: 6e3204eced9b9bbfd68481e2b9fcf05b381357af
+                  MATRIX: 1098->1|1459->292|1505->289|1533->308|1560->309|1756->479|1770->485|1832->527|1895->565|1925->587|1945->599|1959->605|1973->611|1994->624|2007->629|2029->643|2047->653|2067->664|2107->666|2138->670|2189->694|2214->698|2803->1260|2842->1283|2881->1284|2924->1299|2959->1307|2985->1312|3072->1372|3098->1377|3168->1416|3208->1428|3439->1632|3454->1638|3513->1688|3552->1689|3618->1728|3705->1793|3771->1832|3786->1838|4036->2067|4101->2101|4158->2130|4290->2235|4332->2261|4371->2262|4414->2277|4449->2285|4475->2290|4562->2350|4588->2355|4658->2394|4699->2407|4930->2611|4945->2617|5004->2667|5043->2668|5109->2707|5196->2772|5262->2811|5277->2817|5527->3046|5592->3080|5649->3109|5743->3173
+                  LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|42->10|42->10|57->25|57->25|57->25|58->26|58->26|58->26|60->28|60->28|62->30|63->31|65->33|65->33|65->33|65->33|67->35|67->35|69->37|69->37|73->41|74->42|75->43|79->47|79->47|79->47|80->48|80->48|80->48|82->50|82->50|84->52|85->53|87->55|87->55|87->55|87->55|89->57|89->57|91->59|91->59|95->63|96->64|97->65|102->70
                   -- GENERATED --
               */
           

@@ -45,6 +45,15 @@ function openTab(evt, cityName) {
     evt.currentTarget.className += " clicked";
 }
 
+function display_interests() {
+    var x = document.getElementById("persona_tabs");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
 // function carousel() {
 // 	alert(called);
 //     var i;
