@@ -125,9 +125,32 @@ th{
 	overflow: hidden;
 }
 
+#category-btn{
+	width: 298px;
+	text-decoration: none;
+	background: rgba(0, 0, 0, .6);
+	margin-left: -18px;
+	height: 60px;
+	text-align: right;
+	font-size: 24px;
+	color: #fff;
+}
+
+#category-btn:hover{
+	color: #5e97f2;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#categories a{
+	margin-bottom: 0;
+	margin-right: 0;
+}
+
 #categories img{
-	width:250px;
-	height:250px;
+	width:298px;
+	height:280px;
+	padding-bottom: 5px;
 }
 
 #category_info{
@@ -147,33 +170,9 @@ th{
     right: 0;
 }
 
-#news_category{
-	width:250px;
-	height:250px;
-	overflow: hidden;
-}
-
-#music_category{
-	width:250px;
-	height:250px;
-	overflow: hidden;
-}
-
-#entertainment_category{
-	width:250px;
-	height:250px;
-	overflow: hidden;
-}
-
-#tech_category{
-	width:250px;
-	height:250px;
-	overflow: hidden;
-}
-
-#sport_category{
-	width:250px;
-	height:250px;
+#news_category #music_category #entertainment_category #tech_category #sport_category{
+	width:290px;
+	height:290px;
 	overflow: hidden;
 }
 
@@ -216,7 +215,21 @@ th{
 }
 
 #content{
-	margin-top: 50px;
+	margin-top: 80px;
+}
+
+#row-categories{
+	height:40%;
+}
+
+#category-title{
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+
+#category-text{
+	color: #fff;
 }
 
 .persona.clicked{

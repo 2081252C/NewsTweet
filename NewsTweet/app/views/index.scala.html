@@ -6,188 +6,157 @@
 
 @main("NewsTweet")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests) {
   <div id="categories">
-    <table id="category">
-      <tr>
-        <td>
-          <div id="category_info">
-            <h1>Check out the latest tweets!</h1>
+    <div class="container" id="category-container">
+      <div class="row" id="row-categories">
+        <div class="col-sm-4">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem; height: 100%">
+            <div class="card-body">
+              <h4 class="card-title" id="category-title">Welcome to NewsTweet</h4>
+              <h6 class="card-subtitle mb-2 text-muted">An easy way to follow topics on Twitter.</h6>
+              <p class="card-text" id="category-text">NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
+              Or, click on a category to see some recent tweets!</p>
+            </div>
           </div>
-        </td>
-        <td>
-          <div id="news_category">
-            <a href="@routes.HomeController.newsCategory">
-              <div  class="w3-display-container mySlides" >
-                <img class="news w3-animate-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnh6hIgd5yVOfP4oa72UZiFZmaBMBagZpc9g1vxh2jVNCbqofy">
-                <img class="news w3-animate-right" src="https://www.thesun.co.uk/wp-content/uploads/2016/06/eu_referendum_mobile_top.jpg?strip=all&w=750&h=352&crop=1">
-                <img class="news w3-animate-right" src="http://blogs.lse.ac.uk/polis/files/2017/01/papers.png">
-                <script>
-                  var slideIndex = 0;
-                  carousel();
+        </div>
+        <div class="col-sm-4">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
+            <img class="news w3-animate-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnh6hIgd5yVOfP4oa72UZiFZmaBMBagZpc9g1vxh2jVNCbqofy">
+            <img class="news w3-animate-right" src="https://www.thesun.co.uk/wp-content/uploads/2016/06/eu_referendum_mobile_top.jpg?strip=all&w=750&h=352&crop=1">
+            <img class="news w3-animate-right" src="http://blogs.lse.ac.uk/polis/files/2017/01/papers.png">
+            <script>
+              var slideIndex = 0;
+              carousel();
 
-                  function carousel() {
-                      var i;
-                      var x = document.getElementsByClassName("news");
-                      for (i = 0; i < x.length; i++) {
-                        x[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > x.length) {slideIndex = 1}
-                      x[slideIndex-1].style.display = "block";
-                      setTimeout(carousel, 2000); // Change image every 2 seconds
+              function carousel() {
+                  var i;
+                  var x = document.getElementsByClassName("news");
+                  for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
                   }
-                </script>
-                <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  News
-                </div>
-              </div>
-            </a>
-        	</div>
-        </td>
-        <td>
-          <div id="music_category">
-        		<a href="@routes.HomeController.musicCategory">
-              <div  class="w3-display-container mySlides" >
-                <img class="music w3-animate-right" src="https://media.theweekendedition.com.au/wp-content/uploads/2015/03/TWE-Brisbane-Live-Music-Week-1100x550-c-center.jpg">
-                <img class="music w3-animate-right" src="http://www.harbourside-kitchen.com/wp-content/uploads/2014/07/live-music_guide.jpg">
-                <img class="music w3-animate-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkrA9-lCdjjXgVvngNyEkG1fGdgxKj2AWaVoGJpgd6HIIAe11m">
-                <script>
-                  var slideIndex = 0;
-                  carousel1();
+                  slideIndex++;
+                  if (slideIndex > x.length) {slideIndex = 1}
+                  x[slideIndex-1].style.display = "block";
+                  setTimeout(carousel, 2000); // Change image every 2 seconds
+              }
+            </script>
+            <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                <a href="@routes.HomeController.newsCategory" id="category-btn">News</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+        		<div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
+              <img class="music w3-animate-right" src="https://media.theweekendedition.com.au/wp-content/uploads/2015/03/TWE-Brisbane-Live-Music-Week-1100x550-c-center.jpg">
+              <img class="music w3-animate-right" src="http://www.harbourside-kitchen.com/wp-content/uploads/2014/07/live-music_guide.jpg">
+              <img class="music w3-animate-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkrA9-lCdjjXgVvngNyEkG1fGdgxKj2AWaVoGJpgd6HIIAe11m">
+              <script>
+                var slideIndex = 0;
+                carousel1();
 
-                  function carousel1() {
-                      var i;
-                      var x = document.getElementsByClassName("music");
-                      for (i = 0; i < x.length; i++) {
-                        x[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > x.length) {slideIndex = 1}
-                      x[slideIndex-1].style.display = "block";
-                      setTimeout(carousel1, 2000); // Change image every 2 seconds
-                  }
+                function carousel1() {
+                    var i;
+                    var x = document.getElementsByClassName("music");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > x.length) {slideIndex = 1}
+                    x[slideIndex-1].style.display = "block";
+                    setTimeout(carousel1, 2000); // Change image every 2 seconds
+                }
                 </script>
-                <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  Music
-                </div>
+              <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                  <a href="@routes.HomeController.musicCategory" id="category-btn">Music</a>
               </div>
-            </a>
-        	</div>
-        </td>
-      </tr>
+            </div>
+          </div>
+      </div>
+
       <br>
-      <tr>
-        <td>
-          <div id="entertainment_category">
-        		<a href="@routes.HomeController.entertainmentCategory">
-              <div  class="w3-display-container mySlides" >
-                <img class="entertainment w3-animate-right" src="https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg">
-                <img class="entertainment w3-animate-right" src="http://i.dailymail.co.uk/i/pix/2016/02/29/18/31AEE75100000578-3453525-Winners_Leo_enjoyed_a_chat_with_previous_Oscar_winner_Elton_John-a-20_1456771263145.jpg">
-                <img class="entertainment w3-animate-right" src="https://www.standard.co.uk/s3fs-public/thumbnails/image/2013/05/13/09/jack-dee.jpg">
-                <script>
-                  var slideIndex = 0;
-                  carousel2();
 
-                  function carousel2() {
-                      var i;
-                      var x = document.getElementsByClassName("entertainment");
-                      for (i = 0; i < x.length; i++) {
-                        x[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > x.length) {slideIndex = 1}
-                      x[slideIndex-1].style.display = "block";
-                      setTimeout(carousel2, 2000); // Change image every 2 seconds
-                  }
-                </script>
-                <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  Entertainment
-                </div>
-              </div>
-            </a>
-          </div>
-        </td>
-        <td>
-        	<div id="tech_category">
-        		<a href="@routes.HomeController.techCategory">
-              <div  class="w3-display-container mySlides" >
-                <img class="tech w3-animate-right" src="https://static.interestingengineering.com/images/NOVEMBER/sizes/sophia1_resize_md.jpg">
-                <img class="tech w3-animate-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Intel_E5200_-1_%284233673443%29.jpg/1024px-Intel_E5200_-1_%284233673443%29.jpg">
-                <img class="tech w3-animate-right" src="https://buildmyplays.com/wp-content/uploads/2017/01/SocialMediaNettResults.jpg">
-                <script>
-                  var slideIndex = 0;
-                  carousel3();
+      <div class="row" id="row-categories">
+        <div class="col-sm-4">
+        		<div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
+              <img class="entertainment w3-animate-right" src="https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg">
+              <img class="entertainment w3-animate-right" src="http://i.dailymail.co.uk/i/pix/2016/02/29/18/31AEE75100000578-3453525-Winners_Leo_enjoyed_a_chat_with_previous_Oscar_winner_Elton_John-a-20_1456771263145.jpg">
+              <img class="entertainment w3-animate-right" src="https://www.standard.co.uk/s3fs-public/thumbnails/image/2013/05/13/09/jack-dee.jpg">
+              <script>
+                var slideIndex = 0;
+                carousel2();
 
-                  function carousel3() {
-                      var i;
-                      var x = document.getElementsByClassName("tech");
-                      for (i = 0; i < x.length; i++) {
-                        x[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > x.length) {slideIndex = 1}
-                      x[slideIndex-1].style.display = "block";
-                      setTimeout(carousel3, 2000); // Change image every 2 seconds
-                  }
-                </script>
-                <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  Tech
-                </div>
+                function carousel2() {
+                    var i;
+                    var x = document.getElementsByClassName("entertainment");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > x.length) {slideIndex = 1}
+                    x[slideIndex-1].style.display = "block";
+                    setTimeout(carousel2, 2000); // Change image every 2 seconds
+                }
+              </script>
+              <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                  <a href="@routes.HomeController.entertainmentCategory" id="category-btn">Entertainment</a>
               </div>
-            </a>
-        	</div>
-        </td>
-        <td>
-          <div id="sport_category">
-        		<a href="@routes.HomeController.sportCategory">
-              <div  class="w3-display-container mySlides" >
-                <img class="sport w3-animate-right" src="https://ichef.bbci.co.uk/onesport/cps/480/cpsprodpb/E338/production/_98386185_leicesterandmanchesterunited.jpg">
-                <img class="sport w3-animate-right" src="http://www.telegraph.co.uk/content/dam/rugby-union/2017/08/04/TELEMMGLPICT000136082031_trans_NvBQzQNjv4BqBDCnIxthzPLaVuHdTEmpqJRQxFEnemAQdOy_hncTgwo.jpeg?imwidth=480">
-                <img class="sport w3-animate-right" src="https://i2-prod.dailyrecord.co.uk/incoming/article1220810.ece/ALTERNATES/s615/Jessica%20Ennis">
-                <script>
-                  var slideIndex = 0;
-                  carousel4();
+            </div>
+        </div>
 
-                  function carousel4() {
-                      var i;
-                      var x = document.getElementsByClassName("sport");
-                      for (i = 0; i < x.length; i++) {
-                        x[i].style.display = "none";
-                      }
-                      slideIndex++;
-                      if (slideIndex > x.length) {slideIndex = 1}
-                      x[slideIndex-1].style.display = "block";
-                      setTimeout(carousel4, 2000); // Change image every 2 seconds
-                  }
-                </script>
-                <div class="w3-display-bottomright w3-container w3-padding-16 w3-black w3-opacity" id="caption">
-                  Sport
-                </div>
+        <div class="col-sm-4">
+        		<div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
+              <img class="tech w3-animate-right" src="https://static.interestingengineering.com/images/NOVEMBER/sizes/sophia1_resize_md.jpg">
+              <img class="tech w3-animate-right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Intel_E5200_-1_%284233673443%29.jpg/1024px-Intel_E5200_-1_%284233673443%29.jpg">
+              <img class="tech w3-animate-right" src="https://buildmyplays.com/wp-content/uploads/2017/01/SocialMediaNettResults.jpg">
+              <script>
+                var slideIndex = 0;
+                carousel3();
+
+                function carousel3() {
+                    var i;
+                    var x = document.getElementsByClassName("tech");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > x.length) {slideIndex = 1}
+                    x[slideIndex-1].style.display = "block";
+                    setTimeout(carousel3, 2000); // Change image every 2 seconds
+                }
+              </script>
+              <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                  <a href="@routes.HomeController.techCategory" id="category-btn">Tech</a>
               </div>
-            </a>
-          </div>
-        </td>
-      </tr>
-    </table>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
-    		<br>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+        		<div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
+              <img class="sport w3-animate-right" src="https://ichef.bbci.co.uk/onesport/cps/480/cpsprodpb/E338/production/_98386185_leicesterandmanchesterunited.jpg">
+              <img class="sport w3-animate-right" src="http://www.telegraph.co.uk/content/dam/rugby-union/2017/08/04/TELEMMGLPICT000136082031_trans_NvBQzQNjv4BqBDCnIxthzPLaVuHdTEmpqJRQxFEnemAQdOy_hncTgwo.jpeg?imwidth=480">
+              <img class="sport w3-animate-right" src="https://i2-prod.dailyrecord.co.uk/incoming/article1220810.ece/ALTERNATES/s615/Jessica%20Ennis">
+              <script>
+                var slideIndex = 0;
+                carousel4();
+
+                function carousel4() {
+                    var i;
+                    var x = document.getElementsByClassName("sport");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > x.length) {slideIndex = 1}
+                    x[slideIndex-1].style.display = "block";
+                    setTimeout(carousel4, 2000); // Change image every 2 seconds
+                }
+              </script>
+              <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                  <a href="@routes.HomeController.sportCategory" id="category-btn">Sport</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
   
 }
