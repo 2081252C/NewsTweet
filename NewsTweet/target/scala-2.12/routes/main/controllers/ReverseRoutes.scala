@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Thu Dec 14 13:25:44 GMT 2017
+// @DATE:Mon Dec 18 21:52:55 GMT 2017
 
 import play.api.mvc.Call
 
@@ -166,16 +166,16 @@ package controllers {
     }
 
   
-    // @LINE:21
-    def showInterest(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "interest")
-    }
-  
     // @LINE:20
     def addInterest(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "addinterest")
+    }
+  
+    // @LINE:21
+    def showInterest(topic:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "interest/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topic", topic)))
     }
   
   }

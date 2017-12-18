@@ -18,7 +18,7 @@ GET     /track					    controllers.TrackController.trackSearch()
 
 GET     /addpersona					controllers.PersonaController.addPersona()
 GET     /addinterest				controllers.InterestController.addInterest()
-GET     /interest				    controllers.InterestController.showInterest()
+GET     /interest/:topic		    controllers.InterestController.showInterest(topic: String)
 
 
 GET     /logout					    controllers.TwitterSignInServlet.logOut()

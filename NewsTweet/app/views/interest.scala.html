@@ -1,7 +1,18 @@
-@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String])
+@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], tweets: List[String], i: String)
 
-@main("Data Analytics")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests){
-  	<h3>Interest:</h3>
-  
+<script sync src="https://platform.twitter.com/widgets.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
+<script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
+
+@main("Interest")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
+  	<h3>@i</h3>
+  	<div class="card-columns">
+      @for(tweet <- tweets){
+        <div class="card"  id="@tweet"><br></div>
+        <script>
+          rendering("@tweet");
+        </script>
+      }
+    </div>
 }
 

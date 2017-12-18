@@ -1,2 +1,6 @@
-[0m[[0m[0minfo[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/app/controllers/SearchController.java: Some input files use or override a deprecated API.[0m
-[0m[[0m[0minfo[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/app/controllers/SearchController.java: Recompile with -Xlint:deprecation for details.[0m
+[0m[[0m[31merror[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html:95:94: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Char('n')[0m
+[0m[[0m[31merror[0m] [0m[0m required: String[0m
+[0m[[0m[31merror[0m] [0m[0m                                        <li><a href="@routes.InterestController.showInterest('n')">@n</a></li>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

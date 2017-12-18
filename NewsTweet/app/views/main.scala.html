@@ -7,7 +7,7 @@
 
 @import b4.inline.fieldConstructor
 
-@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(content: Html)
+@(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(i: String)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +91,10 @@
                             @for(interest <- interests){
                                 @if(interest contains persona){
                                     <div class="sidebar-interest">
-                                        <li><a href="@routes.InterestController.showInterest">@interest.replace(persona,"")</a></li>
+                                        @defining(interest.replace(" "+persona,"")) { n=>
+                                        <li><a href="@routes.InterestController.showInterest(n)">@n</a></li>
+                                        }
+                                        
                                     </div>
                                 }
                             }

@@ -94,7 +94,7 @@ public class TrackController extends Controller {
 			    return redirect("/");
 			}
 		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
+		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
 		        }
     }
 }

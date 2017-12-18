@@ -23,15 +23,15 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 /*8.2*/import b4.inline.fieldConstructor
 
-object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template10[String,Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],Html,play.twirl.api.HtmlFormat.Appendable] {
+object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template11[String,Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String,Html,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*10.2*/(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*10.2*/(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(i: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*10.207*/("""
+Seq[Any](format.raw/*10.218*/("""
 
 """),format.raw/*12.1*/("""<!DOCTYPE html>
 <html lang="en">
@@ -115,23 +115,26 @@ Seq[Any](format.raw/*10.207*/("""
                             """),_display_(/*91.30*/for(interest <- interests) yield /*91.56*/{_display_(Seq[Any](format.raw/*91.57*/("""
                                 """),_display_(/*92.34*/if(interest contains persona)/*92.63*/{_display_(Seq[Any](format.raw/*92.64*/("""
                                     """),format.raw/*93.37*/("""<div class="sidebar-interest">
-                                        <li><a href=""""),_display_(/*94.55*/routes/*94.61*/.InterestController.showInterest),format.raw/*94.93*/("""">"""),_display_(/*94.96*/interest/*94.104*/.replace(persona,"")),format.raw/*94.124*/("""</a></li>
-                                    </div>
-                                """)))}),format.raw/*96.34*/("""
-                            """)))}),format.raw/*97.30*/("""
-                        """),format.raw/*98.25*/("""</div><hr>
+                                        """),_display_(/*94.42*/defining(interest.replace(" "+persona,""))/*94.84*/ { n=>_display_(Seq[Any](format.raw/*94.90*/("""
+                                        """),format.raw/*95.41*/("""<li><a href=""""),_display_(/*95.55*/routes/*95.61*/.InterestController.showInterest(n)),format.raw/*95.96*/("""">"""),_display_(/*95.99*/n),format.raw/*95.100*/("""</a></li>
+                                        """)))}),format.raw/*96.42*/("""
+                                        
+                                    """),format.raw/*98.37*/("""</div>
+                                """)))}),format.raw/*99.34*/("""
+                            """)))}),format.raw/*100.30*/("""
+                        """),format.raw/*101.25*/("""</div><hr>
                       </div>
-                        """)))}),format.raw/*100.26*/("""
-                    """),format.raw/*101.21*/("""</div>
-                    """)))}),format.raw/*102.22*/("""
-                """),format.raw/*103.17*/("""<!-- Button trigger modal -->
+                        """)))}),format.raw/*103.26*/("""
+                    """),format.raw/*104.21*/("""</div>
+                    """)))}),format.raw/*105.22*/("""
+                """),format.raw/*106.17*/("""<!-- Button trigger modal -->
                 <button type="button" id="add_interest" class="btn btn-primary centred" data-toggle="modal" data-target="#exampleModal">
                   Add Interest
                 </button>
-                """)))}/*107.18*/else/*107.22*/{_display_(Seq[Any](format.raw/*107.23*/(""" 
-                    """),format.raw/*108.21*/("""Here are some sample interests. Sign in to create your own!
-                """)))}),format.raw/*109.18*/("""
-            """),format.raw/*110.13*/("""</ul>
+                """)))}/*110.18*/else/*110.22*/{_display_(Seq[Any](format.raw/*110.23*/(""" 
+                    """),format.raw/*111.21*/("""Here are some sample interests. Sign in to create your own!
+                """)))}),format.raw/*112.18*/("""
+            """),format.raw/*113.13*/("""</ul>
             </div>
             <!-- /#sidebar-wrapper -->
 
@@ -151,20 +154,20 @@ Seq[Any](format.raw/*10.207*/("""
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    """),_display_(/*130.38*/b4/*130.40*/.horizontal.form(action=routes.InterestController.addInterest(), "col-md-2", "col-md-10")/*130.129*/{ implicit ifc =>_display_(Seq[Any](format.raw/*130.146*/("""
+                                    """),_display_(/*133.38*/b4/*133.40*/.horizontal.form(action=routes.InterestController.addInterest(), "col-md-2", "col-md-10")/*133.129*/{ implicit ifc =>_display_(Seq[Any](format.raw/*133.146*/("""
 
-                                        """),_display_(/*132.42*/b4/*132.44*/.text(interestForm("interestName"),
+                                        """),_display_(/*135.42*/b4/*135.44*/.text(interestForm("interestName"),
                                             'placeholder -> "Interest Name",
                                             '_label -> "Name",
-                                            'size -> 5)),format.raw/*135.56*/("""
+                                            'size -> 5)),format.raw/*138.56*/("""
 
-                                        """),_display_(/*137.42*/b4/*137.44*/.select(
+                                        """),_display_(/*140.42*/b4/*140.44*/.select(
                                            interestForm("personaName"),
                                            helper.options(personas),
                                            '_label -> "Persona"
-                                        )),format.raw/*141.42*/("""
+                                        )),format.raw/*144.42*/("""
 
-                                        """),format.raw/*143.41*/("""Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#persona_modal">
+                                        """),format.raw/*146.41*/("""Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#persona_modal">
                                           create a new persona.
                                         </button>
                                     </div>
@@ -172,8 +175,8 @@ Seq[Any](format.raw/*10.207*/("""
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button class="btn btn-primary" type="submit">Save changes</button>
-                            """)))}),format.raw/*151.30*/("""
-                              """),format.raw/*152.31*/("""</div>
+                            """)))}),format.raw/*154.30*/("""
+                              """),format.raw/*155.31*/("""</div>
                             </div>
                           </div>
                         </div>
@@ -190,26 +193,26 @@ Seq[Any](format.raw/*10.207*/("""
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    """),_display_(/*169.38*/b4/*169.40*/.horizontal.form(action=routes.PersonaController.addPersona(), "col-md-2", "col-md-10")/*169.127*/{ implicit ifc =>_display_(Seq[Any](format.raw/*169.144*/("""
+                                    """),_display_(/*172.38*/b4/*172.40*/.horizontal.form(action=routes.PersonaController.addPersona(), "col-md-2", "col-md-10")/*172.127*/{ implicit ifc =>_display_(Seq[Any](format.raw/*172.144*/("""
 
-                                            """),_display_(/*171.46*/b4/*171.48*/.text(personaForm("personaName"),
+                                            """),_display_(/*174.46*/b4/*174.48*/.text(personaForm("personaName"),
                                                 'placeholder -> "Persona Name",
                                                 '_label -> "Name",
-                                                'size -> 1)),format.raw/*174.60*/("""
+                                                'size -> 1)),format.raw/*177.60*/("""
 
                                     
-                                    """),format.raw/*177.37*/("""</div>
+                                    """),format.raw/*180.37*/("""</div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button class="btn btn-primary" type="submit">Save changes</button>
-                            """)))}),format.raw/*182.30*/("""
-                              """),format.raw/*183.31*/("""</div>
+                            """)))}),format.raw/*185.30*/("""
+                              """),format.raw/*186.31*/("""</div>
                             </div>
                           </div>
                         </div>
-                        """),_display_(/*187.26*/content),format.raw/*187.33*/("""
-                    """),format.raw/*188.21*/("""</div>
+                        """),_display_(/*190.26*/content),format.raw/*190.33*/("""
+                    """),format.raw/*191.21*/("""</div>
                 </div>
             </div>
 
@@ -217,15 +220,15 @@ Seq[Any](format.raw/*10.207*/("""
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script>
-            $("#menu-toggle").click(function(e) """),format.raw/*196.49*/("""{"""),format.raw/*196.50*/("""
-                """),format.raw/*197.17*/("""e.preventDefault();
+            $("#menu-toggle").click(function(e) """),format.raw/*199.49*/("""{"""),format.raw/*199.50*/("""
+                """),format.raw/*200.17*/("""e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
-            """),format.raw/*199.13*/("""}"""),format.raw/*199.14*/(""");
+            """),format.raw/*202.13*/("""}"""),format.raw/*202.14*/(""");
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-        <script src=""""),_display_(/*203.23*/routes/*203.29*/.Assets.versioned("javascripts/main.js")),format.raw/*203.69*/("""" type="text/javascript"></script>
-         <script src=""""),_display_(/*204.24*/routes/*204.30*/.Assets.versioned("javascripts/render.js")),format.raw/*204.72*/("""" type="text/javascript"></script>
+        <script src=""""),_display_(/*206.23*/routes/*206.29*/.Assets.versioned("javascripts/main.js")),format.raw/*206.69*/("""" type="text/javascript"></script>
+         <script src=""""),_display_(/*207.24*/routes/*207.30*/.Assets.versioned("javascripts/render.js")),format.raw/*207.72*/("""" type="text/javascript"></script>
     </body>
 
 </html>
@@ -234,9 +237,9 @@ Seq[Any](format.raw/*10.207*/("""
     }
   }
 
-  def render(title:String,searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String],content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(content)
+  def render(title:String,searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String],i:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i)(content)
 
-  def f:((String) => (Form[Search]) => (String) => (Integer) => (Form[Persona]) => (String) => (Form[Interest]) => (List[String]) => (List[String]) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (user) => (bool) => (personaForm) => (img) => (interestForm) => (personas) => (interests) => (content) => apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(content)
+  def f:((String) => (Form[Search]) => (String) => (Integer) => (Form[Persona]) => (String) => (Form[Interest]) => (List[String]) => (List[String]) => (String) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (user) => (bool) => (personaForm) => (img) => (interestForm) => (personas) => (interests) => (i) => (content) => apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i)(content)
 
   def ref: this.type = this
 
@@ -245,11 +248,11 @@ Seq[Any](format.raw/*10.207*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 18 17:19:06 GMT 2017
+                  DATE: Mon Dec 18 22:49:49 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
-                  HASH: c84dfcdef2f365d3f71aa5d314874c619fbacdc0
-                  MATRIX: 651->261|1085->297|1387->502|1416->504|1503->564|1529->569|1968->981|1983->987|2046->1028|2219->1174|2234->1180|2295->1219|3069->1966|3080->1968|3142->2021|3181->2022|3239->2053|3250->2055|3413->2197|3471->2228|3482->2230|3689->2416|3747->2443|3792->2460|3976->2617|3996->2628|4035->2629|4088->2654|4256->2794|4281->2797|4354->2851|4367->2855|4406->2856|4460->2882|4524->2919|4539->2925|4605->2969|4691->3024|4736->3041|4854->3132|4881->3138|5181->3411|5196->3417|5253->3453|5643->3816|5663->3827|5702->3828|5747->3846|5777->3867|5816->3868|5865->3889|5989->3994|6002->3998|6041->3999|6090->4020|6188->4091|6228->4115|6267->4116|6318->4139|6452->4246|6480->4253|6600->4346|6628->4353|6737->4435|6765->4442|6845->4495|6874->4502|6965->4566|7007->4592|7046->4593|7107->4627|7145->4656|7184->4657|7249->4694|7361->4779|7376->4785|7429->4817|7459->4820|7477->4828|7519->4848|7636->4934|7697->4964|7750->4989|7847->5054|7897->5075|7957->5103|8003->5120|8264->5361|8278->5365|8318->5366|8369->5388|8478->5465|8520->5478|9625->6555|9637->6557|9737->6646|9794->6663|9865->6706|9877->6708|10130->6939|10201->6982|10213->6984|10490->7239|10561->7281|11207->7895|11267->7926|12284->8915|12296->8917|12394->9004|12451->9021|12526->9068|12538->9070|12800->9310|12904->9385|13282->9731|13342->9762|13501->9893|13530->9900|13580->9921|13929->10241|13959->10242|14005->10259|14120->10345|14150->10346|14650->10818|14666->10824|14728->10864|14814->10922|14830->10928|14894->10970
-                  LINES: 24->8|29->10|34->10|36->12|39->15|39->15|43->19|43->19|43->19|45->21|45->21|45->21|60->36|60->36|60->36|60->36|62->38|62->38|64->40|66->42|66->42|68->44|69->45|70->46|75->51|75->51|75->51|76->52|76->52|76->52|77->53|77->53|77->53|78->54|78->54|78->54|78->54|79->55|80->56|82->58|82->58|92->68|92->68|92->68|104->80|104->80|104->80|105->81|105->81|105->81|106->82|107->83|107->83|107->83|108->84|109->85|109->85|109->85|110->86|111->87|111->87|112->88|112->88|114->90|114->90|114->90|114->90|115->91|115->91|115->91|116->92|116->92|116->92|117->93|118->94|118->94|118->94|118->94|118->94|118->94|120->96|121->97|122->98|124->100|125->101|126->102|127->103|131->107|131->107|131->107|132->108|133->109|134->110|154->130|154->130|154->130|154->130|156->132|156->132|159->135|161->137|161->137|165->141|167->143|175->151|176->152|193->169|193->169|193->169|193->169|195->171|195->171|198->174|201->177|206->182|207->183|211->187|211->187|212->188|220->196|220->196|221->197|223->199|223->199|227->203|227->203|227->203|228->204|228->204|228->204
+                  HASH: d1cf2c8f210aa78e93d5b6cf5b1a2a52a0c95bd0
+                  MATRIX: 651->261|1092->297|1405->513|1434->515|1521->575|1547->580|1986->992|2001->998|2064->1039|2237->1185|2252->1191|2313->1230|3087->1977|3098->1979|3160->2032|3199->2033|3257->2064|3268->2066|3431->2208|3489->2239|3500->2241|3707->2427|3765->2454|3810->2471|3994->2628|4014->2639|4053->2640|4106->2665|4274->2805|4299->2808|4372->2862|4385->2866|4424->2867|4478->2893|4542->2930|4557->2936|4623->2980|4709->3035|4754->3052|4872->3143|4899->3149|5199->3422|5214->3428|5271->3464|5661->3827|5681->3838|5720->3839|5765->3857|5795->3878|5834->3879|5883->3900|6007->4005|6020->4009|6059->4010|6108->4031|6206->4102|6246->4126|6285->4127|6336->4150|6470->4257|6498->4264|6618->4357|6646->4364|6755->4446|6783->4453|6863->4506|6892->4513|6983->4577|7025->4603|7064->4604|7125->4638|7163->4667|7202->4668|7267->4705|7366->4777|7417->4819|7461->4825|7530->4866|7571->4880|7586->4886|7642->4921|7672->4924|7695->4925|7777->4976|7883->5054|7954->5094|8016->5124|8070->5149|8167->5214|8217->5235|8277->5263|8323->5280|8584->5521|8598->5525|8638->5526|8689->5548|8798->5625|8840->5638|9945->6715|9957->6717|10057->6806|10114->6823|10185->6866|10197->6868|10450->7099|10521->7142|10533->7144|10810->7399|10881->7441|11527->8055|11587->8086|12604->9075|12616->9077|12714->9164|12771->9181|12846->9228|12858->9230|13120->9470|13224->9545|13602->9891|13662->9922|13821->10053|13850->10060|13900->10081|14249->10401|14279->10402|14325->10419|14440->10505|14470->10506|14970->10978|14986->10984|15048->11024|15134->11082|15150->11088|15214->11130
+                  LINES: 24->8|29->10|34->10|36->12|39->15|39->15|43->19|43->19|43->19|45->21|45->21|45->21|60->36|60->36|60->36|60->36|62->38|62->38|64->40|66->42|66->42|68->44|69->45|70->46|75->51|75->51|75->51|76->52|76->52|76->52|77->53|77->53|77->53|78->54|78->54|78->54|78->54|79->55|80->56|82->58|82->58|92->68|92->68|92->68|104->80|104->80|104->80|105->81|105->81|105->81|106->82|107->83|107->83|107->83|108->84|109->85|109->85|109->85|110->86|111->87|111->87|112->88|112->88|114->90|114->90|114->90|114->90|115->91|115->91|115->91|116->92|116->92|116->92|117->93|118->94|118->94|118->94|119->95|119->95|119->95|119->95|119->95|119->95|120->96|122->98|123->99|124->100|125->101|127->103|128->104|129->105|130->106|134->110|134->110|134->110|135->111|136->112|137->113|157->133|157->133|157->133|157->133|159->135|159->135|162->138|164->140|164->140|168->144|170->146|178->154|179->155|196->172|196->172|196->172|196->172|198->174|198->174|201->177|204->180|209->185|210->186|214->190|214->190|215->191|223->199|223->199|224->200|226->202|226->202|230->206|230->206|230->206|231->207|231->207|231->207
                   -- GENERATED --
               */
           

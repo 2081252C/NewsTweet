@@ -22,21 +22,21 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template8[Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], i: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.177*/("""
+Seq[Any](format.raw/*1.188*/("""
 
 """),format.raw/*3.1*/("""<script src=""""),_display_(/*3.15*/routes/*3.21*/.Assets.versioned("javascripts/render.js")),format.raw/*3.63*/(""""; type="text/javascript"></script>
 <link rel="stylesheet" media="screen" href=""""),_display_(/*4.46*/routes/*4.52*/.Assets.versioned("stylesheets/main.css")),format.raw/*4.93*/("""">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-"""),_display_(/*7.2*/main("NewsTweet")/*7.19*/(searchForm)/*7.31*/(user)/*7.37*/(bool)/*7.43*/(personaForm)/*7.56*/(img)/*7.61*/(interestForm)/*7.75*/(personas)/*7.85*/(interests)/*7.96*/ {_display_(Seq[Any](format.raw/*7.98*/("""
+"""),_display_(/*7.2*/main("NewsTweet")/*7.19*/(searchForm)/*7.31*/(user)/*7.37*/(bool)/*7.43*/(personaForm)/*7.56*/(img)/*7.61*/(interestForm)/*7.75*/(personas)/*7.85*/(interests)/*7.96*/(i)/*7.99*/ {_display_(Seq[Any](format.raw/*7.101*/("""
   """),format.raw/*8.3*/("""<div id="categories">
     <div class="container" id="category-container">
       <div class="row" id="row-categories">
@@ -198,9 +198,9 @@ Seq[Any](format.raw/*1.177*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests)
+  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String],i:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests,i)
 
-  def f:((Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,interestForm,personas,interests) => apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests)
+  def f:((Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,interestForm,personas,interests,i) => apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests,i)
 
   def ref: this.type = this
 
@@ -209,11 +209,11 @@ Seq[Any](format.raw/*1.177*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 18 14:03:26 GMT 2017
+                  DATE: Mon Dec 18 22:05:21 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
-                  HASH: 2dc207864adbefd28134d387c1120b41f84d516f
-                  MATRIX: 1031->1|1302->176|1330->178|1370->192|1384->198|1446->240|1553->321|1567->327|1628->368|1730->445|1755->462|1775->474|1789->480|1803->486|1824->499|1837->504|1859->518|1877->528|1896->539|1935->541|1964->544|3428->1980|3457->1981|3504->2000|3655->2123|3684->2124|3733->2145|3808->2192|3837->2193|3884->2212|3971->2271|4000->2272|4042->2286|4071->2287|4118->2306|4279->2439|4308->2440|4349->2453|4500->2577|4515->2583|4564->2611|5413->3432|5442->3433|5491->3454|5647->3582|5676->3583|5727->3606|5804->3655|5833->3656|5882->3677|5971->3738|6000->3739|6042->3753|6071->3754|6120->3775|6286->3913|6315->3914|6360->3931|6515->4059|6530->4065|6580->4094|7554->5040|7583->5041|7632->5062|7796->5198|7825->5199|7876->5222|7953->5271|7982->5272|8031->5293|8120->5354|8149->5355|8191->5369|8220->5370|8269->5391|8435->5529|8464->5530|8507->5545|8663->5673|8679->5679|8738->5716|9596->6545|9626->6546|9676->6567|9832->6694|9862->6695|9914->6718|9992->6767|10022->6768|10072->6789|10162->6850|10192->6851|10235->6865|10265->6866|10315->6887|10482->7025|10512->7026|10556->7041|10712->7169|10728->7175|10778->7203|11699->8095|11729->8096|11779->8117|11936->8245|11966->8246|12018->8269|12096->8318|12126->8319|12176->8340|12266->8401|12296->8402|12339->8416|12369->8417|12419->8438|12586->8576|12616->8577|12660->8592|12816->8720|12832->8726|12883->8755|13036->8877
-                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|62->30|62->30|63->31|65->33|65->33|66->34|67->35|67->35|68->36|69->37|69->37|69->37|69->37|70->38|72->40|72->40|73->41|75->43|75->43|75->43|88->56|88->56|89->57|91->59|91->59|92->60|93->61|93->61|94->62|95->63|95->63|95->63|95->63|96->64|98->66|98->66|99->67|101->69|101->69|101->69|119->87|119->87|120->88|122->90|122->90|123->91|124->92|124->92|125->93|126->94|126->94|126->94|126->94|127->95|129->97|129->97|130->98|132->100|132->100|132->100|146->114|146->114|147->115|149->117|149->117|150->118|151->119|151->119|152->120|153->121|153->121|153->121|153->121|154->122|156->124|156->124|157->125|159->127|159->127|159->127|173->141|173->141|174->142|176->144|176->144|177->145|178->146|178->146|179->147|180->148|180->148|180->148|180->148|181->149|183->151|183->151|184->152|186->154|186->154|186->154|194->162
+                  HASH: d8602395b9ac6c754240d938a919172de65f875d
+                  MATRIX: 1038->1|1320->187|1348->189|1388->203|1402->209|1464->251|1571->332|1585->338|1646->379|1748->456|1773->473|1793->485|1807->491|1821->497|1842->510|1855->515|1877->529|1895->539|1914->550|1925->553|1965->555|1994->558|3458->1994|3487->1995|3534->2014|3685->2137|3714->2138|3763->2159|3838->2206|3867->2207|3914->2226|4001->2285|4030->2286|4072->2300|4101->2301|4148->2320|4309->2453|4338->2454|4379->2467|4530->2591|4545->2597|4594->2625|5443->3446|5472->3447|5521->3468|5677->3596|5706->3597|5757->3620|5834->3669|5863->3670|5912->3691|6001->3752|6030->3753|6072->3767|6101->3768|6150->3789|6316->3927|6345->3928|6390->3945|6545->4073|6560->4079|6610->4108|7584->5054|7613->5055|7662->5076|7826->5212|7855->5213|7906->5236|7983->5285|8012->5286|8061->5307|8150->5368|8179->5369|8221->5383|8250->5384|8299->5405|8465->5543|8494->5544|8537->5559|8693->5687|8709->5693|8768->5730|9626->6559|9656->6560|9706->6581|9862->6708|9892->6709|9944->6732|10022->6781|10052->6782|10102->6803|10192->6864|10222->6865|10265->6879|10295->6880|10345->6901|10512->7039|10542->7040|10586->7055|10742->7183|10758->7189|10808->7217|11729->8109|11759->8110|11809->8131|11966->8259|11996->8260|12048->8283|12126->8332|12156->8333|12206->8354|12296->8415|12326->8416|12369->8430|12399->8431|12449->8452|12616->8590|12646->8591|12690->8606|12846->8734|12862->8740|12913->8769|13066->8891
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|62->30|62->30|63->31|65->33|65->33|66->34|67->35|67->35|68->36|69->37|69->37|69->37|69->37|70->38|72->40|72->40|73->41|75->43|75->43|75->43|88->56|88->56|89->57|91->59|91->59|92->60|93->61|93->61|94->62|95->63|95->63|95->63|95->63|96->64|98->66|98->66|99->67|101->69|101->69|101->69|119->87|119->87|120->88|122->90|122->90|123->91|124->92|124->92|125->93|126->94|126->94|126->94|126->94|127->95|129->97|129->97|130->98|132->100|132->100|132->100|146->114|146->114|147->115|149->117|149->117|150->118|151->119|151->119|152->120|153->121|153->121|153->121|153->121|154->122|156->124|156->124|157->125|159->127|159->127|159->127|173->141|173->141|174->142|176->144|176->144|177->145|178->146|178->146|179->147|180->148|180->148|180->148|180->148|181->149|183->151|183->151|184->152|186->154|186->154|186->154|194->162
                   -- GENERATED --
               */
           

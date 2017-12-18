@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Thu Dec 14 13:25:44 GMT 2017
+// @DATE:Mon Dec 18 21:52:55 GMT 2017
 
 package router
 
@@ -73,7 +73,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """track""", """controllers.TrackController.trackSearch()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addpersona""", """controllers.PersonaController.addPersona()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addinterest""", """controllers.InterestController.addInterest()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """interest""", """controllers.InterestController.showInterest()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """interest/""" + "$" + """topic<[^/]+>""", """controllers.InterestController.showInterest(topic:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """logout""", """controllers.TwitterSignInServlet.logOut()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/news""", """controllers.HomeController.newsCategory()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/entertainment""", """controllers.HomeController.entertainmentCategory()"""),
@@ -251,17 +251,17 @@ class Routes(
 
   // @LINE:21
   private[this] lazy val controllers_InterestController_showInterest9_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("interest")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("interest/"), DynamicPart("topic", """[^/]+""",true)))
   )
   private[this] lazy val controllers_InterestController_showInterest9_invoker = createInvoker(
-    InterestController_4.showInterest(),
+    InterestController_4.showInterest(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.InterestController",
       "showInterest",
-      Nil,
+      Seq(classOf[String]),
       "GET",
-      this.prefix + """interest""",
+      this.prefix + """interest/""" + "$" + """topic<[^/]+>""",
       """""",
       Seq()
     )
@@ -434,8 +434,8 @@ class Routes(
   
     // @LINE:21
     case controllers_InterestController_showInterest9_route(params@_) =>
-      call { 
-        controllers_InterestController_showInterest9_invoker.call(InterestController_4.showInterest())
+      call(params.fromPath[String]("topic", None)) { (topic) =>
+        controllers_InterestController_showInterest9_invoker.call(InterestController_4.showInterest(topic))
       }
   
     // @LINE:24

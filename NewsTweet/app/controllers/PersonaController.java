@@ -60,10 +60,10 @@ public class PersonaController extends Controller {
                     interests.add(i.interestName + " " + persona.personaName);
                 }
             }
-			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
+			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
 			}
 		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
+		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
 		        }
     }
 }

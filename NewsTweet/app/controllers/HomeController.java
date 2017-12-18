@@ -267,10 +267,10 @@ public class HomeController extends Controller{
             System.out.println("\n\ninterets: " + interests.toString());
 
 			String s = t.username;
-		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests));
+		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests));
+	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
 	        }
     }
 
@@ -311,10 +311,10 @@ public class HomeController extends Controller{
                     interests.add(i.interestName + " " + p.personaName);
                 }
             }
-		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests));
+		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, personaNames, interests));
+	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, personaNames, interests, ""));
 	        }	
     }
 
@@ -356,10 +356,10 @@ public class HomeController extends Controller{
                 }
             }
 
-		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests));
+		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, personaNames, interests));
+	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, personaNames, interests, ""));
 	        }
     }
 
@@ -401,10 +401,10 @@ public class HomeController extends Controller{
                     interests.add(i.interestName + " " + p.personaName);
                 }
             }
-		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests));
+		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, personaNames, interests));
+	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, personaNames, interests, ""));
 	        }
     }
 
@@ -446,10 +446,10 @@ public class HomeController extends Controller{
                     interests.add(i.interestName + " " + p.personaName);
                 }
             }
-		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests));
+		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, personaNames, interests));
+	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, personaNames, interests, ""));
             }
     }
 
@@ -487,10 +487,10 @@ public class HomeController extends Controller{
                     interests.add(i.interestName + " " + p.personaName);
                 }
             }
-		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests));
+		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests, ""));
 		}
 	    else{
-	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, personaNames, interests));
+	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, personaNames, interests, ""));
 	        }
     }
 }

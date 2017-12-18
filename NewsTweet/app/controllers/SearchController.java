@@ -55,8 +55,7 @@ public class SearchController extends Controller {
 	        String interestTrack = trackForm.field("interest").value();
 
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
-		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
-
+		    
 		    Query query = new Query(term);
 		    query.setSince("2017-06-01");
 
@@ -132,10 +131,10 @@ public class SearchController extends Controller {
                 }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, trackForm, s, 1, tID, mostPopular, mostRecent, personaForm, t.imgUrl, interestForm, term, personaNames, interests));
+			    return ok(views.html.searchResults.render(searchForm, trackForm, s, 1, tID, mostPopular, mostRecent, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, null, "", 0, tID, mostPopular, mostRecent, personaForm, "", interestForm, term, personaNames, interests));
+		        	return ok(views.html.searchResults.render(searchForm, null, "", 0, tID, mostPopular, mostRecent, personaForm, "", interestForm, term, personaNames, interests, ""));
 		        }
     }
 }
