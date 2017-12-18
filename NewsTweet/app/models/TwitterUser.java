@@ -29,5 +29,13 @@ public class TwitterUser extends Model {
 
     }
 
+    public void setImg(String imgUrl){
+        this.imgUrl = imgUrl;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
     public static final Finder<Long, TwitterUser> find = new Finder<>(TwitterUser.class);
 }

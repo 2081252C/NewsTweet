@@ -87,6 +87,11 @@ public class TwitterSignInServlet extends Controller {
                 TwitterUser tUser = new TwitterUser(userId, userName, image, accessToken.toString());
                 tUser.save();
             }
+            else{
+                t.setImg(user.getProfileImageURL());
+                t.setUsername(user.getScreenName());
+                t.update();
+            }
         } catch (TwitterException e) {
             return ok("bad callback");
         }

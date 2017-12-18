@@ -218,6 +218,7 @@ th{
 .search_result{
 	width: 100%;
 	display: block;
+	height: 35px;
 }
 
 .nav-link.active.search_result{
@@ -262,10 +263,6 @@ th{
   background-color:lightgrey;
 }
 
-#track{
-	display: none;
-}
-
 #main{
 	top:15%;
 }
@@ -278,11 +275,15 @@ th{
 	width:400px;
 }
 
+.centred{
+	margin-left: 40px;
+}
+
 #interest-form, #interest-label{
 	text-align: center;
 }
 
-#add_interest{
+#add_interest #track_btn{
 	margin-left: 30px;
 	background-color: #5e97f2;
     border: none;
@@ -298,11 +299,27 @@ th{
 	border-bottom-left-radius: 5px;
 }
 
-#add_interest:hover{
+#add_interest:hover #track_btn:hover{
 	background-color: lightsteelblue;
 	border-width: 2px;
 	border-style: solid;
     border-color: #5e97f2; 
+}
+
+#track_btn{
+	width:250px;
+	padding-right: 30px;
+	padding-left: 30px;
+	height: 50px;
+	border-width: 2px;
+	border-color: #fff;
+}
+
+#footer{
+	width: 200px;
+	bottom: 25px;
+	right: 55%;
+	left: 45%;
 }
 
 /*!

@@ -30,16 +30,17 @@ object searchResults extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.
       {
 /*3.2*/import helper._
 
-
+implicit def /*4.2*/implicitFieldConstructor/*4.26*/ = {{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }};
 Seq[Any](format.raw/*1.290*/("""
 
-"""),format.raw/*4.1*/("""
-"""),format.raw/*5.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
-<script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
-<script src=""""),_display_(/*7.15*/routes/*7.21*/.Assets.versioned("javascripts/render.js")),format.raw/*7.63*/(""""; type="text/javascript"></script>
+"""),format.raw/*4.89*/("""  """),format.raw/*4.91*/("""// Declares a horizontal field constructor as default
 
-"""),_display_(/*9.2*/main("Search Results")/*9.24*/(searchForm)/*9.36*/(user)/*9.42*/(bool)/*9.48*/(personaForm)/*9.61*/(img)/*9.66*/(interestForm)/*9.80*/(personas)/*9.90*/(interests)/*9.101*/ {_display_(Seq[Any](format.raw/*9.103*/("""
-  	"""),format.raw/*10.4*/("""<h3>Search Results for """),_display_(/*10.28*/term),format.raw/*10.32*/(""":</h3>
+<script sync src="https://platform.twitter.com/widgets.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
+<script src=""""),_display_(/*8.15*/routes/*8.21*/.Assets.versioned("javascripts/render.js")),format.raw/*8.63*/(""""; type="text/javascript"></script>
+
+"""),_display_(/*10.2*/main("Search Results")/*10.24*/(searchForm)/*10.36*/(user)/*10.42*/(bool)/*10.48*/(personaForm)/*10.61*/(img)/*10.66*/(interestForm)/*10.80*/(personas)/*10.90*/(interests)/*10.101*/ {_display_(Seq[Any](format.raw/*10.103*/("""
+  	"""),format.raw/*11.4*/("""<h3>Search Results for """),_display_(/*11.28*/term),format.raw/*11.32*/(""":</h3>
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
             <a class="nav-link active search_result" onclick="openTab(event, 'popular')">Popular</a> 
@@ -51,56 +52,65 @@ Seq[Any](format.raw/*1.290*/("""
           <div id="popular" class="tweets">
             <br>
             <div class="card-columns">
-              """),_display_(/*22.16*/for((tweet) <- popTweets) yield /*22.41*/{_display_(Seq[Any](format.raw/*22.42*/("""
-                """),format.raw/*23.17*/("""<div class="card" id=""""),_display_(/*23.40*/tweet),format.raw/*23.45*/(""""><br></div>
+              """),_display_(/*23.16*/for((tweet) <- popTweets) yield /*23.41*/{_display_(Seq[Any](format.raw/*23.42*/("""
+                """),format.raw/*24.17*/("""<div class="card" id=""""),_display_(/*24.40*/tweet),format.raw/*24.45*/(""""><br></div>
                 <script>
-                  rendering(""""),_display_(/*25.31*/tweet),format.raw/*25.36*/("""");
+                  rendering(""""),_display_(/*26.31*/tweet),format.raw/*26.36*/("""");
                 </script>
-              """)))}),format.raw/*27.16*/("""
-              """),format.raw/*28.15*/("""</div>
-
-           <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
-                            <div id="track">
-                                """),_display_(/*32.34*/helper/*32.40*/.form(action=routes.TrackController.trackSearch())/*32.90*/{_display_(Seq[Any](format.raw/*32.91*/("""
-
-                                    """),_display_(/*34.38*/helper/*34.44*/.inputText(trackForm("term"),
-                                      'value -> term)),format.raw/*35.54*/("""
-
-                                    """),_display_(/*37.38*/helper/*37.44*/.select(
-                                       trackForm("interest"),
-                                       helper.options(interests),
-                                       '_label -> null
-                                    )),format.raw/*41.38*/("""
-                                """)))}),format.raw/*42.34*/("""
-                            """),format.raw/*43.29*/("""</div>
+              """)))}),format.raw/*28.16*/("""
+              """),format.raw/*29.15*/("""</div>
           </div>
       
           <div id="recent" class="tweets">
             <br>
             <div class="card-columns">
-              """),_display_(/*49.16*/for(tweet <- recentTweets) yield /*49.42*/{_display_(Seq[Any](format.raw/*49.43*/("""
-                """),format.raw/*50.17*/("""<div class="card"  id=""""),_display_(/*50.41*/tweet),format.raw/*50.46*/(""""><br></div>
+              """),_display_(/*35.16*/for(tweet <- recentTweets) yield /*35.42*/{_display_(Seq[Any](format.raw/*35.43*/("""
+                """),format.raw/*36.17*/("""<div class="card"  id=""""),_display_(/*36.41*/tweet),format.raw/*36.46*/(""""><br></div>
                 <script>
-                  rendering(""""),_display_(/*52.31*/tweet),format.raw/*52.36*/("""");
+                  rendering(""""),_display_(/*38.31*/tweet),format.raw/*38.36*/("""");
                 </script>
-              """)))}),format.raw/*54.16*/("""
-            """),format.raw/*55.13*/("""</div>
-            <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
-              <div id="track">
-                  """),_display_(/*58.20*/helper/*58.26*/.form(action=routes.TrackController.trackSearch())/*58.76*/{_display_(Seq[Any](format.raw/*58.77*/("""
-
-                      """),_display_(/*60.24*/helper/*60.30*/.inputText(trackForm("term"),
-                        'value -> term)),format.raw/*61.40*/("""
-
-                      """),_display_(/*63.24*/helper/*63.30*/.select(
-                         trackForm("interest"),
-                         helper.options(interests),
-                         '_label -> null
-                      )),format.raw/*67.24*/("""
-                  """)))}),format.raw/*68.20*/("""
-              """),format.raw/*69.15*/("""</div>
+              """)))}),format.raw/*40.16*/("""
+            """),format.raw/*41.13*/("""</div>
           </div>
-""")))}),format.raw/*71.2*/("""
+
+          <div class="fixed-bottom" id="footer">
+            <button type="button" id="track_btn" class="btn btn-primary" data-toggle="modal" data-target="#trackModal">Track Search</button>
+          </div>
+          
+
+          <!-- Modal -->
+          <div class="modal fade" id="trackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="interest-label">Track Search</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div id="track">
+                    """),_display_(/*61.22*/b4/*61.24*/.form(action=routes.TrackController.trackSearch())/*61.74*/{_display_(Seq[Any](format.raw/*61.75*/("""
+
+                        """),_display_(/*63.26*/b4/*63.28*/.text(trackForm("term").copy(value= Option[String](term)),
+                          '_label -> "Search Term")),format.raw/*64.52*/("""
+
+                        """),_display_(/*66.26*/b4/*66.28*/.select(
+                           trackForm("interest"),
+                           helper.options(interests),
+                           '_label -> "Interest"
+                        )),format.raw/*70.26*/("""
+                """),format.raw/*71.17*/("""</div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save changes</button>
+              """)))}),format.raw/*76.16*/("""
+                """),format.raw/*77.17*/("""</div>
+              </div>
+            </div>
+          </div>
+""")))}),format.raw/*81.2*/("""
 
 """))
       }
@@ -118,11 +128,11 @@ Seq[Any](format.raw/*1.290*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 18 16:28:09 GMT 2017
+                  DATE: Mon Dec 18 17:14:56 GMT 2017
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/searchResults.scala.html
-                  HASH: 83436eb74d99d172f2ee38ce2be697d705e99373
-                  MATRIX: 1098->1|1459->292|1505->289|1533->308|1560->309|1756->479|1770->485|1832->527|1895->565|1925->587|1945->599|1959->605|1973->611|1994->624|2007->629|2029->643|2047->653|2067->664|2107->666|2138->670|2189->694|2214->698|2714->1171|2755->1196|2794->1197|2839->1214|2889->1237|2915->1242|3010->1310|3036->1315|3112->1360|3155->1375|3405->1598|3420->1604|3479->1654|3518->1655|3584->1694|3599->1700|3703->1783|3769->1822|3784->1828|4034->2057|4099->2091|4156->2120|4328->2265|4370->2291|4409->2292|4454->2309|4505->2333|4531->2338|4626->2406|4652->2411|4728->2456|4769->2469|4991->2664|5006->2670|5065->2720|5104->2721|5156->2746|5171->2752|5261->2821|5313->2846|5328->2852|5522->3025|5573->3045|5616->3060|5671->3085
-                  LINES: 28->1|31->3|34->1|36->4|37->5|39->7|39->7|39->7|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|41->9|42->10|42->10|42->10|54->22|54->22|54->22|55->23|55->23|55->23|57->25|57->25|59->27|60->28|64->32|64->32|64->32|64->32|66->34|66->34|67->35|69->37|69->37|73->41|74->42|75->43|81->49|81->49|81->49|82->50|82->50|82->50|84->52|84->52|86->54|87->55|90->58|90->58|90->58|90->58|92->60|92->60|93->61|95->63|95->63|99->67|100->68|101->69|103->71
+                  HASH: 732b1c925e74bd579e56bfd7c037595394517ad3
+                  MATRIX: 1098->1|1459->292|1496->309|1528->333|1622->289|1651->396|1680->398|1931->623|1945->629|2007->671|2071->709|2102->731|2123->743|2138->749|2153->755|2175->768|2189->773|2212->787|2231->797|2252->808|2293->810|2324->814|2375->838|2400->842|2900->1315|2941->1340|2980->1341|3025->1358|3075->1381|3101->1386|3196->1454|3222->1459|3298->1504|3341->1519|3513->1664|3555->1690|3594->1691|3639->1708|3690->1732|3716->1737|3811->1805|3837->1810|3913->1855|3954->1868|4907->2794|4918->2796|4977->2846|5016->2847|5070->2874|5081->2876|5212->2986|5266->3013|5277->3015|5485->3202|5530->3219|5837->3495|5882->3512|5977->3577
+                  LINES: 28->1|31->3|33->4|33->4|34->1|36->4|36->4|40->8|40->8|40->8|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|43->11|43->11|43->11|55->23|55->23|55->23|56->24|56->24|56->24|58->26|58->26|60->28|61->29|67->35|67->35|67->35|68->36|68->36|68->36|70->38|70->38|72->40|73->41|93->61|93->61|93->61|93->61|95->63|95->63|96->64|98->66|98->66|102->70|103->71|108->76|109->77|113->81
                   -- GENERATED --
               */
           
