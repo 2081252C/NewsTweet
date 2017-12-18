@@ -9,16 +9,14 @@
 @main("NewsTweet")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests){
   <div id="categories">
   	<h3>Sport:</h3>
-  	<p>
-  		<p id="list">
-        @for(tweet <- tweets){
-          <p id="@tweet"><br></p>
-          <script>
+  	<div class="card-columns">
+      @for(tweet <- tweets){
+        <div class="card"  id="@tweet"><br></div>
+        <script>
           rendering("@tweet");
         </script>
-        }
-    </p>
-  	</p>
+      }
+    </div>
   </div>
   
 }

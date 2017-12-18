@@ -8,31 +8,31 @@
 
 @main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests) {
   	<h3>Search Results for @term:</h3>
-    <table style="width:820px;">
-  	  <tr>
-        <div id="search_tabs">
-          <th style="width:410px;">
-            <button class="search_result" onclick="openTab(event, 'popular')" style="width:400;">Popular</button> 
-          </th>
-          <th style="width:410px;">
-            <button class="search_result" onclick="openTab(event, 'recent')" style="width:400;">Recent</button>
-          </th>
-        </div>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div id="popular" class="tweets" style="width:50%; left:300px">
-            @for(tweet <- popTweets){
-              <p id="@tweet"><br></p>
-              <script>
-              rendering("@tweet");
-            </script>
-            }
+  	  <ul class="nav nav-tabs">
+        <li class="nav-item tab_item">
+            <a class="nav-link active search_result" onclick="openTab(event, 'popular')">Popular</a> 
+          </li>
+          <li class="nav-item tab_item">
+            <a class="nav-link search_result" onclick="openTab(event, 'recent')">Recent</a>
+          </li>
+        </ul>
+          <div id="popular" class="tweets">
+            <br>
+            <div class="card-columns">
+              @for((tweet) <- popTweets){
+                <div class="card" id="@tweet"><br></div>
+                <script>
+                  rendering("@tweet");
+                </script>
+              }
+              </div>
+
            <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
                             <div id="track">
                                 @helper.form(action=routes.TrackController.trackSearch()){
 
-                                    @inputText(trackForm("term").copy(value= Option[String]("@term")))
+                                    @helper.inputText(trackForm("term"),
+                                      'value -> term)
 
                                     @helper.select(
                                        trackForm("interest"),
@@ -43,29 +43,30 @@
                             </div>
           </div>
       
-          <div id="recent" class="tweets" style="width:50%">
-            @for(tweet <- recentTweets){
-              <p id="@tweet"><br></p>
-              <script>
-              rendering("@tweet");
-            </script>
-            }
+          <div id="recent" class="tweets">
+            <br>
+            <div class="card-columns">
+              @for(tweet <- recentTweets){
+                <div class="card"  id="@tweet"><br></div>
+                <script>
+                  rendering("@tweet");
+                </script>
+              }
+            </div>
             <button onclick="document.getElementById('track').style.display = 'block'; this.style.display = 'none'">Track Search</button>
-                            <div id="track">
-                                @helper.form(action=routes.TrackController.trackSearch()){
+              <div id="track">
+                  @helper.form(action=routes.TrackController.trackSearch()){
 
-                                    @inputText(trackForm("term").copy(value= Option[String]("@term")))
+                      @helper.inputText(trackForm("term"),
+                        'value -> term)
 
-                                    @helper.select(
-                                       trackForm("interest"),
-                                       helper.options(interests),
-                                       '_label -> null
-                                    )
-                                }
-                            </div>
+                      @helper.select(
+                         trackForm("interest"),
+                         helper.options(interests),
+                         '_label -> null
+                      )
+                  }
+              </div>
           </div>
-        </td>
-      </tr>
-    </table>
 }
 

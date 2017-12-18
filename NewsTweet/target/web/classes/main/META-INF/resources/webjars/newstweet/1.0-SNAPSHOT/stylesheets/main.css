@@ -210,8 +210,28 @@ th{
 	width:auto;
 	border:0;
 	outline:none;
+	height: 29px;
 	display:block;
-  background-color:lightsteelblue;
+  	background-color:lightsteelblue;
+}
+
+.search_result{
+	width: 100%;
+	display: block;
+}
+
+.nav-link.active.search_result{
+	background-color: #e6eaf2;
+	border-color: #e6eaf2;
+}
+
+.tweets{
+	background-color: #e6eaf2;
+}
+
+.tab_item{
+	width: 50%;
+	display: block;
 }
 
 #content{

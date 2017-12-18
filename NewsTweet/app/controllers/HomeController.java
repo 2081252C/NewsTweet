@@ -101,7 +101,7 @@ public class HomeController extends Controller{
 	                	classify.add(status);
 	                //}
 			        //System.out.println(statuses.size() + ":" + status.getText());
-			        if (top.size() == 1) {
+			        if (top.size() == 50) {
 			          synchronized (lock) {
 			            lock.notify();
 			          }

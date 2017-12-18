@@ -8,8 +8,8 @@ function create(){
 		twttr.widgets.createTweet(
 	      arguments[0], arguments[1], 
 	 	   {
-		        conversation : 'none',    // or all
-		        cards        : 'hidden',  // or visible 
+		        conversation : 'all',    // or all
+		        cards        : 'visible',  // or visible 
 		        linkColor    : '#cc0000', // default is blue
 		        theme        : 'light'    // or dark	
 		});
@@ -39,10 +39,10 @@ function openTab(evt, cityName) {
     tablinks = document.getElementsByClassName("search_result");
     console.log(tablinks);
     for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" clicked", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " clicked";
+    evt.currentTarget.className += " active";
 }
 
 function display_interests() {
