@@ -1,18 +1,73 @@
-@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], tweets: List[String], i: String)
+@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], tweets: List[String], i: String, terms: List[String], allTweets: List[String], values: List[String])
 
 <script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
 @main("Interest")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>@i</h3>
-  	<div class="card-columns">
-      @for(tweet <- tweets){
-        <div class="card"  id="@tweet"><br></div>
-        <script>
-          rendering("@tweet");
-        </script>
-      }
-    </div>
+  	<h3>Tracked Searches for @i</h3>
+
+  	<div id="carousel-centre" class="tweets">
+  		<ul class="nav nav-tabs carlist" id="carouselButtons">
+		    <li class="active car" data-target="#carouselExampleControls" data-slide-to="0">
+		        <a class="nav-link active carousel-btn" id="cb" data-toggle="tab" href="#">All</a>
+		    </li>
+		    @for((v, index) <- values.zipWithIndex){
+				<li class="car" data-target="#carouselExampleControls" data-slide-to="@{index+1}">
+					<a class="nav-link carousel-btn" data-toggle="tab" href="#">@v </a>
+				</li>
+	    	}
+		</ul>
+
+	<br>
+  	<div id="carouselExampleControls" class="carousel slide tweets" data-interval="false">
+	  <div class="carousel-inner" role="listbox">
+
+	    <div class="carousel-item active">
+  			<div class="card-columns">
+		  	@for(t <- allTweets){
+				<div class="all">
+			        <div class="card"  id="@t "><br></div>
+			        <script>
+			          rendering("@t ");
+			        </script>
+				</div>
+		  	}
+	    </div>
+	</div>
+
+	    @for(term <- terms){
+	  		@if(term contains i){
+	  			@defining(term.replace(" "+i,"")) { tweetTerm=>
+		  			<div class="carousel-item">
+		  				<div class="card-columns">
+					      @for(tweet <- tweets){
+					      	@if(tweet contains tweetTerm){
+					      		@defining(tweet.replace(tweetTerm+"%","")) { tweetID=>
+							        <div class="card"  id="@tweetID"><br></div>
+							        <script>
+							          rendering("@tweetID");
+							        </script>
+							    }
+					    	}
+					      }
+					</div>
+				</div>
+				}
+	  		}
+	  	}
+	  </div>
+
+	  <a class="carousel-control-prev" data-slide="prev" href="#whatIsCarousel">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
+</div>
+
 }
 

@@ -115,6 +115,7 @@ public class InterestController extends Controller {
 	        String str = session("id");
 	        List<String> personaNames = new ArrayList<>();
 	        List<String> interests = new ArrayList<>();
+	        List<String> trackedTerms = new ArrayList<>();
 	        List<List<String>> interestTerms = new ArrayList<>();
 	        HashMap<String, List<String>> interestMap = new HashMap<String, List<String>>();
 	        if(str!=null){
@@ -147,6 +148,7 @@ public class InterestController extends Controller {
 	                    List<String> tracks = new ArrayList<>();                  
 	                    for(Track track: tracksFromDB){
 	                    	tracks.add(track.trackedTerm);
+	                    	trackedTerms.add(track.trackedTerm + " " + i.interestName);
 	                    }
 
 	                    interestTerms.add(tracks);
@@ -161,6 +163,7 @@ public class InterestController extends Controller {
 
 				//get list of associated search terms
 				List<String> trackTweets = new ArrayList<>();
+				List<String> allTweets = new ArrayList<>();
 				for(String v: values){
 				    Query query = new Query(v);
 					List<Status> tweets = new ArrayList<Status>();
@@ -168,7 +171,9 @@ public class InterestController extends Controller {
 				    try{
 				    	QueryResult result = twitter.search(query);
 					    for (Status status : result.getTweets()) {
-					        trackTweets.add(Long.toString(status.getId()));
+					    	if(!trackTweets.contains(v + "%" + Long.toString(status.getId()))){
+					    		trackTweets.add(v + "%" + Long.toString(status.getId()));
+					    	}
 					    }
 					}
 					catch (TwitterException e){
@@ -176,16 +181,24 @@ public class InterestController extends Controller {
 					}
 	        	}
 
-				//create new queries for each and save results to lists
+				for(String v: values){
+				    Query query = new Query(v);
+					List<Status> tweets = new ArrayList<Status>();
+				    
+				    try{
+				    	QueryResult result = twitter.search(query);
+					    for (Status status : result.getTweets()) {
+					        if(!allTweets.contains(Long.toString(status.getId()))){
+					        	allTweets.add(Long.toString(status.getId()));
+					        }
+					    }
+					}
+					catch (TwitterException e){
+						return ok("error");
+					}
+	        	}
 
-
-				//create one big list containing all
-
-
-				//pass all lists to view
-
-
-			    return ok(views.html.interest.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, trackTweets, tt));
+			    return ok(views.html.interest.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, trackTweets, tt, trackedTerms, allTweets, values));
 			}
 		    else{
 		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));

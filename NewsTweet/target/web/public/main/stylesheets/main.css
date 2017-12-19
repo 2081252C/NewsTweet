@@ -221,9 +221,48 @@ th{
 	height: 35px;
 }
 
+.carousel-btn{
+	float:left;
+	width:100%;
+	border:0;
+	outline:none;
+	height: 29px;
+  	background-color:lightsteelblue;
+  	display: table-cell;
+  	text-decoration: none;
+  	text-align: center;
+  	color: #3f3f3f;
+  }
+
+  .carousel-btn:hover{
+  	font-weight: bold;
+  	color: #3f3f3f;
+  }
+
+  .carlist{
+  	display: table;
+  	width: 100%;
+  }
+
+  .car{
+    display: table-cell;
+  }
+
+#carouselButtons{
+	background-color: #e6eaf2;
+	border-color: #e6eaf2;
+}
+
 .nav-link.active.search_result{
 	background-color: #e6eaf2;
 	border-color: #e6eaf2;
+}
+
+.nav-link.active.carousel-btn{
+	background-color: #e6eaf2;
+	border-color: #e6eaf2;
+	border-width: 2px;
+	font-weight: bold;
 }
 
 .tweets{
@@ -322,6 +361,7 @@ th{
 	left: 45%;
 }
 
+
 /*!
  * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
  * Copyright 2013-2017 Start Bootstrap
@@ -377,6 +417,22 @@ body {
 #persona_tabs{
 	display: none;
 }
+
+#carousel-centre{
+	width: 100%;
+	margin: auto;
+}
+
+.carousel-item{
+	width: 100%;
+	margin: auto;
+}
+
+.carousel-control {
+  color: #999;
+  width: 4%;
+}
+
 
 
 /* Sidebar Styles */
