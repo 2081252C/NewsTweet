@@ -41,7 +41,8 @@ public class SearchController extends Controller {
 			Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        String term = searchForm.field("searchTerm").value();
 	        String searchType = searchForm.field("searchType").value();
-
+	        Search newSearch = new Search(term);
+	        searchForm = searchForm.fill(newSearch);
 
 	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
 	        String name = personaForm.field("personaName").value();
@@ -64,6 +65,7 @@ public class SearchController extends Controller {
 		    	query = new Query(term);
 		    }
 		    else if(searchType.compareTo("Hashtag")==0){
+		    	term = term.replace(" ", "");
 		    	term = "#"+term;
 		    	query = new Query(term);
 		    }
@@ -85,7 +87,9 @@ public class SearchController extends Controller {
 				query.setResultType(Query.POPULAR);
 		    	QueryResult result = twitter.search(query);
 			    for (Status status : result.getTweets()) {
-			        mostPopular.add(Long.toString(status.getId()));
+			    	if(!mostPopular.contains(Long.toString(status.getId()))){
+			        	mostPopular.add(Long.toString(status.getId()));
+			    	}
 			    }
 			}
 			catch (TwitterException e){
@@ -97,7 +101,9 @@ public class SearchController extends Controller {
 				query.setResultType(Query.RECENT);
 		    	QueryResult result = twitter.search(query);
 			    for (Status status : result.getTweets()) {
-			        mostRecent.add(Long.toString(status.getId()));
+			    	if(!mostRecent.contains(Long.toString(status.getId()))){
+			        	mostRecent.add(Long.toString(status.getId()));
+			        }
 			    }
 			}
 			catch (TwitterException e){
@@ -127,7 +133,7 @@ public class SearchController extends Controller {
                                         .findPagedList()
                                         .getList();
                 for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
+                    interests.add(i.interestName + " - " + p.personaName);
                 }
             }
 				String s = t.username;

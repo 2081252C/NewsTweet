@@ -36,7 +36,7 @@ public class TrackController extends Controller {
 	        Form<Track> trackForm = formFactory.form(Track.class).bindFromRequest();
 	        String search = trackForm.field("term").value();
 	        String interestTrack = trackForm.field("interest").value();
-	        String[] strArray = interestTrack.split(" ");
+	        String[] strArray = interestTrack.split(" - ");
 	        interestTrack = strArray[0];
 	        String personaOfInterest = strArray[1];
 
@@ -62,7 +62,7 @@ public class TrackController extends Controller {
 	                                        .findPagedList()
 	                                        .getList();
 	                for(Interest i: interestsFromDB){
-	                    interests.add(i.interestName + " " + p.personaName);
+	                    interests.add(i.interestName + " - " + p.personaName);
 	                }
 	            }
 

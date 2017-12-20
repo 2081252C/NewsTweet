@@ -57,7 +57,7 @@ public class PersonaController extends Controller {
                                         .findPagedList()
                                         .getList();
                 for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + persona.personaName);
+                    interests.add(i.interestName + " - " + persona.personaName);
                 }
             }
 			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));

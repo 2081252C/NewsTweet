@@ -5,8 +5,25 @@ import play.data.format.*;
 import play.data.validation.*;
 import play.data.validation.Constraints;
 
-public class Search{
+import play.mvc.*;
+import play.data.format.*;
+import play.data.validation.*;
+import play.data.validation.Constraints;
+import javax.persistence.*;
+import io.ebean.*;
+import models.TwitterUser;
+import models.Interest;
+import java.util.List;
+import java.util.ArrayList;
 
-	private String searchTerm;
-	
+public class Search extends Model{
+
+	public String searchTerm;
+
+	public Search() {
+    }
+
+	public Search(String searchTerm){
+		this.searchTerm = searchTerm;
+	}
 }

@@ -68,7 +68,7 @@ public class InterestController extends Controller {
 	                                        .findPagedList()
 	                                        .getList();
 	                for(Interest i: interestsFromDB){
-	                    interests.add(i.interestName + " " + p.personaName);
+	                    interests.add(i.interestName + " - " + p.personaName);
 	                }
 	            }
 
@@ -137,7 +137,7 @@ public class InterestController extends Controller {
 	                                        .findPagedList()
 	                                        .getList();
 	                for(Interest i: interestsFromDB){
-	                    interests.add(i.interestName + " " + p.personaName);
+	                    interests.add(i.interestName + " - " + p.personaName);
 	                    List<Track> tracksFromDB = Track.find.query().where()
 	                    					.ilike("interest", Long.toString(i.id))
 	                                        .setFirstRow(0)
@@ -166,6 +166,7 @@ public class InterestController extends Controller {
 				List<String> allTweets = new ArrayList<>();
 				for(String v: values){
 				    Query query = new Query(v);
+				    query.lang("en");
 					List<Status> tweets = new ArrayList<Status>();
 				    
 				    try{
@@ -183,6 +184,7 @@ public class InterestController extends Controller {
 
 				for(String v: values){
 				    Query query = new Query(v);
+				    query.lang("en");
 					List<Status> tweets = new ArrayList<Status>();
 				    
 				    try{

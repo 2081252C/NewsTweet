@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Mon Dec 18 21:52:55 GMT 2017
+// @DATE:Wed Dec 20 10:02:39 GMT 2017
 
 package controllers;
 

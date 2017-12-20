@@ -11,6 +11,7 @@ import twitter4j.TwitterStreamFactory;
 import twitter4j.TwitterException;
 import twitter4j.conf.ConfigurationBuilder;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 import models.*;
 import play.data.Form;
@@ -47,6 +48,7 @@ public class HomeController extends Controller{
 	@Inject FormFactory formFactory;
 
 	List<String> top = new ArrayList<>();
+    List<String> text = new ArrayList<>();
 	List<Status> classify = new ArrayList<>();
 
 	private final Object lock = new Object();
@@ -70,13 +72,8 @@ public class HomeController extends Controller{
 
 	public Result index() throws ClassNotFoundException, IOException{
 
-			top.clear();
-
-			ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        		configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
-                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
-                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
-                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+            top.clear();
+            classify.clear();
 
 			Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        String term = searchForm.field("searchTerm").value();
@@ -88,6 +85,12 @@ public class HomeController extends Controller{
             Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
             String interestName = interestForm.field("interestName").value();
 
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
 		    //Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    TwitterStream twitterStream = new TwitterStreamFactory(configurationBuilder.build()).getInstance();
@@ -96,12 +99,12 @@ public class HomeController extends Controller{
 	            public void onStatus(Status status) {
 	                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
 	          		System.out.println(status.getRetweetedStatus().getRetweetCount());
-	                //if(status.getRetweetedStatus().getRetweetCount()>1000){
+	                if(!classify.contains(status) && !top.contains(Long.toString(status.getId()))) {
 	                	top.add(Long.toString(status.getId()));
 	                	classify.add(status);
-	                //}
+	                }
 			        //System.out.println(statuses.size() + ":" + status.getText());
-			        if (top.size() == 50) {
+			        if (top.size() == 10) {
 			          synchronized (lock) {
 			            lock.notify();
 			          }
@@ -148,7 +151,485 @@ public class HomeController extends Controller{
 	    System.out.println("returning statuses");
 	    twitterStream.shutdown();
 
-	    DynamicLMClassifier<NGramProcessLM> classifier
+	    //classifier(classify);
+
+        //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
+         String str = session("id");
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+
+            List<Interest> interestsFromDB = new ArrayList<>();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " - " + p.personaName);
+                }
+            }
+
+			String s = t.username;
+		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
+	        }
+    }
+
+    public Result musicCategory(){
+    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+        String term = searchForm.field("searchTerm").value();
+
+        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        String name = personaForm.field("personaName").value();
+
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        top.clear();
+        classify.clear();
+        text.clear();
+
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
+            List<String> values = new ArrayList<>(Arrays.asList(
+                "from:spotify", "from:applemusic", "from:vmas", "gig", "band"));
+
+            for(String v: values){
+                    Query query = new Query(v);
+                    query.count(30);
+                    query.lang("en");
+                    List<Status> tweets = new ArrayList<Status>();
+                    try{
+                        QueryResult result = twitter.search(query);
+                        for (Status status : result.getTweets()) {
+                            if(!classify.contains(status) && !top.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
+                                top.add(Long.toString(status.getId()));
+                                classify.add(status);
+                                text.add(status.getText());
+                            }
+                        }
+                    }
+                    catch (TwitterException e){
+                        return ok("error");
+                    }
+                }
+
+        try{
+            classifier(classify);
+        } catch(IOException e){
+            return ok("error");
+        } catch (ClassNotFoundException e){
+            return ok("error");
+        }
+
+
+        //System.out.println(term);
+         String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+			String s = t.username;
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + "- " + p.personaName);
+                }
+            }
+		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, personaNames, interests, ""));
+	        }	
+    }
+
+    public Result entertainmentCategory(){
+    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+        String term = searchForm.field("searchTerm").value();
+
+        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        String name = personaForm.field("personaName").value();
+
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        top.clear();
+        classify.clear();
+        text.clear();
+
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
+            List<String> values = new ArrayList<>(Arrays.asList(
+                "from:ew", "from:etweekly", "from:thr", "reality show", "celebrity"));
+
+            for(String v: values){
+                    Query query = new Query(v);
+                    query.count(20);
+                    query.lang("en");
+                    List<Status> tweets = new ArrayList<Status>();
+                    try{
+                        QueryResult result = twitter.search(query);
+                        for (Status status : result.getTweets()) {
+                            if(!classify.contains(status) && !top.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
+                                top.add(Long.toString(status.getId()));
+                                classify.add(status);
+                                text.add(status.getText());
+                            }
+                        }
+                    }
+                    catch (TwitterException e){
+                        return ok("error");
+                    }
+                }
+
+        try{
+            classifier(classify);
+        } catch(IOException e){
+            return ok("error");
+        } catch (ClassNotFoundException e){
+            return ok("error");
+        }
+
+        
+        //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
+         String str = session("id");
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+			String s = t.username;
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " - " + p.personaName);
+                }
+            }
+
+		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, personaNames, interests, ""));
+	        }
+    }
+
+    public Result techCategory(){
+    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+        String term = searchForm.field("searchTerm").value();
+
+        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        String name = personaForm.field("personaName").value();
+
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        top.clear();
+        classify.clear();
+        text.clear();
+
+
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
+            List<String> values = new ArrayList<>(Arrays.asList(
+                "from:wired", "from:techcrunch", "from:mashable", "technology", "digital"));
+
+            for(String v: values){
+                    Query query = new Query(v);
+                    query.count(20);
+                    query.lang("en");
+                    List<Status> tweets = new ArrayList<Status>();
+                    try{
+                        QueryResult result = twitter.search(query);
+                        for (Status status : result.getTweets()) {
+                            if(!classify.contains(status) && !top.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
+                                top.add(Long.toString(status.getId()));
+                                classify.add(status);
+                                text.add(status.getText());
+                            }
+                        }
+                    }
+                    catch (TwitterException e){
+                        return ok("error");
+                    }
+                }
+
+        try{
+            classifier(classify);
+        } catch(IOException e){
+            return ok("error");
+        } catch (ClassNotFoundException e){
+            return ok("error");
+        }
+
+
+        //System.out.println(term);
+         String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+            List<String> interests = new ArrayList<>();
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+			String s = t.username;
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " - " + p.personaName);
+                }
+            }
+		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, personaNames, interests, ""));
+	        }
+    }
+
+    public Result sportCategory(){
+    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+        String term = searchForm.field("searchTerm").value();
+
+        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        String name = personaForm.field("personaName").value();
+
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        top.clear();
+        classify.clear();
+        text.clear();
+
+
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
+            List<String> values = new ArrayList<>(Arrays.asList(
+                "from:bbcsport", "from:skysportsnews", "from:scotsunnews", "football", "rugby"));
+
+            for(String v: values){
+                    Query query = new Query(v);
+                    query.count(20);
+                    query.lang("en");
+                    List<Status> tweets = new ArrayList<Status>();
+                    try{
+                        QueryResult result = twitter.search(query);
+                        for (Status status : result.getTweets()) {
+                            if(!classify.contains(status) && !top.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
+                                top.add(Long.toString(status.getId()));
+                                classify.add(status);
+                                text.add(status.getText());
+                            }
+                        }
+                    }
+                    catch (TwitterException e){
+                        return ok("error");
+                    }
+                }
+
+        try{
+            classifier(classify);
+        } catch(IOException e){
+            return ok("error");
+        } catch (ClassNotFoundException e){
+            return ok("error");
+        }
+
+
+        //System.out.println(term);
+        List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
+         String str = session("id");
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+			String s = t.username;
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " - " + p.personaName);
+                }
+            }
+		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, personaNames, interests, ""));
+            }
+    }
+
+    public Result newsCategory(){
+    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+        String term = searchForm.field("searchTerm").value();
+        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+        String name = personaForm.field("personaName").value();
+        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+        String interestName = interestForm.field("interestName").value();
+
+        top.clear();
+        classify.clear();
+        text.clear();
+
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
+                .setOAuthConsumerSecret("NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD")
+                .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
+                .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
+
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
+            List<String> values = new ArrayList<>(Arrays.asList(
+                "from:bbcbreaking", "from:cnnbrk", "from:wsjbreakingnews", "breaking news", "news"));
+
+            for(String v: values){
+                    Query query = new Query(v);
+                    query.count(20);
+                    query.lang("en");
+                    List<Status> tweets = new ArrayList<Status>();
+                    try{
+                        QueryResult result = twitter.search(query);
+                        for (Status status : result.getTweets()) {
+                            if(!classify.contains(status) && !top.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
+                                top.add(Long.toString(status.getId()));
+                                classify.add(status);
+                                text.contains(status.getText());
+                            }
+                        }
+                    }
+                    catch (TwitterException e){
+                        return ok("error");
+                    }
+                }
+
+        try{
+            classifier(classify);
+        } catch(IOException e){
+            return ok("error");
+        } catch (ClassNotFoundException e){
+            return ok("error");
+        }
+
+        //System.out.println(term);
+         String str = session("id");
+         List<String> personaNames = new ArrayList<>();
+        List<String> interests = new ArrayList<>();
+        if(str!=null){
+	        Long id = Long.parseLong(str);
+	        TwitterUser t = TwitterUser.find.byId(id);
+			String s = t.username;
+            List<Persona> personas = Persona.find.query().where()
+                                        .ilike("twitter_user", Long.toString(id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+            for(Persona p: personas){
+                personaNames.add(p.personaName);
+                List<Interest> interestsFromDB = Interest.find.query().where()
+                                        .ilike("persona_id", Long.toString(p.id))
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+                for(Interest i: interestsFromDB){
+                    interests.add(i.interestName + " - " + p.personaName);
+                }
+            }
+		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests, ""));
+		}
+	    else{
+	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, personaNames, interests, ""));
+	        }
+    }
+
+    public void classifier(List<Status> classify) throws ClassNotFoundException, IOException {
+
+        news.clear();
+        entertainment.clear();
+        sport.clear();
+        music.clear();
+        tech.clear();
+
+        DynamicLMClassifier<NGramProcessLM> classifier
             = DynamicLMClassifier.createNGramProcess(CATEGORIES,NGRAM_SIZE);
 
             for(int i=0; i<CATEGORIES.length; ++i) {
@@ -161,20 +642,20 @@ public class HomeController extends Controller{
                 throw new IllegalArgumentException(msg);
             }
 
-	            String[] trainingFiles = classDir.list();
-	            for (int j = 0; j < trainingFiles.length; ++j) {
-	                File file = new File(classDir,trainingFiles[j]);
-	                String text = Files.readFromFile(file,"ISO-8859-1");
-	                System.out.println("Training on " + CATEGORIES[i] + "/" + trainingFiles[j]);
-	                Classification classification
-	                    = new Classification(CATEGORIES[i]);
-	                Classified<CharSequence> classified
-	                    = new Classified<CharSequence>(text,classification);
-	                classifier.handle(classified);
-	            }
-	        }
+                String[] trainingFiles = classDir.list();
+                for (int j = 0; j < trainingFiles.length; ++j) {
+                    File file = new File(classDir,trainingFiles[j]);
+                    String text = Files.readFromFile(file,"ISO-8859-1");
+                    System.out.println("Training on " + CATEGORIES[i] + "/" + trainingFiles[j]);
+                    Classification classification
+                        = new Classification(CATEGORIES[i]);
+                    Classified<CharSequence> classified
+                        = new Classified<CharSequence>(text,classification);
+                    classifier.handle(classified);
+                }
+            }
 
-	    @SuppressWarnings("unchecked") // we created object so know it's safe
+        @SuppressWarnings("unchecked") // we created object so know it's safe
         JointClassifier<CharSequence> compiledClassifier
             = (JointClassifier<CharSequence>)
             AbstractExternalizable.compile(classifier);
@@ -204,29 +685,29 @@ public class HomeController extends Controller{
                 System.out.println("---------------");
 
                 if(bestCategory.compareTo("news")==0){
-                	if(!news.contains(tweetID)){
-                		news.add(tweetID);
-                	}
+                    if(!news.contains(tweetID)){
+                        news.add(tweetID);
+                    }
                 }
                 else if(bestCategory.compareTo("entertainment")==0){
-                	if(!entertainment.contains(tweetID)){
-                		entertainment.add(tweetID);
-                	}
+                    if(!entertainment.contains(tweetID)){
+                        entertainment.add(tweetID);
+                    }
                 }
                 else if(bestCategory.compareTo("music")==0){
-                	if(!music.contains(tweetID)){
-                		music.add(tweetID);
-                	}
+                    if(!music.contains(tweetID)){
+                        music.add(tweetID);
+                    }
                 }
                 else if(bestCategory.compareTo("tech")==0){
-                	if(!tech.contains(tweetID)){
-                		tech.add(tweetID);
-                	}
+                    if(!tech.contains(tweetID)){
+                        tech.add(tweetID);
+                    }
                 }
                 else if(bestCategory.compareTo("sport")==0){
-                	if(!sport.contains(tweetID)){
-                		sport.add(tweetID);
-                	}
+                    if(!sport.contains(tweetID)){
+                        sport.add(tweetID);
+                    }
                 }
             }
         }
@@ -235,262 +716,5 @@ public class HomeController extends Controller{
 
         System.out.println("\nFULL EVAL");
         System.out.println(evaluator);
-
-        //System.out.println(term);
-        List<String> personaNames = new ArrayList<>();
-        List<String> interests = new ArrayList<>();
-         String str = session("id");
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-
-            List<Interest> interestsFromDB = new ArrayList<>();
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-
-            System.out.println("\n\ninterets: " + interests.toString());
-
-			String s = t.username;
-		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-	        }
-    }
-
-    public Result musicCategory(){
-    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-        String term = searchForm.field("searchTerm").value();
-
-        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        String name = personaForm.field("personaName").value();
-
-        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-        String interestName = interestForm.field("interestName").value();
-
-
-        //System.out.println(term);
-         String str = session("id");
-         List<String> personaNames = new ArrayList<>();
-        List<String> interests = new ArrayList<>();
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-			String s = t.username;
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                List<Interest> interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona_id", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-		    return ok(views.html.music.render(searchForm, s, 1, personaForm, t.imgUrl, music, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.music.render(searchForm, "", 0, personaForm, "", music, interestForm, personaNames, interests, ""));
-	        }	
-    }
-
-    public Result entertainmentCategory(){
-    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-        String term = searchForm.field("searchTerm").value();
-
-        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        String name = personaForm.field("personaName").value();
-
-        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-        String interestName = interestForm.field("interestName").value();
-
-        
-        //System.out.println(term);
-        List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
-         String str = session("id");
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-			String s = t.username;
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                List<Interest> interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona_id", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-
-		    return ok(views.html.entertainment.render(searchForm, s, 1, personaForm, t.imgUrl, entertainment, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.entertainment.render(searchForm, "", 0, personaForm, "", entertainment, interestForm, personaNames, interests, ""));
-	        }
-    }
-
-    public Result techCategory(){
-    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-        String term = searchForm.field("searchTerm").value();
-
-        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        String name = personaForm.field("personaName").value();
-
-        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-        String interestName = interestForm.field("interestName").value();
-
-
-        //System.out.println(term);
-         String str = session("id");
-         List<String> personaNames = new ArrayList<>();
-            List<String> interests = new ArrayList<>();
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-			String s = t.username;
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-            
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                List<Interest> interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona_id", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-		    return ok(views.html.tech.render(searchForm, s, 1, personaForm, t.imgUrl, tech, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.tech.render(searchForm, "", 0, personaForm, "", tech, interestForm, personaNames, interests, ""));
-	        }
-    }
-
-    public Result sportCategory(){
-    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-        String term = searchForm.field("searchTerm").value();
-
-        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        String name = personaForm.field("personaName").value();
-
-        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-        String interestName = interestForm.field("interestName").value();
-
-
-        //System.out.println(term);
-        List<String> personaNames = new ArrayList<>();
-        List<String> interests = new ArrayList<>();
-         String str = session("id");
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-			String s = t.username;
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-            
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                List<Interest> interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona_id", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-		    return ok(views.html.sport.render(searchForm, s, 1, personaForm, t.imgUrl, sport, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.sport.render(searchForm, "", 0, personaForm, "", sport, interestForm, personaNames, interests, ""));
-            }
-    }
-
-    public Result newsCategory(){
-    	Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-        String term = searchForm.field("searchTerm").value();
-        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        String name = personaForm.field("personaName").value();
-        Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-        String interestName = interestForm.field("interestName").value();
-
-        //System.out.println(term);
-         String str = session("id");
-         List<String> personaNames = new ArrayList<>();
-        List<String> interests = new ArrayList<>();
-        if(str!=null){
-	        Long id = Long.parseLong(str);
-	        TwitterUser t = TwitterUser.find.byId(id);
-			String s = t.username;
-            List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-            for(Persona p: personas){
-                personaNames.add(p.personaName);
-                List<Interest> interestsFromDB = Interest.find.query().where()
-                                        .ilike("persona_id", Long.toString(p.id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
-                for(Interest i: interestsFromDB){
-                    interests.add(i.interestName + " " + p.personaName);
-                }
-            }
-		    return ok(views.html.news.render(searchForm, s, 1, personaForm, t.imgUrl, news, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.news.render(searchForm, "", 0, personaForm, "", news, interestForm, personaNames, interests, ""));
-	        }
     }
 }

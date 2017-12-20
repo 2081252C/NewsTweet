@@ -41,7 +41,8 @@
 
                             @b4.radio(searchForm("searchType"), 
                                 Seq("User" -> "User", "Hashtag" -> "Hashtag", "Content" -> "Content"), 
-                                '_label -> null)
+                                '_label -> null,
+                                'value -> "Content")
                          }
                 </div>
               </li>
@@ -91,7 +92,7 @@
                             @for(interest <- interests){
                                 @if(interest contains persona){
                                     <div class="sidebar-interest">
-                                        @defining(interest.replace(" "+persona,"")) { n=>
+                                        @defining(interest.replace(" - "+persona,"")) { n=>
                                         <li><a href="@routes.InterestController.showInterest(n)">@n</a></li>
                                         }
                                         

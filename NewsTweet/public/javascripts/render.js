@@ -10,7 +10,7 @@ function create(){
 	 	   {
 		        conversation : 'all',    // or all
 		        cards        : 'visible',  // or visible 
-		        linkColor    : '#cc0000', // default is blue
+		        linkColor    : '#5e97f2', // default is blue
 		        theme        : 'light'    // or dark	
 		});
 	 }
