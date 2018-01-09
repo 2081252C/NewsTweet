@@ -19,10 +19,15 @@ public class Track extends Model{
 	@ManyToOne()
     public Interest interest;
 
-	public Track(String trackedTerm, Interest interest){
+	public Track(String trackedTerm){
     	this.id = id;
     	this.trackedTerm = trackedTerm;
-    	this.interest = interest;
+    }
+
+    public Track(String trackedTerm, Interest interest){
+        this.id = id;
+        this.trackedTerm = trackedTerm;
+        this.interest = interest;
 
     }
 

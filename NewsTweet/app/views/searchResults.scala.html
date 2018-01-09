@@ -8,7 +8,9 @@
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
 @main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>Search Results for @term:</h3>
+  	<h3>Search Results for @term:
+      <a href="@routes.SearchController.searchAnalytics()" class="btn btn-primary" style="float:right;"> Search Analytics </a>
+    </h3>
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
             <a class="nav-link active search_result" onclick="openTab(event, 'popular')">Popular</a> 

@@ -40,7 +40,9 @@ Seq[Any](format.raw/*1.301*/("""
 <script src=""""),_display_(/*8.15*/routes/*8.21*/.Assets.versioned("javascripts/render.js")),format.raw/*8.63*/(""""; type="text/javascript"></script>
 
 """),_display_(/*10.2*/main("Search Results")/*10.24*/(searchForm)/*10.36*/(user)/*10.42*/(bool)/*10.48*/(personaForm)/*10.61*/(img)/*10.66*/(interestForm)/*10.80*/(personas)/*10.90*/(interests)/*10.101*/(i)/*10.104*/{_display_(Seq[Any](format.raw/*10.105*/("""
-  	"""),format.raw/*11.4*/("""<h3>Search Results for """),_display_(/*11.28*/term),format.raw/*11.32*/(""":</h3>
+  	"""),format.raw/*11.4*/("""<h3>Search Results for """),_display_(/*11.28*/term),format.raw/*11.32*/(""":
+      <a href=""""),_display_(/*12.17*/routes/*12.23*/.SearchController.searchAnalytics()),format.raw/*12.58*/("""" class="btn btn-primary" style="float:right;"> Search Analytics </a>
+    </h3>
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
             <a class="nav-link active search_result" onclick="openTab(event, 'popular')">Popular</a> 
@@ -52,25 +54,25 @@ Seq[Any](format.raw/*1.301*/("""
           <div id="popular" class="tweets">
             <br>
             <div class="card-columns">
-              """),_display_(/*23.16*/for((tweet) <- popTweets) yield /*23.41*/{_display_(Seq[Any](format.raw/*23.42*/("""
-                """),format.raw/*24.17*/("""<div class="card" id=""""),_display_(/*24.40*/tweet),format.raw/*24.45*/(""""><br></div>
+              """),_display_(/*25.16*/for((tweet) <- popTweets) yield /*25.41*/{_display_(Seq[Any](format.raw/*25.42*/("""
+                """),format.raw/*26.17*/("""<div class="card" id=""""),_display_(/*26.40*/tweet),format.raw/*26.45*/(""""><br></div>
                 <script>
-                  rendering(""""),_display_(/*26.31*/tweet),format.raw/*26.36*/("""");
+                  rendering(""""),_display_(/*28.31*/tweet),format.raw/*28.36*/("""");
                 </script>
-              """)))}),format.raw/*28.16*/("""
-              """),format.raw/*29.15*/("""</div>
+              """)))}),format.raw/*30.16*/("""
+              """),format.raw/*31.15*/("""</div>
           </div>
       
           <div id="recent" class="tweets">
             <br>
             <div class="card-columns">
-              """),_display_(/*35.16*/for(tweet <- recentTweets) yield /*35.42*/{_display_(Seq[Any](format.raw/*35.43*/("""
-                """),format.raw/*36.17*/("""<div class="card"  id=""""),_display_(/*36.41*/tweet),format.raw/*36.46*/(""""><br></div>
+              """),_display_(/*37.16*/for(tweet <- recentTweets) yield /*37.42*/{_display_(Seq[Any](format.raw/*37.43*/("""
+                """),format.raw/*38.17*/("""<div class="card"  id=""""),_display_(/*38.41*/tweet),format.raw/*38.46*/(""""><br></div>
                 <script>
-                  rendering(""""),_display_(/*38.31*/tweet),format.raw/*38.36*/("""");
+                  rendering(""""),_display_(/*40.31*/tweet),format.raw/*40.36*/("""");
                 </script>
-              """)))}),format.raw/*40.16*/("""
-            """),format.raw/*41.13*/("""</div>
+              """)))}),format.raw/*42.16*/("""
+            """),format.raw/*43.13*/("""</div>
           </div>
 
           <div class="fixed-bottom" id="footer">
@@ -90,27 +92,27 @@ Seq[Any](format.raw/*1.301*/("""
                 </div>
                 <div class="modal-body">
                   <div id="track">
-                    """),_display_(/*61.22*/b4/*61.24*/.form(action=routes.TrackController.trackSearch())/*61.74*/{_display_(Seq[Any](format.raw/*61.75*/("""
+                    """),_display_(/*63.22*/b4/*63.24*/.form(action=routes.TrackController.trackSearch())/*63.74*/{_display_(Seq[Any](format.raw/*63.75*/("""
 
-                        """),_display_(/*63.26*/b4/*63.28*/.text(trackForm("term").copy(value= Option[String](term)),
-                          '_label -> "Search Term")),format.raw/*64.52*/("""
+                        """),_display_(/*65.26*/b4/*65.28*/.text(trackForm("term").copy(value= Option[String](term)),
+                          '_label -> "Search Term")),format.raw/*66.52*/("""
 
-                        """),_display_(/*66.26*/b4/*66.28*/.select(
+                        """),_display_(/*68.26*/b4/*68.28*/.select(
                            trackForm("interest"),
                            helper.options(interests),
                            '_label -> "Interest"
-                        )),format.raw/*70.26*/("""
-                """),format.raw/*71.17*/("""</div>
+                        )),format.raw/*72.26*/("""
+                """),format.raw/*73.17*/("""</div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button class="btn btn-primary" type="submit">Save changes</button>
-              """)))}),format.raw/*76.16*/("""
-                """),format.raw/*77.17*/("""</div>
+              """)))}),format.raw/*78.16*/("""
+                """),format.raw/*79.17*/("""</div>
               </div>
             </div>
           </div>
-""")))}),format.raw/*81.2*/("""
+""")))}),format.raw/*83.2*/("""
 
 """))
       }
@@ -128,11 +130,11 @@ Seq[Any](format.raw/*1.301*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Dec 20 21:47:03 GMT 2017
+                  DATE: Fri Jan 05 15:25:46 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/searchResults.scala.html
-                  HASH: 3033c69d5159b3c95650326ad026a4c9ee811674
-                  MATRIX: 1105->1|1477->303|1514->320|1546->344|1640->300|1669->407|1698->409|1949->634|1963->640|2025->682|2089->720|2120->742|2141->754|2156->760|2171->766|2193->779|2207->784|2230->798|2249->808|2270->819|2283->822|2323->823|2354->827|2405->851|2430->855|2930->1328|2971->1353|3010->1354|3055->1371|3105->1394|3131->1399|3226->1467|3252->1472|3328->1517|3371->1532|3543->1677|3585->1703|3624->1704|3669->1721|3720->1745|3746->1750|3841->1818|3867->1823|3943->1868|3984->1881|4937->2807|4948->2809|5007->2859|5046->2860|5100->2887|5111->2889|5242->2999|5296->3026|5307->3028|5515->3215|5560->3232|5867->3508|5912->3525|6007->3590
-                  LINES: 28->1|31->3|33->4|33->4|34->1|36->4|36->4|40->8|40->8|40->8|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|43->11|43->11|43->11|55->23|55->23|55->23|56->24|56->24|56->24|58->26|58->26|60->28|61->29|67->35|67->35|67->35|68->36|68->36|68->36|70->38|70->38|72->40|73->41|93->61|93->61|93->61|93->61|95->63|95->63|96->64|98->66|98->66|102->70|103->71|108->76|109->77|113->81
+                  HASH: af4479a3c815b96d62212ed8dcb6f887416d539b
+                  MATRIX: 1105->1|1477->303|1514->320|1546->344|1640->300|1669->407|1698->409|1949->634|1963->640|2025->682|2089->720|2120->742|2141->754|2156->760|2171->766|2193->779|2207->784|2230->798|2249->808|2270->819|2283->822|2323->823|2354->827|2405->851|2430->855|2475->873|2490->879|2546->914|3119->1460|3160->1485|3199->1486|3244->1503|3294->1526|3320->1531|3415->1599|3441->1604|3517->1649|3560->1664|3732->1809|3774->1835|3813->1836|3858->1853|3909->1877|3935->1882|4030->1950|4056->1955|4132->2000|4173->2013|5126->2939|5137->2941|5196->2991|5235->2992|5289->3019|5300->3021|5431->3131|5485->3158|5496->3160|5704->3347|5749->3364|6056->3640|6101->3657|6196->3722
+                  LINES: 28->1|31->3|33->4|33->4|34->1|36->4|36->4|40->8|40->8|40->8|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|43->11|43->11|43->11|44->12|44->12|44->12|57->25|57->25|57->25|58->26|58->26|58->26|60->28|60->28|62->30|63->31|69->37|69->37|69->37|70->38|70->38|70->38|72->40|72->40|74->42|75->43|95->63|95->63|95->63|95->63|97->65|97->65|98->66|100->68|100->68|104->72|105->73|110->78|111->79|115->83
                   -- GENERATED --
               */
           

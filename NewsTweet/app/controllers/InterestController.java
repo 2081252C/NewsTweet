@@ -164,6 +164,7 @@ public class InterestController extends Controller {
 				//get list of associated search terms
 				List<String> trackTweets = new ArrayList<>();
 				List<String> allTweets = new ArrayList<>();
+				List<String> text = new ArrayList<>();
 				for(String v: values){
 				    Query query = new Query(v);
 				    query.lang("en");
@@ -172,8 +173,9 @@ public class InterestController extends Controller {
 				    try{
 				    	QueryResult result = twitter.search(query);
 					    for (Status status : result.getTweets()) {
-					    	if(!trackTweets.contains(v + "%" + Long.toString(status.getId()))){
+					    	if(!trackTweets.contains(v + "%" + Long.toString(status.getId())) && !text.contains(status.getText())){
 					    		trackTweets.add(v + "%" + Long.toString(status.getId()));
+					    		text.add(status.getText());
 					    	}
 					    }
 					}
@@ -181,6 +183,8 @@ public class InterestController extends Controller {
 						return ok("error");
 					}
 	        	}
+
+	        	text.clear();
 
 				for(String v: values){
 				    Query query = new Query(v);
@@ -190,8 +194,9 @@ public class InterestController extends Controller {
 				    try{
 				    	QueryResult result = twitter.search(query);
 					    for (Status status : result.getTweets()) {
-					        if(!allTweets.contains(Long.toString(status.getId()))){
+					        if(!allTweets.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
 					        	allTweets.add(Long.toString(status.getId()));
+					        	text.add(status.getText());
 					        }
 					    }
 					}

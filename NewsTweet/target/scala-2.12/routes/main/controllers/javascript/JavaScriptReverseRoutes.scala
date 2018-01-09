@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Dec 20 10:02:39 GMT 2017
+// @DATE:Tue Jan 09 08:15:17 GMT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -60,7 +60,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:27
     def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TwitterSignInServlet.logOut",
       """
@@ -100,7 +100,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:26
+    // @LINE:29
     def newsCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.newsCategory",
       """
@@ -110,7 +110,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:29
+    // @LINE:32
     def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.techCategory",
       """
@@ -120,7 +120,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:27
+    // @LINE:30
     def entertainmentCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.entertainmentCategory",
       """
@@ -130,7 +130,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:28
+    // @LINE:31
     def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.musicCategory",
       """
@@ -140,7 +140,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:30
+    // @LINE:33
     def sportCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.sportCategory",
       """
@@ -180,9 +180,29 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:18
+    def showSentiment: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.SearchController.showSentiment",
+      """
+        function(sentiment0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "search/analytics/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("sentiment", sentiment0))})
+        }
+      """
+    )
+  
+    // @LINE:17
+    def searchAnalytics: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.SearchController.searchAnalytics",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "search/analytics"})
+        }
+      """
+    )
+  
   }
 
-  // @LINE:19
+  // @LINE:22
   class ReversePersonaController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -190,7 +210,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:19
+    // @LINE:22
     def addPersona: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.PersonaController.addPersona",
       """
@@ -202,7 +222,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:17
+  // @LINE:20
   class ReverseTrackController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -210,7 +230,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:17
+    // @LINE:20
     def trackSearch: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TrackController.trackSearch",
       """
@@ -222,7 +242,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:20
+  // @LINE:23
   class ReverseInterestController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -230,7 +250,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:20
+    // @LINE:23
     def addInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.InterestController.addInterest",
       """
@@ -240,7 +260,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:24
     def showInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.InterestController.showInterest",
       """
