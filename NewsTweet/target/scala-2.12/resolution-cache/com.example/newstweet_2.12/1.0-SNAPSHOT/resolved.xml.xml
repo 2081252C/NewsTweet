@@ -4,7 +4,7 @@
 		module="newstweet_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20171216134150"
+		publication="20180116203827"
 	>
 		<description>
 		NewsTweet
@@ -70,5 +70,7 @@
 		<dependency org="org.twitter4j" name="twitter4j-stream" rev="4.0.6" conf="compile->default(compile)"/>
 		<dependency org="de.julielab" name="aliasi-lingpipe" rev="4.1.0" conf="compile->default(compile)"/>
 		<dependency org="com.adrianhurt" name="play-bootstrap_2.12" rev="1.2-P26-B4" conf="compile->default(compile)"/>
+		<dependency org="org.json" name="json" rev="20171018" conf="compile->default(compile)"/>
+		<dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1.1" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

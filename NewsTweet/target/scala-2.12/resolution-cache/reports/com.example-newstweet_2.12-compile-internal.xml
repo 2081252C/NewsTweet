@@ -7,27 +7,51 @@
 		revision="1.0-SNAPSHOT"
 		conf="compile-internal"
 		confs="compile, runtime, test, provided, optional, universal, universal-docs, universal-src, windows, docker, linux, rpm, debian, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, docs"
-		date="20171216134150"/>
+		date="20180116203828"/>
 	<dependencies>
+		<module organisation="com.googlecode.json-simple" name="json-simple">
+			<revision name="1.1.1" status="release" pubdate="20120321051134" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://code.google.com/p/json-simple/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="117">
+				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="2986" time="0" location="/home/carly/.ivy2/cache/com.googlecode.json-simple/json-simple/ivy-1.1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.pom"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile-internal, compile, provided, optional" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="json-simple" type="bundle" ext="jar" status="no" details="" size="23931" time="0" location="/home/carly/.ivy2/cache/com.googlecode.json-simple/json-simple/bundles/json-simple-1.1.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.json" name="json">
+			<revision name="20171018" status="release" pubdate="20171019203130" resolver="public" artresolver="public" homepage="https://github.com/douglascrockford/JSON-java" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="116">
+				<license name="The JSON License" url="http://json.org/license.html"/>
+				<metadata-artifact status="successful" details="" size="5671" time="110" location="/home/carly/.ivy2/cache/org.json/json/ivy-20171018.xml" searched="true" original-local-location="/home/carly/.ivy2/cache/org.json/json/ivy-20171018.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/json/json/20171018/json-20171018.pom"/>
+				<caller organisation="com.example" name="newstweet_2.12" conf="compile-internal, compile, provided, optional" rev="20171018" rev-constraint-default="20171018" rev-constraint-dynamic="20171018" callerrev="1.0-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="json" type="bundle" ext="jar" status="successful" details="" size="61749" time="176" location="/home/carly/.ivy2/cache/org.json/json/bundles/json-20171018.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/json/json/20171018/json-20171018.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="com.adrianhurt" name="play-bootstrap_2.12">
-			<revision name="1.2-P26-B4" status="release" pubdate="20170723141726" resolver="public" artresolver="public" homepage="https://adrianhurt.github.io/play-bootstrap" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="114">
+			<revision name="1.2-P26-B4" status="release" pubdate="20170723141726" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://adrianhurt.github.io/play-bootstrap" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="114">
 				<license name="Apache License" url="https://github.com/adrianhurt/play-bootstrap/blob/master/LICENSE"/>
-				<metadata-artifact status="successful" details="" size="3269" time="175" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap_2.12/ivy-1.2-P26-B4.xml" searched="true" original-local-location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap_2.12/ivy-1.2-P26-B4.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap_2.12/1.2-P26-B4/play-bootstrap_2.12-1.2-P26-B4.pom"/>
+				<metadata-artifact status="no" details="" size="3994" time="0" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap_2.12/ivy-1.2-P26-B4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap_2.12/1.2-P26-B4/play-bootstrap_2.12-1.2-P26-B4.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile-internal, compile, provided, optional" rev="1.2-P26-B4" rev-constraint-default="1.2-P26-B4" rev-constraint-dynamic="1.2-P26-B4" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="play-bootstrap_2.12" type="jar" ext="jar" status="successful" details="" size="180107" time="643" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap_2.12/jars/play-bootstrap_2.12-1.2-P26-B4.jar">
+					<artifact name="play-bootstrap_2.12" type="jar" ext="jar" status="no" details="" size="180107" time="0" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap_2.12/jars/play-bootstrap_2.12-1.2-P26-B4.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap_2.12/1.2-P26-B4/play-bootstrap_2.12-1.2-P26-B4.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.adrianhurt" name="play-bootstrap-core_2.12">
-			<revision name="1.2-P26" status="release" pubdate="20170723133226" resolver="public" artresolver="public" homepage="http://adrianhurt.github.io/play-bootstrap" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="115">
+			<revision name="1.2-P26" status="release" pubdate="20170723133226" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://adrianhurt.github.io/play-bootstrap" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="115">
 				<license name="Apache License" url="https://github.com/adrianhurt/play-bootstrap/blob/master/LICENSE"/>
-				<metadata-artifact status="successful" details="" size="2646" time="131" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap-core_2.12/ivy-1.2-P26.xml" searched="true" original-local-location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap-core_2.12/ivy-1.2-P26.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap-core_2.12/1.2-P26/play-bootstrap-core_2.12-1.2-P26.pom"/>
+				<metadata-artifact status="no" details="" size="3552" time="0" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap-core_2.12/ivy-1.2-P26.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap-core_2.12/1.2-P26/play-bootstrap-core_2.12-1.2-P26.pom"/>
 				<caller organisation="com.adrianhurt" name="play-bootstrap_2.12" conf="default, compile, runtime, master" rev="1.2-P26" rev-constraint-default="1.2-P26" rev-constraint-dynamic="1.2-P26" callerrev="1.2-P26-B4"/>
 				<artifacts>
-					<artifact name="play-bootstrap-core_2.12" type="jar" ext="jar" status="successful" details="" size="29623" time="329" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap-core_2.12/jars/play-bootstrap-core_2.12-1.2-P26.jar">
+					<artifact name="play-bootstrap-core_2.12" type="jar" ext="jar" status="no" details="" size="29623" time="0" location="/home/carly/.ivy2/cache/com.adrianhurt/play-bootstrap-core_2.12/jars/play-bootstrap-core_2.12-1.2-P26.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/adrianhurt/play-bootstrap-core_2.12/1.2-P26/play-bootstrap-core_2.12-1.2-P26.jar"/>
 					</artifact>
 				</artifacts>
@@ -646,7 +670,7 @@
 			</revision>
 		</module>
 		<module organisation="javax.servlet" name="servlet-api">
-			<revision name="2.5" status="release" pubdate="20060717120957" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="116">
+			<revision name="2.5" status="release" pubdate="20060717120957" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="118">
 				<metadata-artifact status="no" details="" size="2320" time="0" location="/home/carly/.ivy2/cache/javax.servlet/servlet-api/ivy-2.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile-internal, compile, provided, optional" rev="2.5" rev-constraint-default="2.5" rev-constraint-dynamic="2.5" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
@@ -1241,6 +1265,7 @@
 				<license name="Common Public License Version 1.0" url="http://www.opensource.org/licenses/cpl1.0.txt"/>
 				<metadata-artifact status="no" details="" size="2897" time="0" location="/home/carly/.ivy2/cache/junit/junit/ivy-4.10.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.pom"/>
 				<caller organisation="de.julielab" name="aliasi-lingpipe" conf="default, compile, runtime, master" rev="4.10" rev-constraint-default="4.10" rev-constraint-dynamic="4.10" callerrev="4.1.0"/>
+				<caller organisation="com.googlecode.json-simple" name="json-simple" conf="default, compile, runtime, master" rev="4.10" rev-constraint-default="4.10" rev-constraint-dynamic="4.10" callerrev="1.1.1"/>
 				<artifacts>
 					<artifact name="junit" type="jar" ext="jar" status="no" details="" size="253160" time="0" location="/home/carly/.ivy2/cache/junit/junit/jars/junit-4.10.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.jar"/>

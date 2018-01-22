@@ -46,3 +46,10 @@ libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.6"
 libraryDependencies += "de.julielab" % "aliasi-lingpipe" % "4.1.0"
 
 libraryDependencies += "com.adrianhurt" %% "play-bootstrap" % "1.2-P26-B4"
+
+// https://mvnrepository.com/artifact/org.json/json
+libraryDependencies += "org.json" % "json" % "20171018"
+
+// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+libraryDependencies += "com.googlecode.json-simple" % "json-simple" % "1.1.1"
+

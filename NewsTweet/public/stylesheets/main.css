@@ -72,6 +72,21 @@ body {
 	border-bottom-left-radius: 25px;
 }
 
+#forcegraph, #wordcloud, #container{
+	background-color: #fff;
+	border-color: #5e97f2;
+	border-width: 2px;
+	border-style: solid;
+	border-top-left-radius: 10px; 
+	border-top-right-radius: 10px; 
+	border-bottom-right-radius: 10px; 
+	border-bottom-left-radius: 10px;
+}
+
+text:hover{
+	fill: #5e97f2 !important;
+}
+
 .dropdown-menu {
 	text-align: center;
 	text-decoration: none;
@@ -526,4 +541,22 @@ body {
     position: relative;
     margin-right: 0;
   }
+}
+
+.node circle {
+  cursor: pointer;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+line.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
 }

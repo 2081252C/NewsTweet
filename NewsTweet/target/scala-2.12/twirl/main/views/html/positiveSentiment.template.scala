@@ -22,15 +22,15 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object positiveSentiment extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template14[Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String,play.twirl.api.HtmlFormat.Appendable] {
+object positiveSentiment extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template15[Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], trackForm: Form[Track], user: String, bool: Integer, tweets: List[String], posTweets: List[String], negTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], trackForm: Form[Track], user: String, bool: Integer, tweets: List[String], posTweets: List[String], negTweets: List[String], neutTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.298*/("""
+Seq[Any](format.raw/*1.324*/("""
 
 """),format.raw/*3.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
@@ -60,9 +60,9 @@ Seq[Any](format.raw/*1.298*/("""
     }
   }
 
-  def render(searchForm:Form[Search],trackForm:Form[Track],user:String,bool:Integer,tweets:List[String],posTweets:List[String],negTweets:List[String],personaForm:Form[Persona],img:String,interestForm:Form[Interest],term:String,personas:List[String],interests:List[String],i:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,trackForm,user,bool,tweets,posTweets,negTweets,personaForm,img,interestForm,term,personas,interests,i)
+  def render(searchForm:Form[Search],trackForm:Form[Track],user:String,bool:Integer,tweets:List[String],posTweets:List[String],negTweets:List[String],neutTweets:List[String],personaForm:Form[Persona],img:String,interestForm:Form[Interest],term:String,personas:List[String],interests:List[String],i:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,trackForm,user,bool,tweets,posTweets,negTweets,neutTweets,personaForm,img,interestForm,term,personas,interests,i)
 
-  def f:((Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,trackForm,user,bool,tweets,posTweets,negTweets,personaForm,img,interestForm,term,personas,interests,i) => apply(searchForm,trackForm,user,bool,tweets,posTweets,negTweets,personaForm,img,interestForm,term,personas,interests,i)
+  def f:((Form[Search],Form[Track],String,Integer,List[String],List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,trackForm,user,bool,tweets,posTweets,negTweets,neutTweets,personaForm,img,interestForm,term,personas,interests,i) => apply(searchForm,trackForm,user,bool,tweets,posTweets,negTweets,neutTweets,personaForm,img,interestForm,term,personas,interests,i)
 
   def ref: this.type = this
 
@@ -71,10 +71,10 @@ Seq[Any](format.raw/*1.298*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Tue Jan 09 08:17:13 GMT 2018
+                  DATE: Mon Jan 15 10:45:48 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/positiveSentiment.scala.html
-                  HASH: 46fa60145c5422212d08cdf6dc3fa717e1c20088
-                  MATRIX: 1109->1|1501->297|1529->299|1725->469|1739->475|1801->517|1930->621|1960->643|1980->655|1994->661|2008->667|2029->680|2042->685|2064->699|2082->709|2102->720|2114->723|2153->724|2182->727|2258->776|2283->780|2425->895|2466->920|2505->921|2550->938|2600->961|2626->966|2721->1034|2747->1039|2823->1084|2866->1099|2937->1140
+                  HASH: f5cc87c7a90bd67015669871a434bc2993bb2edf
+                  MATRIX: 1122->1|1540->323|1568->325|1764->495|1778->501|1840->543|1969->647|1999->669|2019->681|2033->687|2047->693|2068->706|2081->711|2103->725|2121->735|2141->746|2153->749|2192->750|2221->753|2297->802|2322->806|2464->921|2505->946|2544->947|2589->964|2639->987|2665->992|2760->1060|2786->1065|2862->1110|2905->1125|2976->1166
                   LINES: 28->1|33->1|35->3|37->5|37->5|37->5|40->8|40->8|40->8|40->8|40->8|40->8|40->8|40->8|40->8|40->8|40->8|40->8|41->9|42->10|42->10|46->14|46->14|46->14|47->15|47->15|47->15|49->17|49->17|51->19|52->20|56->24
                   -- GENERATED --
               */
