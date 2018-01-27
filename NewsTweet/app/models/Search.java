@@ -20,10 +20,13 @@ public class Search extends Model{
 
 	public String searchTerm;
 
+	public String searchType;
+
 	public Search() {
     }
 
-	public Search(String searchTerm){
+	public Search(String searchTerm, String searchType){
 		this.searchTerm = searchTerm;
+		this.searchType = searchType;
 	}
 }

@@ -1,4 +1,4 @@
-@(searchForm: Form[Search], trackForm: Form[Track], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String)
+@(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], media: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String)
 
 @import helper._
 @implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }  // Declares a horizontal field constructor as default
@@ -13,72 +13,299 @@
     </h3>
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
-            <a class="nav-link active search_result" onclick="openTab(event, 'popular')">Popular</a> 
+            <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
+          </li>
+        <li class="nav-item tab_item">
+            <a class="nav-link search_result" onclick="openTab(event, 'popular')">Popular</a> 
           </li>
           <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'recent')">Recent</a>
+            <a class="nav-link search_result" onclick="openTab(event, 'media')">Media</a>
           </li>
         </ul>
-          <div id="popular" class="tweets">
-            <br>
-            <div class="card-columns">
-              @for((tweet) <- popTweets){
-                <div class="card" id="@tweet"><br></div>
-                <script>
-                  rendering("@tweet");
-                </script>
-              }
-              </div>
-          </div>
-      
+
           <div id="recent" class="tweets">
-            <br>
             <div class="card-columns">
               @for(tweet <- recentTweets){
-                <div class="card"  id="@tweet"><br></div>
-                <script>
-                  rendering("@tweet");
-                </script>
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
+
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
+
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                }
               }
             </div>
           </div>
 
-          <div class="fixed-bottom" id="footer">
-            <button type="button" id="track_btn" class="btn btn-primary" data-toggle="modal" data-target="#trackModal">Track Search</button>
-          </div>
-          
+          <div id="popular" class="tweets">
+            <div class="card-columns">
+              @for((tweet) <- popTweets){
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
 
-          <!-- Modal -->
-          <div class="modal fade" id="trackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="interest-label">Track Search</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div id="track">
-                    @b4.form(action=routes.TrackController.trackSearch()){
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=routes.SearchController.sendMessage()){ 
 
-                        @b4.text(trackForm("term").copy(value= Option[String](term)),
-                          '_label -> "Search Term")
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
 
-                        @b4.select(
-                           trackForm("interest"),
-                           helper.options(interests),
-                           '_label -> "Interest"
-                        )
-                </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit">Save changes</button>
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                }
               }
+            </div>
+          </div>
+
+          <div id="media" class="tweets">
+            <div class="card-columns">
+              @for(tweet <- media){
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
+
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
+
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                }
+              }
+            </div>
+          </div>
+
+           @if(bool==1){
+
+              <div class="fixed-bottom" id="footer">
+                <button type="button" id="track_btn" class="btn btn-primary" data-toggle="modal" data-target="#trackModal">Track Search</button>
+              </div>
+              
+
+              <!-- Modal -->
+              <div class="modal fade" id="trackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="interest-label">Track Search</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div id="track">
+                        @b4.form(action=routes.SearchController.trackSearch()){
+
+                            @b4.text(trackForm("term").copy(value= Option[String](term)),
+                              '_label -> "Search Term")
+
+                            @b4.select(
+                               trackForm("interest"),
+                               helper.options(interests),
+                               '_label -> "Interest"
+                            )
+
+                            Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#interest-modal">
+                                          create a new interest.
+                                        </button>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button class="btn btn-primary" type="submit">Save changes</button>
+                  }
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+
+              <div class="modal fade" id="interest-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Add a New Interest</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.horizontal.form(action=routes.InterestController.addInterest(), "col-md-2", "col-md-10"){ implicit ifc =>
+
+                                        @b4.text(interestForm("interestName"),
+                                            'placeholder -> "Interest Name",
+                                            '_label -> "Name",
+                                            'size -> 5)
+
+                                        @b4.select(
+                                           interestForm("personaName"),
+                                           helper.options(personas),
+                                           '_label -> "Persona"
+                                        )
+
+                                        Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#persona_modal">
+                                          create a new persona.
+                                        </button>
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="modal fade" id="persona_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Add a New Persona</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.horizontal.form(action=routes.PersonaController.addPersona(), "col-md-2", "col-md-10"){ implicit ifc =>
+
+                                            @b4.text(personaForm("personaName"),
+                                                'placeholder -> "Persona Name",
+                                                '_label -> "Name",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Save changes</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+            }
 }
 

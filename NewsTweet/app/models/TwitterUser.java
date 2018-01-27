@@ -16,16 +16,18 @@ public class TwitterUser extends Model {
     public String username;
     public String imgUrl;
     public String accessToken;
+    public String accessTokenSecret;
 
     @OneToMany(mappedBy = "twitter_user")
     public List<Persona> personas = new ArrayList<>();
 
 
-    public TwitterUser(Long id, String username, String imgUrl, String accessToken){
+    public TwitterUser(Long id, String username, String imgUrl, String accessToken, String accessTokenSecret){
     	this.id = id;
     	this.username = username;
         this.imgUrl = imgUrl;
     	this.accessToken = accessToken;
+        this.accessTokenSecret = accessTokenSecret;
 
     }
 
@@ -36,6 +38,7 @@ public class TwitterUser extends Model {
     public void setUsername(String username){
         this.username = username;
     }
+
 
     public static final Finder<Long, TwitterUser> find = new Finder<>(TwitterUser.class);
 }

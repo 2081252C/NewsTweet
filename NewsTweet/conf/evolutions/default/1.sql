@@ -19,6 +19,7 @@ create table twitter_user (
   username                      varchar(255),
   img_url                       varchar(255),
   access_token                  varchar(255),
+  access_token_secret           varchar(255),
   constraint pk_twitter_user primary key (id)
 );
 

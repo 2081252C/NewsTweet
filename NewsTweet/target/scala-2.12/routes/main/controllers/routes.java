@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Tue Jan 09 08:15:17 GMT 2018
+// @DATE:Fri Jan 26 14:57:53 GMT 2018
 
 package controllers;
 
@@ -15,7 +15,6 @@ public class routes {
   public static final controllers.ReverseHomeController HomeController = new controllers.ReverseHomeController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseSearchController SearchController = new controllers.ReverseSearchController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReversePersonaController PersonaController = new controllers.ReversePersonaController(RoutesPrefix.byNamePrefix());
-  public static final controllers.ReverseTrackController TrackController = new controllers.ReverseTrackController(RoutesPrefix.byNamePrefix());
   public static final controllers.ReverseInterestController InterestController = new controllers.ReverseInterestController(RoutesPrefix.byNamePrefix());
 
   public static class javascript {
@@ -26,7 +25,6 @@ public class routes {
     public static final controllers.javascript.ReverseHomeController HomeController = new controllers.javascript.ReverseHomeController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseSearchController SearchController = new controllers.javascript.ReverseSearchController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReversePersonaController PersonaController = new controllers.javascript.ReversePersonaController(RoutesPrefix.byNamePrefix());
-    public static final controllers.javascript.ReverseTrackController TrackController = new controllers.javascript.ReverseTrackController(RoutesPrefix.byNamePrefix());
     public static final controllers.javascript.ReverseInterestController InterestController = new controllers.javascript.ReverseInterestController(RoutesPrefix.byNamePrefix());
   }
 

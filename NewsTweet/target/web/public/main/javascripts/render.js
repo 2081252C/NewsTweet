@@ -1,6 +1,11 @@
 function rendering(){
 	var here = document.getElementById(arguments[0]);
 	var id = arguments[0];
+    if (id.substring(id.length-1) == "a")
+    {
+        id = id.substring(0, id.length-1);
+    }
+
 	window.onload = (create(id.trim(), here));
 }
 

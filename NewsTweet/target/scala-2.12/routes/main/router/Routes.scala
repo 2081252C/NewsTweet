@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Tue Jan 09 08:15:17 GMT 2018
+// @DATE:Fri Jan 26 14:57:53 GMT 2018
 
 package router
 
@@ -16,47 +16,43 @@ import _root_.play.libs.F
 class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
-  HomeController_3: controllers.HomeController,
+  HomeController_2: controllers.HomeController,
   // @LINE:9
-  Assets_6: controllers.Assets,
+  Assets_5: controllers.Assets,
   // @LINE:11
-  TwitterAuth_2: controllers.TwitterAuth,
+  TwitterAuth_1: controllers.TwitterAuth,
   // @LINE:13
-  TwitterSignInServlet_5: controllers.TwitterSignInServlet,
+  TwitterSignInServlet_4: controllers.TwitterSignInServlet,
   // @LINE:16
-  SearchController_1: controllers.SearchController,
-  // @LINE:20
-  TrackController_0: controllers.TrackController,
-  // @LINE:22
-  PersonaController_7: controllers.PersonaController,
-  // @LINE:23
-  InterestController_4: controllers.InterestController,
+  SearchController_0: controllers.SearchController,
+  // @LINE:24
+  PersonaController_6: controllers.PersonaController,
+  // @LINE:25
+  InterestController_3: controllers.InterestController,
   val prefix: String
 ) extends GeneratedRouter {
 
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
-    HomeController_3: controllers.HomeController,
+    HomeController_2: controllers.HomeController,
     // @LINE:9
-    Assets_6: controllers.Assets,
+    Assets_5: controllers.Assets,
     // @LINE:11
-    TwitterAuth_2: controllers.TwitterAuth,
+    TwitterAuth_1: controllers.TwitterAuth,
     // @LINE:13
-    TwitterSignInServlet_5: controllers.TwitterSignInServlet,
+    TwitterSignInServlet_4: controllers.TwitterSignInServlet,
     // @LINE:16
-    SearchController_1: controllers.SearchController,
-    // @LINE:20
-    TrackController_0: controllers.TrackController,
-    // @LINE:22
-    PersonaController_7: controllers.PersonaController,
-    // @LINE:23
-    InterestController_4: controllers.InterestController
-  ) = this(errorHandler, HomeController_3, Assets_6, TwitterAuth_2, TwitterSignInServlet_5, SearchController_1, TrackController_0, PersonaController_7, InterestController_4, "/")
+    SearchController_0: controllers.SearchController,
+    // @LINE:24
+    PersonaController_6: controllers.PersonaController,
+    // @LINE:25
+    InterestController_3: controllers.InterestController
+  ) = this(errorHandler, HomeController_2, Assets_5, TwitterAuth_1, TwitterSignInServlet_4, SearchController_0, PersonaController_6, InterestController_3, "/")
 
   def withPrefix(prefix: String): Routes = {
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_3, Assets_6, TwitterAuth_2, TwitterSignInServlet_5, SearchController_1, TrackController_0, PersonaController_7, InterestController_4, prefix)
+    new Routes(errorHandler, HomeController_2, Assets_5, TwitterAuth_1, TwitterSignInServlet_4, SearchController_0, PersonaController_6, InterestController_3, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -72,7 +68,8 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search""", """controllers.SearchController.searchResults()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search/analytics""", """controllers.SearchController.searchAnalytics()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search/analytics/""" + "$" + """sentiment<[^/]+>""", """controllers.SearchController.showSentiment(sentiment:String)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """track""", """controllers.TrackController.trackSearch()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """track""", """controllers.SearchController.trackSearch()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """send""", """controllers.SearchController.sendMessage()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addpersona""", """controllers.PersonaController.addPersona()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addinterest""", """controllers.InterestController.addInterest()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """interest/""" + "$" + """topic<[^/]+>""", """controllers.InterestController.showInterest(topic:String)"""),
@@ -94,7 +91,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix)))
   )
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
-    HomeController_3.index(),
+    HomeController_2.index(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -112,7 +109,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
   private[this] lazy val controllers_Assets_versioned1_invoker = createInvoker(
-    Assets_6.versioned(fakeValue[String], fakeValue[Asset]),
+    Assets_5.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -130,7 +127,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/auth")))
   )
   private[this] lazy val controllers_TwitterAuth_auth2_invoker = createInvoker(
-    TwitterAuth_2.auth(),
+    TwitterAuth_1.auth(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterAuth",
@@ -148,7 +145,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("twitter/signin")))
   )
   private[this] lazy val controllers_TwitterSignInServlet_signIn3_invoker = createInvoker(
-    TwitterSignInServlet_5.signIn(),
+    TwitterSignInServlet_4.signIn(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterSignInServlet",
@@ -166,7 +163,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("callback")))
   )
   private[this] lazy val controllers_TwitterSignInServlet_callBack4_invoker = createInvoker(
-    TwitterSignInServlet_5.callBack(),
+    TwitterSignInServlet_4.callBack(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterSignInServlet",
@@ -184,7 +181,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("search")))
   )
   private[this] lazy val controllers_SearchController_searchResults5_invoker = createInvoker(
-    SearchController_1.searchResults(),
+    SearchController_0.searchResults(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.SearchController",
@@ -202,7 +199,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("search/analytics")))
   )
   private[this] lazy val controllers_SearchController_searchAnalytics6_invoker = createInvoker(
-    SearchController_1.searchAnalytics(),
+    SearchController_0.searchAnalytics(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.SearchController",
@@ -220,7 +217,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("search/analytics/"), DynamicPart("sentiment", """[^/]+""",true)))
   )
   private[this] lazy val controllers_SearchController_showSentiment7_invoker = createInvoker(
-    SearchController_1.showSentiment(fakeValue[String]),
+    SearchController_0.showSentiment(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.SearchController",
@@ -234,14 +231,14 @@ class Routes(
   )
 
   // @LINE:20
-  private[this] lazy val controllers_TrackController_trackSearch8_route = Route("GET",
+  private[this] lazy val controllers_SearchController_trackSearch8_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("track")))
   )
-  private[this] lazy val controllers_TrackController_trackSearch8_invoker = createInvoker(
-    TrackController_0.trackSearch(),
+  private[this] lazy val controllers_SearchController_trackSearch8_invoker = createInvoker(
+    SearchController_0.trackSearch(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.TrackController",
+      "controllers.SearchController",
       "trackSearch",
       Nil,
       "GET",
@@ -252,11 +249,29 @@ class Routes(
   )
 
   // @LINE:22
-  private[this] lazy val controllers_PersonaController_addPersona9_route = Route("GET",
+  private[this] lazy val controllers_SearchController_sendMessage9_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("send")))
+  )
+  private[this] lazy val controllers_SearchController_sendMessage9_invoker = createInvoker(
+    SearchController_0.sendMessage(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.SearchController",
+      "sendMessage",
+      Nil,
+      "GET",
+      this.prefix + """send""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:24
+  private[this] lazy val controllers_PersonaController_addPersona10_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("addpersona")))
   )
-  private[this] lazy val controllers_PersonaController_addPersona9_invoker = createInvoker(
-    PersonaController_7.addPersona(),
+  private[this] lazy val controllers_PersonaController_addPersona10_invoker = createInvoker(
+    PersonaController_6.addPersona(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.PersonaController",
@@ -269,12 +284,12 @@ class Routes(
     )
   )
 
-  // @LINE:23
-  private[this] lazy val controllers_InterestController_addInterest10_route = Route("GET",
+  // @LINE:25
+  private[this] lazy val controllers_InterestController_addInterest11_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("addinterest")))
   )
-  private[this] lazy val controllers_InterestController_addInterest10_invoker = createInvoker(
-    InterestController_4.addInterest(),
+  private[this] lazy val controllers_InterestController_addInterest11_invoker = createInvoker(
+    InterestController_3.addInterest(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.InterestController",
@@ -287,12 +302,12 @@ class Routes(
     )
   )
 
-  // @LINE:24
-  private[this] lazy val controllers_InterestController_showInterest11_route = Route("GET",
+  // @LINE:26
+  private[this] lazy val controllers_InterestController_showInterest12_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("interest/"), DynamicPart("topic", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_InterestController_showInterest11_invoker = createInvoker(
-    InterestController_4.showInterest(fakeValue[String]),
+  private[this] lazy val controllers_InterestController_showInterest12_invoker = createInvoker(
+    InterestController_3.showInterest(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.InterestController",
@@ -305,12 +320,12 @@ class Routes(
     )
   )
 
-  // @LINE:27
-  private[this] lazy val controllers_TwitterSignInServlet_logOut12_route = Route("GET",
+  // @LINE:29
+  private[this] lazy val controllers_TwitterSignInServlet_logOut13_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("logout")))
   )
-  private[this] lazy val controllers_TwitterSignInServlet_logOut12_invoker = createInvoker(
-    TwitterSignInServlet_5.logOut(),
+  private[this] lazy val controllers_TwitterSignInServlet_logOut13_invoker = createInvoker(
+    TwitterSignInServlet_4.logOut(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.TwitterSignInServlet",
@@ -323,12 +338,12 @@ class Routes(
     )
   )
 
-  // @LINE:29
-  private[this] lazy val controllers_HomeController_newsCategory13_route = Route("GET",
+  // @LINE:31
+  private[this] lazy val controllers_HomeController_newsCategory14_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/news")))
   )
-  private[this] lazy val controllers_HomeController_newsCategory13_invoker = createInvoker(
-    HomeController_3.newsCategory(),
+  private[this] lazy val controllers_HomeController_newsCategory14_invoker = createInvoker(
+    HomeController_2.newsCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -341,12 +356,12 @@ class Routes(
     )
   )
 
-  // @LINE:30
-  private[this] lazy val controllers_HomeController_entertainmentCategory14_route = Route("GET",
+  // @LINE:32
+  private[this] lazy val controllers_HomeController_entertainmentCategory15_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/entertainment")))
   )
-  private[this] lazy val controllers_HomeController_entertainmentCategory14_invoker = createInvoker(
-    HomeController_3.entertainmentCategory(),
+  private[this] lazy val controllers_HomeController_entertainmentCategory15_invoker = createInvoker(
+    HomeController_2.entertainmentCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -359,12 +374,12 @@ class Routes(
     )
   )
 
-  // @LINE:31
-  private[this] lazy val controllers_HomeController_musicCategory15_route = Route("GET",
+  // @LINE:33
+  private[this] lazy val controllers_HomeController_musicCategory16_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/music")))
   )
-  private[this] lazy val controllers_HomeController_musicCategory15_invoker = createInvoker(
-    HomeController_3.musicCategory(),
+  private[this] lazy val controllers_HomeController_musicCategory16_invoker = createInvoker(
+    HomeController_2.musicCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -377,12 +392,12 @@ class Routes(
     )
   )
 
-  // @LINE:32
-  private[this] lazy val controllers_HomeController_techCategory16_route = Route("GET",
+  // @LINE:34
+  private[this] lazy val controllers_HomeController_techCategory17_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/tech")))
   )
-  private[this] lazy val controllers_HomeController_techCategory16_invoker = createInvoker(
-    HomeController_3.techCategory(),
+  private[this] lazy val controllers_HomeController_techCategory17_invoker = createInvoker(
+    HomeController_2.techCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -395,12 +410,12 @@ class Routes(
     )
   )
 
-  // @LINE:33
-  private[this] lazy val controllers_HomeController_sportCategory17_route = Route("GET",
+  // @LINE:35
+  private[this] lazy val controllers_HomeController_sportCategory18_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("category/sport")))
   )
-  private[this] lazy val controllers_HomeController_sportCategory17_invoker = createInvoker(
-    HomeController_3.sportCategory(),
+  private[this] lazy val controllers_HomeController_sportCategory18_invoker = createInvoker(
+    HomeController_2.sportCategory(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -419,109 +434,115 @@ class Routes(
     // @LINE:6
     case controllers_HomeController_index0_route(params@_) =>
       call { 
-        controllers_HomeController_index0_invoker.call(HomeController_3.index())
+        controllers_HomeController_index0_invoker.call(HomeController_2.index())
       }
   
     // @LINE:9
     case controllers_Assets_versioned1_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned1_invoker.call(Assets_6.versioned(path, file))
+        controllers_Assets_versioned1_invoker.call(Assets_5.versioned(path, file))
       }
   
     // @LINE:11
     case controllers_TwitterAuth_auth2_route(params@_) =>
       call { 
-        controllers_TwitterAuth_auth2_invoker.call(TwitterAuth_2.auth())
+        controllers_TwitterAuth_auth2_invoker.call(TwitterAuth_1.auth())
       }
   
     // @LINE:13
     case controllers_TwitterSignInServlet_signIn3_route(params@_) =>
       call { 
-        controllers_TwitterSignInServlet_signIn3_invoker.call(TwitterSignInServlet_5.signIn())
+        controllers_TwitterSignInServlet_signIn3_invoker.call(TwitterSignInServlet_4.signIn())
       }
   
     // @LINE:14
     case controllers_TwitterSignInServlet_callBack4_route(params@_) =>
       call { 
-        controllers_TwitterSignInServlet_callBack4_invoker.call(TwitterSignInServlet_5.callBack())
+        controllers_TwitterSignInServlet_callBack4_invoker.call(TwitterSignInServlet_4.callBack())
       }
   
     // @LINE:16
     case controllers_SearchController_searchResults5_route(params@_) =>
       call { 
-        controllers_SearchController_searchResults5_invoker.call(SearchController_1.searchResults())
+        controllers_SearchController_searchResults5_invoker.call(SearchController_0.searchResults())
       }
   
     // @LINE:17
     case controllers_SearchController_searchAnalytics6_route(params@_) =>
       call { 
-        controllers_SearchController_searchAnalytics6_invoker.call(SearchController_1.searchAnalytics())
+        controllers_SearchController_searchAnalytics6_invoker.call(SearchController_0.searchAnalytics())
       }
   
     // @LINE:18
     case controllers_SearchController_showSentiment7_route(params@_) =>
       call(params.fromPath[String]("sentiment", None)) { (sentiment) =>
-        controllers_SearchController_showSentiment7_invoker.call(SearchController_1.showSentiment(sentiment))
+        controllers_SearchController_showSentiment7_invoker.call(SearchController_0.showSentiment(sentiment))
       }
   
     // @LINE:20
-    case controllers_TrackController_trackSearch8_route(params@_) =>
+    case controllers_SearchController_trackSearch8_route(params@_) =>
       call { 
-        controllers_TrackController_trackSearch8_invoker.call(TrackController_0.trackSearch())
+        controllers_SearchController_trackSearch8_invoker.call(SearchController_0.trackSearch())
       }
   
     // @LINE:22
-    case controllers_PersonaController_addPersona9_route(params@_) =>
+    case controllers_SearchController_sendMessage9_route(params@_) =>
       call { 
-        controllers_PersonaController_addPersona9_invoker.call(PersonaController_7.addPersona())
-      }
-  
-    // @LINE:23
-    case controllers_InterestController_addInterest10_route(params@_) =>
-      call { 
-        controllers_InterestController_addInterest10_invoker.call(InterestController_4.addInterest())
+        controllers_SearchController_sendMessage9_invoker.call(SearchController_0.sendMessage())
       }
   
     // @LINE:24
-    case controllers_InterestController_showInterest11_route(params@_) =>
-      call(params.fromPath[String]("topic", None)) { (topic) =>
-        controllers_InterestController_showInterest11_invoker.call(InterestController_4.showInterest(topic))
+    case controllers_PersonaController_addPersona10_route(params@_) =>
+      call { 
+        controllers_PersonaController_addPersona10_invoker.call(PersonaController_6.addPersona())
       }
   
-    // @LINE:27
-    case controllers_TwitterSignInServlet_logOut12_route(params@_) =>
+    // @LINE:25
+    case controllers_InterestController_addInterest11_route(params@_) =>
       call { 
-        controllers_TwitterSignInServlet_logOut12_invoker.call(TwitterSignInServlet_5.logOut())
+        controllers_InterestController_addInterest11_invoker.call(InterestController_3.addInterest())
+      }
+  
+    // @LINE:26
+    case controllers_InterestController_showInterest12_route(params@_) =>
+      call(params.fromPath[String]("topic", None)) { (topic) =>
+        controllers_InterestController_showInterest12_invoker.call(InterestController_3.showInterest(topic))
       }
   
     // @LINE:29
-    case controllers_HomeController_newsCategory13_route(params@_) =>
+    case controllers_TwitterSignInServlet_logOut13_route(params@_) =>
       call { 
-        controllers_HomeController_newsCategory13_invoker.call(HomeController_3.newsCategory())
-      }
-  
-    // @LINE:30
-    case controllers_HomeController_entertainmentCategory14_route(params@_) =>
-      call { 
-        controllers_HomeController_entertainmentCategory14_invoker.call(HomeController_3.entertainmentCategory())
+        controllers_TwitterSignInServlet_logOut13_invoker.call(TwitterSignInServlet_4.logOut())
       }
   
     // @LINE:31
-    case controllers_HomeController_musicCategory15_route(params@_) =>
+    case controllers_HomeController_newsCategory14_route(params@_) =>
       call { 
-        controllers_HomeController_musicCategory15_invoker.call(HomeController_3.musicCategory())
+        controllers_HomeController_newsCategory14_invoker.call(HomeController_2.newsCategory())
       }
   
     // @LINE:32
-    case controllers_HomeController_techCategory16_route(params@_) =>
+    case controllers_HomeController_entertainmentCategory15_route(params@_) =>
       call { 
-        controllers_HomeController_techCategory16_invoker.call(HomeController_3.techCategory())
+        controllers_HomeController_entertainmentCategory15_invoker.call(HomeController_2.entertainmentCategory())
       }
   
     // @LINE:33
-    case controllers_HomeController_sportCategory17_route(params@_) =>
+    case controllers_HomeController_musicCategory16_route(params@_) =>
       call { 
-        controllers_HomeController_sportCategory17_invoker.call(HomeController_3.sportCategory())
+        controllers_HomeController_musicCategory16_invoker.call(HomeController_2.musicCategory())
+      }
+  
+    // @LINE:34
+    case controllers_HomeController_techCategory17_route(params@_) =>
+      call { 
+        controllers_HomeController_techCategory17_invoker.call(HomeController_2.techCategory())
+      }
+  
+    // @LINE:35
+    case controllers_HomeController_sportCategory18_route(params@_) =>
+      call { 
+        controllers_HomeController_sportCategory18_invoker.call(HomeController_2.sportCategory())
       }
   }
 }

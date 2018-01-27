@@ -74,7 +74,7 @@ public class TwitterSignInServlet extends Controller {
         try {
             String verifier = request().getQueryString("oauth_verifier");
             accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
-            requestToken = null;
+            System.out.println(requestToken + ":::" + requestToken.toString());
             User user = twitter.showUser(twitter.getScreenName());
             long userId = user.getId();// user Id
             TwitterUser t = TwitterUser.find.byId(userId);
@@ -84,8 +84,9 @@ public class TwitterSignInServlet extends Controller {
                 String userName = user.getScreenName(); // user name
                 String image = user.getProfileImageURL();
                 String acessTokenString = accessToken.toString();
-                TwitterUser tUser = new TwitterUser(userId, userName, image, accessToken.toString());
+                TwitterUser tUser = new TwitterUser(userId, userName, image, accessToken.getToken(), accessToken.getTokenSecret());
                 tUser.save();
+                requestToken = null;
             }
             else{
                 t.setImg(user.getProfileImageURL());

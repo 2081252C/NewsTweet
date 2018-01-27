@@ -17,7 +17,9 @@ GET     /search					    			controllers.SearchController.searchResults()
 GET     /search/analytics						controllers.SearchController.searchAnalytics()
 GET     /search/analytics/:sentiment			controllers.SearchController.showSentiment(sentiment: String)
 
-GET     /track					    			controllers.TrackController.trackSearch()
+GET     /track					    			controllers.SearchController.trackSearch()
+
+GET     /send									controllers.SearchController.sendMessage()
 
 GET     /addpersona								controllers.PersonaController.addPersona()
 GET     /addinterest							controllers.InterestController.addInterest()
