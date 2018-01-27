@@ -69,8 +69,14 @@ public class SearchController extends Controller {
 	public List<Status> tweets = new ArrayList<Status>();
 	public List<String> tID = new ArrayList<String>();
 	public List<String> mostPopular = new ArrayList<>();
+	public List<String> mostPopular1 = new ArrayList<>();
+	public List<String> mostPopular2 = new ArrayList<>();
 	public List<String> mostRecent = new ArrayList<>();
+	public List<String> mostRecent1 = new ArrayList<>();
+	public List<String> mostRecent2 = new ArrayList<>();
 	public List<String> media = new ArrayList<>();
+	public List<String> media1 = new ArrayList<>();
+	public List<String> media2 = new ArrayList<>();
 
 	private static File TRAINING_DIR
         = new File("/home/carly/Documents/Project/NewsTweet/NewsTweet/app/controllers/POLARITY_DIR/txt_sentoken");
@@ -91,9 +97,15 @@ public class SearchController extends Controller {
 			tweets.clear();
 			tID.clear();
 			mostPopular.clear();
+			mostPopular1.clear();
+			mostPopular2.clear();
 			mostRecent.clear();
+			mostRecent1.clear();
+			mostRecent2.clear();
 			sentiment.clear();
 			media.clear();
+			media1.clear();
+			media2.clear();
 
 			 ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         		configurationBuilder.setOAuthConsumerKey("AfZgXUsXP3v9F3DYIMVx2q7KH")
@@ -124,15 +136,16 @@ public class SearchController extends Controller {
 		    
 		    Query query = new Query(term);
 		    query.setSince("2017-06-01");
-		    query.count(30);
+		    query.setCount(100);
 		    query.lang("en");
+		    String newTerm = "";
 
 		    if(searchType.compareTo("User")==0){
-		    	String newTerm = "from:"+term;
+		    	newTerm = "from:"+term;
 		    	query = new Query(newTerm);
 		    }
 		    else if(searchType.compareTo("Hashtag")==0){
-		    	String newTerm = term.replace(" ", "");
+		    	newTerm = term.replace(" ", "");
 		    	term = "#"+term;
 		    	query = new Query(newTerm);
 		    }
@@ -148,44 +161,93 @@ public class SearchController extends Controller {
 				return ok("error");
 			}
 
+			ArrayList<Status> allPop = new ArrayList<>();
 			try{
 				query.setResultType(Query.POPULAR);
 		    	QueryResult result = twitter.search(query);
+
+		    	//int i=0;
 			    for (Status status : result.getTweets()) {
-			    	if(!mostPopular.contains(Long.toString(status.getId())) && !status.isRetweet()){
-			        	mostPopular.add(Long.toString(status.getId())+ "-" + status.getUser().getScreenName());
-			        	if(!media.contains(Long.toString(status.getId())) && !status.isRetweet()){
-			        		System.out.println(status.getText());
-			        		if(status.getMediaEntities().length>0){
-			        			//status.getText().contains(".com") || status.getText().contains(".gif") || status.getText().contains(".jpeg")
-			        			media.add(Long.toString(status.getId())+"a" + "-" + status.getUser().getScreenName());
-			        		}
-			        	}
+			    	if(status.isRetweet()){ 
+			    		status = status.getRetweetedStatus();
+			    	}
+			    	if(!allPop.contains(status)){
+			    		allPop.add(status);
 			    	}
 			    }
+
+		        for(int i=0; i<allPop.size(); i++){
+		        	Status status = allPop.get(i);
+		        	System.out.println(Long.toString(status.getId()));
+		        	String tweetUserID = Long.toString(status.getId())+ "p-" + status.getUser().getScreenName();
+		        	if(i<30){
+		        		mostPopular.add(tweetUserID);
+		        	}
+		        	else if(i<60){
+		        		mostPopular1.add(tweetUserID);
+		        	}
+		        	else{
+		        		mostPopular2.add(tweetUserID);
+		        	}
+		        }
 			}
 			catch (TwitterException e){
 				return ok("error");
 			}
 
+			ArrayList<Status> allRecent = new ArrayList<>();
 			try{
 				query.setResultType(Query.RECENT);
 		    	QueryResult result = twitter.search(query);
+
+		    	//int i=0;
 			    for (Status status : result.getTweets()) {
-			    	if(!mostRecent.contains(Long.toString(status.getId())) && !status.isRetweet()){
-			        	mostRecent.add(Long.toString(status.getId())+ "-" + status.getUser().getScreenName());
-			        	if(!media.contains(Long.toString(status.getId())) && !status.isRetweet()){
-			        		System.out.println(status.getText());
-			        		if(status.getMediaEntities().length>0){
-			        			//status.getText().contains(".com") || status.getText().contains(".gif") || status.getText().contains(".jpeg")
-			        			media.add(Long.toString(status.getId())+"a" + "-" + status.getUser().getScreenName());
-			        		}
-			        	}
-			        }
+			    	if(status.isRetweet()){ 
+			    		status = status.getRetweetedStatus();
+			    	}
+			    	if(!allRecent.contains(status)){
+			    		allRecent.add(status);
+			    	}		        	
 			    }
+
+		        for(int i=0; i<allRecent.size(); i++){
+		        	Status status = allRecent.get(i);
+		        	String tweetUserID = Long.toString(status.getId())+ "-" + status.getUser().getScreenName();
+		        	if(i<30){
+		        		mostRecent.add(tweetUserID);
+		        	}
+		        	else if(i<60){
+		        		mostRecent1.add(tweetUserID);
+		        	}
+		        	else{
+		        		mostRecent2.add(tweetUserID);
+		        	}
+		        }
 			}
 			catch (TwitterException e){
 				return ok("error");
+			}
+
+			ArrayList<Status> allPopAndRecent = allPop;
+			for (Status status: allRecent){
+				if(!allPopAndRecent.contains(status))
+					allPopAndRecent.add(status);
+			}
+
+			for(int i=0; i<allPopAndRecent.size(); i++){	
+				Status status = allPopAndRecent.get(i);
+	        	String tweetUserID = Long.toString(status.getId())+ "a-" + status.getUser().getScreenName();
+	        	if(status.getMediaEntities().length>0){
+		        	if(i<30){
+		        		media.add(tweetUserID);
+		        	}
+		        	else if(i<60){
+		        		media1.add(tweetUserID);
+		        	}
+		        	else{
+		        		media2.add(tweetUserID);
+		        	}
+			    }
 			}
 
 	        //System.out.println(term);
@@ -214,10 +276,10 @@ public class SearchController extends Controller {
                 }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, trackForm, messageForm, s, 1, tID, mostPopular, mostRecent, media, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
+			    return ok(views.html.searchResults.render(searchForm, trackForm, messageForm, s, 1, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
 			}
 		    else{
-		        	return ok(views.html.searchResults.render(searchForm, null, messageForm, "", 0, tID, mostPopular, mostRecent, media, personaForm, "", interestForm, term, personaNames, interests, ""));
+		        	return ok(views.html.searchResults.render(searchForm, null, messageForm, "", 0, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, "", interestForm, term, personaNames, interests, ""));
 		        }
     }
 
@@ -311,7 +373,7 @@ public class SearchController extends Controller {
 	        String recipient = messageForm.field("recipientName").value();
 	        String message = messageForm.field("message").value();
 
-	        System.out.println(recipient+"!!!!!");
+	        //System.out.println(recipient+"!!!!!");
 
 	        Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
 	        //String searchType = searchForm.field("searchType").value();
@@ -354,15 +416,6 @@ public class SearchController extends Controller {
                 .setTweetModeExtended(true);
 
 				Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
-
-                try{
-					System.out.println(twitter.getScreenName());
-				}
-				catch (TwitterException e){
-
-                	e.printStackTrace(System.out);
-                	return ok("name");
-                }
 
                 try{
                 	
@@ -486,7 +539,7 @@ public class SearchController extends Controller {
 			jsonObj.put("name", null);
 			String json = jsonObj.toString();
 
-			System.out.println(json);
+			//System.out.println(json);
 
 			// JSON format: {"name": "parentnode", "children": [ {"name": "equens"}, {"name": "test"} ]};
 

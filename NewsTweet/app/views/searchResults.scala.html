@@ -1,4 +1,4 @@
-@(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, tweets: List[String], popTweets: List[String], recentTweets: List[String], media: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String)
+@(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, tweets: List[String], popTweets: List[String], popTweets1: List[String], popTweets2: List[String], recentTweets: List[String], recentTweets1: List[String], recentTweets2: List[String], media: List[String], media1: List[String], media2: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String)
 
 @import helper._
 @implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }  // Declares a horizontal field constructor as default
@@ -16,7 +16,7 @@
             <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
           </li>
         <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'popular')">Popular</a> 
+            <a class="nav-link search_result" onclick="openTab(event, 'popular')">15 Most Popular</a> 
           </li>
           <li class="nav-item tab_item">
             <a class="nav-link search_result" onclick="openTab(event, 'media')">Media</a>
@@ -31,6 +31,7 @@
                     <div id="@tweetArray(0)">
                       <script>
                         rendering("@tweetArray(0)");
+                        console.log("@tweetArray(0)");
                       </script>
                     </div>
                       
@@ -77,7 +78,125 @@
                         
                 }
               }
-            </div>
+
+              <button type="button" class="show_btn" id="show">
+                Show More
+              </button>
+
+              <div id="more" style="display:none">
+                @for(tweet <- recentTweets1){
+                  @defining(tweet.split("-")) { tweetArray =>                 
+                    <div class="card">
+                      <div id="@tweetArray(0)">
+                        <script>
+                          rendering("@tweetArray(0)");
+                        </script>
+                      </div>
+                        
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    </div>
+                  
+
+                    <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="interest-form">
+                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                              @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                  'placeholder -> "Recipient Name",
+                                                  '_label -> "Recipient Name",
+                                                  'size -> 1)
+
+                                              @b4.text(messageForm("message"),
+                                                  'placeholder -> "Message",
+                                                  '_label -> "Message",
+                                                  'size -> 1)
+
+                                      
+                                      </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                              }
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                  }
+                }
+              </div>
+
+              <button type="button" class="show_btn" id="show2" style="display:none">
+                Show More
+              </button>
+
+              <div id="showMore" style="display:none">
+                @for(tweet <- recentTweets2){
+                  @defining(tweet.split("-")) { tweetArray =>                 
+                    <div class="card">
+                      <div id="@tweetArray(0)">
+                        <script>
+                          rendering("@tweetArray(0)");
+                        </script>
+                      </div>
+                        
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    </div>
+                  
+
+                    <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="interest-form">
+                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                              @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                  'placeholder -> "Recipient Name",
+                                                  '_label -> "Recipient Name",
+                                                  'size -> 1)
+
+                                              @b4.text(messageForm("message"),
+                                                  'placeholder -> "Message",
+                                                  '_label -> "Message",
+                                                  'size -> 1)
+
+                                      
+                                      </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                              }
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                  }
+                }
+              </div>
+            </div> 
           </div>
 
           <div id="popular" class="tweets">
@@ -134,8 +253,114 @@
                         
                 }
               }
+
+              <!-- @for((tweet) <- popTweets1){
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
+
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
+
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                }
+              }
+
+              @for((tweet) <- popTweets2){
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
+
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
+
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                         -->
+               <!--  }
+              }-->
             </div>
-          </div>
+          </div> 
 
           <div id="media" class="tweets">
             <div class="card-columns">
@@ -191,6 +416,124 @@
                         
                 }
               }
+
+              <button type="button" class="show_btn" id="media">
+                Show More
+              </button>
+
+              <div id="moreMedia" style="display:none">
+                @for(tweet <- media1){
+                  @defining(tweet.split("-")) { tweetArray =>                 
+                    <div class="card">
+                      <div id="@tweetArray(0)">
+                        <script>
+                          rendering("@tweetArray(0)");
+                        </script>
+                      </div>
+                        
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    </div>
+                  
+
+                    <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="interest-form">
+                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                              @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                  'placeholder -> "Recipient Name",
+                                                  '_label -> "Recipient Name",
+                                                  'size -> 1)
+
+                                              @b4.text(messageForm("message"),
+                                                  'placeholder -> "Message",
+                                                  '_label -> "Message",
+                                                  'size -> 1)
+
+                                      
+                                      </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                              }
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                  }
+                }
+              </div>
+
+              <button type="button" class="show_btn" id="media2" style="display:none">
+                Show More
+              </button>
+
+              <div id="moreMedia2" style="display:none">
+                @for(tweet <- media2){
+                  @defining(tweet.split("-")) { tweetArray =>                 
+                    <div class="card">
+                      <div id="@tweetArray(0)">
+                        <script>
+                          rendering("@tweetArray(0)");
+                        </script>
+                      </div>
+                        
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    </div>
+                  
+
+                    <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="interest-form">
+                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+
+                                              @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                  'placeholder -> "Recipient Name",
+                                                  '_label -> "Recipient Name",
+                                                  'size -> 1)
+
+                                              @b4.text(messageForm("message"),
+                                                  'placeholder -> "Message",
+                                                  '_label -> "Message",
+                                                  'size -> 1)
+
+                                      
+                                      </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                              }
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                  }
+                }
+              </div>
             </div>
           </div>
 
@@ -199,9 +542,8 @@
               <div class="fixed-bottom" id="footer">
                 <button type="button" id="track_btn" class="btn btn-primary" data-toggle="modal" data-target="#trackModal">Track Search</button>
               </div>
+               
               
-
-              <!-- Modal -->
               <div class="modal fade" id="trackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -307,5 +649,29 @@
                         </div>
 
             }
+
+            <script>
+              $('#show').click(function() {
+                $('#more').toggle();
+                $('#show').toggle();
+                $('#show2').toggle();
+            });
+
+              $('#show2').click(function() {
+                $('#showMore').toggle();
+                $('#show2').toggle();
+            });
+
+              $('#media').click(function() {
+                $('#moreMedia').toggle();
+                $('#media2').toggle();
+                $('#media').toggle();
+            });
+
+              $('#show2').click(function() {
+                $('#moreMedia2').toggle();
+                $('#show2').toggle();
+            });
+          </script>
 }
 
