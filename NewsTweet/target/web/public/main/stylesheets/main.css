@@ -19,6 +19,10 @@
     border-color: #fff;
 }
 
+.modal-backdrop {
+  z-index: -1;
+}
+
 #header {
 	overflow: auto;
 	background-color: #5e97f2;
@@ -357,6 +361,32 @@ th{
 	border-bottom-left-radius: 5px;
 }
 
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+}
+.show_btn{
+	margin-bottom:10%;
+	background-color: #5e97f2;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-top-left-radius: 5px; 
+	border-top-right-radius: 5px; 
+	border-bottom-right-radius: 5px; 
+	border-bottom-left-radius: 5px;
+	width:250px;
+	padding-right: 30px;
+	padding-left: 30px;
+	height: 50px;
+	border-width: 2px;
+	border-color: #fff;
+		z-index: 100;
+}
+
 .msg_btn{
 	margin-left: 40%;
 	margin-bottom:2%;
@@ -401,13 +431,13 @@ th{
 	height: 50px;
 	border-width: 2px;
 	border-color: #fff;
+	float: right;
 }
 
 #footer{
-	width: 200px;
+	width: 300px;
 	bottom: 25px;
-	right: 55%;
-	left: 45%;
+	left: 70%;
 }
 
 

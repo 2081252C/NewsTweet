@@ -26,6 +26,7 @@ create table twitter_user (
 create table track (
   id                            bigint auto_increment not null,
   tracked_term                  varchar(255),
+  tweets_as_string              varchar(max),
   interest_id                   bigint not null,
   constraint pk_track_interest primary key (id)
 );
@@ -53,4 +54,5 @@ drop table if exists interest;
 drop table if exists persona;
 
 drop table if exists twitter_user;
+
 

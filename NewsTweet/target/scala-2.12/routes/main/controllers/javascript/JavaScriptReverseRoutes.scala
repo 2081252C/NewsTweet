@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Fri Jan 26 14:57:53 GMT 2018
+// @DATE:Wed Jan 31 09:03:02 GMT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -175,7 +175,7 @@ package controllers.javascript {
       "controllers.SearchController.sendMessage",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "send"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "send"})
         }
       """
     )
@@ -205,7 +205,7 @@ package controllers.javascript {
       "controllers.SearchController.trackSearch",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "track"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "track"})
         }
       """
     )
@@ -235,7 +235,7 @@ package controllers.javascript {
       "controllers.PersonaController.addPersona",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "addpersona"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addpersona"})
         }
       """
     )
@@ -255,7 +255,7 @@ package controllers.javascript {
       "controllers.InterestController.addInterest",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "addinterest"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addinterest"})
         }
       """
     )

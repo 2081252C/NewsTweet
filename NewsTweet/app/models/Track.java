@@ -7,6 +7,7 @@ import play.data.validation.Constraints;
 import javax.persistence.*;
 import io.ebean.*;
 import models.*;
+import java.util.ArrayList;
 
 @Entity
 public class Track extends Model{
@@ -15,6 +16,8 @@ public class Track extends Model{
 	public Long id;
 
 	public String trackedTerm;
+
+    public String tweetsAsString="";
 
 	@ManyToOne()
     public Interest interest;
@@ -29,6 +32,14 @@ public class Track extends Model{
         this.trackedTerm = trackedTerm;
         this.interest = interest;
 
+    }
+
+    public void updateTweets(ArrayList<String> newTweets){
+        for(String tweet: newTweets){
+            if(!tweetsAsString.contains(tweet)){
+                tweetsAsString += tweet+", ";
+            }
+        }
     }
 
     public static final Finder<Long, Track> find = new Finder<>(Track.class);

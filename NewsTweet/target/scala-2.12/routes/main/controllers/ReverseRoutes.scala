@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Fri Jan 26 14:57:53 GMT 2018
+// @DATE:Wed Jan 31 09:03:02 GMT 2018
 
 import play.api.mvc.Call
 
@@ -124,7 +124,7 @@ package controllers {
     // @LINE:22
     def sendMessage(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "send")
+      Call("POST", _prefix + { _defaultPrefix } + "send")
     }
   
     // @LINE:16
@@ -142,7 +142,7 @@ package controllers {
     // @LINE:20
     def trackSearch(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "track")
+      Call("POST", _prefix + { _defaultPrefix } + "track")
     }
   
     // @LINE:17
@@ -163,7 +163,7 @@ package controllers {
     // @LINE:24
     def addPersona(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "addpersona")
+      Call("POST", _prefix + { _defaultPrefix } + "addpersona")
     }
   
   }
@@ -178,7 +178,7 @@ package controllers {
     // @LINE:25
     def addInterest(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "addinterest")
+      Call("POST", _prefix + { _defaultPrefix } + "addinterest")
     }
   
     // @LINE:26

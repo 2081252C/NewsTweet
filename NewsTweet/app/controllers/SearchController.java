@@ -50,6 +50,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.aliasi.util.Files;
+import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.Month;
+import java.time.Instant;
+import java.time.Period;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 
 import play.*;
@@ -59,6 +68,7 @@ import play.data.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 
 
 public class SearchController extends Controller {
@@ -74,6 +84,8 @@ public class SearchController extends Controller {
 	public List<String> mostRecent = new ArrayList<>();
 	public List<String> mostRecent1 = new ArrayList<>();
 	public List<String> mostRecent2 = new ArrayList<>();
+	public ArrayList<Status> allPop = new ArrayList<>();
+	public ArrayList<Status> allRecent = new ArrayList<>();
 	public List<String> media = new ArrayList<>();
 	public List<String> media1 = new ArrayList<>();
 	public List<String> media2 = new ArrayList<>();
@@ -96,6 +108,7 @@ public class SearchController extends Controller {
 	public Result searchResults() {
 			tweets.clear();
 			tID.clear();
+			allPop.clear();
 			mostPopular.clear();
 			mostPopular1.clear();
 			mostPopular2.clear();
@@ -161,7 +174,6 @@ public class SearchController extends Controller {
 				return ok("error");
 			}
 
-			ArrayList<Status> allPop = new ArrayList<>();
 			try{
 				query.setResultType(Query.POPULAR);
 		    	QueryResult result = twitter.search(query);
@@ -195,7 +207,7 @@ public class SearchController extends Controller {
 				return ok("error");
 			}
 
-			ArrayList<Status> allRecent = new ArrayList<>();
+			allRecent = new ArrayList<>();
 			try{
 				query.setResultType(Query.RECENT);
 		    	QueryResult result = twitter.search(query);
@@ -228,11 +240,7 @@ public class SearchController extends Controller {
 				return ok("error");
 			}
 
-			ArrayList<Status> allPopAndRecent = allPop;
-			for (Status status: allRecent){
-				if(!allPopAndRecent.contains(status))
-					allPopAndRecent.add(status);
-			}
+			ArrayList<Status> allPopAndRecent = getAllTweets();
 
 			for(int i=0; i<allPopAndRecent.size(); i++){	
 				Status status = allPopAndRecent.get(i);
@@ -281,6 +289,28 @@ public class SearchController extends Controller {
 		    else{
 		        	return ok(views.html.searchResults.render(searchForm, null, messageForm, "", 0, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, "", interestForm, term, personaNames, interests, ""));
 		        }
+    }
+
+    public ArrayList<Status> getAllTweets(){
+    	    ArrayList<Status> allTweets = allPop;
+			for (Status status: allRecent){
+				if(!allTweets.contains(status))
+					allTweets.add(status);
+			}
+			return allTweets;
+    }
+
+    public ArrayList<String> getTweetString(ArrayList<Status> tweets, String trackedTerm){
+    	ArrayList<String> tweetStrings = new ArrayList<>();
+    	for(Status s: tweets){
+    		Date date = s.getCreatedAt();
+        	Instant instant = date.toInstant();
+        	LocalDateTime ldt = instant.atOffset(ZoneOffset.UTC).toLocalDateTime();
+        	DateTimeFormatter sdfr = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+    		String tweetInfo = trackedTerm +"-"+s.getId() + "-" + s.getUser().getScreenName() + "-" + ldt.format(sdfr);
+    		tweetStrings.add(tweetInfo);
+    	}
+    	return tweetStrings;
     }
 
     public Result trackSearch() {
@@ -350,8 +380,17 @@ public class SearchController extends Controller {
 
                 Interest interestID = trackedInterest.get(0);
 
+                ArrayList<Status> allTweets = getAllTweets();
+
+                ArrayList<String> tweetInfo = getTweetString(allTweets, search);
+
                 Track track = new Track(search, interestID);
                 track.save();
+
+                if(tweetInfo!=null){
+                	track.updateTweets(tweetInfo);
+                	track.update();
+                }
 
 				String s = t.username;
 			    return redirect("http://localhost:9000/search?searchTerm="+search+"&searchType="+searchType);

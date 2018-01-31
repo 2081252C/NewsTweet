@@ -31,7 +31,6 @@
                     <div id="@tweetArray(0)">
                       <script>
                         rendering("@tweetArray(0)");
-                        console.log("@tweetArray(0)");
                       </script>
                     </div>
                       
@@ -78,10 +77,15 @@
                         
                 }
               }
+            </div>
 
+            <div class="button_wrapper">
               <button type="button" class="show_btn" id="show">
                 Show More
               </button>
+            </div>
+
+              <div class="card-columns">
 
               <div id="more" style="display:none">
                 @for(tweet <- recentTweets1){
@@ -137,10 +141,13 @@
                   }
                 }
               </div>
-
+            </div>
+            <div class="button_wrapper">
               <button type="button" class="show_btn" id="show2" style="display:none">
                 Show More
               </button>
+            </div>
+              <div class="card-columns">
 
               <div id="showMore" style="display:none">
                 @for(tweet <- recentTweets2){
@@ -390,7 +397,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                             @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
@@ -448,7 +455,7 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                   'placeholder -> "Recipient Name",
@@ -507,7 +514,7 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                   'placeholder -> "Recipient Name",
@@ -555,7 +562,7 @@
                     </div>
                     <div class="modal-body">
                       <div id="track">
-                        @b4.form(action=routes.SearchController.trackSearch()){
+                        @b4.form(action=helper.CSRF(routes.SearchController.trackSearch())){
 
                             @b4.text(trackForm("term").copy(value= Option[String](term)),
                               '_label -> "Search Term")
@@ -591,7 +598,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.horizontal.form(action=routes.InterestController.addInterest(), "col-md-2", "col-md-10"){ implicit ifc =>
+                                    @b4.horizontal.form(action=helper.CSRF(routes.InterestController.addInterest()), "col-md-2", "col-md-10"){ implicit ifc =>
 
                                         @b4.text(interestForm("interestName"),
                                             'placeholder -> "Interest Name",
@@ -629,7 +636,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.horizontal.form(action=routes.PersonaController.addPersona(), "col-md-2", "col-md-10"){ implicit ifc =>
+                                    @b4.horizontal.form(action=helper.CSRF(routes.PersonaController.addPersona()), "col-md-2", "col-md-10"){ implicit ifc =>
 
                                             @b4.text(personaForm("personaName"),
                                                 'placeholder -> "Persona Name",

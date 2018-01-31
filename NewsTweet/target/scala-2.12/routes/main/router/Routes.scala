@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Fri Jan 26 14:57:53 GMT 2018
+// @DATE:Wed Jan 31 09:03:02 GMT 2018
 
 package router
 
@@ -68,10 +68,10 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search""", """controllers.SearchController.searchResults()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search/analytics""", """controllers.SearchController.searchAnalytics()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search/analytics/""" + "$" + """sentiment<[^/]+>""", """controllers.SearchController.showSentiment(sentiment:String)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """track""", """controllers.SearchController.trackSearch()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """send""", """controllers.SearchController.sendMessage()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addpersona""", """controllers.PersonaController.addPersona()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addinterest""", """controllers.InterestController.addInterest()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """track""", """controllers.SearchController.trackSearch()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """send""", """controllers.SearchController.sendMessage()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addpersona""", """controllers.PersonaController.addPersona()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addinterest""", """controllers.InterestController.addInterest()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """interest/""" + "$" + """topic<[^/]+>""", """controllers.InterestController.showInterest(topic:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """logout""", """controllers.TwitterSignInServlet.logOut()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """category/news""", """controllers.HomeController.newsCategory()"""),
@@ -231,7 +231,7 @@ class Routes(
   )
 
   // @LINE:20
-  private[this] lazy val controllers_SearchController_trackSearch8_route = Route("GET",
+  private[this] lazy val controllers_SearchController_trackSearch8_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("track")))
   )
   private[this] lazy val controllers_SearchController_trackSearch8_invoker = createInvoker(
@@ -241,7 +241,7 @@ class Routes(
       "controllers.SearchController",
       "trackSearch",
       Nil,
-      "GET",
+      "POST",
       this.prefix + """track""",
       """""",
       Seq()
@@ -249,7 +249,7 @@ class Routes(
   )
 
   // @LINE:22
-  private[this] lazy val controllers_SearchController_sendMessage9_route = Route("GET",
+  private[this] lazy val controllers_SearchController_sendMessage9_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("send")))
   )
   private[this] lazy val controllers_SearchController_sendMessage9_invoker = createInvoker(
@@ -259,7 +259,7 @@ class Routes(
       "controllers.SearchController",
       "sendMessage",
       Nil,
-      "GET",
+      "POST",
       this.prefix + """send""",
       """""",
       Seq()
@@ -267,7 +267,7 @@ class Routes(
   )
 
   // @LINE:24
-  private[this] lazy val controllers_PersonaController_addPersona10_route = Route("GET",
+  private[this] lazy val controllers_PersonaController_addPersona10_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("addpersona")))
   )
   private[this] lazy val controllers_PersonaController_addPersona10_invoker = createInvoker(
@@ -277,7 +277,7 @@ class Routes(
       "controllers.PersonaController",
       "addPersona",
       Nil,
-      "GET",
+      "POST",
       this.prefix + """addpersona""",
       """""",
       Seq()
@@ -285,7 +285,7 @@ class Routes(
   )
 
   // @LINE:25
-  private[this] lazy val controllers_InterestController_addInterest11_route = Route("GET",
+  private[this] lazy val controllers_InterestController_addInterest11_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("addinterest")))
   )
   private[this] lazy val controllers_InterestController_addInterest11_invoker = createInvoker(
@@ -295,7 +295,7 @@ class Routes(
       "controllers.InterestController",
       "addInterest",
       Nil,
-      "GET",
+      "POST",
       this.prefix + """addinterest""",
       """""",
       Seq()

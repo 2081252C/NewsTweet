@@ -6,6 +6,7 @@
  *@
 
 @import b4.inline.fieldConstructor
+@import helper._
 
 @(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(i: String)(content: Html)
 
@@ -33,7 +34,7 @@
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
                 <div id="search">
-                        @b4.form(action=routes.SearchController.searchResults()){
+                        @b4.form(action=helper.CSRF(routes.SearchController.searchResults())){
 
                             @b4.text(searchForm("searchTerm"),
                                 'placeholder -> "Search ...",
@@ -131,7 +132,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.horizontal.form(action=routes.InterestController.addInterest(), "col-md-2", "col-md-10"){ implicit ifc =>
+                                    @b4.horizontal.form(action=helper.CSRF(routes.InterestController.addInterest()), "col-md-2", "col-md-10"){ implicit ifc =>
 
                                         @b4.text(interestForm("interestName"),
                                             'placeholder -> "Interest Name",
@@ -170,7 +171,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.horizontal.form(action=routes.PersonaController.addPersona(), "col-md-2", "col-md-10"){ implicit ifc =>
+                                    @b4.horizontal.form(action=helper.CSRF(routes.PersonaController.addPersona()), "col-md-2", "col-md-10"){ implicit ifc =>
 
                                             @b4.text(personaForm("personaName"),
                                                 'placeholder -> "Persona Name",
