@@ -51,7 +51,7 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                             @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
@@ -114,17 +114,17 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                  'placeholder -> "Recipient Name",
-                                                  '_label -> "Recipient Name",
-                                                  'size -> 1)
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
 
-                                              @b4.text(messageForm("message"),
-                                                  'placeholder -> "Message",
-                                                  '_label -> "Message",
-                                                  'size -> 1)
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
 
                                       
                                       </div>
@@ -176,17 +176,17 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=routes.SearchController.sendMessage()){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                  'placeholder -> "Recipient Name",
-                                                  '_label -> "Recipient Name",
-                                                  'size -> 1)
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
 
-                                              @b4.text(messageForm("message"),
-                                                  'placeholder -> "Message",
-                                                  '_label -> "Message",
-                                                  'size -> 1)
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
 
                                       
                                       </div>
@@ -209,169 +209,6 @@
           <div id="popular" class="tweets">
             <div class="card-columns">
               @for((tweet) <- popTweets){
-                @defining(tweet.split("-")) { tweetArray =>                 
-                  <div class="card">
-                    <div id="@tweetArray(0)">
-                      <script>
-                        rendering("@tweetArray(0)");
-                      </script>
-                    </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
-                  </div>
-                
-
-                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="interest-form">
-                                    @b4.form(action=routes.SearchController.sendMessage()){ 
-
-                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                'placeholder -> "Recipient Name",
-                                                '_label -> "Recipient Name",
-                                                'size -> 1)
-
-                                            @b4.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
-
-                                    
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            }
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                }
-              }
-
-              <!-- @for((tweet) <- popTweets1){
-                @defining(tweet.split("-")) { tweetArray =>                 
-                  <div class="card">
-                    <div id="@tweetArray(0)">
-                      <script>
-                        rendering("@tweetArray(0)");
-                      </script>
-                    </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
-                  </div>
-                
-
-                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="interest-form">
-                                    @b4.form(action=routes.SearchController.sendMessage()){ 
-
-                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                'placeholder -> "Recipient Name",
-                                                '_label -> "Recipient Name",
-                                                'size -> 1)
-
-                                            @b4.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
-
-                                    
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            }
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                }
-              }
-
-              @for((tweet) <- popTweets2){
-                @defining(tweet.split("-")) { tweetArray =>                 
-                  <div class="card">
-                    <div id="@tweetArray(0)">
-                      <script>
-                        rendering("@tweetArray(0)");
-                      </script>
-                    </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
-                  </div>
-                
-
-                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="interest-form">
-                                    @b4.form(action=routes.SearchController.sendMessage()){ 
-
-                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                'placeholder -> "Recipient Name",
-                                                '_label -> "Recipient Name",
-                                                'size -> 1)
-
-                                            @b4.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
-
-                                    
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            }
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                         -->
-               <!--  }
-              }-->
-            </div>
-          </div> 
-
-          <div id="media" class="tweets">
-            <div class="card-columns">
-              @for(tweet <- media){
                 @defining(tweet.split("-")) { tweetArray =>                 
                   <div class="card">
                     <div id="@tweetArray(0)">
@@ -423,6 +260,62 @@
                         
                 }
               }
+            </div>
+          </div> 
+
+          <div id="media" class="tweets">
+            <div class="card-columns">
+              @for(tweet <- media){
+                @defining(tweet.split("-")) { tweetArray =>                 
+                  <div class="card">
+                    <div id="@tweetArray(0)">
+                      <script>
+                        rendering("@tweetArray(0)");
+                      </script>
+                    </div>
+                      
+                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                      Message @tweetArray(1)
+                    </button>
+                  </div>
+                
+
+                  <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="interest-form">
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+
+                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
+
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
+                                    
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                            }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                }
+              }
 
               <button type="button" class="show_btn" id="media">
                 Show More
@@ -458,14 +351,14 @@
                                       @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                  'placeholder -> "Recipient Name",
-                                                  '_label -> "Recipient Name",
-                                                  'size -> 1)
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
 
-                                              @b4.text(messageForm("message"),
-                                                  'placeholder -> "Message",
-                                                  '_label -> "Message",
-                                                  'size -> 1)
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
 
                                       
                                       </div>
@@ -517,14 +410,14 @@
                                       @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
-                                                  'placeholder -> "Recipient Name",
-                                                  '_label -> "Recipient Name",
-                                                  'size -> 1)
+                                                'placeholder -> "Recipient Name",
+                                                '_label -> "Recipient Name",
+                                                'size -> 1)
 
-                                              @b4.text(messageForm("message"),
-                                                  'placeholder -> "Message",
-                                                  '_label -> "Message",
-                                                  'size -> 1)
+                                            @b4.text(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message",
+                                                'size -> 1)
 
                                       
                                       </div>

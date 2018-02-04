@@ -79,7 +79,9 @@
                     <li class="sidebar-brand">
                             <h3><b>Interests</b></h3><hr>
                     </li>
-              @if(bool==1){
+              @if(bool==0){
+                  <p align=center><i>Here are some sample interests. Sign in to create your own!</i><br><hr></p>
+                }
                 @if(interests.isEmpty){
                     Looks like you don't have any interests yet!<br><br> Would you like to add one?<br><br>
                 }else{
@@ -105,12 +107,11 @@
                         }
                     </div>
                     }
-                <!-- Button trigger modal -->
-                <button type="button" id="add_interest" class="btn btn-primary centred" data-toggle="modal" data-target="#exampleModal">
-                  Add Interest
-                </button>
-                }else{ 
-                    Here are some sample interests. Sign in to create your own!
+                @if(bool==1){
+                  <!-- Button trigger modal -->
+                  <button type="button" id="add_interest" class="btn btn-primary centred" data-toggle="modal" data-target="#exampleModal">
+                    Add Interest
+                  </button>
                 }
             </ul>
             </div>

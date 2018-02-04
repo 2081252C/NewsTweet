@@ -91,8 +91,6 @@ public class HomeController extends Controller{
                 .setOAuthAccessToken("1561842786-RaR4w59MNxCD9aL9n6qxygJjx90NKhYZZTdJy3n")
                 .setOAuthAccessTokenSecret("tFeSn3QIssVrT8OAH42hl7RX8gYpmJX9uj2hMByLjdK8c");
 
-		    //Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
-		    //twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
 		    TwitterStream twitterStream = new TwitterStreamFactory(configurationBuilder.build()).getInstance();
    			StatusListener listener = new StatusListener() {
 	            @Override
@@ -157,7 +155,11 @@ public class HomeController extends Controller{
         List<String> personaNames = new ArrayList<>();
         List<String> interests = new ArrayList<>();
          String str = session("id");
-        if(str!=null){
+         int bool=1;
+        if(str==null){
+            str="1";
+            bool=0;
+        }
 	        Long id = Long.parseLong(str);
 	        TwitterUser t = TwitterUser.find.byId(id);
             List<Persona> personas = Persona.find.query().where()
@@ -182,11 +184,7 @@ public class HomeController extends Controller{
             }
 
 			String s = t.username;
-		    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
-		}
-	    else{
-	        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-	        }
+		    return ok(views.html.index.render(searchForm, s, bool, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
     }
 
     public Result musicCategory(){

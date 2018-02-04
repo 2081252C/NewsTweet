@@ -166,7 +166,7 @@ th{
 	margin-right: 0;
 }
 
-#categories img{
+#categories .w3-animate-right{
 	width:298px;
 	height:280px;
 	padding-bottom: 0;
@@ -309,6 +309,7 @@ th{
 
 #category-text{
 	color: #fff;
+	font-size: 13px;
 }
 
 .persona.clicked{
@@ -418,6 +419,25 @@ th{
 	border-top-right-radius: 5px; 
 	border-bottom-right-radius: 5px; 
 	border-bottom-left-radius: 5px;
+}
+
+#login-card{
+	width:70%;
+	height:auto;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border-width: 2px;
+	border-style: solid;
+    border-color: #fff; 
+    border-top-left-radius: 5px; 
+	border-top-right-radius: 5px; 
+	border-bottom-right-radius: 5px; 
+	border-bottom-left-radius: 5px;
+}
+
+#intro-card{
+	padding-bottom: 0;
 }
 
 .navbar-right{

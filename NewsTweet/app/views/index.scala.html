@@ -10,11 +10,18 @@
       <div class="row" id="row-categories">
         <div class="col-sm-4">
           <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem; height: 100%">
-            <div class="card-body">
+            <div class="card-body" id="intro-card">
               <h4 class="card-title" id="category-title">Welcome to NewsTweet</h4>
               <h6 class="card-subtitle mb-2 text-muted">An easy way to follow topics on Twitter.</h6>
-              <p class="card-text" id="category-text">NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
-              Or, click on a category to see some recent tweets!</p>
+                <p class="card-text" id="category-text">
+              @if(bool==1){
+                NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
+                Or, click on a category to see some recent tweets!</p>
+              } else {
+                 NewsTweet is a platform which allows you to search for tweets and save the results of multiple searches collectively as an interest. You can search tweets using the bar above, or log in with Twitter to create an Interest to start saving search results.
+                 <br><br>
+                 <a href="/twitter/signin"><img id="login-card" src="@routes.Assets.versioned("images/twitterlogin.png")"> </a><p>
+              }
             </div>
           </div>
         </div>

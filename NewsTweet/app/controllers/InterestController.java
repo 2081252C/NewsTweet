@@ -139,6 +139,9 @@ public class InterestController extends Controller {
 	        String term = searchForm.field("searchTerm").value();
 
 	        String str = session("id");
+	        if(str==null){
+	        	str="1";
+	        }
 	        List<String> personaNames = new ArrayList<>();
 	        List<String> interests = new ArrayList<>();
 	        List<String> trackedTerms = new ArrayList<>();
@@ -205,18 +208,23 @@ public class InterestController extends Controller {
 				    try{
 				    	QueryResult result = twitter.search(query);
 					    for (Status status : result.getTweets()) {
+					    	if(status.isRetweet()){ 
+					    		status = status.getRetweetedStatus();
+					    	}
 					        if(!allTweets.contains(Long.toString(status.getId())) && !text.contains(status.getText())){
 					        	text.add(status.getText());
-					        	//SimpleDateFormat sdfr = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					        	Date date = status.getCreatedAt();
 					        	Instant instant = date.toInstant();
 					        	LocalDateTime ldt = instant.atOffset(ZoneOffset.UTC).toLocalDateTime();
 					        	DateTimeFormatter sdfr = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 					        	tweets.add(tracked.trackedTerm + "-" + Long.toString(status.getId())+ "-" + status.getUser().getScreenName() + "-" + ldt.format(sdfr));
 					            allTweets.add(Long.toString(status.getId())+ "-" + status.getUser().getScreenName() + "-" + ldt.format(sdfr)); 
+					        	System.out.println(status.getCreatedAt());
 					        }
 					    }
 					    tracked.updateTweets(tweets);
+					    tracked.update();
+
 					}
 					catch (TwitterException e){
 						return ok("error");
@@ -266,6 +274,7 @@ public class InterestController extends Controller {
 	        	 return ok(views.html.interest.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, trackTweets, tt, trackedTerms, allTweets, headers, messageForm));
 			}
 		    else{
+
 		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
 		        }
     }

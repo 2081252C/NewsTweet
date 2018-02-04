@@ -42,12 +42,19 @@ Seq[Any](format.raw/*1.188*/("""
       <div class="row" id="row-categories">
         <div class="col-sm-4">
           <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem; height: 100%">
-            <div class="card-body">
+            <div class="card-body" id="intro-card">
               <h4 class="card-title" id="category-title">Welcome to NewsTweet</h4>
               <h6 class="card-subtitle mb-2 text-muted">An easy way to follow topics on Twitter.</h6>
-              <p class="card-text" id="category-text">NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
-              Or, click on a category to see some recent tweets!</p>
-            </div>
+                <p class="card-text" id="category-text">
+              """),_display_(/*17.16*/if(bool==1)/*17.27*/{_display_(Seq[Any](format.raw/*17.28*/("""
+                """),format.raw/*18.17*/("""NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
+                Or, click on a category to see some recent tweets!</p>
+              """)))}/*20.17*/else/*20.22*/{_display_(Seq[Any](format.raw/*20.23*/("""
+                 """),format.raw/*21.18*/("""NewsTweet is a platform which allows you to search for tweets and save the results of multiple searches collectively as an interest. You can search tweets using the bar above, or log in with Twitter to create an Interest to start saving search results.
+                 <br><br>
+                 <a href="/twitter/signin"><img id="login-card" src=""""),_display_(/*23.71*/routes/*23.77*/.Assets.versioned("images/twitterlogin.png")),format.raw/*23.121*/(""""> </a><p>
+              """)))}),format.raw/*24.16*/("""
+            """),format.raw/*25.13*/("""</div>
           </div>
         </div>
         <div class="col-sm-4">
@@ -59,20 +66,20 @@ Seq[Any](format.raw/*1.188*/("""
               var slideIndex = 0;
               carousel();
 
-              function carousel() """),format.raw/*30.35*/("""{"""),format.raw/*30.36*/("""
-                  """),format.raw/*31.19*/("""var i;
+              function carousel() """),format.raw/*37.35*/("""{"""),format.raw/*37.36*/("""
+                  """),format.raw/*38.19*/("""var i;
                   var x = document.getElementsByClassName("news");
-                  for (i = 0; i < x.length; i++) """),format.raw/*33.50*/("""{"""),format.raw/*33.51*/("""
-                    """),format.raw/*34.21*/("""x[i].style.display = "none";
-                  """),format.raw/*35.19*/("""}"""),format.raw/*35.20*/("""
-                  """),format.raw/*36.19*/("""slideIndex++;
-                  if (slideIndex > x.length) """),format.raw/*37.46*/("""{"""),format.raw/*37.47*/("""slideIndex = 1"""),format.raw/*37.61*/("""}"""),format.raw/*37.62*/("""
-                  """),format.raw/*38.19*/("""x[slideIndex-1].style.display = "block";
+                  for (i = 0; i < x.length; i++) """),format.raw/*40.50*/("""{"""),format.raw/*40.51*/("""
+                    """),format.raw/*41.21*/("""x[i].style.display = "none";
+                  """),format.raw/*42.19*/("""}"""),format.raw/*42.20*/("""
+                  """),format.raw/*43.19*/("""slideIndex++;
+                  if (slideIndex > x.length) """),format.raw/*44.46*/("""{"""),format.raw/*44.47*/("""slideIndex = 1"""),format.raw/*44.61*/("""}"""),format.raw/*44.62*/("""
+                  """),format.raw/*45.19*/("""x[slideIndex-1].style.display = "block";
                   setTimeout(carousel, 2000); // Change image every 2 seconds
-              """),format.raw/*40.15*/("""}"""),format.raw/*40.16*/("""
-            """),format.raw/*41.13*/("""</script>
+              """),format.raw/*47.15*/("""}"""),format.raw/*47.16*/("""
+            """),format.raw/*48.13*/("""</script>
             <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                <a href=""""),_display_(/*43.27*/routes/*43.33*/.HomeController.newsCategory),format.raw/*43.61*/("""" id="category-btn">News</a>
+                <a href=""""),_display_(/*50.27*/routes/*50.33*/.HomeController.newsCategory),format.raw/*50.61*/("""" id="category-btn">News</a>
             </div>
           </div>
         </div>
@@ -85,20 +92,20 @@ Seq[Any](format.raw/*1.188*/("""
                 var slideIndex = 0;
                 carousel1();
 
-                function carousel1() """),format.raw/*56.38*/("""{"""),format.raw/*56.39*/("""
-                    """),format.raw/*57.21*/("""var i;
+                function carousel1() """),format.raw/*63.38*/("""{"""),format.raw/*63.39*/("""
+                    """),format.raw/*64.21*/("""var i;
                     var x = document.getElementsByClassName("music");
-                    for (i = 0; i < x.length; i++) """),format.raw/*59.52*/("""{"""),format.raw/*59.53*/("""
-                      """),format.raw/*60.23*/("""x[i].style.display = "none";
-                    """),format.raw/*61.21*/("""}"""),format.raw/*61.22*/("""
-                    """),format.raw/*62.21*/("""slideIndex++;
-                    if (slideIndex > x.length) """),format.raw/*63.48*/("""{"""),format.raw/*63.49*/("""slideIndex = 1"""),format.raw/*63.63*/("""}"""),format.raw/*63.64*/("""
-                    """),format.raw/*64.21*/("""x[slideIndex-1].style.display = "block";
+                    for (i = 0; i < x.length; i++) """),format.raw/*66.52*/("""{"""),format.raw/*66.53*/("""
+                      """),format.raw/*67.23*/("""x[i].style.display = "none";
+                    """),format.raw/*68.21*/("""}"""),format.raw/*68.22*/("""
+                    """),format.raw/*69.21*/("""slideIndex++;
+                    if (slideIndex > x.length) """),format.raw/*70.48*/("""{"""),format.raw/*70.49*/("""slideIndex = 1"""),format.raw/*70.63*/("""}"""),format.raw/*70.64*/("""
+                    """),format.raw/*71.21*/("""x[slideIndex-1].style.display = "block";
                     setTimeout(carousel1, 2000); // Change image every 2 seconds
-                """),format.raw/*66.17*/("""}"""),format.raw/*66.18*/("""
-                """),format.raw/*67.17*/("""</script>
+                """),format.raw/*73.17*/("""}"""),format.raw/*73.18*/("""
+                """),format.raw/*74.17*/("""</script>
               <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <a href=""""),_display_(/*69.29*/routes/*69.35*/.HomeController.musicCategory),format.raw/*69.64*/("""" id="category-btn">Music</a>
+                  <a href=""""),_display_(/*76.29*/routes/*76.35*/.HomeController.musicCategory),format.raw/*76.64*/("""" id="category-btn">Music</a>
               </div>
             </div>
           </div>
@@ -116,20 +123,20 @@ Seq[Any](format.raw/*1.188*/("""
                 var slideIndex = 0;
                 carousel2();
 
-                function carousel2() """),format.raw/*87.38*/("""{"""),format.raw/*87.39*/("""
-                    """),format.raw/*88.21*/("""var i;
+                function carousel2() """),format.raw/*94.38*/("""{"""),format.raw/*94.39*/("""
+                    """),format.raw/*95.21*/("""var i;
                     var x = document.getElementsByClassName("entertainment");
-                    for (i = 0; i < x.length; i++) """),format.raw/*90.52*/("""{"""),format.raw/*90.53*/("""
-                      """),format.raw/*91.23*/("""x[i].style.display = "none";
-                    """),format.raw/*92.21*/("""}"""),format.raw/*92.22*/("""
-                    """),format.raw/*93.21*/("""slideIndex++;
-                    if (slideIndex > x.length) """),format.raw/*94.48*/("""{"""),format.raw/*94.49*/("""slideIndex = 1"""),format.raw/*94.63*/("""}"""),format.raw/*94.64*/("""
-                    """),format.raw/*95.21*/("""x[slideIndex-1].style.display = "block";
+                    for (i = 0; i < x.length; i++) """),format.raw/*97.52*/("""{"""),format.raw/*97.53*/("""
+                      """),format.raw/*98.23*/("""x[i].style.display = "none";
+                    """),format.raw/*99.21*/("""}"""),format.raw/*99.22*/("""
+                    """),format.raw/*100.21*/("""slideIndex++;
+                    if (slideIndex > x.length) """),format.raw/*101.48*/("""{"""),format.raw/*101.49*/("""slideIndex = 1"""),format.raw/*101.63*/("""}"""),format.raw/*101.64*/("""
+                    """),format.raw/*102.21*/("""x[slideIndex-1].style.display = "block";
                     setTimeout(carousel2, 2000); // Change image every 2 seconds
-                """),format.raw/*97.17*/("""}"""),format.raw/*97.18*/("""
-              """),format.raw/*98.15*/("""</script>
+                """),format.raw/*104.17*/("""}"""),format.raw/*104.18*/("""
+              """),format.raw/*105.15*/("""</script>
               <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <a href=""""),_display_(/*100.29*/routes/*100.35*/.HomeController.entertainmentCategory),format.raw/*100.72*/("""" id="category-btn">Entertainment</a>
+                  <a href=""""),_display_(/*107.29*/routes/*107.35*/.HomeController.entertainmentCategory),format.raw/*107.72*/("""" id="category-btn">Entertainment</a>
               </div>
             </div>
         </div>
@@ -143,20 +150,20 @@ Seq[Any](format.raw/*1.188*/("""
                 var slideIndex = 0;
                 carousel3();
 
-                function carousel3() """),format.raw/*114.38*/("""{"""),format.raw/*114.39*/("""
-                    """),format.raw/*115.21*/("""var i;
+                function carousel3() """),format.raw/*121.38*/("""{"""),format.raw/*121.39*/("""
+                    """),format.raw/*122.21*/("""var i;
                     var x = document.getElementsByClassName("tech");
-                    for (i = 0; i < x.length; i++) """),format.raw/*117.52*/("""{"""),format.raw/*117.53*/("""
-                      """),format.raw/*118.23*/("""x[i].style.display = "none";
-                    """),format.raw/*119.21*/("""}"""),format.raw/*119.22*/("""
-                    """),format.raw/*120.21*/("""slideIndex++;
-                    if (slideIndex > x.length) """),format.raw/*121.48*/("""{"""),format.raw/*121.49*/("""slideIndex = 1"""),format.raw/*121.63*/("""}"""),format.raw/*121.64*/("""
-                    """),format.raw/*122.21*/("""x[slideIndex-1].style.display = "block";
+                    for (i = 0; i < x.length; i++) """),format.raw/*124.52*/("""{"""),format.raw/*124.53*/("""
+                      """),format.raw/*125.23*/("""x[i].style.display = "none";
+                    """),format.raw/*126.21*/("""}"""),format.raw/*126.22*/("""
+                    """),format.raw/*127.21*/("""slideIndex++;
+                    if (slideIndex > x.length) """),format.raw/*128.48*/("""{"""),format.raw/*128.49*/("""slideIndex = 1"""),format.raw/*128.63*/("""}"""),format.raw/*128.64*/("""
+                    """),format.raw/*129.21*/("""x[slideIndex-1].style.display = "block";
                     setTimeout(carousel3, 2000); // Change image every 2 seconds
-                """),format.raw/*124.17*/("""}"""),format.raw/*124.18*/("""
-              """),format.raw/*125.15*/("""</script>
+                """),format.raw/*131.17*/("""}"""),format.raw/*131.18*/("""
+              """),format.raw/*132.15*/("""</script>
               <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <a href=""""),_display_(/*127.29*/routes/*127.35*/.HomeController.techCategory),format.raw/*127.63*/("""" id="category-btn">Tech</a>
+                  <a href=""""),_display_(/*134.29*/routes/*134.35*/.HomeController.techCategory),format.raw/*134.63*/("""" id="category-btn">Tech</a>
               </div>
             </div>
         </div>
@@ -170,20 +177,20 @@ Seq[Any](format.raw/*1.188*/("""
                 var slideIndex = 0;
                 carousel4();
 
-                function carousel4() """),format.raw/*141.38*/("""{"""),format.raw/*141.39*/("""
-                    """),format.raw/*142.21*/("""var i;
+                function carousel4() """),format.raw/*148.38*/("""{"""),format.raw/*148.39*/("""
+                    """),format.raw/*149.21*/("""var i;
                     var x = document.getElementsByClassName("sport");
-                    for (i = 0; i < x.length; i++) """),format.raw/*144.52*/("""{"""),format.raw/*144.53*/("""
-                      """),format.raw/*145.23*/("""x[i].style.display = "none";
-                    """),format.raw/*146.21*/("""}"""),format.raw/*146.22*/("""
-                    """),format.raw/*147.21*/("""slideIndex++;
-                    if (slideIndex > x.length) """),format.raw/*148.48*/("""{"""),format.raw/*148.49*/("""slideIndex = 1"""),format.raw/*148.63*/("""}"""),format.raw/*148.64*/("""
-                    """),format.raw/*149.21*/("""x[slideIndex-1].style.display = "block";
+                    for (i = 0; i < x.length; i++) """),format.raw/*151.52*/("""{"""),format.raw/*151.53*/("""
+                      """),format.raw/*152.23*/("""x[i].style.display = "none";
+                    """),format.raw/*153.21*/("""}"""),format.raw/*153.22*/("""
+                    """),format.raw/*154.21*/("""slideIndex++;
+                    if (slideIndex > x.length) """),format.raw/*155.48*/("""{"""),format.raw/*155.49*/("""slideIndex = 1"""),format.raw/*155.63*/("""}"""),format.raw/*155.64*/("""
+                    """),format.raw/*156.21*/("""x[slideIndex-1].style.display = "block";
                     setTimeout(carousel4, 2000); // Change image every 2 seconds
-                """),format.raw/*151.17*/("""}"""),format.raw/*151.18*/("""
-              """),format.raw/*152.15*/("""</script>
+                """),format.raw/*158.17*/("""}"""),format.raw/*158.18*/("""
+              """),format.raw/*159.15*/("""</script>
               <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                  <a href=""""),_display_(/*154.29*/routes/*154.35*/.HomeController.sportCategory),format.raw/*154.64*/("""" id="category-btn">Sport</a>
+                  <a href=""""),_display_(/*161.29*/routes/*161.35*/.HomeController.sportCategory),format.raw/*161.64*/("""" id="category-btn">Sport</a>
               </div>
             </div>
         </div>
@@ -191,7 +198,7 @@ Seq[Any](format.raw/*1.188*/("""
     </div>
   </div>
   
-""")))}),format.raw/*162.2*/("""
+""")))}),format.raw/*169.2*/("""
 
 """))
       }
@@ -209,11 +216,11 @@ Seq[Any](format.raw/*1.188*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 18 22:05:21 GMT 2017
+                  DATE: Sun Feb 04 18:47:21 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
-                  HASH: d8602395b9ac6c754240d938a919172de65f875d
-                  MATRIX: 1038->1|1320->187|1348->189|1388->203|1402->209|1464->251|1571->332|1585->338|1646->379|1748->456|1773->473|1793->485|1807->491|1821->497|1842->510|1855->515|1877->529|1895->539|1914->550|1925->553|1965->555|1994->558|3458->1994|3487->1995|3534->2014|3685->2137|3714->2138|3763->2159|3838->2206|3867->2207|3914->2226|4001->2285|4030->2286|4072->2300|4101->2301|4148->2320|4309->2453|4338->2454|4379->2467|4530->2591|4545->2597|4594->2625|5443->3446|5472->3447|5521->3468|5677->3596|5706->3597|5757->3620|5834->3669|5863->3670|5912->3691|6001->3752|6030->3753|6072->3767|6101->3768|6150->3789|6316->3927|6345->3928|6390->3945|6545->4073|6560->4079|6610->4108|7584->5054|7613->5055|7662->5076|7826->5212|7855->5213|7906->5236|7983->5285|8012->5286|8061->5307|8150->5368|8179->5369|8221->5383|8250->5384|8299->5405|8465->5543|8494->5544|8537->5559|8693->5687|8709->5693|8768->5730|9626->6559|9656->6560|9706->6581|9862->6708|9892->6709|9944->6732|10022->6781|10052->6782|10102->6803|10192->6864|10222->6865|10265->6879|10295->6880|10345->6901|10512->7039|10542->7040|10586->7055|10742->7183|10758->7189|10808->7217|11729->8109|11759->8110|11809->8131|11966->8259|11996->8260|12048->8283|12126->8332|12156->8333|12206->8354|12296->8415|12326->8416|12369->8430|12399->8431|12449->8452|12616->8590|12646->8591|12690->8606|12846->8734|12862->8740|12913->8769|13066->8891
-                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|62->30|62->30|63->31|65->33|65->33|66->34|67->35|67->35|68->36|69->37|69->37|69->37|69->37|70->38|72->40|72->40|73->41|75->43|75->43|75->43|88->56|88->56|89->57|91->59|91->59|92->60|93->61|93->61|94->62|95->63|95->63|95->63|95->63|96->64|98->66|98->66|99->67|101->69|101->69|101->69|119->87|119->87|120->88|122->90|122->90|123->91|124->92|124->92|125->93|126->94|126->94|126->94|126->94|127->95|129->97|129->97|130->98|132->100|132->100|132->100|146->114|146->114|147->115|149->117|149->117|150->118|151->119|151->119|152->120|153->121|153->121|153->121|153->121|154->122|156->124|156->124|157->125|159->127|159->127|159->127|173->141|173->141|174->142|176->144|176->144|177->145|178->146|178->146|179->147|180->148|180->148|180->148|180->148|181->149|183->151|183->151|184->152|186->154|186->154|186->154|194->162
+                  HASH: 6ec739f81972da4b55e0443cd0217d04958d4197
+                  MATRIX: 1038->1|1320->187|1348->189|1388->203|1402->209|1464->251|1571->332|1585->338|1646->379|1748->456|1773->473|1793->485|1807->491|1821->497|1842->510|1855->515|1877->529|1895->539|1914->550|1925->553|1965->555|1994->558|2600->1137|2620->1148|2659->1149|2704->1166|2894->1338|2907->1343|2946->1344|2992->1362|3368->1711|3383->1717|3449->1761|3506->1787|3547->1800|4300->2525|4329->2526|4376->2545|4527->2668|4556->2669|4605->2690|4680->2737|4709->2738|4756->2757|4843->2816|4872->2817|4914->2831|4943->2832|4990->2851|5151->2984|5180->2985|5221->2998|5372->3122|5387->3128|5436->3156|6285->3977|6314->3978|6363->3999|6519->4127|6548->4128|6599->4151|6676->4200|6705->4201|6754->4222|6843->4283|6872->4284|6914->4298|6943->4299|6992->4320|7158->4458|7187->4459|7232->4476|7387->4604|7402->4610|7452->4639|8426->5585|8455->5586|8504->5607|8668->5743|8697->5744|8748->5767|8825->5816|8854->5817|8904->5838|8994->5899|9024->5900|9067->5914|9097->5915|9147->5936|9314->6074|9344->6075|9388->6090|9544->6218|9560->6224|9619->6261|10477->7090|10507->7091|10557->7112|10713->7239|10743->7240|10795->7263|10873->7312|10903->7313|10953->7334|11043->7395|11073->7396|11116->7410|11146->7411|11196->7432|11363->7570|11393->7571|11437->7586|11593->7714|11609->7720|11659->7748|12580->8640|12610->8641|12660->8662|12817->8790|12847->8791|12899->8814|12977->8863|13007->8864|13057->8885|13147->8946|13177->8947|13220->8961|13250->8962|13300->8983|13467->9121|13497->9122|13541->9137|13697->9265|13713->9271|13764->9300|13917->9422
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|49->17|49->17|49->17|50->18|52->20|52->20|52->20|53->21|55->23|55->23|55->23|56->24|57->25|69->37|69->37|70->38|72->40|72->40|73->41|74->42|74->42|75->43|76->44|76->44|76->44|76->44|77->45|79->47|79->47|80->48|82->50|82->50|82->50|95->63|95->63|96->64|98->66|98->66|99->67|100->68|100->68|101->69|102->70|102->70|102->70|102->70|103->71|105->73|105->73|106->74|108->76|108->76|108->76|126->94|126->94|127->95|129->97|129->97|130->98|131->99|131->99|132->100|133->101|133->101|133->101|133->101|134->102|136->104|136->104|137->105|139->107|139->107|139->107|153->121|153->121|154->122|156->124|156->124|157->125|158->126|158->126|159->127|160->128|160->128|160->128|160->128|161->129|163->131|163->131|164->132|166->134|166->134|166->134|180->148|180->148|181->149|183->151|183->151|184->152|185->153|185->153|186->154|187->155|187->155|187->155|187->155|188->156|190->158|190->158|191->159|193->161|193->161|193->161|201->169
                   -- GENERATED --
               */
           

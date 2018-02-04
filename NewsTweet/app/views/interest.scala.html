@@ -68,7 +68,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
@@ -135,7 +135,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
@@ -202,7 +202,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
@@ -268,7 +268,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
@@ -352,8 +352,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
-
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
 						                                                '_label -> "Recipient Name",
@@ -419,7 +418,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
@@ -501,6 +500,7 @@
 						                                                '_label -> "Message",
 						                                                'size -> 1)
 
+
 						                                    
 						                                    </div>
 						                              </div>
@@ -557,7 +557,7 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
