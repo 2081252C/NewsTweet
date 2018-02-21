@@ -50,24 +50,26 @@ function openTab(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-function display_interests() {
-    var x = document.getElementById("persona_tabs");
+function display(section, toBeHidden) {
+    console.log("h4");
+    var x = document.getElementById(section);
+    var y = document.getElementById(toBeHidden);
     if (x.style.display === "none") {
+        console.log("ok");
         x.style.display = "block";
-    } else {
+        y.style.display = "none";
+    } 
+    else {
+        console.log("o");
         x.style.display = "none";
+        y.style.display = "block";
     }
 }
 
-// function carousel() {
-// 	alert(called);
-//     var i;
-//     var x = document.getElementsByClassName(arguments[0]);
-//     for (i = 0; i < x.length; i++) {
-//       x[i].style.display = "none";
-//     }
-//     slideIndex++;
-//     if (slideIndex > x.length) {slideIndex = 1}
-//     x[slideIndex-1].style.display = "block";
-//     setTimeout(carousel(), 1000); // Change image every 2 seconds
-// }
+function displayNoTweetsMessage(section, messageArea){
+    var x = document.getElementById(messageArea);
+    console.log(document.getElementById(section).innerHTML);
+    if(!$.trim( $('#'+section).html() ).length) {
+        x.style.display = "block";
+    }
+}

@@ -8,7 +8,11 @@
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
 @main("Interest")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>Tracked Searches for @i</h3>
+  	<h3>Tracked Searches for "<b>@i</b>"</h3>
+
+  	<div id="loader"></div>
+
+    <div id="page-content" style="display:none">
 
   	<div id="carousel-centre" class="tweets">
   		<ul class="nav nav-tabs carlist" id="carouselButtons">
@@ -41,7 +45,8 @@
 							</div>
 
 							<div id="today" class="collapse" role="tabpanel" aria-labelledby="today">
-				  				<div class="card-columns">
+								<div id="no-today" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="today-cards">
 				  					@for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	
@@ -56,7 +61,7 @@
 								                    </button>
 								                </div>
 
-										    } 
+										    
 										    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">
 						                            <div class="modal-content">
@@ -95,7 +100,9 @@
 								    	
 								    }
 							      }
+							  }
 								</div>
+								<script>displayNoTweetsMessage("today-cards", "no-today")</script>
 							</div>
 
 							 <div class="card">
@@ -109,7 +116,8 @@
 							</div>
 
 							<div id="week" class="collapse" role="tabpanel" aria-labelledby="week">
-					  			<div class="card-columns">
+								<div id="no-weeks" style="display:none;"> No tweets to show. </div>
+					  			<div class="card-columns" id="week-cards">
 								    @for(tweet <- track){
 								      	@defining(tweet.split("-")) { tweetArray => 
 									      	
@@ -162,6 +170,7 @@
 									    	}
 									    
 								    }
+								    <script>displayNoTweetsMessage("week-cards", "no-weeks")</script>
 								</div>
 							</div>
 
@@ -177,7 +186,8 @@
 							</div>
 
 							<div id="month" class="collapse" role="tabpanel" aria-labelledby="month">
-				  				<div class="card-columns">
+								<div id="no-months" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="month-cards">
 							      @for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								   		@if(tweetArray(3)=="month"){
@@ -229,6 +239,7 @@
 								    	
 								    }
 							      }
+							      <script>displayNoTweetsMessage("month-cards", "no-months")</script>
 								</div>
 							</div>
 
@@ -243,7 +254,8 @@
 							</div>
 
 							<div id="older" class="collapse" role="tabpanel" aria-labelledby="older">
-				  				<div class="card-columns">
+								<div id="no-older" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="older-cards">
 							      @for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      		@if(tweetArray(3)=="older"){
@@ -297,6 +309,7 @@
 								    }
 							      }
 								</div>
+								<script>displayNoTweetsMessage("older-cards", "no-older")</script>
 							</div>
 
 						</div>
@@ -307,8 +320,8 @@
 
 	    @for(term <- terms){
 	  		@if(term contains i){
-	  			@defining(term.replace(" "+i,"")) { tweetTerm=>
-	  				@defining(tweetTerm.replace(" ","-")) { id=>
+	  			@defining(term.replace("-"+i,"")) { tweetTerm=>
+	  				@defining(tweetTerm.replaceAll(" ","-")) { id=>
 			  			<div class="carousel-item">
 			  				<div id="accordion" role="tablist" aria-multiselectable="true">
 
@@ -323,7 +336,8 @@
 							</div>
 
 							<div id="today@id" class="collapse" role="tabpanel" aria-labelledby="today@id">
-				  				<div class="card-columns">
+								<div id="no-today@id" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="today@id-cards">
 							      @for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
@@ -337,9 +351,6 @@
 								                      Message @tweetArray(2)
 								                    </button>
 								                </div>
-
-										    }
-
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">
@@ -374,11 +385,14 @@
 						                            </div>
 						                          </div>
 						                        </div>
+						                    }
 										    
 								    	}
 								    }
 							      }
+							      
 								</div>
+								<script>displayNoTweetsMessage("today@id-cards", "no-today@id")</script>
 							</div>
 
 							 <div class="card">
@@ -392,7 +406,8 @@
 							</div>
 
 							<div id="week@id" class="collapse" role="tabpanel" aria-labelledby="week@id">
-					  			<div class="card-columns">
+								<div id="no-weeks@id" style="display:none;"> No tweets to show. </div>
+					  			<div class="card-columns" id="week@id-cards">
 								      @for(tweet <- track){
 								      	@defining(tweet.split("-")) { tweetArray => 
 									      	@if(tweetArray(0)==tweetTerm){
@@ -447,7 +462,9 @@
 									    	}
 									    }
 								      }
+								      
 								</div>
+								<script>displayNoTweetsMessage("week@id-cards", "no-weeks@id")</script>
 							</div>
 
 
@@ -462,7 +479,8 @@
 							</div>
 
 							<div id="month@id" class="collapse" role="tabpanel" aria-labelledby="month@id">
-				  				<div class="card-columns">
+								<div id="no-months@id" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="month@id-cards">
 							      @for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
@@ -517,7 +535,9 @@
 								    	}
 								    }
 							      }
+							      
 								</div>
+								<script>displayNoTweetsMessage("month@id-cards", "no-months@id")</script>
 							</div>
 
 							<div class="card">
@@ -531,7 +551,8 @@
 							</div>
 
 							<div id="older@id" class="collapse" role="tabpanel" aria-labelledby="older@id">
-				  				<div class="card-columns">
+								<div id="no-older@id" style="display:none;"> No tweets to show. </div>
+				  				<div class="card-columns" id="older@id-cards">
 							      @for(tweet <- track){
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
@@ -585,7 +606,9 @@
 								    	}
 								    }
 							      }
+							      
 								</div>
+								<script>displayNoTweetsMessage("older@id-cards", "no-older@id")</script>
 							</div>
 
 						</div>
@@ -599,6 +622,16 @@
 	  </div>
 	</div>
 </div>
+</div>
+		  <script>
+			var myVar;
+            myVar = setTimeout(showPage, 3000);
+
+            function showPage() {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("page-content").style.display = "block";
+            }
+          </script>
 
 }
 

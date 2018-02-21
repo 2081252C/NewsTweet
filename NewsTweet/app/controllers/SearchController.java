@@ -9,6 +9,7 @@ import models.Search;
 import javax.inject.Inject;
 import views.html.main;
 import play.data.Form.*;
+import controllers.NLP;
 
 import twitter4j.Twitter;
 import twitter4j.auth.AccessToken;
@@ -104,6 +105,21 @@ public class SearchController extends Controller {
     List<Status> sentiment = new ArrayList<>();
     String term = "";
     String searchType="";
+    int bool =1;
+
+    //stopwords from https://github.com/Yoast/YoastSEO.js/blob/acd077ca44d904632d8ae7fa5699bdcb76741379/js/config/stopwords.js (with altertions)
+    private List<String> stopwords = asList("a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "around", "as", "at", 
+    		"be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can", "could", "did", "do", "does", "doing", 
+    		"down", "during", "each", "few", "followers", "follower", "for", "from", "further", "got", "had", "has", "have", "having", "he", "he'd", "he'll", "he's", 
+    		"her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i", "i'd", "i'll", "i'm", "i've", 
+    		"if", "in", "into", "is", "it", "it's", "its", "itself", "let's", "me", "more", "most", "my", "myself", "nor", "of", "on", 
+    		"once", "only", "or", "other", "ought", "our", "ours", "ourselves", "out", "over", "own", "retweet", "rt", "same", "she", "she'd", "she'll", 
+    		"she's", "should", "so", "some", "such", "still", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", 
+    		"there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through", "to", "too", 
+    		"under", "until", "up", "very", "was", "we", "we'd", "we'll", "we're", "we've", "were", "what", "what's", "when", "when's", 
+    		"where", "where's", "which", "while", "who", "who's", "whom", "why", "why's", "with", "would", "you", "you'd", "you'll", 
+    		"you're", "you've", "your", "yours", "yourself", "yourselves");
+
 
 	public Result searchResults() {
 			tweets.clear();
@@ -149,25 +165,33 @@ public class SearchController extends Controller {
 		    
 		    Query query = new Query(term);
 		    query.setSince("2017-06-01");
-		    query.setCount(100);
 		    query.lang("en");
 		    String newTerm = "";
 
 		    if(searchType.compareTo("User")==0){
 		    	newTerm = "from:"+term;
 		    	query = new Query(newTerm);
+		    	query.lang("en");
 		    }
 		    else if(searchType.compareTo("Hashtag")==0){
 		    	newTerm = term.replace(" ", "");
-		    	term = "#"+term;
+		    	newTerm = "#"+newTerm;
+		    	term = newTerm;
 		    	query = new Query(newTerm);
+		    	query.lang("en");
 		    }
 
 		    try{
+		    	query.setCount(30);
 		    	QueryResult result = twitter.search(query);
 			    for (Status status : result.getTweets()) {
-			    	sentiment.add(status);
-			        tID.add(Long.toString(status.getId()));
+			    	if(status.isRetweet()){ 
+			    		status = status.getRetweetedStatus();
+			    	}
+			    	if(!sentiment.contains(status)){
+			    		sentiment.add(status);
+			        	tID.add(Long.toString(status.getId()));
+			    	}
 			    }
 			}
 			catch (TwitterException e){
@@ -175,6 +199,7 @@ public class SearchController extends Controller {
 			}
 
 			try{
+				query.setCount(100);
 				query.setResultType(Query.POPULAR);
 		    	QueryResult result = twitter.search(query);
 
@@ -209,6 +234,7 @@ public class SearchController extends Controller {
 
 			allRecent = new ArrayList<>();
 			try{
+				query.setCount(100);
 				query.setResultType(Query.RECENT);
 		    	QueryResult result = twitter.search(query);
 
@@ -262,7 +288,11 @@ public class SearchController extends Controller {
 	         String str = session("id");
 	         List<String> personaNames = new ArrayList<>();
             List<String> interests = new ArrayList<>();
-	        if(str!=null){
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        	System.out.println("hello");
+	        }
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
 		        List<Persona> personas = Persona.find.query().where()
@@ -284,11 +314,7 @@ public class SearchController extends Controller {
                 }
             }
 				String s = t.username;
-			    return ok(views.html.searchResults.render(searchForm, trackForm, messageForm, s, 1, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
-			}
-		    else{
-		        	return ok(views.html.searchResults.render(searchForm, null, messageForm, "", 0, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, "", interestForm, term, personaNames, interests, ""));
-		        }
+			    return ok(views.html.searchResults.render(searchForm, trackForm, messageForm, s, bool, tID, mostPopular, mostPopular1, mostPopular2, mostRecent, mostRecent1, mostRecent2, media, media1, media2, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
     }
 
     public ArrayList<Status> getAllTweets(){
@@ -314,31 +340,60 @@ public class SearchController extends Controller {
     }
 
     public Result trackSearch() {
-			Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-	        String interestName = interestForm.field("interestName").value();
-	        String personaName = interestForm.field("personaName").value();
+			// Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+	  //       String interestName = interestForm.field("interestName").value();
+	  //       String personaName = interestForm.field("personaName").value();
 
-	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        	String name = personaForm.field("personaName").value();
+	  //       Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+   //      	String name = personaForm.field("personaName").value();
+
+    		String str = session("id");
 
 	        Form<Track> trackForm = formFactory.form(Track.class).bindFromRequest();
 	        String search = trackForm.field("term").value();
 	        String interestTrack = trackForm.field("interest").value();
+	        String newPersona = trackForm.field("newPersonaName").value();
+	        String existingPersona = trackForm.field("personaName").value();
+	        Long id = Long.parseLong(str);
+		    TwitterUser t = TwitterUser.find.byId(id);
+	        if(interestTrack==null){
+	        	interestTrack = trackForm.field("newInterestName").value();
+	        	if(existingPersona==null){
+	        		Persona newPersonaObj = new Persona(newPersona, t);
+	        		newPersonaObj.save();
+	        		Interest newInterest = new Interest(interestTrack, newPersonaObj);
+	        		newInterest.save();
+	        		interestTrack+=" - " +newPersona;
+	     		}else{
+	     			List<Persona> existingPersonas = Persona.find.query().where()
+                                        .ilike("twitter_user", str)
+                                        .ilike("persona_name", existingPersona)
+                                        .setFirstRow(0)
+                                        .setMaxRows(25)
+                                        .findPagedList()
+                                        .getList();
+
+                	Persona existingPersonaObj = existingPersonas.get(0);
+                	Interest newInterest = new Interest(interestTrack, existingPersonaObj);
+                	newInterest.save();
+                	interestTrack+=" - "+existingPersona;
+	     		}
+	        }
 	        String[] strArray = interestTrack.split(" - ");
 	        interestTrack = strArray[0];
 	        String personaOfInterest = strArray[1];
 
 	        Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-	        //String searchType = searchForm.field("searchType").value();
 	        Search newSearch = new Search(search, searchType);
 	        searchForm = searchForm.fill(newSearch);
 
-	        String str = session("id");
 	        List<String> personaNames = new ArrayList<>();
 	            List<String> interests = new ArrayList<>();
-	        if(str!=null){
-		        Long id = Long.parseLong(str);
-		        TwitterUser t = TwitterUser.find.byId(id);
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        }
+		        
 		        List<Persona> personas = Persona.find.query().where()
                                         .ilike("twitter_user", Long.toString(id))
                                         .setFirstRow(0)
@@ -394,10 +449,7 @@ public class SearchController extends Controller {
 
 				String s = t.username;
 			    return redirect("http://localhost:9000/search?searchTerm="+search+"&searchType="+searchType);
-			}
-		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-		        }
+			
     }
 
     public Result sendMessage() {
@@ -422,7 +474,10 @@ public class SearchController extends Controller {
 	        String str = session("id");
 	        List<String> personaNames = new ArrayList<>();
 	            List<String> interests = new ArrayList<>();
-	        if(str!=null){
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        }
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
 		        List<Persona> personas = Persona.find.query().where()
@@ -468,13 +523,15 @@ public class SearchController extends Controller {
                 }
 
 			    return redirect("http://localhost:9000/search?searchTerm="+term+"&searchType="+searchType);
-			}
-		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-		        }
+			
     }
 
     public Result searchAnalytics() throws TwitterException {
+
+    		pos.clear();
+        	neg.clear();
+        	neut.clear();
+
     		LoadingFrame frame = new LoadingFrame();
 		    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    frame.setSize(200, 100);
@@ -509,13 +566,38 @@ public class SearchController extends Controller {
 
 		    Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
 
-		     try{
-	            classifier(sentiment);
-	        } catch(IOException e){
-	            return ok("error");
-	        } catch (ClassNotFoundException e){
-	            return ok("error");
-	        }
+		     	ArrayList<String> negText = new ArrayList<>();
+        		ArrayList<String> neutText = new ArrayList<>();
+        		ArrayList<String> posText = new ArrayList<>();
+
+	            NLP.init();
+				for(Status tweet : sentiment) {
+
+					String tweetText = tweet.getText();
+					String tweetID = Long.toString(tweet.getId());
+
+					if(NLP.findSentiment(tweetText)==1){
+	                    if(!negText.contains(tweetText)){
+	                        neg.add(tweetID);
+	                        negText.add(tweetText);
+	                    }
+	                }
+	                else if(NLP.findSentiment(tweetText)==3){
+	                    if(!posText.contains(tweetText)){
+	                        pos.add(tweetID);
+	                        posText.add(tweetText);
+	                    }
+	                }
+	                else if(NLP.findSentiment(tweetText)==2){
+	                	// 
+
+	                	if(!neutText.contains(tweetText)){
+	                        neut.add(tweetID);
+	                        neutText.add(tweetText);
+	                    }
+	                }
+					System.out.println(tweetText + " : " + NLP.findSentiment(tweetText));
+				}
 
 	        double posSize = ((double) pos.size())/((double) sentiment.size()) *100;
 			double negSize = ((double) neg.size())/((double) sentiment.size()) *100;
@@ -589,7 +671,10 @@ public class SearchController extends Controller {
 	         String str = session("id");
 	         List<String> personaNames = new ArrayList<>();
             List<String> interests = new ArrayList<>();
-	        if(str!=null){
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        }
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
 		        List<Persona> personas = Persona.find.query().where()
@@ -612,11 +697,8 @@ public class SearchController extends Controller {
             }
 				String s = t.username;
 				frame.setVisible(false);
-			    return ok(views.html.dataAnalytics.render(searchForm, trackForm, s, 1, tID, pos, posSize, neg, negSize, neut, neutSize, personaForm, t.imgUrl, interestForm, term, personaNames, interests, "", json, wordcloudData));
-			}
-		    else{
-		        	return ok(views.html.dataAnalytics.render(searchForm, null, "", 0, tID, pos, posSize, neg, negSize, neut, neutSize, personaForm, "", interestForm, term, personaNames, interests, "", json, wordcloudData));
-		        }
+			    return ok(views.html.dataAnalytics.render(searchForm, trackForm, s, bool, tID, pos, posSize, neg, negSize, neut, neutSize, personaForm, t.imgUrl, interestForm, term, personaNames, interests, "", json, wordcloudData));
+			
     }
 
     public ArrayList<User> maxFollowers(ArrayList<User> users, ArrayList<User> mostPopular) {
@@ -665,7 +747,10 @@ public class SearchController extends Controller {
 	         String str = session("id");
 	         List<String> personaNames = new ArrayList<>();
             List<String> interests = new ArrayList<>();
-	        if(str!=null){
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        }
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
 		        List<Persona> personas = Persona.find.query().where()
@@ -685,46 +770,22 @@ public class SearchController extends Controller {
                 for(Interest i: interestsFromDB){
                     interests.add(i.interestName + " - " + p.personaName);
                 }
-            }
+       		}
 				String s = t.username;
 				if(sentiment.compareTo("neutral") == 0){
-					return ok(views.html.neutralSentiment.render(searchForm, trackForm, s, 1, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
+					return ok(views.html.neutralSentiment.render(searchForm, trackForm, s, bool, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
 				}
 				if(sentiment.compareTo("positive") == 0){
-					return ok(views.html.positiveSentiment.render(searchForm, trackForm, s, 1, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
+					return ok(views.html.positiveSentiment.render(searchForm, trackForm, s, bool, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
 				}
 				if(sentiment.compareTo("negative") == 0){
-					return ok(views.html.negativeSentiment.render(searchForm, trackForm, s, 1, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
+					return ok(views.html.negativeSentiment.render(searchForm, trackForm, s, bool, tID, pos, neg, neut, personaForm, t.imgUrl, interestForm, term, personaNames, interests, ""));
 				}
 				return ok("error");
-				
-			}
-		    else{
-		    	if(sentiment.compareTo("positive") == 0){
-					return ok(views.html.positiveSentiment.render(searchForm, null, "", 0, tID, pos, neg, neut, personaForm, "", interestForm, term, personaNames, interests, ""));
-				}else if(sentiment.compareTo("negative") == 0){
-					return ok(views.html.negativeSentiment.render(searchForm, null, "", 0, tID, pos, neg, neut, personaForm, "", interestForm, term, personaNames, interests, ""));
-				}   
-				else{
-					return ok(views.html.neutralSentiment.render(searchForm, null, "", 0, tID, pos, neg, neut, personaForm, "", interestForm, term, personaNames, interests, ""));
-				}
-			}
+			
     }
 
     public String findFrequency(List<Status> tweets) {
-    	//stopwords from https://github.com/Yoast/YoastSEO.js/blob/acd077ca44d904632d8ae7fa5699bdcb76741379/js/config/stopwords.js (with altertions)
-    	List<String> stopwords = asList("a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "around", "as", "at", 
-    		"be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can", "could", "did", "do", "does", "doing", 
-    		"down", "during", "each", "few", "followers", "follower", "for", "from", "further", "got", "had", "has", "have", "having", "he", "he'd", "he'll", "he's", 
-    		"her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i", "i'd", "i'll", "i'm", "i've", 
-    		"if", "in", "into", "is", "it", "it's", "its", "itself", "let's", "me", "more", "most", "my", "myself", "nor", "of", "on", 
-    		"once", "only", "or", "other", "ought", "our", "ours", "ourselves", "out", "over", "own", "retweet", "rt", "same", "she", "she'd", "she'll", 
-    		"she's", "should", "so", "some", "such", "still", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", 
-    		"there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through", "to", "too", 
-    		"under", "until", "up", "very", "was", "we", "we'd", "we'll", "we're", "we've", "were", "what", "what's", "when", "when's", 
-    		"where", "where's", "which", "while", "who", "who's", "whom", "why", "why's", "with", "would", "you", "you'd", "you'll", 
-    		"you're", "you've", "your", "yours", "yourself", "yourselves");
-
     	//parsing
     	ArrayList<String> words = new ArrayList<>();
     	ArrayList<String> singleWords = new ArrayList<>();
@@ -788,6 +849,9 @@ public class SearchController extends Controller {
                 for (int j = 0; j < trainingFiles.length; ++j) {
                     File file = new File(classDir,trainingFiles[j]);
                     String text = Files.readFromFile(file,"ISO-8859-1");
+                    for(String stopword: stopwords){
+                		text = text.replace(stopword, "");
+                	}
                     System.out.println("Training on " + CATEGORIES[i] + "/" + trainingFiles[j]);
                     Classification classification
                         = new Classification(CATEGORIES[i]);
@@ -814,7 +878,13 @@ public class SearchController extends Controller {
         for(int i = 0; i < CATEGORIES.length; ++i) {
             //File classDir = new File(TESTING_DIR,CATEGORIES[i]);
             for (int j=0; j<classify.size();  ++j) {
-                String text = classify.get(j).getText();
+                String textTweet = classify.get(j).getText();
+                String text = textTweet.toLowerCase();
+                text = text.replace("^a-zA-Z ", " ");
+                for(String stopword: stopwords){
+                	text = text.replace(" "+stopword+" ", " ");
+                }
+                System.out.println(text);
                 String tweetID = Long.toString(classify.get(j).getId());
                 System.out.print("Testing on " + CATEGORIES[i] + "/" + text + " ");
                 Classification classification
@@ -831,21 +901,23 @@ public class SearchController extends Controller {
                 System.out.println("---------------");
 
                 if(bestCategory.compareTo("neg")==0){
-                    if(!negText.contains(text)){
+                    if(!negText.contains(textTweet)){
                         neg.add(tweetID);
-                        negText.add(text);
+                        negText.add(textTweet);
                     }
                 }
                 else if(bestCategory.compareTo("pos")==0){
-                    if(!posText.contains(text)){
+                    if(!posText.contains(textTweet)){
                         pos.add(tweetID);
-                        posText.add(text);
+                        posText.add(textTweet);
                     }
                 }
                 else if(bestCategory.compareTo("neut")==0){
-                	if(!neutText.contains(text)){
+                	// 
+
+                	if(!neutText.contains(textTweet)){
                         neut.add(tweetID);
-                        neutText.add(text);
+                        neutText.add(textTweet);
                     }
                 }
             }

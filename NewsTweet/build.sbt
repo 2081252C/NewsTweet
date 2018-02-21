@@ -53,3 +53,13 @@ libraryDependencies += "org.json" % "json" % "20171018"
 // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 libraryDependencies += "com.googlecode.json-simple" % "json-simple" % "1.1.1"
 
+// https://mvnrepository.com/artifact/org.ejml/ejml-core
+libraryDependencies += "org.ejml" % "ejml-core" % "0.33"
+
+// https://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp
+libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0"
+
+// https://mvnrepository.com/artifact/edu.stanford.nlp/stanford-parser
+libraryDependencies += "edu.stanford.nlp" % "stanford-parser" % "3.8.0"
+
+libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0" classifier "models"

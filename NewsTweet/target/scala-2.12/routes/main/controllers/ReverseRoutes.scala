@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Jan 31 09:03:02 GMT 2018
+// @DATE:Sat Feb 17 14:39:57 GMT 2018
 
 import play.api.mvc.Call
 
@@ -46,7 +46,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "callback")
     }
   
-    // @LINE:29
+    // @LINE:27
     def logOut(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "logout")
@@ -76,31 +76,31 @@ package controllers {
     }
 
   
-    // @LINE:31
+    // @LINE:29
     def newsCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/news")
     }
   
-    // @LINE:34
+    // @LINE:32
     def techCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/tech")
     }
   
-    // @LINE:32
+    // @LINE:30
     def entertainmentCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/entertainment")
     }
   
-    // @LINE:33
+    // @LINE:31
     def musicCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/music")
     }
   
-    // @LINE:35
+    // @LINE:33
     def sportCategory(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "category/sport")
@@ -154,37 +154,16 @@ package controllers {
   }
 
   // @LINE:24
-  class ReversePersonaController(_prefix: => String) {
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:24
-    def addPersona(): Call = {
-      
-      Call("POST", _prefix + { _defaultPrefix } + "addpersona")
-    }
-  
-  }
-
-  // @LINE:25
   class ReverseInterestController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:25
-    def addInterest(): Call = {
+    // @LINE:24
+    def showInterest(p:String, topic:String): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "addinterest")
-    }
-  
-    // @LINE:26
-    def showInterest(topic:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "interest/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topic", topic)))
+      Call("GET", _prefix + { _defaultPrefix } + "interest/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("p", p)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topic", topic)))
     }
   
   }

@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Wed Jan 31 09:03:02 GMT 2018
+// @DATE:Sat Feb 17 14:39:57 GMT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -60,7 +60,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:29
+    // @LINE:27
     def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TwitterSignInServlet.logOut",
       """
@@ -100,7 +100,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:31
+    // @LINE:29
     def newsCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.newsCategory",
       """
@@ -110,7 +110,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:34
+    // @LINE:32
     def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.techCategory",
       """
@@ -120,7 +120,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:32
+    // @LINE:30
     def entertainmentCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.entertainmentCategory",
       """
@@ -130,7 +130,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:33
+    // @LINE:31
     def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.musicCategory",
       """
@@ -140,7 +140,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:35
+    // @LINE:33
     def sportCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.sportCategory",
       """
@@ -223,26 +223,6 @@ package controllers.javascript {
   }
 
   // @LINE:24
-  class ReversePersonaController(_prefix: => String) {
-
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:24
-    def addPersona: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.PersonaController.addPersona",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addpersona"})
-        }
-      """
-    )
-  
-  }
-
-  // @LINE:25
   class ReverseInterestController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -250,22 +230,12 @@ package controllers.javascript {
     }
 
   
-    // @LINE:25
-    def addInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.InterestController.addInterest",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addinterest"})
-        }
-      """
-    )
-  
-    // @LINE:26
+    // @LINE:24
     def showInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.InterestController.showInterest",
       """
-        function(topic0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "interest/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("topic", topic0))})
+        function(p0,topic1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "interest/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("p", p0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("topic", topic1))})
         }
       """
     )

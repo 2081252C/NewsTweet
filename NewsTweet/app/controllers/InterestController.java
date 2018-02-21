@@ -51,66 +51,68 @@ public class InterestController extends Controller {
 	@Inject FormFactory formFactory;
 
 	public Interest interestTrack;
+	int bool=1;
 
-	public Result addInterest() {
-			Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
-	        String interestName = interestForm.field("interestName").value();
-	        String personaName = interestForm.field("personaName").value();
+	// public Result addInterest() {
+	// 		Form<Interest> interestForm = formFactory.form(Interest.class).bindFromRequest();
+	//         String interestName = interestForm.field("interestName").value();
+	//         String personaName = interestForm.field("personaName").value();
 
-	        Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
-        	String name = personaForm.field("personaName").value();
+	//         Form<Persona> personaForm = formFactory.form(Persona.class).bindFromRequest();
+ //        	String name = personaForm.field("personaName").value();
 
-	        Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
-	        String term = searchForm.field("searchTerm").value();
+	//         Form<Search> searchForm = formFactory.form(Search.class).bindFromRequest();
+	//         String term = searchForm.field("searchTerm").value();
 
-	        String str = session("id");
-	        List<String> personaNames = new ArrayList<>();
-	            List<String> interests = new ArrayList<>();
-	        if(str!=null){
-		        Long id = Long.parseLong(str);
-		        TwitterUser t = TwitterUser.find.byId(id);
-		        List<Persona> personas = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
+	//         String str = session("id");
+	//         List<String> personaNames = new ArrayList<>();
+	//             List<String> interests = new ArrayList<>();
+
+	//         if(str==null){
+	//         	str="1";
+	//         	bool=0;
+	//         }
+	// 	        Long id = Long.parseLong(str);
+	// 	        TwitterUser t = TwitterUser.find.byId(id);
+	// 	        List<Persona> personas = Persona.find.query().where()
+ //                                        .ilike("twitter_user", Long.toString(id))
+ //                                        .setFirstRow(0)
+ //                                        .setMaxRows(25)
+ //                                        .findPagedList()
+ //                                        .getList();
 	            
-	            for(Persona p: personas){
-	                personaNames.add(p.personaName);
-	                List<Interest> interestsFromDB = Interest.find.query().where()
-	                                        .ilike("persona", Long.toString(p.id))
-	                                        .setFirstRow(0)
-	                                        .setMaxRows(25)
-	                                        .findPagedList()
-	                                        .getList();
-	                for(Interest i: interestsFromDB){
-	                    interests.add(i.interestName + " - " + p.personaName);
-	                }
-	            }
+	//             for(Persona p: personas){
+	//                 personaNames.add(p.personaName);
+	//                 List<Interest> interestsFromDB = Interest.find.query().where()
+	//                                         .ilike("persona", Long.toString(p.id))
+	//                                         .setFirstRow(0)
+	//                                         .setMaxRows(25)
+	//                                         .findPagedList()
+	//                                         .getList();
+	//                 for(Interest i: interestsFromDB){
+	//                     interests.add(i.interestName + " - " + p.personaName);
+	//                 }
+	//             }
 
-	   			List<Persona> personaSaveInterest = Persona.find.query().where()
-                                        .ilike("twitter_user", Long.toString(id))
-                                        .ilike("persona_name", personaName)
-                                        .setFirstRow(0)
-                                        .setMaxRows(25)
-                                        .findPagedList()
-                                        .getList();
+	//    			List<Persona> personaSaveInterest = Persona.find.query().where()
+ //                                        .ilike("twitter_user", Long.toString(id))
+ //                                        .ilike("persona_name", personaName)
+ //                                        .setFirstRow(0)
+ //                                        .setMaxRows(25)
+ //                                        .findPagedList()
+ //                                        .getList();
 
-                Persona pID = personaSaveInterest.get(0);
+ //                Persona pID = personaSaveInterest.get(0);
                 
-                Interest i = new Interest(interestName, pID);
-		        i.save();
+ //                Interest i = new Interest(interestName, pID);
+	// 	        i.save();
 
-				String s = t.username;
-			    return ok(views.html.index.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
-			}
-		    else{
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-		        }
-    }
+	// 			String s = t.username;
+	// 		    return ok(views.html.index.render(searchForm, s, bool, personaForm, t.imgUrl, interestForm, personaNames, interests, ""));
+ //    }
 
-    public Result showInterest(String tt) {
+    public Result showInterest(String persona, String tt) {
+    		String interestPersona = tt+ " (" + persona + ")";
     		LoadingFrame frame = new LoadingFrame();
 		    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    frame.setSize(200, 100);
@@ -139,16 +141,16 @@ public class InterestController extends Controller {
 	        String term = searchForm.field("searchTerm").value();
 
 	        String str = session("id");
-	        if(str==null){
-	        	str="1";
-	        }
 	        List<String> personaNames = new ArrayList<>();
 	        List<String> interests = new ArrayList<>();
 	        List<String> trackedTerms = new ArrayList<>();
 	        List<List<String>> interestTerms = new ArrayList<>();
 	        List<Track> tracksFromDB = new ArrayList<>();
 	        HashMap<String, List<String>> interestMap = new HashMap<String, List<String>>();
-	        if(str!=null){
+	        if(str==null){
+	        	str="1";
+	        	bool=0;
+	        }
 		        Long id = Long.parseLong(str);
 		        TwitterUser t = TwitterUser.find.byId(id);
 		        List<Persona> personas = Persona.find.query().where()
@@ -178,12 +180,13 @@ public class InterestController extends Controller {
 	                    List<String> tracks = new ArrayList<>();                  
 	                    for(Track track: tracksFromDB){
 	                    	tracks.add(Long.toString(track.id));
-	                    	trackedTerms.add(track.trackedTerm + " " + i.interestName);
+	                    	trackedTerms.add(track.trackedTerm + "-" + i.interestName + " (" + p.personaName +")");
 	                    }
 
 	                    interestTrack = i;
 	                    interestTerms.add(tracks);
-	                    interestMap.put(i.interestName, tracks);
+	                    String key = i.interestName + "-" + p.personaName;
+	                    interestMap.put(key, tracks);
 	                    System.out.println(interestMap);
 	                    
 	                }
@@ -191,7 +194,7 @@ public class InterestController extends Controller {
 
 				String s = t.username;
 
-				List<String> values = interestMap.get(tt);
+				List<String> values = interestMap.get(tt+"-"+persona);
 
 				//get list of associated search terms
 				ArrayList<String> trackTweets = new ArrayList<>();
@@ -240,7 +243,6 @@ public class InterestController extends Controller {
 					Track track = Track.find.byId(Long.parseLong(v));
 					headers.add(track.trackedTerm);
 				    String[] tweetInfo = track.tweetsAsString.split(", ");
-				    System.out.println(track.trackedTerm);
 
 		        	LocalDateTime currentTime = LocalDateTime.now();
 
@@ -267,16 +269,11 @@ public class InterestController extends Controller {
 	 					
 		        	}
 		        }
-
-		        System.out.println(trackTweets.toString());
 		        frame.setVisible(false);
 
-	        	 return ok(views.html.interest.render(searchForm, s, 1, personaForm, t.imgUrl, interestForm, personaNames, interests, trackTweets, tt, trackedTerms, allTweets, headers, messageForm));
-			}
-		    else{
+		        interestPersona = tt+ " (" + persona + ")";
 
-		        	return ok(views.html.index.render(searchForm, "", 0, personaForm, "", interestForm, personaNames, interests, ""));
-		        }
+	        	 return ok(views.html.interest.render(searchForm, s, bool, personaForm, t.imgUrl, interestForm, personaNames, interests, trackTweets, interestPersona, trackedTerms, allTweets, headers, messageForm));
     }
 
 }

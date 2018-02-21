@@ -21,9 +21,7 @@ POST     /track					    			controllers.SearchController.trackSearch()
 
 POST     /send									controllers.SearchController.sendMessage()
 
-POST     /addpersona								controllers.PersonaController.addPersona()
-POST     /addinterest							controllers.InterestController.addInterest()
-GET     /interest/:topic		    			controllers.InterestController.showInterest(topic: String)
+GET     /interest/:p/:topic		    			controllers.InterestController.showInterest(p: String, topic: String)
 
 
 GET     /logout					    			controllers.TwitterSignInServlet.logOut()

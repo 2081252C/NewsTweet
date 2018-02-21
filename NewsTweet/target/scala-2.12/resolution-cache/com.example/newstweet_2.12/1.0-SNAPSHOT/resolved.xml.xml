@@ -4,7 +4,7 @@
 		module="newstweet_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20180116203827"
+		publication="20180221190105"
 	>
 		<description>
 		NewsTweet
@@ -72,5 +72,11 @@
 		<dependency org="com.adrianhurt" name="play-bootstrap_2.12" rev="1.2-P26-B4" conf="compile->default(compile)"/>
 		<dependency org="org.json" name="json" rev="20171018" conf="compile->default(compile)"/>
 		<dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1.1" conf="compile->default(compile)"/>
+		<dependency org="org.ejml" name="ejml-core" rev="0.33" conf="compile->default(compile)"/>
+		<dependency org="edu.stanford.nlp" name="stanford-corenlp" rev="3.8.0" conf="compile->default(compile)">
+			<artifact name="stanford-corenlp" type="jar" ext="jar" conf="compile"/>
+			<artifact name="stanford-corenlp" type="jar" ext="jar" conf="compile" e:classifier="models"/>
+		</dependency>
+		<dependency org="edu.stanford.nlp" name="stanford-parser" rev="3.8.0" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

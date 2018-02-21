@@ -8,9 +8,14 @@
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
 @main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>Search Results for @term:
+  	<h3>Search Results for "<b>@term</b>":
       <a href="@routes.SearchController.searchAnalytics()" class="btn btn-primary" style="float:right;"> Search Analytics </a>
     </h3>
+
+    <div id="loader"></div>
+
+    <div id="page-content" style="display:none">
+
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
             <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
@@ -33,10 +38,12 @@
                         rendering("@tweetArray(0)");
                       </script>
                     </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
+                     
+                    @if(bool==1){  
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    }
                   </div>
                 
 
@@ -97,9 +104,11 @@
                         </script>
                       </div>
                         
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      @if(bool==1){  
+                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                          Message @tweetArray(1)
+                        </button>
+                      }
                     </div>
                   
 
@@ -158,10 +167,12 @@
                           rendering("@tweetArray(0)");
                         </script>
                       </div>
-                        
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      
+                      @if(bool==1){  
+                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                          Message @tweetArray(1)
+                        </button>
+                      }
                     </div>
                   
 
@@ -216,10 +227,12 @@
                         rendering("@tweetArray(0)");
                       </script>
                     </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
+                     
+                    @if(bool==1){  
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    }
                   </div>
                 
 
@@ -273,10 +286,12 @@
                         rendering("@tweetArray(0)");
                       </script>
                     </div>
-                      
-                    <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                      Message @tweetArray(1)
-                    </button>
+                    
+                    @if(bool==1){  
+                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message @tweetArray(1)
+                      </button>
+                    }
                   </div>
                 
 
@@ -330,10 +345,12 @@
                           rendering("@tweetArray(0)");
                         </script>
                       </div>
-                        
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      
+                      @if(bool==1){  
+                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                          Message @tweetArray(1)
+                        </button>
+                      }
                     </div>
                   
 
@@ -390,9 +407,11 @@
                         </script>
                       </div>
                         
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      @if(bool==1){
+                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                          Message @tweetArray(1)
+                        </button>
+                      }
                     </div>
                   
 
@@ -460,15 +479,47 @@
                             @b4.text(trackForm("term").copy(value= Option[String](term)),
                               '_label -> "Search Term")
 
-                            @b4.select(
-                               trackForm("interest"),
-                               helper.options(interests),
-                               '_label -> "Interest"
-                            )
+                            <div id="to-be-hidden">
+                              @b4.select(
+                                 trackForm("interest"),
+                                 helper.options(interests),
+                                 '_label -> "Interest",
+                                 '_default -> "-- Select an Interest --",
+                                 'selected -> "-1"
+                              )
+                              Or,  <a onclick="display('hidden-form', 'to-be-hidden')"><u>create a new interest</u></a>:
+                            </div>
 
-                            Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#interest-modal">
-                                          create a new interest.
-                                        </button>
+                            <div id="hidden-form" style="display:none">
+                              <a onclick="display('hidden-form', 'to-be-hidden')"><u>Undo</u></a>:
+                              @b4.text(trackForm("newInterestName"),
+                                              'placeholder -> "Interest Name",
+                                              '_label -> "",
+                                              'size -> 5)
+
+                              <div id="be-hidden">
+                                @b4.select(
+                                   trackForm("personaName"),
+                                   helper.options(personas),
+                                   '_label -> "",
+                                   '_default -> "-- Select an Interest Category --",
+                                   'selected -> "-1"
+                                )
+                                Or, <a onclick="display('hidden-category-form', 'be-hidden')"><u>create a new Interest Category</u></a>:
+                              </div>
+
+                              
+                            </div>
+                            <div id="hidden-category-form" style="display:none">
+                              <a onclick="display('hidden-category-form', 'be-hidden')"><u>Undo</u></a>:
+                              @b4.text(trackForm("newPersonaName"),
+                                  'placeholder -> "Name of Interest Category",
+                                  '_label -> "",
+                                  'size -> 1)
+                            </div>
+
+
+
                     </div>
                     </div>
                     <div class="modal-footer">
@@ -480,75 +531,10 @@
                 </div>
               </div>
 
-              <div class="modal fade" id="interest-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="interest-label">Add a New Interest</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="interest-form">
-                                    @b4.horizontal.form(action=helper.CSRF(routes.InterestController.addInterest()), "col-md-2", "col-md-10"){ implicit ifc =>
-
-                                        @b4.text(interestForm("interestName"),
-                                            'placeholder -> "Interest Name",
-                                            '_label -> "Name",
-                                            'size -> 5)
-
-                                        @b4.select(
-                                           interestForm("personaName"),
-                                           helper.options(personas),
-                                           '_label -> "Persona"
-                                        )
-
-                                        Or, <button type="button" id="add_interest" class="btn btn-primary" data-toggle="modal" data-target="#persona_modal">
-                                          create a new persona.
-                                        </button>
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Save changes</button>
-                            }
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal fade" id="persona_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="interest-label">Add a New Persona</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="interest-form">
-                                    @b4.horizontal.form(action=helper.CSRF(routes.PersonaController.addPersona()), "col-md-2", "col-md-10"){ implicit ifc =>
-
-                                            @b4.text(personaForm("personaName"),
-                                                'placeholder -> "Persona Name",
-                                                '_label -> "Name",
-                                                'size -> 1)
-
-                                    
-                                    </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Save changes</button>
-                            }
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+              
 
             }
+          </div>
 
             <script>
               $('#show').click(function() {
@@ -572,6 +558,14 @@
                 $('#moreMedia2').toggle();
                 $('#show2').toggle();
             });
+
+            var myVar;
+            myVar = setTimeout(showPage, 3000);
+
+            function showPage() {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("page-content").style.display = "block";
+            }
           </script>
 }
 
