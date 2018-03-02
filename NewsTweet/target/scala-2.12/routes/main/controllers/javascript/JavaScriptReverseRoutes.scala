@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Sat Feb 17 14:39:57 GMT 2018
+// @DATE:Fri Mar 02 16:00:22 GMT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -32,7 +32,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:13
+  // @LINE:11
   class ReverseTwitterSignInServlet(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -40,17 +40,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
-    def signIn: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.TwitterSignInServlet.signIn",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "twitter/signin"})
-        }
-      """
-    )
-  
-    // @LINE:14
+    // @LINE:12
     def callBack: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TwitterSignInServlet.callBack",
       """
@@ -60,32 +50,22 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:27
+    // @LINE:11
+    def signIn: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.TwitterSignInServlet.signIn",
+      """
+        function(uri0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "twitter/signin" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("uri", uri0)])})
+        }
+      """
+    )
+  
+    // @LINE:25
     def logOut: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TwitterSignInServlet.logOut",
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
-        }
-      """
-    )
-  
-  }
-
-  // @LINE:11
-  class ReverseTwitterAuth(_prefix: => String) {
-
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:11
-    def auth: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.TwitterAuth.auth",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "twitter/auth"})
         }
       """
     )
@@ -100,52 +80,52 @@ package controllers.javascript {
     }
 
   
-    // @LINE:29
+    // @LINE:27
     def newsCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.newsCategory",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/news"})
-        }
-      """
-    )
-  
-    // @LINE:32
-    def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.techCategory",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/tech"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "news"})
         }
       """
     )
   
     // @LINE:30
+    def techCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.techCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "tech"})
+        }
+      """
+    )
+  
+    // @LINE:28
     def entertainmentCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.entertainmentCategory",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/entertainment"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "entertainment"})
+        }
+      """
+    )
+  
+    // @LINE:29
+    def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.musicCategory",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "music"})
         }
       """
     )
   
     // @LINE:31
-    def musicCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.musicCategory",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/music"})
-        }
-      """
-    )
-  
-    // @LINE:33
     def sportCategory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.sportCategory",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "category/sport"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "sport"})
         }
       """
     )
@@ -162,7 +142,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:16
+  // @LINE:14
   class ReverseSearchController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -170,17 +150,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:22
-    def sendMessage: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.SearchController.sendMessage",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "send"})
-        }
-      """
-    )
-  
-    // @LINE:16
+    // @LINE:14
     def searchResults: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.SearchController.searchResults",
       """
@@ -190,7 +160,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:18
+    // @LINE:16
     def showSentiment: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.SearchController.showSentiment",
       """
@@ -200,17 +170,27 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:20
+    // @LINE:18
     def trackSearch: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.SearchController.trackSearch",
       """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "track"})
+        function(uri0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "track" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("uri", uri0)])})
         }
       """
     )
   
-    // @LINE:17
+    // @LINE:20
+    def sendMessage: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.SearchController.sendMessage",
+      """
+        function(uri0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "send" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("uri", uri0)])})
+        }
+      """
+    )
+  
+    // @LINE:15
     def searchAnalytics: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.SearchController.searchAnalytics",
       """
@@ -222,7 +202,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:24
+  // @LINE:22
   class ReverseInterestController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -230,7 +210,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:24
+    // @LINE:22
     def showInterest: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.InterestController.showInterest",
       """

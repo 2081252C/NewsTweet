@@ -1,18 +1,20 @@
-@(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, tweets: List[String], popTweets: List[String], popTweets1: List[String], popTweets2: List[String], recentTweets: List[String], recentTweets1: List[String], recentTweets2: List[String], media: List[String], media1: List[String], media2: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String)
+@(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, popTweets: List[String], recentTweets: List[String], recentTweets1: List[String], recentTweets2: List[String], media: List[String], media1: List[String], media2: List[String], img: String, term: String, personas: List[String], interests: List[String])
 
 @import helper._
-@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }  // Declares a horizontal field constructor as default
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }
 
 <script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
-@main("Search Results")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>Search Results for "<b>@term</b>":
-      <a href="@routes.SearchController.searchAnalytics()" class="btn btn-primary" style="float:right;"> Search Analytics </a>
+@main("Search Results")(searchForm)(user)(bool)(img)(personas)(interests){
+    <h3 id="upper">search results for "<span class="lite">@term</span>":
+      <a href="@routes.SearchController.searchAnalytics()" class="btn btn-primary" id="analytics-btn"> Search Analytics </a>
     </h3>
 
-    <div id="loader"></div>
+    <div id="loader-bg">
+     <div id="loader"></div>
+   </div>
 
     <div id="page-content" style="display:none">
 
@@ -21,10 +23,10 @@
             <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
           </li>
         <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'popular')">15 Most Popular</a> 
+            <a class="nav-link search_result" onclick="openTab(event, 'popular')">Top 15 Tweets</a> 
           </li>
           <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'media')">Media</a>
+            <a class="nav-link search_result" onclick="openTab(event, 'media')">Photos, Videos and Links</a>
           </li>
         </ul>
 
@@ -40,9 +42,9 @@
                     </div>
                      
                     @if(bool==1){  
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                     }
                   </div>
                 
@@ -58,24 +60,24 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                             @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
-                                                '_label -> "Recipient Name",
+                                                '_label -> "To:",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                     
                                     </div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                             }
                               </div>
                             </div>
@@ -86,10 +88,11 @@
               }
             </div>
 
+            <hr>
             <div class="button_wrapper">
-              <button type="button" class="show_btn" id="show">
-                Show More
-              </button>
+              <a class="show_btn" id="show">
+                <b class="caret"></b> Show More
+              </a>
             </div>
 
               <div class="card-columns">
@@ -105,9 +108,9 @@
                       </div>
                         
                       @if(bool==1){  
-                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                          Message @tweetArray(1)
-                        </button>
+                        <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                       }
                     </div>
                   
@@ -123,24 +126,24 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                       
                                       </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                               }
                                 </div>
                               </div>
@@ -151,10 +154,12 @@
                 }
               </div>
             </div>
+
             <div class="button_wrapper">
-              <button type="button" class="show_btn" id="show2" style="display:none">
-                Show More
-              </button>
+              <a class="show_btn" id="show2" style="display:none">
+                <hr>
+                <b class="caret"></b> Show More
+              </a>
             </div>
               <div class="card-columns">
 
@@ -169,9 +174,9 @@
                       </div>
                       
                       @if(bool==1){  
-                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                          Message @tweetArray(1)
-                        </button>
+                        <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                       }
                     </div>
                   
@@ -187,24 +192,24 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                       
                                       </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                               }
                                 </div>
                               </div>
@@ -229,9 +234,9 @@
                     </div>
                      
                     @if(bool==1){  
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                     }
                   </div>
                 
@@ -247,24 +252,24 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                             @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                     
                                     </div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                             }
                               </div>
                             </div>
@@ -288,9 +293,9 @@
                     </div>
                     
                     @if(bool==1){  
-                      <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                        Message @tweetArray(1)
-                      </button>
+                      <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                     }
                   </div>
                 
@@ -306,23 +311,23 @@
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                             @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
                                     
                                     </div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                             }
                               </div>
                             </div>
@@ -332,9 +337,17 @@
                 }
               }
 
-              <button type="button" class="show_btn" id="media">
-                Show More
-              </button>
+            
+            </div>
+             
+             <hr> 
+            <div class="button_wrapper">
+              <a class="show_btn" id="media1">
+                <b class="caret"></b> Show More
+              </a>
+            </div>
+
+            <div class="card-columns">
 
               <div id="moreMedia" style="display:none">
                 @for(tweet <- media1){
@@ -347,9 +360,9 @@
                       </div>
                       
                       @if(bool==1){  
-                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                          Message @tweetArray(1)
-                        </button>
+                        <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                       }
                     </div>
                   
@@ -365,24 +378,24 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                       
                                       </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                               }
                                 </div>
                               </div>
@@ -392,11 +405,16 @@
                   }
                 }
               </div>
+            </div>
 
-              <button type="button" class="show_btn" id="media2" style="display:none">
-                Show More
-              </button>
+            <div class="button_wrapper">
+              <a class="show_btn" id="media2" style="display:none">
+                <hr>
+                <b class="caret"></b> Show More
+              </a>
+            </div>
 
+            <div class="card-columns">
               <div id="moreMedia2" style="display:none">
                 @for(tweet <- media2){
                   @defining(tweet.split("-")) { tweetArray =>                 
@@ -408,9 +426,9 @@
                       </div>
                         
                       @if(bool==1){
-                        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-                          Message @tweetArray(1)
-                        </button>
+                        <a class="msg_btn" data-toggle="modal" data-target="#@tweet">
+                        Message <span style="color: #E4BC7B">@tweetArray(1)</span> <i class="icon-envelope-l"></i> 
+                      </a>
                       }
                     </div>
                   
@@ -426,24 +444,24 @@
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+                                      @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
                                               @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
                                                 'size -> 1)
 
-                                            @b4.text(messageForm("message"),
+                                            @b4.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)
+                                                '_label -> "Message:",
+                                                'rows -> 4)
 
                                       
                                       </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
                               }
                                 </div>
                               </div>
@@ -455,6 +473,7 @@
               </div>
             </div>
           </div>
+        </div>
 
            @if(bool==1){
 
@@ -474,7 +493,7 @@
                     </div>
                     <div class="modal-body">
                       <div id="track">
-                        @b4.form(action=helper.CSRF(routes.SearchController.trackSearch())){
+                        @b4.form(action=helper.CSRF(routes.SearchController.trackSearch(request.uri))){
 
                             @b4.text(trackForm("term").copy(value= Option[String](term)),
                               '_label -> "Search Term")
@@ -524,7 +543,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button class="btn btn-primary" type="submit">Save changes</button>
+                      <button class="btn btn-primary" id="submit-btn" type="submit">Save changes</button>
                   }
                     </div>
                   </div>
@@ -548,15 +567,15 @@
                 $('#show2').toggle();
             });
 
-              $('#media').click(function() {
+              $('#media1').click(function() {
                 $('#moreMedia').toggle();
                 $('#media2').toggle();
-                $('#media').toggle();
+                $('#media1').toggle();
             });
 
-              $('#show2').click(function() {
+              $('#media2').click(function() {
                 $('#moreMedia2').toggle();
-                $('#show2').toggle();
+                $('#media2').toggle();
             });
 
             var myVar;
@@ -564,6 +583,7 @@
 
             function showPage() {
               document.getElementById("loader").style.display = "none";
+              document.getElementById("loader-bg").style.display = "none";
               document.getElementById("page-content").style.display = "block";
             }
           </script>

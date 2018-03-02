@@ -1,2 +1,3 @@
-[0m[[0m[31merror[0m] [0m[0m[Error] /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/interest.scala.html:610[0m
-[0m[[0m[31merror[0m] [0m[0m}: Not parsed?[0m
+[0m[[0m[31merror[0m] [0m[0m[Error] /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/negativeSentiment.scala.html:82[0m
+[0m[[0m[31merror[0m] [0m[0m}: Expected '}' but found 'EOF'[0m
+[0m[[0m[31merror[0m] [0m[0m(compile:[31mtwirlCompileTemplates[0m) Twirl compilation failed[0m

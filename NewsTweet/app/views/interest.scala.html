@@ -1,16 +1,18 @@
-@(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], track: List[String], i: String, terms: List[String], allTweets: List[String], values: List[String], messageForm: Form[Message])
+@(searchForm: Form[Search], user: String, bool: Integer, img: String, personas: List[String], interests: List[String], track: List[String], i: String, terms: List[String], allTweets: List[String], values: List[String], messageForm: Form[Message])
 
 @import helper._
-@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }  // Declares a horizontal field constructor as default
+@implicitFieldConstructor = @{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }
 
 <script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src="@routes.Assets.versioned("javascripts/render.js")"; type="text/javascript"></script>
 
-@main("Interest")(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i){
-  	<h3>Tracked Searches for "<b>@i</b>"</h3>
+@main("Interest")(searchForm)(user)(bool)(img)(personas)(interests){
+  	<h3 id="upper">Tracked Searches for "<span class="lite">@i</span>"</h3>
 
-  	<div id="loader"></div>
+  	<div id="loader-bg">
+  		<div id="loader"></div>
+  	</div>
 
     <div id="page-content" style="display:none">
 
@@ -32,287 +34,293 @@
 
 	    <div class="carousel-item active">
 	    	<div id="all">
-			  				<div id="accordion" role="tablist" aria-multiselectable="true">
+				<div id="accordion" role="tablist" aria-multiselectable="true">
 
-							 <div class="card">
-							    <div class="card-header" role="tab" id="daily">
-							      <h5 class="mb-0">
-							        <a data-toggle="collapse" data-parent="#accordion" href="#today" aria-expanded="true" aria-controls="today">
-							          Today
-							        </a>
-							      </h5>
-							    </div>
-							</div>
+			 <div class="card">
+			    <div class="card-header" role="tab" id="daily">
+			      <h5 class="mb-0">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#today" aria-expanded="true" aria-controls="today">
+			          Today
+			        </a>
+			      </h5>
+			    </div>
+			</div>
 
-							<div id="today" class="collapse" role="tabpanel" aria-labelledby="today">
-								<div id="no-today" style="display:none;"> No tweets to show. </div>
-				  				<div class="card-columns" id="today-cards">
-				  					@for(tweet <- track){
-							      	@defining(tweet.split("-")) { tweetArray => 
-								      	
-								      		@if(tweetArray(3)=="today"){
-										        <div class="card">
-										        	<div id="@tweetArray(1)a"></div>
-											        <script>
-											          rendering("@tweetArray(1)a");
-											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
-								                      Message @tweetArray(2)
-								                    </button>
-								                </div>
+			<div id="today" class="collapse" role="tabpanel" aria-labelledby="today">
+				<div class="none" id="no-today" style="display:none;"> No tweets to show. </div>
+  				<div class="card-columns" id="today-cards">
+  					@for(tweet <- track){
+			      	@defining(tweet.split("-")) { tweetArray => 
+				      	
+				      		@if(tweetArray(3)=="today"){
+						        <div class="card">
+						        	<div id="@tweetArray(1)a"></div>
+							        <script>
+							          rendering("@tweetArray(1)a");
+							        </script>
+							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
+				                      Message <span style="color: #E4BC7B">@tweetArray(2)</span> <i class="icon-envelope-l"></i>
+				                    </a>
+				                </div>
+				                
 
-										    
-										    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						                          <div class="modal-dialog" role="document">
-						                            <div class="modal-content">
-						                              <div class="modal-header">
-						                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						                                  <span aria-hidden="true">&times;</span>
-						                                </button>
-						                              </div>
-						                              <div class="modal-body">
-						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+						    
+						    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                          <div class="modal-dialog" role="document">
+		                            <div class="modal-content">
+		                              <div class="modal-header">
+		                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+		                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                  <span aria-hidden="true">&times;</span>
+		                                </button>
+		                              </div>
+		                              <div class="modal-body">
+		                                <div id="interest-form">
+		                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
-						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
-						                                                'placeholder -> "Recipient Name",
-						                                                '_label -> "Recipient Name",
-						                                                'size -> 1)
+		                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
+		                                                'placeholder -> "Recipient Name",
+		                                                '_label -> "Recipient Name",
+		                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
-						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+		                                            @b4.textarea(messageForm("message"),
+		                                                'placeholder -> "Message",
+		                                                '_label -> "Message:",
+		                                                'rows -> 4)
 
-						                                    
-						                                    </div>
-						                              </div>
-						                              <div class="modal-footer">
-						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-						                            }
-						                              </div>
-						                            </div>
-						                          </div>
-						                        </div>
-										     
-								    	
-								    }
-							      }
-							  }
-								</div>
-								<script>displayNoTweetsMessage("today-cards", "no-today")</script>
-							</div>
+		                                    
+		                                    </div>
+		                              </div>
+		                              <div class="modal-footer">
+		                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+		  
+		                              </div>
+		                          }
+		                            </div>
+		                          </div>
+		                        </div>
+		                    
+						     
+				    	
+				    }
+			      }
+			  }
+				</div>
+				<script>displayNoTweetsMessage("today-cards", "no-today")</script>
+			</div>
 
-							 <div class="card">
-							    <div class="card-header" role="tab" id="weekly">
-							      <h5 class="mb-0">
-							        <a data-toggle="collapse" data-parent="#accordion" href="#week" aria-expanded="true" aria-controls="week">
-							          Past Week
-							        </a>
-							      </h5>
-							    </div>
-							</div>
+			 <div class="card">
+			    <div class="card-header" role="tab" id="weekly">
+			      <h5 class="mb-0">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#week" aria-expanded="true" aria-controls="week">
+			          Past Week
+			        </a>
+			      </h5>
+			    </div>
+			</div>
 
-							<div id="week" class="collapse" role="tabpanel" aria-labelledby="week">
-								<div id="no-weeks" style="display:none;"> No tweets to show. </div>
-					  			<div class="card-columns" id="week-cards">
-								    @for(tweet <- track){
-								      	@defining(tweet.split("-")) { tweetArray => 
-									      	
-									      		@if(tweetArray(3)=="week"){
-											        <div class="card">
-										        	<div id="@tweetArray(1)a"></div>
-											        <script>
-											          rendering("@tweetArray(1)a");
-											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
-								                      Message @tweetArray(2)
-								                    </button>
-								                </div>
-											    }
-											    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						                          <div class="modal-dialog" role="document">
-						                            <div class="modal-content">
-						                              <div class="modal-header">
-						                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						                                  <span aria-hidden="true">&times;</span>
-						                                </button>
-						                              </div>
-						                              <div class="modal-body">
-						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+			<div id="week" class="collapse" role="tabpanel" aria-labelledby="week">
+				<div class="none" id="no-weeks" style="display:none;"> No tweets to show. </div>
+	  			<div class="card-columns" id="week-cards">
+				    @for(tweet <- track){
+				      	@defining(tweet.split("-")) { tweetArray => 
+					      	
+					      		@if(tweetArray(3)=="week"){
+							        <div class="card">
+						        	<div id="@tweetArray(1)a"></div>
+							        <script>
+							          rendering("@tweetArray(1)a");
+							        </script>
+							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
+				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+				                    </a>
+				                </div>
+							    }
+							    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                          <div class="modal-dialog" role="document">
+		                            <div class="modal-content">
+		                              <div class="modal-header">
+		                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+		                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                  <span aria-hidden="true">&times;</span>
+		                                </button>
+		                              </div>
+		                              <div class="modal-body">
+		                                <div id="interest-form">
+		                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
-						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
-						                                                'placeholder -> "Recipient Name",
-						                                                '_label -> "Recipient Name",
-						                                                'size -> 1)
+		                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
+		                                                'placeholder -> "Recipient Name",
+		                                                '_label -> "Recipient Name",
+		                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
-						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+		                                            @b4.textarea(messageForm("message"),
+		                                                'placeholder -> "Message",
+		                                                '_label -> "Message:",
+		                                                'rows -> 4)
 
-						                                    
-						                                    </div>
-						                              </div>
-						                              <div class="modal-footer">
-						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-						                            }
-						                              </div>
-						                            </div>
-						                          </div>
-						                        </div>
-										     
-									    	}
-									    
-								    }
-								    <script>displayNoTweetsMessage("week-cards", "no-weeks")</script>
-								</div>
-							</div>
+		                                    
+		                                    </div>
+		                              </div>
+		                              <div class="modal-footer">
+		                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+		                            
+		                              </div>
+		                          }
+		                            </div>
+		                          </div>
+		                        </div>
+						     
+					    	}
+					    
+				    }
+				    <script>displayNoTweetsMessage("week-cards", "no-weeks")</script>
+				</div>
+			</div>
 
 
-							<div class="card">
-							    <div class="card-header" role="tab" id="monthly">
-							      <h5 class="mb-0">
-							        <a data-toggle="collapse" data-parent="#accordion" href="#month" aria-expanded="true" aria-controls="month">
-							          Past Month
-							        </a>
-							      </h5>
-							    </div>
-							</div>
+			<div class="card">
+			    <div class="card-header" role="tab" id="monthly">
+			      <h5 class="mb-0">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#month" aria-expanded="true" aria-controls="month">
+			          Past Month
+			        </a>
+			      </h5>
+			    </div>
+			</div>
 
-							<div id="month" class="collapse" role="tabpanel" aria-labelledby="month">
-								<div id="no-months" style="display:none;"> No tweets to show. </div>
-				  				<div class="card-columns" id="month-cards">
-							      @for(tweet <- track){
-							      	@defining(tweet.split("-")) { tweetArray => 
-								   		@if(tweetArray(3)=="month"){
-										        <div class="card">
-										        	<div id="@tweetArray(1)a"></div>
-											        <script>
-											          rendering("@tweetArray(1)a");
-											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
-								                      Message @tweetArray(2)
-								                    </button>
-								                </div>
-										    }
-				  						<div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						                          <div class="modal-dialog" role="document">
-						                            <div class="modal-content">
-						                              <div class="modal-header">
-						                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						                                  <span aria-hidden="true">&times;</span>
-						                                </button>
-						                              </div>
-						                              <div class="modal-body">
-						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+			<div id="month" class="collapse" role="tabpanel" aria-labelledby="month">
+				<div  class="none" id="no-months" style="display:none;"> No tweets to show. </div>
+  				<div class="card-columns" id="month-cards">
+			      @for(tweet <- track){
+			      	@defining(tweet.split("-")) { tweetArray => 
+				   		@if(tweetArray(3)=="month"){
+						        <div class="card">
+						        	<div id="@tweetArray(1)a"></div>
+							        <script>
+							          rendering("@tweetArray(1)a");
+							        </script>
+							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
+				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+				                    </a>
+				                </div>
+						    }
+  						<div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                          <div class="modal-dialog" role="document">
+		                            <div class="modal-content">
+		                              <div class="modal-header">
+		                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+		                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                  <span aria-hidden="true">&times;</span>
+		                                </button>
+		                              </div>
+		                              <div class="modal-body">
+		                                <div id="interest-form">
+		                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
-						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
-						                                                'placeholder -> "Recipient Name",
-						                                                '_label -> "Recipient Name",
-						                                                'size -> 1)
+		                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
+		                                                'placeholder -> "Recipient Name",
+		                                                '_label -> "Recipient Name",
+		                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
-						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+		                                            @b4.textarea(messageForm("message"),
+		                                                'placeholder -> "Message",
+		                                                '_label -> "Message:",
+		                                                'rows -> 4)
 
-						                                    
-						                                    </div>
-						                              </div>
-						                              <div class="modal-footer">
-						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-						                            }
-						                              </div>
-						                            </div>
-						                          </div>
-						                        </div>
-										   
-								    	
-								    }
-							      }
-							      <script>displayNoTweetsMessage("month-cards", "no-months")</script>
-								</div>
-							</div>
+		                                    
+		                                    </div>
+		                              </div>
+		                              <div class="modal-footer">
+		                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+		                            
+		                              </div>
+		                          }
+		                            </div>
+		                          </div>
+		                        </div>
+						   
+				    	
+				    }
+			      }
+			      <script>displayNoTweetsMessage("month-cards", "no-months")</script>
+				</div>
+			</div>
 
-							<div class="card">
-							    <div class="card-header" role="tab" id="old">
-							      <h5 class="mb-0">
-							        <a data-toggle="collapse" data-parent="#accordion" href="#older" aria-expanded="true" aria-controls="older">
-							          Older
-							        </a>
-							      </h5>
-							    </div>
-							</div>
+			<div class="card">
+			    <div class="card-header" role="tab" id="old">
+			      <h5 class="mb-0">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#older" aria-expanded="true" aria-controls="older">
+			          Older
+			        </a>
+			      </h5>
+			    </div>
+			</div>
 
-							<div id="older" class="collapse" role="tabpanel" aria-labelledby="older">
-								<div id="no-older" style="display:none;"> No tweets to show. </div>
-				  				<div class="card-columns" id="older-cards">
-							      @for(tweet <- track){
-							      	@defining(tweet.split("-")) { tweetArray => 
-								      		@if(tweetArray(3)=="older"){
-										        <div class="card">
-										        	<div id="@tweetArray(1)a"></div>
-											        <script>
-											          rendering("@tweetArray(1)a");
-											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
-								                      Message @tweetArray(2)
-								                    </button>
-								                </div>
+			<div id="older" class="collapse" role="tabpanel" aria-labelledby="older">
+				<div  class="none" id="no-older" style="display:none;"> No tweets to show. </div>
+  				<div class="card-columns" id="older-cards">
+			      @for(tweet <- track){
+			      	@defining(tweet.split("-")) { tweetArray => 
+				      		@if(tweetArray(3)=="older"){
+						        <div class="card">
+						        	<div id="@tweetArray(1)a"></div>
+							        <script>
+							          rendering("@tweetArray(1)a");
+							        </script>
+							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
+				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+				                    </a>
+				                </div>
 
-								                <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						                          <div class="modal-dialog" role="document">
-						                            <div class="modal-content">
-						                              <div class="modal-header">
-						                                <h5 class="modal-title" id="interest-label">Send Message</h5>
-						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						                                  <span aria-hidden="true">&times;</span>
-						                                </button>
-						                              </div>
-						                              <div class="modal-body">
-						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+				                <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                          <div class="modal-dialog" role="document">
+		                            <div class="modal-content">
+		                              <div class="modal-header">
+		                                <h5 class="modal-title" id="interest-label">Send Message</h5>
+		                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                  <span aria-hidden="true">&times;</span>
+		                                </button>
+		                              </div>
+		                              <div class="modal-body">
+		                                <div id="interest-form">
+		                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
-						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
-						                                                'placeholder -> "Recipient Name",
-						                                                '_label -> "Recipient Name",
-						                                                'size -> 1)
+		                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
+		                                                'placeholder -> "Recipient Name",
+		                                                '_label -> "Recipient Name",
+		                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
-						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+		                                            @b4.textarea(messageForm("message"),
+		                                                'placeholder -> "Message",
+		                                                '_label -> "Message:",
+		                                                'rows -> 4)
 
-						                                    
-						                                    </div>
-						                              </div>
-						                              <div class="modal-footer">
-						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-						                            }
-						                              </div>
-						                            </div>
-						                          </div>
-						                        </div>
-										    }
-										    
-								    	
-								    }
-							      }
-								</div>
-								<script>displayNoTweetsMessage("older-cards", "no-older")</script>
-							</div>
+		                                    
+		                                    </div>
+		                              </div>
+		                              <div class="modal-footer">
+		                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+		                            
+		                              </div>
+		                          }
+		                            </div>
+		                          </div>
+		                        </div>
+						    }
+						    
+				    	
+				    }
+			      }
+				</div>
+				<script>displayNoTweetsMessage("older-cards", "no-older")</script>
+			</div>
 
-						</div>
+		</div>
 					
   				
 	    </div>
@@ -347,9 +355,9 @@
 											        <script>
 											          rendering("@tweetArray(1)");
 											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-								                      Message @tweetArray(2)
-								                    </button>
+											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+								                    </a>
 								                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -363,23 +371,23 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
 						                                                '_label -> "Recipient Name",
 						                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
+						                                            @b4.textarea(messageForm("message"),
 						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+						                                                '_label -> "Message:",
+						                                                'rows -> 4)
 
 						                                    
 						                                    </div>
 						                              </div>
 						                              <div class="modal-footer">
 						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+						                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
 						                            }
 						                              </div>
 						                            </div>
@@ -417,9 +425,9 @@
 											        <script>
 											          rendering("@tweetArray(1)");
 											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-								                      Message @tweetArray(2)
-								                    </button>
+											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+								                    </a>
 								                </div>
 
 												<div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -433,24 +441,24 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
 						                                                '_label -> "Recipient Name",
 						                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
+						                                            @b4.textarea(messageForm("message"),
 						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+						                                                '_label -> "Message:",
+						                                                'rows -> 4)
 
 						                                    
 						                                    </div>
 						                              </div>
 						                              <div class="modal-footer">
 						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+						                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
 						                            }
 						                              </div>
 						                            </div>
@@ -490,9 +498,9 @@
 											        <script>
 											          rendering("@tweetArray(1)");
 											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-								                      Message @tweetArray(2)
-								                    </button>
+											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+								                    </a>
 								                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -506,17 +514,17 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=routes.SearchController.sendMessage()){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
 						                                                '_label -> "Recipient Name",
 						                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
+						                                            @b4.textarea(messageForm("message"),
 						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+						                                                '_label -> "Message:",
+						                                                'rows -> 4)
 
 
 						                                    
@@ -524,7 +532,7 @@
 						                              </div>
 						                              <div class="modal-footer">
 						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+						                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
 						                            }
 						                              </div>
 						                            </div>
@@ -562,9 +570,9 @@
 											        <script>
 											          rendering("@tweetArray(1)");
 											        </script>
-											        <button type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
-								                      Message @tweetArray(2)
-								                    </button>
+											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
+								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
+								                    </a>
 								                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -578,24 +586,24 @@
 						                              </div>
 						                              <div class="modal-body">
 						                                <div id="interest-form">
-						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage())){ 
+						                                    @b4.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri))){ 
 
 						                                            @b4.text(messageForm("recipientName").copy(value= Option[String](tweetArray(2))),
 						                                                'placeholder -> "Recipient Name",
 						                                                '_label -> "Recipient Name",
 						                                                'size -> 1)
 
-						                                            @b4.text(messageForm("message"),
+						                                            @b4.textarea(messageForm("message"),
 						                                                'placeholder -> "Message",
-						                                                '_label -> "Message",
-						                                                'size -> 1)
+						                                                '_label -> "Message:",
+						                                                'rows -> 4)
 
 						                                    
 						                                    </div>
 						                              </div>
 						                              <div class="modal-footer">
 						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
+						                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
 						                            }
 						                              </div>
 						                            </div>
@@ -629,6 +637,7 @@
 
             function showPage() {
               document.getElementById("loader").style.display = "none";
+              document.getElementById("loader-bg").style.display = "none";
               document.getElementById("page-content").style.display = "block";
             }
           </script>

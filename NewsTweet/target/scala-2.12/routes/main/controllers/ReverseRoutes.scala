@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/carly/Documents/Project/NewsTweet/NewsTweet/conf/routes
-// @DATE:Sat Feb 17 14:39:57 GMT 2018
+// @DATE:Fri Mar 02 16:00:22 GMT 2018
 
 import play.api.mvc.Call
 
@@ -27,44 +27,29 @@ package controllers {
   
   }
 
-  // @LINE:13
+  // @LINE:11
   class ReverseTwitterSignInServlet(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:13
-    def signIn(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "twitter/signin")
-    }
-  
-    // @LINE:14
+    // @LINE:12
     def callBack(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "callback")
     }
   
-    // @LINE:27
+    // @LINE:11
+    def signIn(uri:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "twitter/signin" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("uri", uri)))))
+    }
+  
+    // @LINE:25
     def logOut(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "logout")
-    }
-  
-  }
-
-  // @LINE:11
-  class ReverseTwitterAuth(_prefix: => String) {
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:11
-    def auth(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "twitter/auth")
     }
   
   }
@@ -76,34 +61,34 @@ package controllers {
     }
 
   
-    // @LINE:29
+    // @LINE:27
     def newsCategory(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "category/news")
-    }
-  
-    // @LINE:32
-    def techCategory(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "category/tech")
+      Call("GET", _prefix + { _defaultPrefix } + "news")
     }
   
     // @LINE:30
+    def techCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "tech")
+    }
+  
+    // @LINE:28
     def entertainmentCategory(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "category/entertainment")
+      Call("GET", _prefix + { _defaultPrefix } + "entertainment")
+    }
+  
+    // @LINE:29
+    def musicCategory(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "music")
     }
   
     // @LINE:31
-    def musicCategory(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "category/music")
-    }
-  
-    // @LINE:33
     def sportCategory(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "category/sport")
+      Call("GET", _prefix + { _defaultPrefix } + "sport")
     }
   
     // @LINE:6
@@ -114,38 +99,38 @@ package controllers {
   
   }
 
-  // @LINE:16
+  // @LINE:14
   class ReverseSearchController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:22
-    def sendMessage(): Call = {
-      
-      Call("POST", _prefix + { _defaultPrefix } + "send")
-    }
-  
-    // @LINE:16
+    // @LINE:14
     def searchResults(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "search")
     }
   
-    // @LINE:18
+    // @LINE:16
     def showSentiment(sentiment:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "search/analytics/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("sentiment", sentiment)))
     }
   
-    // @LINE:20
-    def trackSearch(): Call = {
+    // @LINE:18
+    def trackSearch(uri:String): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "track")
+      Call("POST", _prefix + { _defaultPrefix } + "track" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("uri", uri)))))
     }
   
-    // @LINE:17
+    // @LINE:20
+    def sendMessage(uri:String): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "send" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("uri", uri)))))
+    }
+  
+    // @LINE:15
     def searchAnalytics(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "search/analytics")
@@ -153,14 +138,14 @@ package controllers {
   
   }
 
-  // @LINE:24
+  // @LINE:22
   class ReverseInterestController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:24
+    // @LINE:22
     def showInterest(p:String, topic:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "interest/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("p", p)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topic", topic)))

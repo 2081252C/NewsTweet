@@ -22,41 +22,41 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String,play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template6[Form[Search],String,Integer,String,List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, personaForm: Form[Persona], img: String, interestForm: Form[Interest], personas: List[String], interests: List[String], i: String):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], user: String, bool: Integer, img: String, personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.188*/("""
+Seq[Any](format.raw/*1.119*/("""
 
 """),format.raw/*3.1*/("""<script src=""""),_display_(/*3.15*/routes/*3.21*/.Assets.versioned("javascripts/render.js")),format.raw/*3.63*/(""""; type="text/javascript"></script>
-<link rel="stylesheet" media="screen" href=""""),_display_(/*4.46*/routes/*4.52*/.Assets.versioned("stylesheets/main.css")),format.raw/*4.93*/("""">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-"""),_display_(/*7.2*/main("NewsTweet")/*7.19*/(searchForm)/*7.31*/(user)/*7.37*/(bool)/*7.43*/(personaForm)/*7.56*/(img)/*7.61*/(interestForm)/*7.75*/(personas)/*7.85*/(interests)/*7.96*/(i)/*7.99*/ {_display_(Seq[Any](format.raw/*7.101*/("""
-  """),format.raw/*8.3*/("""<div id="categories">
-    <div class="container" id="category-container">
-      <div class="row" id="row-categories">
+"""),_display_(/*5.2*/main("NewsTweet")/*5.19*/(searchForm)/*5.31*/(user)/*5.37*/(bool)/*5.43*/(img)/*5.48*/(personas)/*5.58*/(interests)/*5.69*/ {_display_(Seq[Any](format.raw/*5.71*/("""
+  """),format.raw/*6.3*/("""<div id="categories">
+    <div id="category-container">
+      <div class="row" id="top-categories">
+        
         <div class="col-sm-4">
           <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem; height: 100%">
             <div class="card-body" id="intro-card">
-              <h4 class="card-title" id="category-title">Welcome to NewsTweet</h4>
-              <h6 class="card-subtitle mb-2 text-muted">An easy way to follow topics on Twitter.</h6>
+              <h4 class="card-title" id="category-title">Welcome to <a class="small">News<span class="lite">Tweet</span></a></h4>
+              <h6 class="card-subtitle mb-2 text-muted" id="orange">Track topics on <span class="lite">Twitter</span></h6>
                 <p class="card-text" id="category-text">
-              """),_display_(/*17.16*/if(bool==1)/*17.27*/{_display_(Seq[Any](format.raw/*17.28*/("""
-                """),format.raw/*18.17*/("""NewsTweet allows you to track Twitter searches. Search above to get started!<br><br>
+              """),_display_(/*16.16*/if(bool==1)/*16.27*/{_display_(Seq[Any](format.raw/*16.28*/("""
+                """),format.raw/*17.17*/("""<a class="smaller">News<span class="lite">Tweet</span></a> allows you to track Twitter searches. Search above to get started!<br><br>
                 Or, click on a category to see some recent tweets!</p>
-              """)))}/*20.17*/else/*20.22*/{_display_(Seq[Any](format.raw/*20.23*/("""
-                 """),format.raw/*21.18*/("""NewsTweet is a platform which allows you to search for tweets and save the results of multiple searches collectively as an interest. You can search tweets using the bar above, or log in with Twitter to create an Interest to start saving search results.
+              """)))}/*19.17*/else/*19.21*/{_display_(Seq[Any](format.raw/*19.22*/("""
+                 """),format.raw/*20.18*/("""<a class="smaller">News<span class="lite">Tweet</span></a> allows you to search for tweets and save the results of multiple searches collectively as an interest. You can search tweets using the bar above, or log in with Twitter to start saving search results.
                  <br><br>
-                 <a href="/twitter/signin"><img id="login-card" src=""""),_display_(/*23.71*/routes/*23.77*/.Assets.versioned("images/twitterlogin.png")),format.raw/*23.121*/(""""> </a><p>
-              """)))}),format.raw/*24.16*/("""
-            """),format.raw/*25.13*/("""</div>
+                 <a href=""""),_display_(/*22.28*/controllers/*22.39*/.routes.TwitterSignInServlet.signIn(request.uri)),format.raw/*22.87*/(""""><img id="login-card" src=""""),_display_(/*22.116*/routes/*22.122*/.Assets.versioned("images/twitterlogin.png")),format.raw/*22.166*/(""""> </a>
+              """)))}),format.raw/*23.16*/("""
+            """),format.raw/*24.13*/("""</div>
           </div>
         </div>
+    
         <div class="col-sm-4">
           <div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
             <img class="news w3-animate-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnh6hIgd5yVOfP4oa72UZiFZmaBMBagZpc9g1vxh2jVNCbqofy">
@@ -111,9 +111,9 @@ Seq[Any](format.raw/*1.188*/("""
           </div>
       </div>
 
-      <br>
+      <br> 
 
-      <div class="row" id="row-categories">
+      <div class="row" id="bottom-categories">
         <div class="col-sm-4">
         		<div class="card card-inverse" style="background-color: #333; border-color: #333; width: 20rem;">
               <img class="entertainment w3-animate-right" src="https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg">
@@ -205,9 +205,9 @@ Seq[Any](format.raw/*1.188*/("""
     }
   }
 
-  def render(searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String],i:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests,i)
+  def render(searchForm:Form[Search],user:String,bool:Integer,img:String,personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,user,bool,img,personas,interests)
 
-  def f:((Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,personaForm,img,interestForm,personas,interests,i) => apply(searchForm,user,bool,personaForm,img,interestForm,personas,interests,i)
+  def f:((Form[Search],String,Integer,String,List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,user,bool,img,personas,interests) => apply(searchForm,user,bool,img,personas,interests)
 
   def ref: this.type = this
 
@@ -216,11 +216,11 @@ Seq[Any](format.raw/*1.188*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Sun Feb 04 18:47:21 GMT 2018
+                  DATE: Fri Mar 02 15:53:28 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/index.scala.html
-                  HASH: 6ec739f81972da4b55e0443cd0217d04958d4197
-                  MATRIX: 1038->1|1320->187|1348->189|1388->203|1402->209|1464->251|1571->332|1585->338|1646->379|1748->456|1773->473|1793->485|1807->491|1821->497|1842->510|1855->515|1877->529|1895->539|1914->550|1925->553|1965->555|1994->558|2600->1137|2620->1148|2659->1149|2704->1166|2894->1338|2907->1343|2946->1344|2992->1362|3368->1711|3383->1717|3449->1761|3506->1787|3547->1800|4300->2525|4329->2526|4376->2545|4527->2668|4556->2669|4605->2690|4680->2737|4709->2738|4756->2757|4843->2816|4872->2817|4914->2831|4943->2832|4990->2851|5151->2984|5180->2985|5221->2998|5372->3122|5387->3128|5436->3156|6285->3977|6314->3978|6363->3999|6519->4127|6548->4128|6599->4151|6676->4200|6705->4201|6754->4222|6843->4283|6872->4284|6914->4298|6943->4299|6992->4320|7158->4458|7187->4459|7232->4476|7387->4604|7402->4610|7452->4639|8426->5585|8455->5586|8504->5607|8668->5743|8697->5744|8748->5767|8825->5816|8854->5817|8904->5838|8994->5899|9024->5900|9067->5914|9097->5915|9147->5936|9314->6074|9344->6075|9388->6090|9544->6218|9560->6224|9619->6261|10477->7090|10507->7091|10557->7112|10713->7239|10743->7240|10795->7263|10873->7312|10903->7313|10953->7334|11043->7395|11073->7396|11116->7410|11146->7411|11196->7432|11363->7570|11393->7571|11437->7586|11593->7714|11609->7720|11659->7748|12580->8640|12610->8641|12660->8662|12817->8790|12847->8791|12899->8814|12977->8863|13007->8864|13057->8885|13147->8946|13177->8947|13220->8961|13250->8962|13300->8983|13467->9121|13497->9122|13541->9137|13697->9265|13713->9271|13764->9300|13917->9422
-                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|36->4|36->4|36->4|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|39->7|40->8|49->17|49->17|49->17|50->18|52->20|52->20|52->20|53->21|55->23|55->23|55->23|56->24|57->25|69->37|69->37|70->38|72->40|72->40|73->41|74->42|74->42|75->43|76->44|76->44|76->44|76->44|77->45|79->47|79->47|80->48|82->50|82->50|82->50|95->63|95->63|96->64|98->66|98->66|99->67|100->68|100->68|101->69|102->70|102->70|102->70|102->70|103->71|105->73|105->73|106->74|108->76|108->76|108->76|126->94|126->94|127->95|129->97|129->97|130->98|131->99|131->99|132->100|133->101|133->101|133->101|133->101|134->102|136->104|136->104|137->105|139->107|139->107|139->107|153->121|153->121|154->122|156->124|156->124|157->125|158->126|158->126|159->127|160->128|160->128|160->128|160->128|161->129|163->131|163->131|164->132|166->134|166->134|166->134|180->148|180->148|181->149|183->151|183->151|184->152|185->153|185->153|186->154|187->155|187->155|187->155|187->155|188->156|190->158|190->158|191->159|193->161|193->161|193->161|201->169
+                  HASH: c6ab6f5f589978cd9e3c798f5f0473a64aec4c17
+                  MATRIX: 1002->1|1215->118|1243->120|1283->134|1297->140|1359->182|1422->220|1447->237|1467->249|1481->255|1495->261|1508->266|1526->276|1545->287|1584->289|1613->292|2278->930|2298->941|2337->942|2382->959|2621->1180|2634->1184|2673->1185|2719->1203|3059->1516|3079->1527|3148->1575|3205->1604|3221->1610|3287->1654|3341->1677|3382->1690|4140->2420|4169->2421|4216->2440|4367->2563|4396->2564|4445->2585|4520->2632|4549->2633|4596->2652|4683->2711|4712->2712|4754->2726|4783->2727|4830->2746|4991->2879|5020->2880|5061->2893|5212->3017|5227->3023|5276->3051|6125->3872|6154->3873|6203->3894|6359->4022|6388->4023|6439->4046|6516->4095|6545->4096|6594->4117|6683->4178|6712->4179|6754->4193|6783->4194|6832->4215|6998->4353|7027->4354|7072->4371|7227->4499|7242->4505|7292->4534|8270->5484|8299->5485|8348->5506|8512->5642|8541->5643|8592->5666|8669->5715|8698->5716|8748->5737|8838->5798|8868->5799|8911->5813|8941->5814|8991->5835|9158->5973|9188->5974|9232->5989|9388->6117|9404->6123|9463->6160|10321->6989|10351->6990|10401->7011|10557->7138|10587->7139|10639->7162|10717->7211|10747->7212|10797->7233|10887->7294|10917->7295|10960->7309|10990->7310|11040->7331|11207->7469|11237->7470|11281->7485|11437->7613|11453->7619|11503->7647|12424->8539|12454->8540|12504->8561|12661->8689|12691->8690|12743->8713|12821->8762|12851->8763|12901->8784|12991->8845|13021->8846|13064->8860|13094->8861|13144->8882|13311->9020|13341->9021|13385->9036|13541->9164|13557->9170|13608->9199|13761->9321
+                  LINES: 28->1|33->1|35->3|35->3|35->3|35->3|37->5|37->5|37->5|37->5|37->5|37->5|37->5|37->5|37->5|38->6|48->16|48->16|48->16|49->17|51->19|51->19|51->19|52->20|54->22|54->22|54->22|54->22|54->22|54->22|55->23|56->24|69->37|69->37|70->38|72->40|72->40|73->41|74->42|74->42|75->43|76->44|76->44|76->44|76->44|77->45|79->47|79->47|80->48|82->50|82->50|82->50|95->63|95->63|96->64|98->66|98->66|99->67|100->68|100->68|101->69|102->70|102->70|102->70|102->70|103->71|105->73|105->73|106->74|108->76|108->76|108->76|126->94|126->94|127->95|129->97|129->97|130->98|131->99|131->99|132->100|133->101|133->101|133->101|133->101|134->102|136->104|136->104|137->105|139->107|139->107|139->107|153->121|153->121|154->122|156->124|156->124|157->125|158->126|158->126|159->127|160->128|160->128|160->128|160->128|161->129|163->131|163->131|164->132|166->134|166->134|166->134|180->148|180->148|181->149|183->151|183->151|184->152|185->153|185->153|186->154|187->155|187->155|187->155|187->155|188->156|190->158|190->158|191->159|193->161|193->161|193->161|201->169
                   -- GENERATED --
               */
           

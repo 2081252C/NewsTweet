@@ -22,143 +22,166 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 /*1.2*/import b4.inline.fieldConstructor
-/*2.2*/import helper._
+/*3.2*/import helper._
 
-object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template11[String,Form[Search],String,Integer,Form[Persona],String,Form[Interest],List[String],List[String],String,Html,play.twirl.api.HtmlFormat.Appendable] {
+object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template8[String,Form[Search],String,Integer,String,List[String],List[String],Html,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*4.2*/(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(personaForm: Form[Persona])(img: String)(interestForm: Form[Interest])(personas: List[String])(interests: List[String])(i: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*5.2*/(title: String)(searchForm: Form[Search])(user: String)(bool: Integer)(img: String)(personas: List[String])(interests: List[String])(content: Html):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*4.218*/("""
+Seq[Any](format.raw/*5.149*/("""
 
-"""),format.raw/*6.1*/("""<!DOCTYPE html>
+"""),format.raw/*7.1*/("""<!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>"""),_display_(/*9.17*/title),format.raw/*9.22*/("""</title>
+        <title>"""),_display_(/*10.17*/title),format.raw/*10.22*/("""</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Custom styles -->
+        <link href=""""),_display_(/*14.22*/routes/*14.28*/.Assets.versioned("stylesheets/NiceAdmin/css/bootstrap.min.css")),format.raw/*14.92*/("""" rel="stylesheet"/>
+        <!--external css-->
+        <link href=""""),_display_(/*16.22*/routes/*16.28*/.Assets.versioned("stylesheets/NiceAdmin/css/style.css")),format.raw/*16.84*/("""" rel="stylesheet">
+        <!-- bootstrap theme -->
+        <link href=""""),_display_(/*18.22*/routes/*18.28*/.Assets.versioned("stylesheets/NiceAdmin/css/bootstrap-theme.css")),format.raw/*18.94*/("""" rel="stylesheet"/>
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link rel="stylesheet" media="screen" href=""""),_display_(/*14.54*/routes/*14.60*/.Assets.versioned("stylesheets/main.css")),format.raw/*14.101*/("""">
-        
-        <link rel="shortcut icon" type="image/png" href=""""),_display_(/*16.59*/routes/*16.65*/.Assets.versioned("images/favicon.png")),format.raw/*16.104*/("""">
+        <!-- font icon -->
+        <link href=""""),_display_(/*22.22*/routes/*22.28*/.Assets.versioned("stylesheets/NiceAdmin/css/elegant-icons-style.css")),format.raw/*22.98*/("""" rel="stylesheet" />
+        <link href=""""),_display_(/*23.22*/routes/*23.28*/.Assets.versioned("stylesheets/NiceAdmin/css/font-awesome.min.css")),format.raw/*23.95*/("""" rel="stylesheet" />
+        <link href=""""),_display_(/*24.22*/routes/*24.28*/.Assets.versioned("stylesheets/NiceAdmin/css/style-responsive.css")),format.raw/*24.95*/("""" rel="stylesheet" />
+        <!--link rel="stylesheet" media="screen" href=""""),_display_(/*25.57*/routes/*25.63*/.Assets.versioned("stylesheets/main.css")),format.raw/*25.104*/(""""-->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="shortcut icon" type="image/png" href=""""),_display_(/*27.59*/routes/*27.65*/.Assets.versioned("images/favicon.png")),format.raw/*27.104*/("""">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #5e97f2; height:65px;">
-          <div id="title">
-                <a href="/"> <h1> NewsTweet </h1></a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>      
-          </button>
+      <section id="container" class="">
+        <!--header start-->
+          <header class="header dark-bg">
+            <div class="toggle-nav nav">
+              <div id="menu-toggle"><a href="#"><i class="icon_menu"></i></a></div>
+            </div>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <div id="search">
-                        """),_display_(/*31.26*/b4/*31.28*/.form(action=helper.CSRF(routes.SearchController.searchResults()))/*31.94*/{_display_(Seq[Any](format.raw/*31.95*/("""
+            <!--logo start-->
+            <a href="/" class="logo nav"> News<span class="lite">Tweet</span> </a>
+            <!--logo end-->
 
-                            """),_display_(/*33.30*/b4/*33.32*/.text(searchForm("searchTerm"),
-                                'placeholder -> "Search ...",
-                                '_label -> null)),format.raw/*35.49*/("""
+            <div class="nav search-row" id="top_menu">
+              <!--  search form start -->
+              <ul class="nav top-menu">
+                <li>
+                  <div id="search">
+                    """),_display_(/*46.22*/b4/*46.24*/.form(action=helper.CSRF(routes.SearchController.searchResults()))/*46.90*/{_display_(Seq[Any](format.raw/*46.91*/("""
 
-                            """),_display_(/*37.30*/b4/*37.32*/.radio(searchForm("searchType"), 
-                                Seq("User" -> "User", "Hashtag" -> "Hashtag", "Content" -> "Content"), 
-                                '_label -> null,
-                                'value -> "Content")),format.raw/*40.53*/("""
-                         """)))}),format.raw/*41.27*/("""
-                """),format.raw/*42.17*/("""</div>
-              </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown text-center">
-                """),_display_(/*47.18*/if(bool==1)/*47.29*/{_display_(Seq[Any](format.raw/*47.30*/("""
-                        """),format.raw/*48.25*/("""<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img id="user_pic" src="""),_display_(/*48.165*/img),format.raw/*48.168*/("""><span class="caret"></span></a>
-                    """)))}/*49.22*/else/*49.26*/{_display_(Seq[Any](format.raw/*49.27*/(""" 
-                        """),format.raw/*50.25*/("""<a href="/twitter/signin"><img id="login-button" src=""""),_display_(/*50.80*/routes/*50.86*/.Assets.versioned("images/twitterlogin.png")),format.raw/*50.130*/("""" width="120%" border="0px" > </a>
-                    """)))}),format.raw/*51.22*/("""
-                """),format.raw/*52.17*/("""</a>
-              <ul class="dropdown-menu dropdown-menu-center">
-                <li><i>"""),_display_(/*54.25*/(user)),format.raw/*54.31*/("""</i></li>
-                <li><a href="/logout"> Logout</a></li>
+                        """),_display_(/*48.26*/b4/*48.28*/.text(searchForm("searchTerm"),
+                            'placeholder -> "Search ...",
+                            '_label -> null)),format.raw/*50.45*/("""
+
+                        """),_display_(/*52.26*/b4/*52.28*/.radio(searchForm("searchType"), 
+                            Seq("User" -> "User", "Hashtag" -> "Hashtag", "Content" -> "Content"), 
+                            '_label -> null,
+                            'value -> "Content")),format.raw/*55.49*/("""
+                     """)))}),format.raw/*56.23*/("""
+                  """),format.raw/*57.19*/("""</div>
+                </li>
               </ul>
-            </li>
-          </ul>
-          </div>
-        </nav>
+              <!--  search form end -->
+            </div>
 
-        <div id="tabs">        
-                <button class="persona" id="menu-toggle">
-                    <img src=""""),_display_(/*64.32*/routes/*64.38*/.Assets.versioned("images/menu.png")),format.raw/*64.74*/("""" width="18px" border="0px"> </button>
-        </div>
+            <div class="top-nav notification-row">
+              <ul class="nav pull-right top-menu">
 
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                  """),_display_(/*68.20*/if(bool==1)/*68.31*/{_display_(Seq[Any](format.raw/*68.32*/("""
+                      """),format.raw/*69.23*/("""<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img id="user-pic" src="""),_display_(/*69.163*/img),format.raw/*69.166*/(""" """),format.raw/*69.167*/("""class="nav"></a>
+                      <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                          <li><a><i>"""),_display_(/*72.38*/(user)),format.raw/*72.44*/("""</i></a></li>
+                          <li><a href="/logout"> Logout</a></li>
+                      </ul>
+                  """)))}/*75.20*/else/*75.24*/{_display_(Seq[Any](format.raw/*75.25*/(""" 
+                      """),format.raw/*76.23*/("""<a href=""""),_display_(/*76.33*/controllers/*76.44*/.routes.TwitterSignInServlet.signIn(request.uri)),format.raw/*76.92*/(""""><img id="login-button" src=""""),_display_(/*76.123*/routes/*76.129*/.Assets.versioned("images/twitterlogin.png")),format.raw/*76.173*/("""" width="60%" border="0px" > </a>
+                  """)))}),format.raw/*77.20*/("""
+                  
+                """),format.raw/*79.17*/("""</li>
+                <!-- user login dropdown end -->
+              </ul>
+            </div>
+          </header>
+        <!--header end-->
 
+        <!--sidebar start-->
         <div id="wrapper" class="toggled">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <br>
                     <li class="sidebar-brand">
-                            <h3><b>Interests</b></h3><hr>
+                            <a class="small">Interests</a>
                     </li>
-              """),_display_(/*76.16*/if(bool==0)/*76.27*/{_display_(Seq[Any](format.raw/*76.28*/("""
-                  """),format.raw/*77.19*/("""<p align=center><i>Here are some sample interests. Sign in to create your own!</i><br><hr></p>
-                """)))}),format.raw/*78.18*/("""
-                """),_display_(/*79.18*/if(interests.isEmpty)/*79.39*/{_display_(Seq[Any](format.raw/*79.40*/("""
-                    """),format.raw/*80.21*/("""Looks like you don't have any interests yet!<br><br> Would you like to add one?<br><br>
-                """)))}/*81.18*/else/*81.22*/{_display_(Seq[Any](format.raw/*81.23*/("""
-                    """),format.raw/*82.21*/("""<div id="exampleAccordion" data-children=".item">
-                    """),_display_(/*83.22*/for(persona <- personas) yield /*83.46*/{_display_(Seq[Any](format.raw/*83.47*/("""
-                      """),_display_(/*84.24*/defining(persona.replaceAll(" ",""))/*84.60*/ { personaNoSpace=>_display_(Seq[Any](format.raw/*84.79*/("""
-                      """),format.raw/*85.23*/("""<div class="item">
-                            <li class="sidebar-brand"><a data-toggle="collapse" href="#"""),_display_(/*86.89*/personaNoSpace),format.raw/*86.103*/("""" aria-expanded="false" aria-controls="collapseOne">
-                                <h5><b>"""),_display_(/*87.41*/persona),format.raw/*87.48*/("""</b></h5>
+              """),_display_(/*95.16*/if(bool==0)/*95.27*/{_display_(Seq[Any](format.raw/*95.28*/("""
+                  """),format.raw/*96.19*/("""<li class="sidebar-brand"><i>Here are some sample interests. Sign in to create your own!</i></li>
+                """)))}),format.raw/*97.18*/("""
+                """),_display_(/*98.18*/if(interests.isEmpty)/*98.39*/{_display_(Seq[Any](format.raw/*98.40*/("""
+                    """),format.raw/*99.21*/("""<li class="sidebar-brand">Looks like you don't have any interests yet! <br> Track a search to add one.</li>
+                """)))}/*100.18*/else/*100.22*/{_display_(Seq[Any](format.raw/*100.23*/("""
+                    """),format.raw/*101.21*/("""<div id="exampleAccordion" data-children=".item">
+                    """),_display_(/*102.22*/for(persona <- personas) yield /*102.46*/{_display_(Seq[Any](format.raw/*102.47*/("""
+                      """),_display_(/*103.24*/defining(persona.replaceAll(" ",""))/*103.60*/ { personaNoSpace=>_display_(Seq[Any](format.raw/*103.79*/("""
+                      """),format.raw/*104.23*/("""<div class="item">
+                            <li class="sidebar-brand"><a data-toggle="collapse" href="#"""),_display_(/*105.89*/personaNoSpace),format.raw/*105.103*/("""" aria-expanded="false" aria-controls="collapseOne">
+                                <h5><b><i class="icon_folder"></i> """),_display_(/*106.69*/persona),format.raw/*106.76*/("""</b></h5>
                             </a></li>
-                        <div id=""""),_display_(/*89.35*/personaNoSpace),format.raw/*89.49*/("""" class="collapse" role="tabpanel" aria-labelledby=""""),_display_(/*89.102*/personaNoSpace),format.raw/*89.116*/("""" data-parent="#exampleAccordion">
-                        """)))}),format.raw/*90.26*/("""
-                            """),_display_(/*91.30*/for(interest <- interests) yield /*91.56*/{_display_(Seq[Any](format.raw/*91.57*/("""
-                                """),_display_(/*92.34*/if(interest contains persona)/*92.63*/{_display_(Seq[Any](format.raw/*92.64*/("""
-                                    """),format.raw/*93.37*/("""<div class="sidebar-interest">
-                                        """),_display_(/*94.42*/defining(interest.replace(" - "+persona,""))/*94.86*/ { n=>_display_(Seq[Any](format.raw/*94.92*/("""
-                                        """),format.raw/*95.41*/("""<li><a href=""""),_display_(/*95.55*/routes/*95.61*/.InterestController.showInterest(persona, n)),format.raw/*95.105*/("""">"""),_display_(/*95.108*/n),format.raw/*95.109*/("""</a></li>
-                                        """)))}),format.raw/*96.42*/("""
+                        <div id=""""),_display_(/*108.35*/personaNoSpace),format.raw/*108.49*/("""" class="collapse" role="tabpanel" aria-labelledby=""""),_display_(/*108.102*/personaNoSpace),format.raw/*108.116*/("""" data-parent="#exampleAccordion">
+                        """)))}),format.raw/*109.26*/("""
+                            """),_display_(/*110.30*/for(interest <- interests) yield /*110.56*/{_display_(Seq[Any](format.raw/*110.57*/("""
+                                """),_display_(/*111.34*/if(interest contains persona)/*111.63*/{_display_(Seq[Any](format.raw/*111.64*/("""
+                                    """),format.raw/*112.37*/("""<div class="sidebar-interest">
+                                        """),_display_(/*113.42*/defining(interest.replace(" - "+persona,""))/*113.86*/ { n=>_display_(Seq[Any](format.raw/*113.92*/("""
+                                        """),format.raw/*114.41*/("""<li><a href=""""),_display_(/*114.55*/routes/*114.61*/.InterestController.showInterest(persona, n)),format.raw/*114.105*/(""""><i class="icon_document_alt"></i> """),_display_(/*114.142*/n),format.raw/*114.143*/("""</a></li>
+                                        """)))}),format.raw/*115.42*/("""
                                         
-                                    """),format.raw/*98.37*/("""</div>
-                                """)))}),format.raw/*99.34*/("""
-                            """)))}),format.raw/*100.30*/("""
-                        """),format.raw/*101.25*/("""</div><hr>
+                                    """),format.raw/*117.37*/("""</div>
+                                """)))}),format.raw/*118.34*/("""
+                            """)))}),format.raw/*119.30*/("""
+                        """),format.raw/*120.25*/("""</div><hr>
                       </div>
-                        """)))}),format.raw/*103.26*/("""
-                    """),format.raw/*104.21*/("""</div>
-                    """)))}),format.raw/*105.22*/("""
-            """),format.raw/*106.13*/("""</ul>
+                        """)))}),format.raw/*122.26*/("""
+                    """),format.raw/*123.21*/("""</div>
+                    """)))}),format.raw/*124.22*/("""
+            """),format.raw/*125.13*/("""</ul>
             </div>
             <!-- /#sidebar-wrapper -->
 
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div id="content">
-                        """),_display_(/*113.26*/content),format.raw/*113.33*/("""
-                    """),format.raw/*114.21*/("""</div>
+                        """),_display_(/*132.26*/content),format.raw/*132.33*/("""
+                    """),format.raw/*133.21*/("""</div>
                 </div>
             </div>
+          </div>
+      </section>
 
-        </div>
+        <!--/div-->
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script>
-            $("#menu-toggle").click(function(e) """),format.raw/*122.49*/("""{"""),format.raw/*122.50*/("""
-                """),format.raw/*123.17*/("""e.preventDefault();
+            $("#menu-toggle").click(function(e) """),format.raw/*143.49*/("""{"""),format.raw/*143.50*/("""
+                """),format.raw/*144.17*/("""e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
-            """),format.raw/*125.13*/("""}"""),format.raw/*125.14*/(""");
+            """),format.raw/*146.13*/("""}"""),format.raw/*146.14*/(""");
         </script>
+        <script src=""""),_display_(/*148.23*/routes/*148.29*/.Assets.versioned("javascripts/main.js")),format.raw/*148.69*/("""" type="text/javascript"></script>
+         <script src=""""),_display_(/*149.24*/routes/*149.30*/.Assets.versioned("javascripts/render.js")),format.raw/*149.72*/("""" type="text/javascript"></script>
+        <script src=""""),_display_(/*150.23*/routes/*150.29*/.Assets.versioned("javascripts/NiceAdmin/bootstrap.min.js")),format.raw/*150.88*/("""" type="text/javascript"></script>
+        <script src=""""),_display_(/*151.23*/routes/*151.29*/.Assets.versioned("javascripts/NiceAdmin/jquery.js")),format.raw/*151.81*/("""" type="text/javascript"></script>
+        <script src=""""),_display_(/*152.23*/routes/*152.29*/.Assets.versioned("javascripts/NiceAdmin/scripts.js")),format.raw/*152.82*/("""" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-        <script src=""""),_display_(/*129.23*/routes/*129.29*/.Assets.versioned("javascripts/main.js")),format.raw/*129.69*/("""" type="text/javascript"></script>
-         <script src=""""),_display_(/*130.24*/routes/*130.30*/.Assets.versioned("javascripts/render.js")),format.raw/*130.72*/("""" type="text/javascript"></script>
     </body>
 
 </html>
@@ -167,9 +190,9 @@ Seq[Any](format.raw/*4.218*/("""
     }
   }
 
-  def render(title:String,searchForm:Form[Search],user:String,bool:Integer,personaForm:Form[Persona],img:String,interestForm:Form[Interest],personas:List[String],interests:List[String],i:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i)(content)
+  def render(title:String,searchForm:Form[Search],user:String,bool:Integer,img:String,personas:List[String],interests:List[String],content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(searchForm)(user)(bool)(img)(personas)(interests)(content)
 
-  def f:((String) => (Form[Search]) => (String) => (Integer) => (Form[Persona]) => (String) => (Form[Interest]) => (List[String]) => (List[String]) => (String) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (user) => (bool) => (personaForm) => (img) => (interestForm) => (personas) => (interests) => (i) => (content) => apply(title)(searchForm)(user)(bool)(personaForm)(img)(interestForm)(personas)(interests)(i)(content)
+  def f:((String) => (Form[Search]) => (String) => (Integer) => (String) => (List[String]) => (List[String]) => (Html) => play.twirl.api.HtmlFormat.Appendable) = (title) => (searchForm) => (user) => (bool) => (img) => (personas) => (interests) => (content) => apply(title)(searchForm)(user)(bool)(img)(personas)(interests)(content)
 
   def ref: this.type = this
 
@@ -178,11 +201,11 @@ Seq[Any](format.raw/*4.218*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Wed Feb 21 21:14:48 GMT 2018
+                  DATE: Fri Mar 02 15:53:28 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/main.scala.html
-                  HASH: 1423d7e7ec35a4f1b65147c1b4bdd7f3d1001613
-                  MATRIX: 651->1|692->36|1114->54|1426->270|1454->272|1540->332|1565->337|2093->838|2108->844|2171->885|2268->955|2283->961|2344->1000|3118->1747|3129->1749|3204->1815|3243->1816|3301->1847|3312->1849|3475->1991|3533->2022|3544->2024|3804->2263|3862->2290|3907->2307|4091->2464|4111->2475|4150->2476|4203->2501|4371->2641|4396->2644|4469->2698|4482->2702|4521->2703|4575->2729|4657->2784|4672->2790|4738->2834|4825->2890|4870->2907|4988->2998|5015->3004|5315->3277|5330->3283|5387->3319|5793->3698|5813->3709|5852->3710|5899->3729|6042->3841|6087->3859|6117->3880|6156->3881|6205->3902|6329->4007|6342->4011|6381->4012|6430->4033|6528->4104|6568->4128|6607->4129|6658->4153|6703->4189|6760->4208|6811->4231|6945->4338|6981->4352|7101->4445|7129->4452|7238->4534|7273->4548|7354->4601|7390->4615|7481->4675|7538->4705|7580->4731|7619->4732|7680->4766|7718->4795|7757->4796|7822->4833|7921->4905|7974->4949|8018->4955|8087->4996|8128->5010|8143->5016|8209->5060|8240->5063|8263->5064|8345->5115|8451->5193|8522->5233|8584->5263|8638->5288|8735->5353|8785->5374|8845->5402|8887->5415|9134->5634|9163->5641|9213->5662|9562->5982|9592->5983|9638->6000|9753->6086|9783->6087|10283->6559|10299->6565|10361->6605|10447->6663|10463->6669|10527->6711
-                  LINES: 24->1|25->2|30->4|35->4|37->6|40->9|40->9|45->14|45->14|45->14|47->16|47->16|47->16|62->31|62->31|62->31|62->31|64->33|64->33|66->35|68->37|68->37|71->40|72->41|73->42|78->47|78->47|78->47|79->48|79->48|79->48|80->49|80->49|80->49|81->50|81->50|81->50|81->50|82->51|83->52|85->54|85->54|95->64|95->64|95->64|107->76|107->76|107->76|108->77|109->78|110->79|110->79|110->79|111->80|112->81|112->81|112->81|113->82|114->83|114->83|114->83|115->84|115->84|115->84|116->85|117->86|117->86|118->87|118->87|120->89|120->89|120->89|120->89|121->90|122->91|122->91|122->91|123->92|123->92|123->92|124->93|125->94|125->94|125->94|126->95|126->95|126->95|126->95|126->95|126->95|127->96|129->98|130->99|131->100|132->101|134->103|135->104|136->105|137->106|144->113|144->113|145->114|153->122|153->122|154->123|156->125|156->125|160->129|160->129|160->129|161->130|161->130|161->130
+                  HASH: 41d3facad30054cb04784b43ac2178858cad74d6
+                  MATRIX: 651->1|692->37|1077->55|1320->202|1348->204|1435->264|1461->269|1675->456|1690->462|1775->526|1872->596|1887->602|1964->658|2065->732|2080->738|2167->804|2518->1128|2533->1134|2624->1204|2694->1247|2709->1253|2797->1320|2867->1363|2882->1369|2970->1436|3075->1514|3090->1520|3153->1561|3323->1704|3338->1710|3399->1749|4064->2387|4075->2389|4150->2455|4189->2456|4243->2483|4254->2485|4409->2619|4463->2646|4474->2648|4722->2875|4776->2898|4823->2917|5169->3236|5189->3247|5228->3248|5279->3271|5447->3411|5472->3414|5502->3415|5705->3591|5732->3597|5877->3723|5890->3727|5929->3728|5981->3752|6018->3762|6038->3773|6107->3821|6166->3852|6182->3858|6248->3902|6332->3955|6396->3991|6917->4485|6937->4496|6976->4497|7023->4516|7169->4631|7214->4649|7244->4670|7283->4671|7332->4692|7477->4817|7491->4821|7531->4822|7581->4843|7680->4914|7721->4938|7761->4939|7813->4963|7859->4999|7917->5018|7969->5041|8104->5148|8141->5162|8290->5283|8319->5290|8429->5372|8465->5386|8547->5439|8584->5453|8676->5513|8734->5543|8777->5569|8817->5570|8879->5604|8918->5633|8958->5634|9024->5671|9124->5743|9178->5787|9223->5793|9293->5834|9335->5848|9351->5854|9418->5898|9484->5935|9508->5936|9591->5987|9698->6065|9770->6105|9832->6135|9886->6160|9983->6225|10033->6246|10093->6274|10135->6287|10382->6506|10411->6513|10461->6534|10849->6893|10879->6894|10925->6911|11040->6997|11070->6998|11141->7041|11157->7047|11219->7087|11305->7145|11321->7151|11385->7193|11470->7250|11486->7256|11567->7315|11652->7372|11668->7378|11742->7430|11827->7487|11843->7493|11918->7546
+                  LINES: 24->1|25->3|30->5|35->5|37->7|40->10|40->10|44->14|44->14|44->14|46->16|46->16|46->16|48->18|48->18|48->18|52->22|52->22|52->22|53->23|53->23|53->23|54->24|54->24|54->24|55->25|55->25|55->25|57->27|57->27|57->27|76->46|76->46|76->46|76->46|78->48|78->48|80->50|82->52|82->52|85->55|86->56|87->57|98->68|98->68|98->68|99->69|99->69|99->69|99->69|102->72|102->72|105->75|105->75|105->75|106->76|106->76|106->76|106->76|106->76|106->76|106->76|107->77|109->79|125->95|125->95|125->95|126->96|127->97|128->98|128->98|128->98|129->99|130->100|130->100|130->100|131->101|132->102|132->102|132->102|133->103|133->103|133->103|134->104|135->105|135->105|136->106|136->106|138->108|138->108|138->108|138->108|139->109|140->110|140->110|140->110|141->111|141->111|141->111|142->112|143->113|143->113|143->113|144->114|144->114|144->114|144->114|144->114|144->114|145->115|147->117|148->118|149->119|150->120|152->122|153->123|154->124|155->125|162->132|162->132|163->133|173->143|173->143|174->144|176->146|176->146|178->148|178->148|178->148|179->149|179->149|179->149|180->150|180->150|180->150|181->151|181->151|181->151|182->152|182->152|182->152
                   -- GENERATED --
               */
           

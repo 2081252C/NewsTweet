@@ -22,29 +22,31 @@ import play.mvc.Http.Context.Implicit._
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 
-object searchResults extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template22[Form[Search],Form[Track],Form[Message],String,Integer,List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String,play.twirl.api.HtmlFormat.Appendable] {
+object searchResults extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template16[Form[Search],Form[Track],Form[Message],String,Integer,List[String],List[String],List[String],List[String],List[String],List[String],List[String],String,String,List[String],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, tweets: List[String], popTweets: List[String], popTweets1: List[String], popTweets2: List[String], recentTweets: List[String], recentTweets1: List[String], recentTweets2: List[String], media: List[String], media1: List[String], media2: List[String], personaForm: Form[Persona], img: String, interestForm: Form[Interest], term: String, personas: List[String], interests: List[String], i: String):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(searchForm: Form[Search], trackForm: Form[Track], messageForm: Form[Message], user: String, bool: Integer, popTweets: List[String], recentTweets: List[String], recentTweets1: List[String], recentTweets2: List[String], media: List[String], media1: List[String], media2: List[String], img: String, term: String, personas: List[String], interests: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 /*3.2*/import helper._
 
 implicit def /*4.2*/implicitFieldConstructor/*4.26*/ = {{ b4.horizontal.fieldConstructor("col-md-2", "col-md-10") }};
-Seq[Any](format.raw/*1.504*/("""
+Seq[Any](format.raw/*1.361*/("""
 
-"""),format.raw/*4.89*/("""  """),format.raw/*4.91*/("""// Declares a horizontal field constructor as default
+"""),format.raw/*4.89*/("""
 
-<script sync src="https://platform.twitter.com/widgets.js"></script>
+"""),format.raw/*6.1*/("""<script sync src="https://platform.twitter.com/widgets.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.js"; type="text/javascript"></script>
 <script src=""""),_display_(/*8.15*/routes/*8.21*/.Assets.versioned("javascripts/render.js")),format.raw/*8.63*/(""""; type="text/javascript"></script>
 
-"""),_display_(/*10.2*/main("Search Results")/*10.24*/(searchForm)/*10.36*/(user)/*10.42*/(bool)/*10.48*/(personaForm)/*10.61*/(img)/*10.66*/(interestForm)/*10.80*/(personas)/*10.90*/(interests)/*10.101*/(i)/*10.104*/{_display_(Seq[Any](format.raw/*10.105*/("""
-  	"""),format.raw/*11.4*/("""<h3>Search Results for "<b>"""),_display_(/*11.32*/term),format.raw/*11.36*/("""</b>":
-      <a href=""""),_display_(/*12.17*/routes/*12.23*/.SearchController.searchAnalytics()),format.raw/*12.58*/("""" class="btn btn-primary" style="float:right;"> Search Analytics </a>
+"""),_display_(/*10.2*/main("Search Results")/*10.24*/(searchForm)/*10.36*/(user)/*10.42*/(bool)/*10.48*/(img)/*10.53*/(personas)/*10.63*/(interests)/*10.74*/{_display_(Seq[Any](format.raw/*10.75*/("""
+    """),format.raw/*11.5*/("""<h3 id="upper">search results for "<span class="lite">"""),_display_(/*11.60*/term),format.raw/*11.64*/("""</span>":
+      <a href=""""),_display_(/*12.17*/routes/*12.23*/.SearchController.searchAnalytics()),format.raw/*12.58*/("""" class="btn btn-primary" id="analytics-btn"> Search Analytics </a>
     </h3>
 
-    <div id="loader"></div>
+    <div id="loader-bg">
+     <div id="loader"></div>
+   </div>
 
     <div id="page-content" style="display:none">
 
@@ -53,33 +55,33 @@ Seq[Any](format.raw/*1.504*/("""
             <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
           </li>
         <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'popular')">15 Most Popular</a> 
+            <a class="nav-link search_result" onclick="openTab(event, 'popular')">Top 15 Tweets</a> 
           </li>
           <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'media')">Media</a>
+            <a class="nav-link search_result" onclick="openTab(event, 'media')">Photos, Videos and Links</a>
           </li>
         </ul>
 
           <div id="recent" class="tweets">
             <div class="card-columns">
-              """),_display_(/*33.16*/for(tweet <- recentTweets) yield /*33.42*/{_display_(Seq[Any](format.raw/*33.43*/("""
-                """),_display_(/*34.18*/defining(tweet.split("-"))/*34.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*34.60*/("""                 
-                  """),format.raw/*35.19*/("""<div class="card">
-                    <div id=""""),_display_(/*36.31*/tweetArray(0)),format.raw/*36.44*/("""">
+              """),_display_(/*35.16*/for(tweet <- recentTweets) yield /*35.42*/{_display_(Seq[Any](format.raw/*35.43*/("""
+                """),_display_(/*36.18*/defining(tweet.split("-"))/*36.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*36.60*/("""                 
+                  """),format.raw/*37.19*/("""<div class="card">
+                    <div id=""""),_display_(/*38.31*/tweetArray(0)),format.raw/*38.44*/("""">
                       <script>
-                        rendering(""""),_display_(/*38.37*/tweetArray(0)),format.raw/*38.50*/("""");
+                        rendering(""""),_display_(/*40.37*/tweetArray(0)),format.raw/*40.50*/("""");
                       </script>
                     </div>
                      
-                    """),_display_(/*42.22*/if(bool==1)/*42.33*/{_display_(Seq[Any](format.raw/*42.34*/("""  
-                      """),format.raw/*43.23*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*43.96*/tweet),format.raw/*43.101*/("""">
-                        Message """),_display_(/*44.34*/tweetArray(1)),format.raw/*44.47*/("""
-                      """),format.raw/*45.23*/("""</button>
-                    """)))}),format.raw/*46.22*/("""
-                  """),format.raw/*47.19*/("""</div>
+                    """),_display_(/*44.22*/if(bool==1)/*44.33*/{_display_(Seq[Any](format.raw/*44.34*/("""  
+                      """),format.raw/*45.23*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*45.77*/tweet),format.raw/*45.82*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*46.63*/tweetArray(1)),format.raw/*46.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                    """)))}),format.raw/*48.22*/("""
+                  """),format.raw/*49.19*/("""</div>
                 
 
-                  <div class="modal fade" id=""""),_display_(/*50.48*/tweet),format.raw/*50.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id=""""),_display_(/*52.48*/tweet),format.raw/*52.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -90,61 +92,62 @@ Seq[Any](format.raw/*1.504*/("""
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    """),_display_(/*61.38*/b4/*61.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*61.104*/{_display_(Seq[Any](format.raw/*61.105*/(""" 
+                                    """),_display_(/*63.38*/b4/*63.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*63.115*/{_display_(Seq[Any](format.raw/*63.116*/(""" 
 
-                                            """),_display_(/*63.46*/b4/*63.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                            """),_display_(/*65.46*/b4/*65.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
-                                                '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*66.60*/("""
+                                                '_label -> "To:",
+                                                'size -> 1)),format.raw/*68.60*/("""
 
-                                            """),_display_(/*68.46*/b4/*68.48*/.text(messageForm("message"),
+                                            """),_display_(/*70.46*/b4/*70.48*/.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)),format.raw/*71.60*/("""
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*73.60*/("""
 
                                     
-                                    """),format.raw/*74.37*/("""</div>
+                                    """),format.raw/*76.37*/("""</div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            """)))}),format.raw/*79.30*/("""
-                              """),format.raw/*80.31*/("""</div>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                            """)))}),format.raw/*81.30*/("""
+                              """),format.raw/*82.31*/("""</div>
                             </div>
                           </div>
                         </div>
                         
-                """)))}),format.raw/*85.18*/("""
-              """)))}),format.raw/*86.16*/("""
-            """),format.raw/*87.13*/("""</div>
+                """)))}),format.raw/*87.18*/("""
+              """)))}),format.raw/*88.16*/("""
+            """),format.raw/*89.13*/("""</div>
 
+            <hr>
             <div class="button_wrapper">
-              <button type="button" class="show_btn" id="show">
-                Show More
-              </button>
+              <a class="show_btn" id="show">
+                <b class="caret"></b> Show More
+              </a>
             </div>
 
               <div class="card-columns">
 
               <div id="more" style="display:none">
-                """),_display_(/*98.18*/for(tweet <- recentTweets1) yield /*98.45*/{_display_(Seq[Any](format.raw/*98.46*/("""
-                  """),_display_(/*99.20*/defining(tweet.split("-"))/*99.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*99.62*/("""                 
-                    """),format.raw/*100.21*/("""<div class="card">
-                      <div id=""""),_display_(/*101.33*/tweetArray(0)),format.raw/*101.46*/("""">
+                """),_display_(/*101.18*/for(tweet <- recentTweets1) yield /*101.45*/{_display_(Seq[Any](format.raw/*101.46*/("""
+                  """),_display_(/*102.20*/defining(tweet.split("-"))/*102.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*102.62*/("""                 
+                    """),format.raw/*103.21*/("""<div class="card">
+                      <div id=""""),_display_(/*104.33*/tweetArray(0)),format.raw/*104.46*/("""">
                         <script>
-                          rendering(""""),_display_(/*103.39*/tweetArray(0)),format.raw/*103.52*/("""");
+                          rendering(""""),_display_(/*106.39*/tweetArray(0)),format.raw/*106.52*/("""");
                         </script>
                       </div>
                         
-                      """),_display_(/*107.24*/if(bool==1)/*107.35*/{_display_(Seq[Any](format.raw/*107.36*/("""  
-                        """),format.raw/*108.25*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*108.98*/tweet),format.raw/*108.103*/("""">
-                          Message """),_display_(/*109.36*/tweetArray(1)),format.raw/*109.49*/("""
-                        """),format.raw/*110.25*/("""</button>
-                      """)))}),format.raw/*111.24*/("""
-                    """),format.raw/*112.21*/("""</div>
+                      """),_display_(/*110.24*/if(bool==1)/*110.35*/{_display_(Seq[Any](format.raw/*110.36*/("""  
+                        """),format.raw/*111.25*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*111.79*/tweet),format.raw/*111.84*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*112.63*/tweetArray(1)),format.raw/*112.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                      """)))}),format.raw/*114.24*/("""
+                    """),format.raw/*115.21*/("""</div>
                   
 
-                    <div class="modal fade" id=""""),_display_(/*115.50*/tweet),format.raw/*115.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id=""""),_display_(/*118.50*/tweet),format.raw/*118.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -155,60 +158,62 @@ Seq[Any](format.raw/*1.504*/("""
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      """),_display_(/*126.40*/b4/*126.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*126.106*/{_display_(Seq[Any](format.raw/*126.107*/(""" 
+                                      """),_display_(/*129.40*/b4/*129.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*129.117*/{_display_(Seq[Any](format.raw/*129.118*/(""" 
 
-                                              """),_display_(/*128.48*/b4/*128.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                              """),_display_(/*131.48*/b4/*131.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*131.60*/("""
+                                                'size -> 1)),format.raw/*134.60*/("""
 
-                                            """),_display_(/*133.46*/b4/*133.48*/.text(messageForm("message"),
+                                            """),_display_(/*136.46*/b4/*136.48*/.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)),format.raw/*136.60*/("""
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*139.60*/("""
 
                                       
-                                      """),format.raw/*139.39*/("""</div>
+                                      """),format.raw/*142.39*/("""</div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                              """)))}),format.raw/*144.32*/("""
-                                """),format.raw/*145.33*/("""</div>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                              """)))}),format.raw/*147.32*/("""
+                                """),format.raw/*148.33*/("""</div>
                               </div>
                             </div>
                           </div>
                           
-                  """)))}),format.raw/*150.20*/("""
-                """)))}),format.raw/*151.18*/("""
-              """),format.raw/*152.15*/("""</div>
+                  """)))}),format.raw/*153.20*/("""
+                """)))}),format.raw/*154.18*/("""
+              """),format.raw/*155.15*/("""</div>
             </div>
+
             <div class="button_wrapper">
-              <button type="button" class="show_btn" id="show2" style="display:none">
-                Show More
-              </button>
+              <a class="show_btn" id="show2" style="display:none">
+                <hr>
+                <b class="caret"></b> Show More
+              </a>
             </div>
               <div class="card-columns">
 
               <div id="showMore" style="display:none">
-                """),_display_(/*162.18*/for(tweet <- recentTweets2) yield /*162.45*/{_display_(Seq[Any](format.raw/*162.46*/("""
-                  """),_display_(/*163.20*/defining(tweet.split("-"))/*163.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*163.62*/("""                 
-                    """),format.raw/*164.21*/("""<div class="card">
-                      <div id=""""),_display_(/*165.33*/tweetArray(0)),format.raw/*165.46*/("""">
+                """),_display_(/*167.18*/for(tweet <- recentTweets2) yield /*167.45*/{_display_(Seq[Any](format.raw/*167.46*/("""
+                  """),_display_(/*168.20*/defining(tweet.split("-"))/*168.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*168.62*/("""                 
+                    """),format.raw/*169.21*/("""<div class="card">
+                      <div id=""""),_display_(/*170.33*/tweetArray(0)),format.raw/*170.46*/("""">
                         <script>
-                          rendering(""""),_display_(/*167.39*/tweetArray(0)),format.raw/*167.52*/("""");
+                          rendering(""""),_display_(/*172.39*/tweetArray(0)),format.raw/*172.52*/("""");
                         </script>
                       </div>
                       
-                      """),_display_(/*171.24*/if(bool==1)/*171.35*/{_display_(Seq[Any](format.raw/*171.36*/("""  
-                        """),format.raw/*172.25*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*172.98*/tweet),format.raw/*172.103*/("""">
-                          Message """),_display_(/*173.36*/tweetArray(1)),format.raw/*173.49*/("""
-                        """),format.raw/*174.25*/("""</button>
-                      """)))}),format.raw/*175.24*/("""
-                    """),format.raw/*176.21*/("""</div>
+                      """),_display_(/*176.24*/if(bool==1)/*176.35*/{_display_(Seq[Any](format.raw/*176.36*/("""  
+                        """),format.raw/*177.25*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*177.79*/tweet),format.raw/*177.84*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*178.63*/tweetArray(1)),format.raw/*178.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                      """)))}),format.raw/*180.24*/("""
+                    """),format.raw/*181.21*/("""</div>
                   
 
-                    <div class="modal fade" id=""""),_display_(/*179.50*/tweet),format.raw/*179.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id=""""),_display_(/*184.50*/tweet),format.raw/*184.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -219,56 +224,56 @@ Seq[Any](format.raw/*1.504*/("""
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      """),_display_(/*190.40*/b4/*190.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*190.106*/{_display_(Seq[Any](format.raw/*190.107*/(""" 
+                                      """),_display_(/*195.40*/b4/*195.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*195.117*/{_display_(Seq[Any](format.raw/*195.118*/(""" 
 
-                                              """),_display_(/*192.48*/b4/*192.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                              """),_display_(/*197.48*/b4/*197.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*195.60*/("""
-
-                                            """),_display_(/*197.46*/b4/*197.48*/.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
                                                 'size -> 1)),format.raw/*200.60*/("""
 
+                                            """),_display_(/*202.46*/b4/*202.48*/.textarea(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*205.60*/("""
+
                                       
-                                      """),format.raw/*203.39*/("""</div>
+                                      """),format.raw/*208.39*/("""</div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                              """)))}),format.raw/*208.32*/("""
-                                """),format.raw/*209.33*/("""</div>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                              """)))}),format.raw/*213.32*/("""
+                                """),format.raw/*214.33*/("""</div>
                               </div>
                             </div>
                           </div>
                           
-                  """)))}),format.raw/*214.20*/("""
-                """)))}),format.raw/*215.18*/("""
-              """),format.raw/*216.15*/("""</div>
+                  """)))}),format.raw/*219.20*/("""
+                """)))}),format.raw/*220.18*/("""
+              """),format.raw/*221.15*/("""</div>
             </div> 
           </div>
 
           <div id="popular" class="tweets">
             <div class="card-columns">
-              """),_display_(/*222.16*/for((tweet) <- popTweets) yield /*222.41*/{_display_(Seq[Any](format.raw/*222.42*/("""
-                """),_display_(/*223.18*/defining(tweet.split("-"))/*223.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*223.60*/("""                 
-                  """),format.raw/*224.19*/("""<div class="card">
-                    <div id=""""),_display_(/*225.31*/tweetArray(0)),format.raw/*225.44*/("""">
+              """),_display_(/*227.16*/for((tweet) <- popTweets) yield /*227.41*/{_display_(Seq[Any](format.raw/*227.42*/("""
+                """),_display_(/*228.18*/defining(tweet.split("-"))/*228.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*228.60*/("""                 
+                  """),format.raw/*229.19*/("""<div class="card">
+                    <div id=""""),_display_(/*230.31*/tweetArray(0)),format.raw/*230.44*/("""">
                       <script>
-                        rendering(""""),_display_(/*227.37*/tweetArray(0)),format.raw/*227.50*/("""");
+                        rendering(""""),_display_(/*232.37*/tweetArray(0)),format.raw/*232.50*/("""");
                       </script>
                     </div>
                      
-                    """),_display_(/*231.22*/if(bool==1)/*231.33*/{_display_(Seq[Any](format.raw/*231.34*/("""  
-                      """),format.raw/*232.23*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*232.96*/tweet),format.raw/*232.101*/("""">
-                        Message """),_display_(/*233.34*/tweetArray(1)),format.raw/*233.47*/("""
-                      """),format.raw/*234.23*/("""</button>
-                    """)))}),format.raw/*235.22*/("""
-                  """),format.raw/*236.19*/("""</div>
+                    """),_display_(/*236.22*/if(bool==1)/*236.33*/{_display_(Seq[Any](format.raw/*236.34*/("""  
+                      """),format.raw/*237.23*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*237.77*/tweet),format.raw/*237.82*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*238.63*/tweetArray(1)),format.raw/*238.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                    """)))}),format.raw/*240.22*/("""
+                  """),format.raw/*241.19*/("""</div>
                 
 
-                  <div class="modal fade" id=""""),_display_(/*239.48*/tweet),format.raw/*239.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id=""""),_display_(/*244.48*/tweet),format.raw/*244.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -279,55 +284,55 @@ Seq[Any](format.raw/*1.504*/("""
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    """),_display_(/*250.38*/b4/*250.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*250.104*/{_display_(Seq[Any](format.raw/*250.105*/(""" 
+                                    """),_display_(/*255.38*/b4/*255.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*255.115*/{_display_(Seq[Any](format.raw/*255.116*/(""" 
 
-                                            """),_display_(/*252.46*/b4/*252.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                            """),_display_(/*257.46*/b4/*257.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*255.60*/("""
-
-                                            """),_display_(/*257.46*/b4/*257.48*/.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
                                                 'size -> 1)),format.raw/*260.60*/("""
 
+                                            """),_display_(/*262.46*/b4/*262.48*/.textarea(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*265.60*/("""
+
                                     
-                                    """),format.raw/*263.37*/("""</div>
+                                    """),format.raw/*268.37*/("""</div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            """)))}),format.raw/*268.30*/("""
-                              """),format.raw/*269.31*/("""</div>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                            """)))}),format.raw/*273.30*/("""
+                              """),format.raw/*274.31*/("""</div>
                             </div>
                           </div>
                         </div>
                         
-                """)))}),format.raw/*274.18*/("""
-              """)))}),format.raw/*275.16*/("""
-            """),format.raw/*276.13*/("""</div>
+                """)))}),format.raw/*279.18*/("""
+              """)))}),format.raw/*280.16*/("""
+            """),format.raw/*281.13*/("""</div>
           </div> 
 
           <div id="media" class="tweets">
             <div class="card-columns">
-              """),_display_(/*281.16*/for(tweet <- media) yield /*281.35*/{_display_(Seq[Any](format.raw/*281.36*/("""
-                """),_display_(/*282.18*/defining(tweet.split("-"))/*282.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*282.60*/("""                 
-                  """),format.raw/*283.19*/("""<div class="card">
-                    <div id=""""),_display_(/*284.31*/tweetArray(0)),format.raw/*284.44*/("""">
+              """),_display_(/*286.16*/for(tweet <- media) yield /*286.35*/{_display_(Seq[Any](format.raw/*286.36*/("""
+                """),_display_(/*287.18*/defining(tweet.split("-"))/*287.44*/ { tweetArray =>_display_(Seq[Any](format.raw/*287.60*/("""                 
+                  """),format.raw/*288.19*/("""<div class="card">
+                    <div id=""""),_display_(/*289.31*/tweetArray(0)),format.raw/*289.44*/("""">
                       <script>
-                        rendering(""""),_display_(/*286.37*/tweetArray(0)),format.raw/*286.50*/("""");
+                        rendering(""""),_display_(/*291.37*/tweetArray(0)),format.raw/*291.50*/("""");
                       </script>
                     </div>
                     
-                    """),_display_(/*290.22*/if(bool==1)/*290.33*/{_display_(Seq[Any](format.raw/*290.34*/("""  
-                      """),format.raw/*291.23*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*291.96*/tweet),format.raw/*291.101*/("""">
-                        Message """),_display_(/*292.34*/tweetArray(1)),format.raw/*292.47*/("""
-                      """),format.raw/*293.23*/("""</button>
-                    """)))}),format.raw/*294.22*/("""
-                  """),format.raw/*295.19*/("""</div>
+                    """),_display_(/*295.22*/if(bool==1)/*295.33*/{_display_(Seq[Any](format.raw/*295.34*/("""  
+                      """),format.raw/*296.23*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*296.77*/tweet),format.raw/*296.82*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*297.63*/tweetArray(1)),format.raw/*297.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                    """)))}),format.raw/*299.22*/("""
+                  """),format.raw/*300.19*/("""</div>
                 
 
-                  <div class="modal fade" id=""""),_display_(/*298.48*/tweet),format.raw/*298.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id=""""),_display_(/*303.48*/tweet),format.raw/*303.53*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -338,55 +343,63 @@ Seq[Any](format.raw/*1.504*/("""
                               </div>
                               <div class="modal-body">
                                 <div id="interest-form">
-                                    """),_display_(/*309.38*/b4/*309.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*309.104*/{_display_(Seq[Any](format.raw/*309.105*/(""" 
+                                    """),_display_(/*314.38*/b4/*314.40*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*314.115*/{_display_(Seq[Any](format.raw/*314.116*/(""" 
 
-                                            """),_display_(/*311.46*/b4/*311.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                            """),_display_(/*316.46*/b4/*316.48*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*314.60*/("""
-
-                                            """),_display_(/*316.46*/b4/*316.48*/.text(messageForm("message"),
-                                                'placeholder -> "Message",
-                                                '_label -> "Message",
                                                 'size -> 1)),format.raw/*319.60*/("""
+
+                                            """),_display_(/*321.46*/b4/*321.48*/.textarea(messageForm("message"),
+                                                'placeholder -> "Message",
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*324.60*/("""
                                     
-                                    """),format.raw/*321.37*/("""</div>
+                                    """),format.raw/*326.37*/("""</div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                            """)))}),format.raw/*326.30*/("""
-                              """),format.raw/*327.31*/("""</div>
+                                <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                            """)))}),format.raw/*331.30*/("""
+                              """),format.raw/*332.31*/("""</div>
                             </div>
                           </div>
                         </div>
                         
-                """)))}),format.raw/*332.18*/("""
-              """)))}),format.raw/*333.16*/("""
+                """)))}),format.raw/*337.18*/("""
+              """)))}),format.raw/*338.16*/("""
 
-              """),format.raw/*335.15*/("""<button type="button" class="show_btn" id="media">
-                Show More
-              </button>
+            
+            """),format.raw/*341.13*/("""</div>
+             
+             <hr> 
+            <div class="button_wrapper">
+              <a class="show_btn" id="media1">
+                <b class="caret"></b> Show More
+              </a>
+            </div>
+
+            <div class="card-columns">
 
               <div id="moreMedia" style="display:none">
-                """),_display_(/*340.18*/for(tweet <- media1) yield /*340.38*/{_display_(Seq[Any](format.raw/*340.39*/("""
-                  """),_display_(/*341.20*/defining(tweet.split("-"))/*341.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*341.62*/("""                 
-                    """),format.raw/*342.21*/("""<div class="card">
-                      <div id=""""),_display_(/*343.33*/tweetArray(0)),format.raw/*343.46*/("""">
+                """),_display_(/*353.18*/for(tweet <- media1) yield /*353.38*/{_display_(Seq[Any](format.raw/*353.39*/("""
+                  """),_display_(/*354.20*/defining(tweet.split("-"))/*354.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*354.62*/("""                 
+                    """),format.raw/*355.21*/("""<div class="card">
+                      <div id=""""),_display_(/*356.33*/tweetArray(0)),format.raw/*356.46*/("""">
                         <script>
-                          rendering(""""),_display_(/*345.39*/tweetArray(0)),format.raw/*345.52*/("""");
+                          rendering(""""),_display_(/*358.39*/tweetArray(0)),format.raw/*358.52*/("""");
                         </script>
                       </div>
                       
-                      """),_display_(/*349.24*/if(bool==1)/*349.35*/{_display_(Seq[Any](format.raw/*349.36*/("""  
-                        """),format.raw/*350.25*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*350.98*/tweet),format.raw/*350.103*/("""">
-                          Message """),_display_(/*351.36*/tweetArray(1)),format.raw/*351.49*/("""
-                        """),format.raw/*352.25*/("""</button>
-                      """)))}),format.raw/*353.24*/("""
-                    """),format.raw/*354.21*/("""</div>
+                      """),_display_(/*362.24*/if(bool==1)/*362.35*/{_display_(Seq[Any](format.raw/*362.36*/("""  
+                        """),format.raw/*363.25*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*363.79*/tweet),format.raw/*363.84*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*364.63*/tweetArray(1)),format.raw/*364.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                      """)))}),format.raw/*366.24*/("""
+                    """),format.raw/*367.21*/("""</div>
                   
 
-                    <div class="modal fade" id=""""),_display_(/*357.50*/tweet),format.raw/*357.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id=""""),_display_(/*370.50*/tweet),format.raw/*370.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -397,57 +410,62 @@ Seq[Any](format.raw/*1.504*/("""
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      """),_display_(/*368.40*/b4/*368.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*368.106*/{_display_(Seq[Any](format.raw/*368.107*/(""" 
+                                      """),_display_(/*381.40*/b4/*381.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*381.117*/{_display_(Seq[Any](format.raw/*381.118*/(""" 
 
-                                              """),_display_(/*370.48*/b4/*370.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                              """),_display_(/*383.48*/b4/*383.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*373.60*/("""
+                                                'size -> 1)),format.raw/*386.60*/("""
 
-                                            """),_display_(/*375.46*/b4/*375.48*/.text(messageForm("message"),
+                                            """),_display_(/*388.46*/b4/*388.48*/.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)),format.raw/*378.60*/("""
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*391.60*/("""
 
                                       
-                                      """),format.raw/*381.39*/("""</div>
+                                      """),format.raw/*394.39*/("""</div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                              """)))}),format.raw/*386.32*/("""
-                                """),format.raw/*387.33*/("""</div>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                              """)))}),format.raw/*399.32*/("""
+                                """),format.raw/*400.33*/("""</div>
                               </div>
                             </div>
                           </div>
                           
-                  """)))}),format.raw/*392.20*/("""
-                """)))}),format.raw/*393.18*/("""
-              """),format.raw/*394.15*/("""</div>
+                  """)))}),format.raw/*405.20*/("""
+                """)))}),format.raw/*406.18*/("""
+              """),format.raw/*407.15*/("""</div>
+            </div>
 
-              <button type="button" class="show_btn" id="media2" style="display:none">
-                Show More
-              </button>
+            <div class="button_wrapper">
+              <a class="show_btn" id="media2" style="display:none">
+                <hr>
+                <b class="caret"></b> Show More
+              </a>
+            </div>
 
+            <div class="card-columns">
               <div id="moreMedia2" style="display:none">
-                """),_display_(/*401.18*/for(tweet <- media2) yield /*401.38*/{_display_(Seq[Any](format.raw/*401.39*/("""
-                  """),_display_(/*402.20*/defining(tweet.split("-"))/*402.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*402.62*/("""                 
-                    """),format.raw/*403.21*/("""<div class="card">
-                      <div id=""""),_display_(/*404.33*/tweetArray(0)),format.raw/*404.46*/("""">
+                """),_display_(/*419.18*/for(tweet <- media2) yield /*419.38*/{_display_(Seq[Any](format.raw/*419.39*/("""
+                  """),_display_(/*420.20*/defining(tweet.split("-"))/*420.46*/ { tweetArray =>_display_(Seq[Any](format.raw/*420.62*/("""                 
+                    """),format.raw/*421.21*/("""<div class="card">
+                      <div id=""""),_display_(/*422.33*/tweetArray(0)),format.raw/*422.46*/("""">
                         <script>
-                          rendering(""""),_display_(/*406.39*/tweetArray(0)),format.raw/*406.52*/("""");
+                          rendering(""""),_display_(/*424.39*/tweetArray(0)),format.raw/*424.52*/("""");
                         </script>
                       </div>
                         
-                      """),_display_(/*410.24*/if(bool==1)/*410.35*/{_display_(Seq[Any](format.raw/*410.36*/("""
-                        """),format.raw/*411.25*/("""<button type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*411.98*/tweet),format.raw/*411.103*/("""">
-                          Message """),_display_(/*412.36*/tweetArray(1)),format.raw/*412.49*/("""
-                        """),format.raw/*413.25*/("""</button>
-                      """)))}),format.raw/*414.24*/("""
-                    """),format.raw/*415.21*/("""</div>
+                      """),_display_(/*428.24*/if(bool==1)/*428.35*/{_display_(Seq[Any](format.raw/*428.36*/("""
+                        """),format.raw/*429.25*/("""<a class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*429.79*/tweet),format.raw/*429.84*/("""">
+                        Message <span style="color: #E4BC7B">"""),_display_(/*430.63*/tweetArray(1)),format.raw/*430.76*/("""</span> <i class="icon-envelope-l"></i> 
+                      </a>
+                      """)))}),format.raw/*432.24*/("""
+                    """),format.raw/*433.21*/("""</div>
                   
 
-                    <div class="modal fade" id=""""),_display_(/*418.50*/tweet),format.raw/*418.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id=""""),_display_(/*436.50*/tweet),format.raw/*436.55*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -458,39 +476,40 @@ Seq[Any](format.raw/*1.504*/("""
                                 </div>
                                 <div class="modal-body">
                                   <div id="interest-form">
-                                      """),_display_(/*429.40*/b4/*429.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage()))/*429.106*/{_display_(Seq[Any](format.raw/*429.107*/(""" 
+                                      """),_display_(/*447.40*/b4/*447.42*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*447.117*/{_display_(Seq[Any](format.raw/*447.118*/(""" 
 
-                                              """),_display_(/*431.48*/b4/*431.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                                              """),_display_(/*449.48*/b4/*449.50*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                                                 'placeholder -> "Recipient Name",
                                                 '_label -> "Recipient Name",
-                                                'size -> 1)),format.raw/*434.60*/("""
+                                                'size -> 1)),format.raw/*452.60*/("""
 
-                                            """),_display_(/*436.46*/b4/*436.48*/.text(messageForm("message"),
+                                            """),_display_(/*454.46*/b4/*454.48*/.textarea(messageForm("message"),
                                                 'placeholder -> "Message",
-                                                '_label -> "Message",
-                                                'size -> 1)),format.raw/*439.60*/("""
+                                                '_label -> "Message:",
+                                                'rows -> 4)),format.raw/*457.60*/("""
 
                                       
-                                      """),format.raw/*442.39*/("""</div>
+                                      """),format.raw/*460.39*/("""</div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button class="btn btn-primary" id="submit-button" type="submit">Send</button>
-                              """)))}),format.raw/*447.32*/("""
-                                """),format.raw/*448.33*/("""</div>
+                                  <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
+                              """)))}),format.raw/*465.32*/("""
+                                """),format.raw/*466.33*/("""</div>
                               </div>
                             </div>
                           </div>
                           
-                  """)))}),format.raw/*453.20*/("""
-                """)))}),format.raw/*454.18*/("""
-              """),format.raw/*455.15*/("""</div>
+                  """)))}),format.raw/*471.20*/("""
+                """)))}),format.raw/*472.18*/("""
+              """),format.raw/*473.15*/("""</div>
             </div>
           </div>
+        </div>
 
-           """),_display_(/*459.13*/if(bool==1)/*459.24*/{_display_(Seq[Any](format.raw/*459.25*/("""
+           """),_display_(/*478.13*/if(bool==1)/*478.24*/{_display_(Seq[Any](format.raw/*478.25*/("""
 
-              """),format.raw/*461.15*/("""<div class="fixed-bottom" id="footer">
+              """),format.raw/*480.15*/("""<div class="fixed-bottom" id="footer">
                 <button type="button" id="track_btn" class="btn btn-primary" data-toggle="modal" data-target="#trackModal">Track Search</button>
               </div>
                
@@ -506,49 +525,49 @@ Seq[Any](format.raw/*1.504*/("""
                     </div>
                     <div class="modal-body">
                       <div id="track">
-                        """),_display_(/*477.26*/b4/*477.28*/.form(action=helper.CSRF(routes.SearchController.trackSearch()))/*477.92*/{_display_(Seq[Any](format.raw/*477.93*/("""
+                        """),_display_(/*496.26*/b4/*496.28*/.form(action=helper.CSRF(routes.SearchController.trackSearch(request.uri)))/*496.103*/{_display_(Seq[Any](format.raw/*496.104*/("""
 
-                            """),_display_(/*479.30*/b4/*479.32*/.text(trackForm("term").copy(value= Option[String](term)),
-                              '_label -> "Search Term")),format.raw/*480.56*/("""
+                            """),_display_(/*498.30*/b4/*498.32*/.text(trackForm("term").copy(value= Option[String](term)),
+                              '_label -> "Search Term")),format.raw/*499.56*/("""
 
-                            """),format.raw/*482.29*/("""<div id="to-be-hidden">
-                              """),_display_(/*483.32*/b4/*483.34*/.select(
+                            """),format.raw/*501.29*/("""<div id="to-be-hidden">
+                              """),_display_(/*502.32*/b4/*502.34*/.select(
                                  trackForm("interest"),
                                  helper.options(interests),
                                  '_label -> "Interest",
                                  '_default -> "-- Select an Interest --",
                                  'selected -> "-1"
-                              )),format.raw/*489.32*/("""
-                              """),format.raw/*490.31*/("""Or,  <a onclick="display('hidden-form', 'to-be-hidden')"><u>create a new interest</u></a>:
+                              )),format.raw/*508.32*/("""
+                              """),format.raw/*509.31*/("""Or,  <a onclick="display('hidden-form', 'to-be-hidden')"><u>create a new interest</u></a>:
                             </div>
 
                             <div id="hidden-form" style="display:none">
                               <a onclick="display('hidden-form', 'to-be-hidden')"><u>Undo</u></a>:
-                              """),_display_(/*495.32*/b4/*495.34*/.text(trackForm("newInterestName"),
+                              """),_display_(/*514.32*/b4/*514.34*/.text(trackForm("newInterestName"),
                                               'placeholder -> "Interest Name",
                                               '_label -> "",
-                                              'size -> 5)),format.raw/*498.58*/("""
+                                              'size -> 5)),format.raw/*517.58*/("""
 
-                              """),format.raw/*500.31*/("""<div id="be-hidden">
-                                """),_display_(/*501.34*/b4/*501.36*/.select(
+                              """),format.raw/*519.31*/("""<div id="be-hidden">
+                                """),_display_(/*520.34*/b4/*520.36*/.select(
                                    trackForm("personaName"),
                                    helper.options(personas),
                                    '_label -> "",
                                    '_default -> "-- Select an Interest Category --",
                                    'selected -> "-1"
-                                )),format.raw/*507.34*/("""
-                                """),format.raw/*508.33*/("""Or, <a onclick="display('hidden-category-form', 'be-hidden')"><u>create a new Interest Category</u></a>:
+                                )),format.raw/*526.34*/("""
+                                """),format.raw/*527.33*/("""Or, <a onclick="display('hidden-category-form', 'be-hidden')"><u>create a new Interest Category</u></a>:
                               </div>
 
                               
                             </div>
                             <div id="hidden-category-form" style="display:none">
                               <a onclick="display('hidden-category-form', 'be-hidden')"><u>Undo</u></a>:
-                              """),_display_(/*515.32*/b4/*515.34*/.text(trackForm("newPersonaName"),
+                              """),_display_(/*534.32*/b4/*534.34*/.text(trackForm("newPersonaName"),
                                   'placeholder -> "Name of Interest Category",
                                   '_label -> "",
-                                  'size -> 1)),format.raw/*518.46*/("""
-                            """),format.raw/*519.29*/("""</div>
+                                  'size -> 1)),format.raw/*537.46*/("""
+                            """),format.raw/*538.29*/("""</div>
 
 
 
@@ -556,59 +575,60 @@ Seq[Any](format.raw/*1.504*/("""
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button class="btn btn-primary" type="submit">Save changes</button>
-                  """)))}),format.raw/*528.20*/("""
-                    """),format.raw/*529.21*/("""</div>
+                      <button class="btn btn-primary" id="submit-btn" type="submit">Save changes</button>
+                  """)))}),format.raw/*547.20*/("""
+                    """),format.raw/*548.21*/("""</div>
                   </div>
                 </div>
               </div>
 
               
 
-            """)))}),format.raw/*536.14*/("""
-          """),format.raw/*537.11*/("""</div>
+            """)))}),format.raw/*555.14*/("""
+          """),format.raw/*556.11*/("""</div>
 
             <script>
-              $('#show').click(function() """),format.raw/*540.43*/("""{"""),format.raw/*540.44*/("""
-                """),format.raw/*541.17*/("""$('#more').toggle();
+              $('#show').click(function() """),format.raw/*559.43*/("""{"""),format.raw/*559.44*/("""
+                """),format.raw/*560.17*/("""$('#more').toggle();
                 $('#show').toggle();
                 $('#show2').toggle();
-            """),format.raw/*544.13*/("""}"""),format.raw/*544.14*/(""");
+            """),format.raw/*563.13*/("""}"""),format.raw/*563.14*/(""");
 
-              $('#show2').click(function() """),format.raw/*546.44*/("""{"""),format.raw/*546.45*/("""
-                """),format.raw/*547.17*/("""$('#showMore').toggle();
+              $('#show2').click(function() """),format.raw/*565.44*/("""{"""),format.raw/*565.45*/("""
+                """),format.raw/*566.17*/("""$('#showMore').toggle();
                 $('#show2').toggle();
-            """),format.raw/*549.13*/("""}"""),format.raw/*549.14*/(""");
+            """),format.raw/*568.13*/("""}"""),format.raw/*568.14*/(""");
 
-              $('#media').click(function() """),format.raw/*551.44*/("""{"""),format.raw/*551.45*/("""
-                """),format.raw/*552.17*/("""$('#moreMedia').toggle();
+              $('#media1').click(function() """),format.raw/*570.45*/("""{"""),format.raw/*570.46*/("""
+                """),format.raw/*571.17*/("""$('#moreMedia').toggle();
                 $('#media2').toggle();
-                $('#media').toggle();
-            """),format.raw/*555.13*/("""}"""),format.raw/*555.14*/(""");
+                $('#media1').toggle();
+            """),format.raw/*574.13*/("""}"""),format.raw/*574.14*/(""");
 
-              $('#show2').click(function() """),format.raw/*557.44*/("""{"""),format.raw/*557.45*/("""
-                """),format.raw/*558.17*/("""$('#moreMedia2').toggle();
-                $('#show2').toggle();
-            """),format.raw/*560.13*/("""}"""),format.raw/*560.14*/(""");
+              $('#media2').click(function() """),format.raw/*576.45*/("""{"""),format.raw/*576.46*/("""
+                """),format.raw/*577.17*/("""$('#moreMedia2').toggle();
+                $('#media2').toggle();
+            """),format.raw/*579.13*/("""}"""),format.raw/*579.14*/(""");
 
             var myVar;
             myVar = setTimeout(showPage, 3000);
 
-            function showPage() """),format.raw/*565.33*/("""{"""),format.raw/*565.34*/("""
-              """),format.raw/*566.15*/("""document.getElementById("loader").style.display = "none";
+            function showPage() """),format.raw/*584.33*/("""{"""),format.raw/*584.34*/("""
+              """),format.raw/*585.15*/("""document.getElementById("loader").style.display = "none";
+              document.getElementById("loader-bg").style.display = "none";
               document.getElementById("page-content").style.display = "block";
-            """),format.raw/*568.13*/("""}"""),format.raw/*568.14*/("""
-          """),format.raw/*569.11*/("""</script>
-""")))}),format.raw/*570.2*/("""
+            """),format.raw/*588.13*/("""}"""),format.raw/*588.14*/("""
+          """),format.raw/*589.11*/("""</script>
+""")))}),format.raw/*590.2*/("""
 
 """))
       }
     }
   }
 
-  def render(searchForm:Form[Search],trackForm:Form[Track],messageForm:Form[Message],user:String,bool:Integer,tweets:List[String],popTweets:List[String],popTweets1:List[String],popTweets2:List[String],recentTweets:List[String],recentTweets1:List[String],recentTweets2:List[String],media:List[String],media1:List[String],media2:List[String],personaForm:Form[Persona],img:String,interestForm:Form[Interest],term:String,personas:List[String],interests:List[String],i:String): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,trackForm,messageForm,user,bool,tweets,popTweets,popTweets1,popTweets2,recentTweets,recentTweets1,recentTweets2,media,media1,media2,personaForm,img,interestForm,term,personas,interests,i)
+  def render(searchForm:Form[Search],trackForm:Form[Track],messageForm:Form[Message],user:String,bool:Integer,popTweets:List[String],recentTweets:List[String],recentTweets1:List[String],recentTweets2:List[String],media:List[String],media1:List[String],media2:List[String],img:String,term:String,personas:List[String],interests:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(searchForm,trackForm,messageForm,user,bool,popTweets,recentTweets,recentTweets1,recentTweets2,media,media1,media2,img,term,personas,interests)
 
-  def f:((Form[Search],Form[Track],Form[Message],String,Integer,List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],List[String],Form[Persona],String,Form[Interest],String,List[String],List[String],String) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,trackForm,messageForm,user,bool,tweets,popTweets,popTweets1,popTweets2,recentTweets,recentTweets1,recentTweets2,media,media1,media2,personaForm,img,interestForm,term,personas,interests,i) => apply(searchForm,trackForm,messageForm,user,bool,tweets,popTweets,popTweets1,popTweets2,recentTweets,recentTweets1,recentTweets2,media,media1,media2,personaForm,img,interestForm,term,personas,interests,i)
+  def f:((Form[Search],Form[Track],Form[Message],String,Integer,List[String],List[String],List[String],List[String],List[String],List[String],List[String],String,String,List[String],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (searchForm,trackForm,messageForm,user,bool,popTweets,recentTweets,recentTweets1,recentTweets2,media,media1,media2,img,term,personas,interests) => apply(searchForm,trackForm,messageForm,user,bool,popTweets,recentTweets,recentTweets1,recentTweets2,media,media1,media2,img,term,personas,interests)
 
   def ref: this.type = this
 
@@ -617,11 +637,11 @@ Seq[Any](format.raw/*1.504*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Sat Feb 17 15:34:04 GMT 2018
+                  DATE: Fri Mar 02 15:20:11 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/searchResults.scala.html
-                  HASH: 3fdab6b6905e4458eb10babd1a2874eb9401f9d2
-                  MATRIX: 1210->1|1785->506|1822->523|1854->547|1948->503|1977->610|2006->612|2257->837|2271->843|2333->885|2397->923|2428->945|2449->957|2464->963|2479->969|2501->982|2515->987|2538->1001|2557->1011|2578->1022|2591->1025|2631->1026|2662->1030|2717->1058|2742->1062|2792->1085|2807->1091|2863->1126|3652->1888|3694->1914|3733->1915|3778->1933|3813->1959|3867->1975|3931->2011|4007->2060|4041->2073|4138->2143|4172->2156|4305->2262|4325->2273|4364->2274|4417->2299|4517->2372|4544->2377|4607->2413|4641->2426|4692->2449|4754->2480|4801->2499|4900->2571|4926->2576|5726->3349|5737->3351|5811->3415|5851->3416|5926->3464|5937->3466|6255->3763|6329->3810|6340->3812|6595->4046|6698->4121|7086->4478|7145->4509|7324->4657|7371->4673|7412->4686|7732->4979|7775->5006|7814->5007|7861->5027|7896->5053|7950->5069|8017->5107|8096->5158|8131->5171|8233->5245|8268->5258|8411->5373|8432->5384|8472->5385|8528->5412|8629->5485|8657->5490|8723->5528|8758->5541|8812->5566|8877->5599|8927->5620|9031->5696|9058->5701|9881->6496|9893->6498|9968->6562|10009->6563|10087->6613|10099->6615|10418->6912|10493->6959|10505->6961|10761->7195|10869->7274|11268->7641|11330->7674|11520->7832|11570->7850|11614->7865|11978->8201|12022->8228|12062->8229|12110->8249|12146->8275|12201->8291|12268->8329|12347->8380|12382->8393|12484->8467|12519->8480|12660->8593|12681->8604|12721->8605|12777->8632|12878->8705|12906->8710|12972->8748|13007->8761|13061->8786|13126->8819|13176->8840|13280->8916|13307->8921|14130->9716|14142->9718|14217->9782|14258->9783|14336->9833|14348->9835|14667->10132|14742->10179|14754->10181|15010->10415|15118->10494|15517->10861|15579->10894|15769->11052|15819->11070|15863->11085|16034->11228|16076->11253|16116->11254|16162->11272|16198->11298|16253->11314|16318->11350|16395->11399|16430->11412|16528->11482|16563->11495|16697->11601|16718->11612|16758->11613|16812->11638|16913->11711|16941->11716|17005->11752|17040->11765|17092->11788|17155->11819|17203->11838|17303->11910|17330->11915|18131->12688|18143->12690|18218->12754|18259->12755|18335->12803|18347->12805|18666->13102|18741->13149|18753->13151|19009->13385|19113->13460|19502->13817|19562->13848|19742->13996|19790->14012|19832->14025|19982->14147|20018->14166|20058->14167|20104->14185|20140->14211|20195->14227|20260->14263|20337->14312|20372->14325|20470->14395|20505->14408|20638->14513|20659->14524|20699->14525|20753->14550|20854->14623|20882->14628|20946->14664|20981->14677|21033->14700|21096->14731|21144->14750|21244->14822|21271->14827|22072->15600|22084->15602|22159->15666|22200->15667|22276->15715|22288->15717|22607->16014|22682->16061|22694->16063|22950->16297|23053->16371|23442->16728|23502->16759|23682->16907|23730->16923|23775->16939|23978->17114|24015->17134|24055->17135|24103->17155|24139->17181|24194->17197|24261->17235|24340->17286|24375->17299|24477->17373|24512->17386|24653->17499|24674->17510|24714->17511|24770->17538|24871->17611|24899->17616|24965->17654|25000->17667|25054->17692|25119->17725|25169->17746|25273->17822|25300->17827|26123->18622|26135->18624|26210->18688|26251->18689|26329->18739|26341->18741|26660->19038|26735->19085|26747->19087|27003->19321|27111->19400|27510->19767|27572->19800|27762->19958|27812->19976|27856->19991|28104->20211|28141->20231|28181->20232|28229->20252|28265->20278|28320->20294|28387->20332|28466->20383|28501->20396|28603->20470|28638->20483|28781->20598|28802->20609|28842->20610|28896->20635|28997->20708|29025->20713|29091->20751|29126->20764|29180->20789|29245->20822|29295->20843|29399->20919|29426->20924|30249->21719|30261->21721|30336->21785|30377->21786|30455->21836|30467->21838|30786->22135|30861->22182|30873->22184|31129->22418|31237->22497|31636->22864|31698->22897|31888->23055|31938->23073|31982->23088|32066->23144|32087->23155|32127->23156|32172->23172|33141->24113|33153->24115|33227->24179|33267->24180|33326->24211|33338->24213|33474->24327|33533->24357|33616->24412|33628->24414|33987->24751|34047->24782|34404->25111|34416->25113|34671->25346|34732->25378|34814->25432|34826->25434|35200->25786|35262->25819|35716->26245|35728->26247|35958->26455|36016->26484|36374->26810|36424->26831|36562->26937|36602->26948|36702->27019|36732->27020|36778->27037|36915->27145|36945->27146|37021->27193|37051->27194|37097->27211|37201->27286|37231->27287|37307->27334|37337->27335|37383->27352|37527->27467|37557->27468|37633->27515|37663->27516|37709->27533|37815->27610|37845->27611|37982->27719|38012->27720|38056->27735|38234->27884|38264->27885|38304->27896|38346->27907
-                  LINES: 28->1|31->3|33->4|33->4|34->1|36->4|36->4|40->8|40->8|40->8|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|43->11|43->11|43->11|44->12|44->12|44->12|65->33|65->33|65->33|66->34|66->34|66->34|67->35|68->36|68->36|70->38|70->38|74->42|74->42|74->42|75->43|75->43|75->43|76->44|76->44|77->45|78->46|79->47|82->50|82->50|93->61|93->61|93->61|93->61|95->63|95->63|98->66|100->68|100->68|103->71|106->74|111->79|112->80|117->85|118->86|119->87|130->98|130->98|130->98|131->99|131->99|131->99|132->100|133->101|133->101|135->103|135->103|139->107|139->107|139->107|140->108|140->108|140->108|141->109|141->109|142->110|143->111|144->112|147->115|147->115|158->126|158->126|158->126|158->126|160->128|160->128|163->131|165->133|165->133|168->136|171->139|176->144|177->145|182->150|183->151|184->152|194->162|194->162|194->162|195->163|195->163|195->163|196->164|197->165|197->165|199->167|199->167|203->171|203->171|203->171|204->172|204->172|204->172|205->173|205->173|206->174|207->175|208->176|211->179|211->179|222->190|222->190|222->190|222->190|224->192|224->192|227->195|229->197|229->197|232->200|235->203|240->208|241->209|246->214|247->215|248->216|254->222|254->222|254->222|255->223|255->223|255->223|256->224|257->225|257->225|259->227|259->227|263->231|263->231|263->231|264->232|264->232|264->232|265->233|265->233|266->234|267->235|268->236|271->239|271->239|282->250|282->250|282->250|282->250|284->252|284->252|287->255|289->257|289->257|292->260|295->263|300->268|301->269|306->274|307->275|308->276|313->281|313->281|313->281|314->282|314->282|314->282|315->283|316->284|316->284|318->286|318->286|322->290|322->290|322->290|323->291|323->291|323->291|324->292|324->292|325->293|326->294|327->295|330->298|330->298|341->309|341->309|341->309|341->309|343->311|343->311|346->314|348->316|348->316|351->319|353->321|358->326|359->327|364->332|365->333|367->335|372->340|372->340|372->340|373->341|373->341|373->341|374->342|375->343|375->343|377->345|377->345|381->349|381->349|381->349|382->350|382->350|382->350|383->351|383->351|384->352|385->353|386->354|389->357|389->357|400->368|400->368|400->368|400->368|402->370|402->370|405->373|407->375|407->375|410->378|413->381|418->386|419->387|424->392|425->393|426->394|433->401|433->401|433->401|434->402|434->402|434->402|435->403|436->404|436->404|438->406|438->406|442->410|442->410|442->410|443->411|443->411|443->411|444->412|444->412|445->413|446->414|447->415|450->418|450->418|461->429|461->429|461->429|461->429|463->431|463->431|466->434|468->436|468->436|471->439|474->442|479->447|480->448|485->453|486->454|487->455|491->459|491->459|491->459|493->461|509->477|509->477|509->477|509->477|511->479|511->479|512->480|514->482|515->483|515->483|521->489|522->490|527->495|527->495|530->498|532->500|533->501|533->501|539->507|540->508|547->515|547->515|550->518|551->519|560->528|561->529|568->536|569->537|572->540|572->540|573->541|576->544|576->544|578->546|578->546|579->547|581->549|581->549|583->551|583->551|584->552|587->555|587->555|589->557|589->557|590->558|592->560|592->560|597->565|597->565|598->566|600->568|600->568|601->569|602->570
+                  HASH: c7a7cf61e6905848bcaa375785048ff8a28a88f7
+                  MATRIX: 1135->1|1567->363|1604->380|1636->404|1730->360|1759->467|1787->469|1983->639|1997->645|2059->687|2123->725|2154->747|2175->759|2190->765|2205->771|2219->776|2238->786|2258->797|2297->798|2329->803|2411->858|2436->862|2489->888|2504->894|2560->929|3400->1742|3442->1768|3481->1769|3526->1787|3561->1813|3615->1829|3679->1865|3755->1914|3789->1927|3886->1997|3920->2010|4053->2116|4073->2127|4112->2128|4165->2153|4246->2207|4272->2212|4364->2277|4398->2290|4518->2379|4565->2398|4664->2470|4690->2475|5490->3248|5501->3250|5586->3325|5626->3326|5701->3374|5712->3376|6019->3662|6093->3709|6104->3711|6364->3950|6467->4025|6852->4379|6911->4410|7090->4558|7137->4574|7178->4587|7514->4895|7558->4922|7598->4923|7646->4943|7682->4969|7737->4985|7804->5023|7883->5074|7918->5087|8020->5161|8055->5174|8198->5289|8219->5300|8259->5301|8315->5328|8397->5382|8424->5387|8517->5452|8552->5465|8675->5556|8725->5577|8829->5653|8856->5658|9679->6453|9691->6455|9777->6530|9818->6531|9896->6581|9908->6583|10227->6880|10302->6927|10314->6929|10575->7168|10683->7247|11079->7611|11141->7644|11331->7802|11381->7820|11425->7835|11809->8191|11853->8218|11893->8219|11941->8239|11977->8265|12032->8281|12099->8319|12178->8370|12213->8383|12315->8457|12350->8470|12491->8583|12512->8594|12552->8595|12608->8622|12690->8676|12717->8681|12810->8746|12845->8759|12968->8850|13018->8871|13122->8947|13149->8952|13972->9747|13984->9749|14070->9824|14111->9825|14189->9875|14201->9877|14520->10174|14595->10221|14607->10223|14868->10462|14976->10541|15372->10905|15434->10938|15624->11096|15674->11114|15718->11129|15889->11272|15931->11297|15971->11298|16017->11316|16053->11342|16108->11358|16173->11394|16250->11443|16285->11456|16383->11526|16418->11539|16552->11645|16573->11656|16613->11657|16667->11682|16749->11736|16776->11741|16869->11806|16904->11819|17025->11908|17073->11927|17173->11999|17200->12004|18001->12777|18013->12779|18099->12854|18140->12855|18216->12903|18228->12905|18547->13202|18622->13249|18634->13251|18895->13490|18999->13565|19385->13919|19445->13950|19625->14098|19673->14114|19715->14127|19865->14249|19901->14268|19941->14269|19987->14287|20023->14313|20078->14329|20143->14365|20220->14414|20255->14427|20353->14497|20388->14510|20521->14615|20542->14626|20582->14627|20636->14652|20718->14706|20745->14711|20838->14776|20873->14789|20994->14878|21042->14897|21142->14969|21169->14974|21970->15747|21982->15749|22068->15824|22109->15825|22185->15873|22197->15875|22516->16172|22591->16219|22603->16221|22864->16460|22967->16534|23353->16888|23413->16919|23593->17067|23641->17083|23697->17110|24053->17438|24090->17458|24130->17459|24178->17479|24214->17505|24269->17521|24336->17559|24415->17610|24450->17623|24552->17697|24587->17710|24728->17823|24749->17834|24789->17835|24845->17862|24927->17916|24954->17921|25047->17986|25082->17999|25205->18090|25255->18111|25359->18187|25386->18192|26209->18987|26221->18989|26307->19064|26348->19065|26426->19115|26438->19117|26757->19414|26832->19461|26844->19463|27105->19702|27213->19781|27609->20145|27671->20178|27861->20336|27911->20354|27955->20369|28340->20726|28377->20746|28417->20747|28465->20767|28501->20793|28556->20809|28623->20847|28702->20898|28737->20911|28839->20985|28874->20998|29017->21113|29038->21124|29078->21125|29132->21150|29214->21204|29241->21209|29334->21274|29369->21287|29492->21378|29542->21399|29646->21475|29673->21480|30496->22275|30508->22277|30594->22352|30635->22353|30713->22403|30725->22405|31044->22702|31119->22749|31131->22751|31392->22990|31500->23069|31896->23433|31958->23466|32148->23624|32198->23642|32242->23657|32341->23728|32362->23739|32402->23740|32447->23756|33416->24697|33428->24699|33514->24774|33555->24775|33614->24806|33626->24808|33762->24922|33821->24952|33904->25007|33916->25009|34275->25346|34335->25377|34692->25706|34704->25708|34959->25941|35020->25973|35102->26027|35114->26029|35488->26381|35550->26414|36004->26840|36016->26842|36246->27050|36304->27079|36678->27421|36728->27442|36866->27548|36906->27559|37006->27630|37036->27631|37082->27648|37219->27756|37249->27757|37325->27804|37355->27805|37401->27822|37505->27897|37535->27898|37612->27946|37642->27947|37688->27964|37833->28080|37863->28081|37940->28129|37970->28130|38016->28147|38123->28225|38153->28226|38290->28334|38320->28335|38364->28350|38617->28574|38647->28575|38687->28586|38729->28597
+                  LINES: 28->1|31->3|33->4|33->4|34->1|36->4|38->6|40->8|40->8|40->8|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|42->10|43->11|43->11|43->11|44->12|44->12|44->12|67->35|67->35|67->35|68->36|68->36|68->36|69->37|70->38|70->38|72->40|72->40|76->44|76->44|76->44|77->45|77->45|77->45|78->46|78->46|80->48|81->49|84->52|84->52|95->63|95->63|95->63|95->63|97->65|97->65|100->68|102->70|102->70|105->73|108->76|113->81|114->82|119->87|120->88|121->89|133->101|133->101|133->101|134->102|134->102|134->102|135->103|136->104|136->104|138->106|138->106|142->110|142->110|142->110|143->111|143->111|143->111|144->112|144->112|146->114|147->115|150->118|150->118|161->129|161->129|161->129|161->129|163->131|163->131|166->134|168->136|168->136|171->139|174->142|179->147|180->148|185->153|186->154|187->155|199->167|199->167|199->167|200->168|200->168|200->168|201->169|202->170|202->170|204->172|204->172|208->176|208->176|208->176|209->177|209->177|209->177|210->178|210->178|212->180|213->181|216->184|216->184|227->195|227->195|227->195|227->195|229->197|229->197|232->200|234->202|234->202|237->205|240->208|245->213|246->214|251->219|252->220|253->221|259->227|259->227|259->227|260->228|260->228|260->228|261->229|262->230|262->230|264->232|264->232|268->236|268->236|268->236|269->237|269->237|269->237|270->238|270->238|272->240|273->241|276->244|276->244|287->255|287->255|287->255|287->255|289->257|289->257|292->260|294->262|294->262|297->265|300->268|305->273|306->274|311->279|312->280|313->281|318->286|318->286|318->286|319->287|319->287|319->287|320->288|321->289|321->289|323->291|323->291|327->295|327->295|327->295|328->296|328->296|328->296|329->297|329->297|331->299|332->300|335->303|335->303|346->314|346->314|346->314|346->314|348->316|348->316|351->319|353->321|353->321|356->324|358->326|363->331|364->332|369->337|370->338|373->341|385->353|385->353|385->353|386->354|386->354|386->354|387->355|388->356|388->356|390->358|390->358|394->362|394->362|394->362|395->363|395->363|395->363|396->364|396->364|398->366|399->367|402->370|402->370|413->381|413->381|413->381|413->381|415->383|415->383|418->386|420->388|420->388|423->391|426->394|431->399|432->400|437->405|438->406|439->407|451->419|451->419|451->419|452->420|452->420|452->420|453->421|454->422|454->422|456->424|456->424|460->428|460->428|460->428|461->429|461->429|461->429|462->430|462->430|464->432|465->433|468->436|468->436|479->447|479->447|479->447|479->447|481->449|481->449|484->452|486->454|486->454|489->457|492->460|497->465|498->466|503->471|504->472|505->473|510->478|510->478|510->478|512->480|528->496|528->496|528->496|528->496|530->498|530->498|531->499|533->501|534->502|534->502|540->508|541->509|546->514|546->514|549->517|551->519|552->520|552->520|558->526|559->527|566->534|566->534|569->537|570->538|579->547|580->548|587->555|588->556|591->559|591->559|592->560|595->563|595->563|597->565|597->565|598->566|600->568|600->568|602->570|602->570|603->571|606->574|606->574|608->576|608->576|609->577|611->579|611->579|616->584|616->584|617->585|620->588|620->588|621->589|622->590
                   -- GENERATED --
               */
           

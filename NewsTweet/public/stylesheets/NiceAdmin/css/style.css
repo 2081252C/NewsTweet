@@ -542,7 +542,7 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 
 ul.sidebar-menu {
 
-    margin-top: 60px;
+    margin-top: 85px;
 
 }
 
@@ -1050,7 +1050,7 @@ ul.sidebar-menu li.active a i {
 
 a.logo {
 
-    font-size: 22px;
+    font-size: 24px;
 
     font-weight: 300;
 
@@ -1061,6 +1061,7 @@ a.logo {
     margin-top: 15px;
 
     text-transform: uppercase;
+    vertical-align: middle;
 
 }
 

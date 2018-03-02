@@ -47,13 +47,15 @@ public class TwitterSignInServlet extends Controller {
     public boolean set = false;
     public RequestToken requestToken = null;
     public AccessToken accessToken = null;
-    StringBuffer callbackURL = new StringBuffer("http://localhost:9000/");
+    String url = "";
 
     public void setOAuth(boolean b){
         this.set = b;
     }
 
-    public Result signIn() throws IOException {
+    public Result signIn(String uri) throws IOException {
+        url = "http://"+request().host()+uri;
+        StringBuffer callbackURL = new StringBuffer(url);
         if(!set){
             twitter.setOAuthConsumer("AfZgXUsXP3v9F3DYIMVx2q7KH", "NoIVu1Vq4ggGOnJk0zvUoaGBuIBS3AuxN607zoah5D44PNKLgD");
             setOAuth(true);
@@ -74,9 +76,8 @@ public class TwitterSignInServlet extends Controller {
         try {
             String verifier = request().getQueryString("oauth_verifier");
             accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
-            System.out.println(requestToken + ":::" + requestToken.toString());
             User user = twitter.showUser(twitter.getScreenName());
-            long userId = user.getId();// user Id
+            long userId = user.getId(); // user Id
             TwitterUser t = TwitterUser.find.byId(userId);
             session("id", Long.toString(userId));
             session("access", accessToken.toString());
@@ -96,7 +97,7 @@ public class TwitterSignInServlet extends Controller {
         } catch (TwitterException e) {
             return ok("bad callback");
         }
-        return redirect("http://localhost:9000/");
+        return redirect(url);
    }
 
    public Result logOut(){
@@ -107,6 +108,6 @@ public class TwitterSignInServlet extends Controller {
         }
         twitter.setOAuthAccessToken(null);
         this.requestToken=null;
-        return redirect("http://localhost:9000");
+        return redirect(controllers.routes.HomeController.index());
     }
 }

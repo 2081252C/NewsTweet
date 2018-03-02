@@ -1552,8 +1552,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .form-control::-webkit-input-placeholder {
   color: #d7d7d7;
 }
-.form-control {
-  display: block;
+.form-control .form-group {
+  display: inline-block;
   width: 100%;
   height: 34px;
   padding: 6px 12px;
@@ -1621,7 +1621,7 @@ textarea.form-control {
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
-  margin-top: 0;
+  margin-top: 2px;
   margin-left: 10px;
 }
 input[type="radio"][disabled],
@@ -1734,7 +1734,7 @@ textarea.input-lg {
   color: #6b6b6b;
 }
 @media (min-width: 768px) {
-  .form-inline .form-group {
+  .form-inline .form-group{
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
@@ -1742,14 +1742,14 @@ textarea.input-lg {
   .form-inline .form-control {
     display: inline-block;
   }
-  .form-inline .radio,
+  .form-check-inline .radio,
   .form-inline .checkbox {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
   }
-  .form-inline .radio input[type="radio"],
+  .form-check-inline .radio input[type="radio"],
   .form-inline .checkbox input[type="checkbox"] {
     float: none;
     margin-left: 0;
