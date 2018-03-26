@@ -1,0 +1,8 @@
+[0m[[0m[31merror[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/test/controllers/SearchResultsTest.java:151:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   class TwitterUser[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class controllers.SearchResultsTest[0m
+[0m[[0m[31merror[0m] [0m[0m        TwitterUser t = new TwitterUser(0L, "test", "", "", "");[0m
+[0m[[0m[31merror[0m] [0m[0m/home/carly/Documents/Project/NewsTweet/NewsTweet/test/controllers/SearchResultsTest.java:151:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   class TwitterUser[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class controllers.SearchResultsTest[0m
+[0m[[0m[31merror[0m] [0m[0m        TwitterUser t = new TwitterUser(0L, "test", "", "", "");[0m

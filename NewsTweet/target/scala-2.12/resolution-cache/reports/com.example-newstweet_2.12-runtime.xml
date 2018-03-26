@@ -7,7 +7,7 @@
 		revision="1.0-SNAPSHOT"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, universal, universal-docs, universal-src, windows, docker, linux, rpm, debian, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, docs"
-		date="20180221190105"/>
+		date="20180317202050"/>
 	<dependencies>
 		<module organisation="edu.stanford.nlp" name="stanford-parser">
 			<revision name="3.8.0" status="release" pubdate="20170922050748" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://nlp.stanford.edu/software/lex-parser.shtml" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="135">
@@ -27,7 +27,7 @@
 				<metadata-artifact status="no" details="" size="5772" time="0" location="/home/carly/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/ivy-3.8.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/edu/stanford/nlp/stanford-corenlp/3.8.0/stanford-corenlp-3.8.0.pom"/>
 				<caller organisation="com.example" name="newstweet_2.12" conf="compile, runtime" rev="3.8.0" rev-constraint-default="3.8.0" rev-constraint-dynamic="3.8.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="stanford-corenlp" type="jar" ext="jar" extra-classifier="models" status="successful" details="" size="362452284" time="76869" location="/home/carly/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/jars/stanford-corenlp-3.8.0-models.jar">
+					<artifact name="stanford-corenlp" type="jar" ext="jar" extra-classifier="models" status="no" details="" size="362452284" time="0" location="/home/carly/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/jars/stanford-corenlp-3.8.0-models.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/edu/stanford/nlp/stanford-corenlp/3.8.0/stanford-corenlp-3.8.0-models.jar"/>
 					</artifact>
 					<artifact name="stanford-corenlp" type="jar" ext="jar" status="no" details="" size="8011820" time="0" location="/home/carly/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/jars/stanford-corenlp-3.8.0.jar">

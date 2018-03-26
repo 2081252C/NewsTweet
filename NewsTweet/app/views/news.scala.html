@@ -14,7 +14,9 @@
   </div>
 
   <div id="page-content" style="display:none">
-    <h3 id="upper">News:</h3>
+    <div id="header">
+      <h3 id="upper">News:</h3>
+    </div>
   	<div class="card-columns">
       @for(tweet <- tweets){
         @defining(tweet.split("-")) { tweetArray => 

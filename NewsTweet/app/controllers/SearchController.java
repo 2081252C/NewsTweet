@@ -176,6 +176,8 @@ public class SearchController extends Controller {
 	public Result searchResults() {
 			uri = request().uri();
 
+			System.out.println("hello i'm signed in " + session("id"));
+
 			tweets.clear();
 			tID.clear();
 			allPop.clear();
@@ -485,13 +487,7 @@ public class SearchController extends Controller {
     }
 
     public Result searchAnalytics() throws TwitterException {
-    		LoadingFrame frame = new LoadingFrame();
-		    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		    frame.setSize(200, 100);
-		    frame.setLocationRelativeTo(null);
-		    frame.setUndecorated(true);
-		    frame.startLoading();
-		    frame.setVisible(true);
+    		
 
     		ArrayList<Status> analytics = new ArrayList<>();
     		ArrayList<Status> analyticsID = new ArrayList<>();
@@ -566,7 +562,7 @@ public class SearchController extends Controller {
                         negText.add(tweetText);
                     }
                 }
-                else if(sentiment==3){
+                else if(sentiment==3 || sentiment==4){
                     if(!posText.contains(tweetText)){
                         pos.add(tweetID+"-"+author);
                         posText.add(tweetText);
@@ -645,7 +641,6 @@ public class SearchController extends Controller {
 			//wordcloud
 			String wordcloudData = findFrequency(analytics);
 			
-			frame.setVisible(false);
 			return ok(views.html.dataAnalytics.render(searchForm, twitterUsername, loggedInBool, pos, posSize, neg, negSize, neut, neutSize, twitterProfilePic, term, personaNames, interests, json, wordcloudData));
 			
     }

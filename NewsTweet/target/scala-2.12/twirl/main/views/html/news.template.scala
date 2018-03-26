@@ -46,23 +46,25 @@ Seq[Any](format.raw/*1.169*/("""
   </div>
 
   <div id="page-content" style="display:none">
-    <h3 id="upper">News:</h3>
+    <div id="header">
+      <h3 id="upper">News:</h3>
+    </div>
   	<div class="card-columns">
-      """),_display_(/*19.8*/for(tweet <- tweets) yield /*19.28*/{_display_(Seq[Any](format.raw/*19.29*/("""
-        """),_display_(/*20.10*/defining(tweet.split("-"))/*20.36*/ { tweetArray =>_display_(Seq[Any](format.raw/*20.52*/(""" 
-        """),format.raw/*21.9*/("""<div class="card">
-          <div id=""""),_display_(/*22.21*/tweetArray(0)),format.raw/*22.34*/(""""></div>
+      """),_display_(/*21.8*/for(tweet <- tweets) yield /*21.28*/{_display_(Seq[Any](format.raw/*21.29*/("""
+        """),_display_(/*22.10*/defining(tweet.split("-"))/*22.36*/ { tweetArray =>_display_(Seq[Any](format.raw/*22.52*/(""" 
+        """),format.raw/*23.9*/("""<div class="card">
+          <div id=""""),_display_(/*24.21*/tweetArray(0)),format.raw/*24.34*/(""""></div>
           <script>
-            rendering(""""),_display_(/*24.25*/tweetArray(0)),format.raw/*24.38*/("""");
+            rendering(""""),_display_(/*26.25*/tweetArray(0)),format.raw/*26.38*/("""");
           </script>
-          """),_display_(/*26.12*/if(bool==1)/*26.23*/{_display_(Seq[Any](format.raw/*26.24*/("""
-            """),format.raw/*27.13*/("""<a type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*27.81*/tweet),format.raw/*27.86*/("""">
-              Message <span style="color: #E4BC7B">"""),_display_(/*28.53*/tweetArray(1)),format.raw/*28.66*/(""" """),format.raw/*28.67*/("""<i class="icon-envelope-l"></i>
+          """),_display_(/*28.12*/if(bool==1)/*28.23*/{_display_(Seq[Any](format.raw/*28.24*/("""
+            """),format.raw/*29.13*/("""<a type="button" class="msg_btn" data-toggle="modal" data-target="#"""),_display_(/*29.81*/tweet),format.raw/*29.86*/("""">
+              Message <span style="color: #E4BC7B">"""),_display_(/*30.53*/tweetArray(1)),format.raw/*30.66*/(""" """),format.raw/*30.67*/("""<i class="icon-envelope-l"></i>
             </a>
-          """)))}),format.raw/*30.12*/("""
-        """),format.raw/*31.9*/("""</div>
+          """)))}),format.raw/*32.12*/("""
+        """),format.raw/*33.9*/("""</div>
 
-      <div class="modal fade" id=""""),_display_(/*33.36*/tweet),format.raw/*33.41*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id=""""),_display_(/*35.36*/tweet),format.raw/*35.41*/("""" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -76,44 +78,44 @@ Seq[Any](format.raw/*1.169*/("""
 
             <div class="modal-body">
               <div id="interest-form">
-                  """),_display_(/*47.20*/b4/*47.22*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*47.97*/{_display_(Seq[Any](format.raw/*47.98*/(""" 
+                  """),_display_(/*49.20*/b4/*49.22*/.form(action=helper.CSRF(routes.SearchController.sendMessage(request.uri)))/*49.97*/{_display_(Seq[Any](format.raw/*49.98*/(""" 
 
-                          """),_display_(/*49.28*/b4/*49.30*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
+                          """),_display_(/*51.28*/b4/*51.30*/.text(messageForm("recipientName").copy(value= Option[String](tweetArray(1))),
                               'placeholder -> "Recipient Name",
                               '_label -> "Recipient Name",
-                              'size -> 1)),format.raw/*52.42*/("""
+                              'size -> 1)),format.raw/*54.42*/("""
 
-                          """),_display_(/*54.28*/b4/*54.30*/.textarea(messageForm("message"),
+                          """),_display_(/*56.28*/b4/*56.30*/.textarea(messageForm("message"),
                             'placeholder -> "Message",
                             '_label -> "Message:",
-                            'rows -> 4)),format.raw/*57.40*/("""
+                            'rows -> 4)),format.raw/*59.40*/("""
 
                   
-                """),format.raw/*60.17*/("""</div>
+                """),format.raw/*62.17*/("""</div>
             </div>
             
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button class="btn btn-primary" id="submit-btn" type="submit">Send</button>
-          """)))}),format.raw/*66.12*/("""
-            """),format.raw/*67.13*/("""</div>
+          """)))}),format.raw/*68.12*/("""
+            """),format.raw/*69.13*/("""</div>
           </div>
         </div>
       </div>
-    """)))}),format.raw/*71.6*/("""
-  """)))}),format.raw/*72.4*/("""
-  """),format.raw/*73.3*/("""</div>
+    """)))}),format.raw/*73.6*/("""
+  """)))}),format.raw/*74.4*/("""
+  """),format.raw/*75.3*/("""</div>
 
   <script>
   var myVar;
   myVar = setTimeout(showPage, 3000);
 
-  function showPage() """),format.raw/*79.23*/("""{"""),format.raw/*79.24*/("""
-    """),format.raw/*80.5*/("""document.getElementById("loader").style.display = "none";
+  function showPage() """),format.raw/*81.23*/("""{"""),format.raw/*81.24*/("""
+    """),format.raw/*82.5*/("""document.getElementById("loader").style.display = "none";
     document.getElementById("loader-bg").style.display = "none";
     document.getElementById("page-content").style.display = "block";
-  """),format.raw/*83.3*/("""}"""),format.raw/*83.4*/("""
-"""),format.raw/*84.1*/("""</script> 
+  """),format.raw/*85.3*/("""}"""),format.raw/*85.4*/("""
+"""),format.raw/*86.1*/("""</script> 
   
 """)))}))
       }
@@ -131,11 +133,11 @@ Seq[Any](format.raw/*1.169*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Fri Mar 02 15:46:26 GMT 2018
+                  DATE: Sun Mar 18 11:12:11 GMT 2018
                   SOURCE: /home/carly/Documents/Project/NewsTweet/NewsTweet/app/views/news.scala.html
-                  HASH: f8711827f9533f625f60ea5b4b2ccde21787fa40
-                  MATRIX: 1028->1|1268->261|1305->171|1337->195|1431->168|1460->258|1488->277|1515->278|1711->448|1725->454|1787->496|1851->534|1877->551|1898->563|1913->569|1928->575|1942->580|1961->590|1981->601|2020->602|2050->605|2251->780|2287->800|2326->801|2363->811|2398->837|2452->853|2489->863|2555->902|2589->915|2668->967|2702->980|2764->1015|2784->1026|2823->1027|2864->1040|2959->1108|2985->1113|3067->1168|3101->1181|3130->1182|3221->1242|3257->1251|3327->1294|3353->1299|3958->1877|3969->1879|4053->1954|4092->1955|4149->1985|4160->1987|4424->2230|4480->2259|4491->2261|4691->2440|4756->2477|5064->2754|5105->2767|5192->2824|5226->2828|5256->2831|5377->2924|5406->2925|5438->2930|5659->3124|5687->3125|5715->3126
-                  LINES: 28->1|31->5|33->3|33->3|34->1|36->3|38->6|39->7|41->9|41->9|41->9|43->11|43->11|43->11|43->11|43->11|43->11|43->11|43->11|43->11|44->12|51->19|51->19|51->19|52->20|52->20|52->20|53->21|54->22|54->22|56->24|56->24|58->26|58->26|58->26|59->27|59->27|59->27|60->28|60->28|60->28|62->30|63->31|65->33|65->33|79->47|79->47|79->47|79->47|81->49|81->49|84->52|86->54|86->54|89->57|92->60|98->66|99->67|103->71|104->72|105->73|111->79|111->79|112->80|115->83|115->83|116->84
+                  HASH: 2320f6e1b92d564bfe83e6457854cfb51b203dc5
+                  MATRIX: 1028->1|1268->261|1305->171|1337->195|1431->168|1460->258|1488->277|1515->278|1711->448|1725->454|1787->496|1851->534|1877->551|1898->563|1913->569|1928->575|1942->580|1961->590|1981->601|2020->602|2050->605|2286->815|2322->835|2361->836|2398->846|2433->872|2487->888|2524->898|2590->937|2624->950|2703->1002|2737->1015|2799->1050|2819->1061|2858->1062|2899->1075|2994->1143|3020->1148|3102->1203|3136->1216|3165->1217|3256->1277|3292->1286|3362->1329|3388->1334|3993->1912|4004->1914|4088->1989|4127->1990|4184->2020|4195->2022|4459->2265|4515->2294|4526->2296|4726->2475|4791->2512|5099->2789|5140->2802|5227->2859|5261->2863|5291->2866|5412->2959|5441->2960|5473->2965|5694->3159|5722->3160|5750->3161
+                  LINES: 28->1|31->5|33->3|33->3|34->1|36->3|38->6|39->7|41->9|41->9|41->9|43->11|43->11|43->11|43->11|43->11|43->11|43->11|43->11|43->11|44->12|53->21|53->21|53->21|54->22|54->22|54->22|55->23|56->24|56->24|58->26|58->26|60->28|60->28|60->28|61->29|61->29|61->29|62->30|62->30|62->30|64->32|65->33|67->35|67->35|81->49|81->49|81->49|81->49|83->51|83->51|86->54|88->56|88->56|91->59|94->62|100->68|101->69|105->73|106->74|107->75|113->81|113->81|114->82|117->85|117->85|118->86
                   -- GENERATED --
               */
           

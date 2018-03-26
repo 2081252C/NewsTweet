@@ -53,14 +53,14 @@
 			      	@defining(tweet.split("-")) { tweetArray => 
 				      	
 				      		@if(tweetArray(3)=="today"){
-						        <div class="card">
+						        <div id="card@tweetArray(1)a" class="card">
 						        	<div id="@tweetArray(1)a"></div>
 							        <script>
 							          rendering("@tweetArray(1)a");
 							        </script>
 							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
 				                      Message <span style="color: #E4BC7B">@tweetArray(2)</span> <i class="icon-envelope-l"></i>
-				                    </a>
+				                      		                    </a>
 				                </div>
 				                
 
@@ -127,15 +127,17 @@
 				      	@defining(tweet.split("-")) { tweetArray => 
 					      	
 					      		@if(tweetArray(3)=="week"){
-							        <div class="card">
+							        <div id="card@tweetArray(1)a" class="card">
 						        	<div id="@tweetArray(1)a"></div>
 							        <script>
 							          rendering("@tweetArray(1)a");
+							          
 							        </script>
 							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
 				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 				                    </a>
-				                </div>
+				                   
+				                      		                </div>
 							    }
 							    <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		                          <div class="modal-dialog" role="document">
@@ -197,15 +199,16 @@
 			      @for(tweet <- track){
 			      	@defining(tweet.split("-")) { tweetArray => 
 				   		@if(tweetArray(3)=="month"){
-						        <div class="card">
+						        <div id="card@tweetArray(1)a" class="card">
 						        	<div id="@tweetArray(1)a"></div>
 							        <script>
 							          rendering("@tweetArray(1)a");
-							        </script>
+							         </script>
 							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
 				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 				                    </a>
-				                </div>
+				                    
+				                      		                </div>
 						    }
   						<div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		                          <div class="modal-dialog" role="document">
@@ -266,15 +269,16 @@
 			      @for(tweet <- track){
 			      	@defining(tweet.split("-")) { tweetArray => 
 				      		@if(tweetArray(3)=="older"){
-						        <div class="card">
+						        <div id="card@tweetArray(1)a" class="card">
 						        	<div id="@tweetArray(1)a"></div>
 							        <script>
 							          rendering("@tweetArray(1)a");
-							        </script>
+							         </script>
 							        <a type="button" class="msg_btn" data-toggle="modal" data-target="#all@tweetArray(1)">
 				                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 				                    </a>
-				                </div>
+				                    
+				                      		                </div>
 
 				                <div class="modal fade" id="all@tweetArray(1)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		                          <div class="modal-dialog" role="document">
@@ -350,15 +354,16 @@
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
 								      		@if(tweetArray(3)=="today"){
-										        <div class="card">
+										        <div id="card@tweetArray(1)" class="card">
 										        	<div id="@tweetArray(1)"></div>
 											        <script>
 											          rendering("@tweetArray(1)");
-											        </script>
+											           </script>
 											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
 								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 								                    </a>
-								                </div>
+								                    
+				                      						                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">
@@ -420,15 +425,16 @@
 								      	@defining(tweet.split("-")) { tweetArray => 
 									      	@if(tweetArray(0)==tweetTerm){
 									      		@if(tweetArray(3)=="week"){
-											        <div class="card">
+											        <div id="card@tweetArray(1)" class="card">
 										        	<div id="@tweetArray(1)"></div>
 											        <script>
 											          rendering("@tweetArray(1)");
-											        </script>
+											         </script>
 											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
 								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 								                    </a>
-								                </div>
+								                    
+				                      						                </div>
 
 												<div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">
@@ -493,7 +499,7 @@
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
 								      		@if(tweetArray(3)=="month"){
-										        <div class="card">
+										        <div id="card@tweetArray(1)" class="card">
 										        	<div id="@tweetArray(1)"></div>
 											        <script>
 											          rendering("@tweetArray(1)");
@@ -501,7 +507,8 @@
 											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
 								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 								                    </a>
-								                </div>
+								                    
+				                      						                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">
@@ -565,7 +572,7 @@
 							      	@defining(tweet.split("-")) { tweetArray => 
 								      	@if(tweetArray(0)==tweetTerm){
 								      		@if(tweetArray(3)=="older"){
-										        <div class="card">
+										        <div id="card@tweetArray(1)" class="card">
 										        	<div id="@tweetArray(1)"></div>
 											        <script>
 											          rendering("@tweetArray(1)");
@@ -573,7 +580,8 @@
 											        <a type="button" class="msg_btn" data-toggle="modal" data-target="#@tweet">
 								                      Message <span style="color: #E4BC7B">@tweetArray(2) <i class="icon-envelope-l"></i>
 								                    </a>
-								                </div>
+								                    
+				                      						                </div>
 
 								                <div class="modal fade" id="@tweet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						                          <div class="modal-dialog" role="document">

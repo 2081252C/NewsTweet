@@ -20,13 +20,13 @@
 
   	  <ul class="nav nav-tabs">
         <li class="nav-item tab_item">
-            <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a>
-          </li>
+          <div id="recent_tab"> <a class="nav-link active search_result" onclick="openTab(event, 'recent')">Recent</a></div>
+        </li>
         <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'popular')">Top 15 Tweets</a> 
+            <div id="popular_tab"><a class="nav-link search_result" onclick="openTab(event, 'popular')">Top 15 Tweets</a></div> 
           </li>
           <li class="nav-item tab_item">
-            <a class="nav-link search_result" onclick="openTab(event, 'media')">Photos, Videos and Links</a>
+            <div id="media_tab"><a class="nav-link search_result" onclick="openTab(event, 'media')">Photos, Videos and Links</a></div>
           </li>
         </ul>
 
@@ -506,11 +506,12 @@
                                  '_default -> "-- Select an Interest --",
                                  'selected -> "-1"
                               )
-                              Or,  <a onclick="display('hidden-form', 'to-be-hidden')"><u>create a new interest</u></a>:
+                                Or,  <a id="createinterest" href="#" onclick="display('hidden-form', 'to-be-hidden')"><u>create a new interest</u></a>:
+                              
                             </div>
 
                             <div id="hidden-form" style="display:none">
-                              <a onclick="display('hidden-form', 'to-be-hidden')"><u>Undo</u></a>:
+                              <a  onclick="display('hidden-form', 'to-be-hidden')"><u>Undo</u></a>:
                               @b4.text(trackForm("newInterestName"),
                                               'placeholder -> "Interest Name",
                                               '_label -> "",
@@ -524,7 +525,7 @@
                                    '_default -> "-- Select an Interest Category --",
                                    'selected -> "-1"
                                 )
-                                Or, <a onclick="display('hidden-category-form', 'be-hidden')"><u>create a new Interest Category</u></a>:
+                                Or, <a id="create-persona" onclick="display('hidden-category-form', 'be-hidden')"><u>create a new Interest Category</u></a>:
                               </div>
 
                               

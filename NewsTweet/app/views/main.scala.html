@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Custom styles -->
-        <link href="@routes.Assets.versioned("stylesheets/NiceAdmin/css/bootstrap.min.css")" rel="stylesheet"/>
+        <link href="@routes.Assets.versioned("stylesheets/NiceAdmin/css/main.css")" rel="stylesheet"/>
         <!--external css-->
         <link href="@routes.Assets.versioned("stylesheets/NiceAdmin/css/style.css")" rel="stylesheet">
         <!-- bootstrap theme -->
@@ -70,7 +70,7 @@
                       <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
                           <li><a><i>@(user)</i></a></li>
-                          <li><a href="/logout"> Logout</a></li>
+                          <li><a href="@controllers.routes.TwitterSignInServlet.logOut()"> Logout</a></li>
                       </ul>
                   }else{ 
                       <a href="@controllers.routes.TwitterSignInServlet.signIn(request.uri)"><img id="login-button" src="@routes.Assets.versioned("images/twitterlogin.png")" width="60%" border="0px" > </a>
@@ -93,7 +93,7 @@
                             <a class="small">Interests</a>
                     </li>
               @if(bool==0){
-                  <li class="sidebar-brand"><i>Here are some sample interests. Sign in to create your own!</i></li>
+                  <li class="sidebar-brand"><i>Here is a sample interest - sign in to create your own!</i></li>
                 }
                 @if(interests.isEmpty){
                     <li class="sidebar-brand">Looks like you don't have any interests yet! <br> Track a search to add one.</li>
@@ -102,7 +102,7 @@
                     @for(persona <- personas){
                       @defining(persona.replaceAll(" ","")) { personaNoSpace=>
                       <div class="item">
-                            <li class="sidebar-brand"><a data-toggle="collapse" href="#@personaNoSpace" aria-expanded="false" aria-controls="collapseOne">
+                            <li class="sidebar-brand"><a data-toggle="collapse" id="persona@personaNoSpace" href="#@personaNoSpace" aria-expanded="false" aria-controls="collapseOne">
                                 <h5><b><i class="icon_folder"></i> @persona</b></h5>
                             </a></li>
                         <div id="@personaNoSpace" class="collapse" role="tabpanel" aria-labelledby="@personaNoSpace" data-parent="#exampleAccordion">
@@ -111,7 +111,7 @@
                                 @if(interest contains persona){
                                     <div class="sidebar-interest">
                                         @defining(interest.replace(" - "+persona,"")) { n=>
-                                        <li><a href="@routes.InterestController.showInterest(persona, n)"><i class="icon_document_alt"></i> @n</a></li>
+                                        <li><a href="@routes.InterestController.showInterest(persona, n)" id="@n"><i class="icon_document_alt"></i> @n</a></li>
                                         }
                                         
                                     </div>

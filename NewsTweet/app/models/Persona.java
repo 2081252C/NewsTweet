@@ -18,8 +18,7 @@ public class Persona extends Model{
 	public Long id;
 
 	public String personaName;
-	//private List interests;
-
+	
 	@ManyToOne()
     public TwitterUser twitter_user;
 

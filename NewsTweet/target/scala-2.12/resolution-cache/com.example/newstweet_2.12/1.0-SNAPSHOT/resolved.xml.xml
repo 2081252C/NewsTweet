@@ -4,7 +4,7 @@
 		module="newstweet_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20180221190105"
+		publication="20180317202050"
 	>
 		<description>
 		NewsTweet
@@ -78,5 +78,7 @@
 			<artifact name="stanford-corenlp" type="jar" ext="jar" conf="compile" e:classifier="models"/>
 		</dependency>
 		<dependency org="edu.stanford.nlp" name="stanford-parser" rev="3.8.0" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.play" name="play-java-jdbc_2.12" rev="2.6.6" conf="test->default(compile)"/>
+		<dependency org="org.assertj" name="assertj-core" rev="3.9.1" conf="test->default(compile)"/>
 	</dependencies>
 </ivy-module>

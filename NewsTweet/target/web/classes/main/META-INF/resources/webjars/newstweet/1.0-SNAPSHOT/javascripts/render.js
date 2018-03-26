@@ -7,6 +7,8 @@ function rendering(){
     }
 
 	window.onload = (create(id.trim(), here));
+
+    //hideDeletedTweet(here, id);
 }
 
 function create(){
@@ -68,8 +70,18 @@ function display(section, toBeHidden) {
 
 function displayNoTweetsMessage(section, messageArea){
     var x = document.getElementById(messageArea);
-    console.log(document.getElementById(section).innerHTML);
     if(!$.trim( $('#'+section).html() ).length) {
         x.style.display = "block";
+    }
+}
+
+function hideDeletedTweet(tweetDiv, tweet){
+    var x = document.getElementById(tweetDiv);
+    //var y = $("#"+tweet).attr("id");
+    var t = document.getElementById(tweet);
+    var y = t.getElementsByTagName("iframe");
+    console.log(y);
+    if(y.length==0) {
+        x.style.display = "none";
     }
 }

@@ -38,7 +38,7 @@ public class HomeController extends Controller{
     private static String[] CATEGORIES
         = { "entertainment", "sport", "music", "news", "tech" };
 
-    private static int NGRAM_SIZE = 6;
+    private static int NGRAM_SIZE = 2;
 
     private int loggedInBool=1;
 
@@ -434,7 +434,7 @@ public class HomeController extends Controller{
                 for (int j = 0; j < trainingFiles.length; ++j) {
                     File file = new File(classDir,trainingFiles[j]);
                     String text = Files.readFromFile(file,"ISO-8859-1");
-                    System.out.println("Training on " + CATEGORIES[i] + "/" + trainingFiles[j]);
+                   // System.out.println("Training on " + CATEGORIES[i] + "/" + trainingFiles[j]);
                     Classification classification
                         = new Classification(CATEGORIES[i]);
                     Classified<CharSequence> classified
@@ -459,7 +459,7 @@ public class HomeController extends Controller{
                 String text = classify.get(j).getText();
                 String tweetID = Long.toString(classify.get(j).getId());
                 String author = classify.get(j).getUser().getScreenName();
-                System.out.print("Testing on " + CATEGORIES[i] + "/" + text + " ");
+                //System.out.print("Testing on " + CATEGORIES[i] + "/" + text + " ");
                 Classification classification
                     = new Classification(CATEGORIES[i]);
                 Classified<CharSequence> classified
@@ -469,9 +469,9 @@ public class HomeController extends Controller{
                     compiledClassifier.classify(text);
                 String bestCategory = jc.bestCategory();
                 String details = jc.toString();
-                System.out.println("Got best category of: " + bestCategory);
-                System.out.println(jc.toString());
-                System.out.println("---------------");
+                // System.out.println("Got best category of: " + bestCategory);
+                // System.out.println(jc.toString());
+                // System.out.println("---------------");
 
                 if(bestCategory.compareTo("news")==0){
                     if(!news.contains(tweetID+"-"+author)){

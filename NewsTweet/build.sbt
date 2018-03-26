@@ -63,3 +63,8 @@ libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0"
 libraryDependencies += "edu.stanford.nlp" % "stanford-parser" % "3.8.0"
 
 libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0" classifier "models"
+
+libraryDependencies += javaJdbc % Test
+
+// https://mvnrepository.com/artifact/org.assertj/assertj-core
+libraryDependencies += "org.assertj" % "assertj-core" % "3.9.1" % Test
